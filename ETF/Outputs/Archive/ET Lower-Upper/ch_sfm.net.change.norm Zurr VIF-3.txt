@@ -1,0 +1,70 @@
+
+Call:
+ssn_lm(formula = ch_sfm.net.change.norm ~ ch_curvature.median + 
+    ch_channel_width + ch_central.slope.difference + ch_stream.power + 
+    ch_slope.over.width.central.diff + ch_stream.power.central.diff + 
+    hs_hillslope.length + hs_flow.accumulation.max + hs_curvature.median, 
+    ssn.object = ET_ssn, tailup_type = "linear", taildown_type = "linear", 
+    euclid_type = "spherical", additive = "afv_flow_accum")
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.17414 -0.46020 -0.04248  0.59799  7.85885 
+
+Coefficients (fixed):
+                                  Estimate Std. Error z value Pr(>|z|)  
+(Intercept)                      -0.219371   1.498635  -0.146   0.8836  
+ch_curvature.median              -0.028361   0.041177  -0.689   0.4910  
+ch_channel_width                 -0.096155   0.059919  -1.605   0.1085  
+ch_central.slope.difference      -0.019132   0.040168  -0.476   0.6339  
+ch_stream.power                  -0.006414   0.058610  -0.109   0.9129  
+ch_slope.over.width.central.diff -0.095021   0.056080  -1.694   0.0902 .
+ch_stream.power.central.diff      0.164679   0.064224   2.564   0.0103 *
+hs_hillslope.length               0.009363   0.035591   0.263   0.7925  
+hs_flow.accumulation.max         -0.031331   0.030501  -1.027   0.3043  
+hs_curvature.median              -0.013192   0.034538  -0.382   0.7025  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Pseudo R-squared: 0.02301
+
+Coefficients (covariance):
+            Effect     Parameter   Estimate
+     tailup linear  de (parsill)  4.646e-01
+     tailup linear         range  6.679e+03
+   taildown linear  de (parsill)  5.205e+00
+   taildown linear         range  8.693e+03
+  euclid spherical  de (parsill)  5.746e-01
+  euclid spherical         range  3.429e+01
+            nugget        nugget  9.711e-02
+
+# A tibble: 5 × 2
+  varcomp            proportion
+  <chr>                   <dbl>
+1 Covariates (PR-sq)     0.0230
+2 tailup_de              0.0716
+3 taildown_de            0.802 
+4 euclid_de              0.0885
+5 nugget                 0.0150
+# A tibble: 10 × 7
+   term                             estimate std.error statistic p.value conf.low conf.high
+   <chr>                               <dbl>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
+ 1 (Intercept)                      -0.219      1.50      -0.146  0.884   -3.16      2.72  
+ 2 ch_central.slope.difference      -0.0191     0.0402    -0.476  0.634   -0.0979    0.0596
+ 3 ch_channel_width                 -0.0962     0.0599    -1.60   0.109   -0.214     0.0213
+ 4 ch_curvature.median              -0.0284     0.0412    -0.689  0.491   -0.109     0.0523
+ 5 ch_slope.over.width.central.diff -0.0950     0.0561    -1.69   0.0902  -0.205     0.0149
+ 6 ch_stream.power                  -0.00641    0.0586    -0.109  0.913   -0.121     0.108 
+ 7 ch_stream.power.central.diff      0.165      0.0642     2.56   0.0103   0.0388    0.291 
+ 8 hs_curvature.median              -0.0132     0.0345    -0.382  0.702   -0.0809    0.0545
+ 9 hs_flow.accumulation.max         -0.0313     0.0305    -1.03   0.304   -0.0911    0.0284
+10 hs_hillslope.length               0.00936    0.0356     0.263  0.792   -0.0604    0.0791
+# A tibble: 1 × 9
+      n     p  npar value   AIC  AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
+1   547    10     7 1281. 1295. 1295.  -640.     532.           0.0230
+[1] "Leave One Out Cross Validation"
+# A tibble: 1 × 10
+       bias std.bias  MSPE RMSPE std.MSPE   RAV  cor2 cover.80 cover.90 cover.95
+      <dbl>    <dbl> <dbl> <dbl>    <dbl> <dbl> <dbl>    <dbl>    <dbl>    <dbl>
+1 0.0000943 0.000185 0.439 0.663     1.02 0.652 0.561    0.861    0.914    0.929

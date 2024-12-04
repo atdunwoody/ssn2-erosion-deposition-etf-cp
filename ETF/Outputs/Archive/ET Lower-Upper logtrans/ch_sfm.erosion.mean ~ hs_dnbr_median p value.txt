@@ -1,0 +1,76 @@
+
+Call:
+ssn_lm(formula = ch_sfm.erosion.mean ~ ws_mi60_mean + ws_accum_precip_mean + 
+    ws_slope_mean + ws_aspect_mean + ws_RV.Clay + ch_elevation.mean + 
+    ch_slope.upstream + hs_area + hs_hillslope.length + hs_flow.accumulation.max + 
+    hs_slope.median + hs_aspect.median + hs_curvature.median, 
+    ssn.object = ET_ssn, tailup_type = "exponential", taildown_type = "none", 
+    euclid_type = "gaussian", additive = "afv_flow_accum")
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.169304 -0.046943 -0.008733  0.024137  0.425862 
+
+Coefficients (fixed):
+                           Estimate Std. Error z value Pr(>|z|)    
+(Intercept)               0.0947538  0.0213863   4.431  9.4e-06 ***
+ws_mi60_mean             -0.2764601  0.2320440  -1.191   0.2335    
+ws_accum_precip_mean      0.2354557  0.1403139   1.678   0.0933 .  
+ws_slope_mean             0.0951735  0.0569552   1.671   0.0947 .  
+ws_aspect_mean            0.1065004  0.1542396   0.690   0.4899    
+ws_RV.Clay                0.0221714  0.0362256   0.612   0.5405    
+ch_elevation.mean        -0.0445098  0.0399212  -1.115   0.2649    
+ch_slope.upstream        -0.0009859  0.0046374  -0.213   0.8316    
+hs_area                   0.0201488  0.0112054   1.798   0.0722 .  
+hs_hillslope.length      -0.0201479  0.0097768  -2.061   0.0393 *  
+hs_flow.accumulation.max -0.0041325  0.0076813  -0.538   0.5906    
+hs_slope.median          -0.0153887  0.0113908  -1.351   0.1767    
+hs_aspect.median          0.0078408  0.0059153   1.325   0.1850    
+hs_curvature.median      -0.0050381  0.0039375  -1.279   0.2007    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Pseudo R-squared: 0.0722
+
+Coefficients (covariance):
+              Effect     Parameter   Estimate
+  tailup exponential  de (parsill)  1.940e-03
+  tailup exponential         range  1.412e+03
+     euclid gaussian  de (parsill)  2.227e-03
+     euclid gaussian         range  1.621e+01
+              nugget        nugget  2.780e-03
+
+# A tibble: 5 × 2
+  varcomp            proportion
+  <chr>                   <dbl>
+1 Covariates (PR-sq)     0.0722
+2 tailup_de              0.259 
+3 taildown_de            0     
+4 euclid_de              0.297 
+5 nugget                 0.371 
+# A tibble: 14 × 7
+   term                      estimate std.error statistic    p.value conf.low conf.high
+   <chr>                        <dbl>     <dbl>     <dbl>      <dbl>    <dbl>     <dbl>
+ 1 (Intercept)               0.0948     0.0214      4.43  0.00000940  0.0528   0.137   
+ 2 ch_elevation.mean        -0.0445     0.0399     -1.11  0.265      -0.123    0.0337  
+ 3 ch_slope.upstream        -0.000986   0.00464    -0.213 0.832      -0.0101   0.00810 
+ 4 hs_area                   0.0201     0.0112      1.80  0.0722     -0.00181  0.0421  
+ 5 hs_aspect.median          0.00784    0.00592     1.33  0.185      -0.00375  0.0194  
+ 6 hs_curvature.median      -0.00504    0.00394    -1.28  0.201      -0.0128   0.00268 
+ 7 hs_flow.accumulation.max -0.00413    0.00768    -0.538 0.591      -0.0192   0.0109  
+ 8 hs_hillslope.length      -0.0201     0.00978    -2.06  0.0393     -0.0393  -0.000986
+ 9 hs_slope.median          -0.0154     0.0114     -1.35  0.177      -0.0377   0.00694 
+10 ws_accum_precip_mean      0.235      0.140       1.68  0.0933     -0.0396   0.510   
+11 ws_aspect_mean            0.107      0.154       0.690 0.490      -0.196    0.409   
+12 ws_mi60_mean             -0.276      0.232      -1.19  0.233      -0.731    0.178   
+13 ws_RV.Clay                0.0222     0.0362      0.612 0.541      -0.0488   0.0932  
+14 ws_slope_mean             0.0952     0.0570      1.67  0.0947     -0.0165   0.207   
+# A tibble: 1 × 9
+      n     p  npar  value    AIC   AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int>  <dbl>  <dbl>  <dbl>  <dbl>    <dbl>            <dbl>
+1   547    14     5 -1281. -1271. -1271.   640.     534.           0.0722
+[1] "Leave One Out Cross Validation"
+# A tibble: 1 × 10
+       bias  std.bias    MSPE  RMSPE std.MSPE    RAV  cor2 cover.80 cover.90 cover.95
+      <dbl>     <dbl>   <dbl>  <dbl>    <dbl>  <dbl> <dbl>    <dbl>    <dbl>    <dbl>
+1 -0.000105 -0.000299 0.00440 0.0663     1.01 0.0660 0.636    0.868    0.914    0.945

@@ -1,0 +1,192 @@
+
+> # Save input parameters
+> cat("Model Formula:\n")
+Model Formula:
+
+> print(model_formula)
+ch_sfm.erosion.norm ~ ch_elevation.mean + ch_flow.accumulation.max + 
+    ch_curvature.median + ch_central.slope.difference + ch_channel.width.over.valley.width + 
+    ch_stream.power.central.diff + hs_hillslope.length + hs_slope.median + 
+    hs_northness.median + hs_eastness.median + hs_curvature.median + 
+    hs_bare.earth.mean + hs_ndvi.range + hs_dnbr.median
+
+> cat("\nSSN Path:\n")
+
+SSN Path:
+
+> print(ssn_path)
+[1] "Y:/ATD/GIS/ETF/Watershed Stats/SSN2/Outputs/MPM_erosion_logtrans/MPM_erosion_logtrans.ssn"
+
+> cat("\nLSN Output Path:\n")
+
+LSN Output Path:
+
+> print(lsn_out)
+[1] "Y:/ATD/GIS/ETF/Watershed Stats/SSN2/Outputs/MPM_erosion_logtrans/lsn_out"
+
+> cat("\n")
+
+
+> # Fit the model using the defined formula
+> if (multiple_ws == TRUE){
++   ssn_mod <- ssn_glm(
++     formula = model_formula,
++     ssn.object = CP_s .... [TRUNCATED] 
+
+> # Print the suMWary of the model to the file
+> print(summary(ssn_mod))
+
+Call:
+ssn_glm(formula = model_formula, ssn.object = CP_ssn, family = "Gamma", 
+    tailup_type = "exponential", taildown_type = "none", euclid_type = "gaussian", 
+    nugget_type = "nugget", additive = "afv_flow_accum")
+
+Deviance Residuals:
+       Min         1Q     Median         3Q        Max 
+-0.0023717 -0.0007157 -0.0002247  0.0010921  0.0019203 
+
+Coefficients (fixed):
+                                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                         1.01225    3.58575   0.282 0.777716    
+ch_elevation.mean                   2.16919    3.25089   0.667 0.504606    
+ch_flow.accumulation.max            0.55779    2.79577   0.200 0.841861    
+ch_curvature.median                -0.10304    0.10996  -0.937 0.348709    
+ch_central.slope.difference        -0.42769    0.12628  -3.387 0.000707 ***
+ch_channel.width.over.valley.width -0.58321    0.34432  -1.694 0.090306 .  
+ch_stream.power.central.diff        0.08347    0.06387   1.307 0.191249    
+hs_hillslope.length                 0.12250    0.33574   0.365 0.715206    
+hs_slope.median                    -0.91665    0.28652  -3.199 0.001378 ** 
+hs_northness.median                 0.50522    0.37503   1.347 0.177927    
+hs_eastness.median                 -0.08102    0.21899  -0.370 0.711402    
+hs_curvature.median                 0.29623    0.12149   2.438 0.014758 *  
+hs_bare.earth.mean                  0.05213    0.24603   0.212 0.832209    
+hs_ndvi.range                       1.06584    0.37495   2.843 0.004474 ** 
+hs_dnbr.median                      0.64800    0.18935   3.422 0.000621 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Pseudo R-squared: 0.7279
+
+Coefficients (covariance):
+              Effect     Parameter   Estimate
+  tailup exponential  de (parsill)  1.699e-06
+  tailup exponential         range  1.920e+05
+     euclid gaussian  de (parsill)  1.677e+01
+     euclid gaussian         range  1.842e+03
+              nugget        nugget  1.980e-01
+          dispersion    dispersion  1.372e+03
+
+
+> # Print tidy suMWary with confidence intervals
+> print(tidy(ssn_mod, conf.int = TRUE))
+# A tibble: 15 × 7
+   term                               estimate std.error statistic  p.value conf.low conf.high
+   <chr>                                 <dbl>     <dbl>     <dbl>    <dbl>    <dbl>     <dbl>
+ 1 (Intercept)                          1.01      3.59       0.282 0.778     -6.02      8.04  
+ 2 ch_central.slope.difference         -0.428     0.126     -3.39  0.000707  -0.675    -0.180 
+ 3 ch_channel.width.over.valley.width  -0.583     0.344     -1.69  0.0903    -1.26      0.0917
+ 4 ch_curvature.median                 -0.103     0.110     -0.937 0.349     -0.319     0.112 
+ 5 ch_elevation.mean                    2.17      3.25       0.667 0.505     -4.20      8.54  
+ 6 ch_flow.accumulation.max             0.558     2.80       0.200 0.842     -4.92      6.04  
+ 7 ch_stream.power.central.diff         0.0835    0.0639     1.31  0.191     -0.0417    0.209 
+ 8 hs_bare.earth.mean                   0.0521    0.246      0.212 0.832     -0.430     0.534 
+ 9 hs_curvature.median                  0.296     0.121      2.44  0.0148     0.0581    0.534 
+10 hs_dnbr.median                       0.648     0.189      3.42  0.000621   0.277     1.02  
+11 hs_eastness.median                  -0.0810    0.219     -0.370 0.711     -0.510     0.348 
+12 hs_hillslope.length                  0.123     0.336      0.365 0.715     -0.536     0.781 
+13 hs_ndvi.range                        1.07      0.375      2.84  0.00447    0.331     1.80  
+14 hs_northness.median                  0.505     0.375      1.35  0.178     -0.230     1.24  
+15 hs_slope.median                     -0.917     0.287     -3.20  0.00138   -1.48     -0.355 
+
+> #----------------------------#
+> #       Initialization       #
+> #----------------------------#
+> 
+> # Define the prefix and type
+> prefix <- "MPM"
+
+> type <- "deposition"  # Change this value as needed (e.g., "deposition")
+
+> # Flags for loading and processing
+> load_ssn <- TRUE
+
+> # Define the output and input base folders
+> base_output_folder <- "Y:/ATD/GIS/ETF/Watershed Stats/SSN2/Outputs"
+
+> base_input_folder <- "Y:/ATD/GIS/ETF/Watershed Stats/SSN2/Inputs"
+
+> # Construct the specific output folder using the prefix and type
+> output_folder <- file.path(base_output_folder, paste0(prefix, "_", type, "_logtra ..." ... [TRUNCATED] 
+
+> # Define the output file using the prefix and type
+> output_file <- file.path(
++   output_folder, 
++   paste0(prefix, "_ch_sfm.", type, ".norm VIF-2 ..." ... [TRUNCATED] 
+
+> # Dynamically construct the model formula using the type variable
+> response_var <- paste0("ch_sfm.", type, ".norm")
+
+> model_formula_str <- paste(
++   response_var, "~",
++   "ch_slope.median +",
++   "ch_change.in.slope.over.width +",
++   "ch_channel.width.over.valley ..." ... [TRUNCATED] 
+
+> model_formula <- as.formula(model_formula_str)
+
+> # Define other input and output paths using the prefix and type
+> # Uncomment and modify the following line if you need to use the combined watershe .... [TRUNCATED] 
+
+> # Define the SSN path using the prefix and type
+> ssn_path <- file.path(
++   output_folder, 
++   paste0(prefix, "_", type, "_logtrans.ssn")
++ )
+
+> # Define the LSN output folder (assuming it doesn't require the prefix)
+> lsn_out <- file.path(output_folder, "lsn_out")
+
+> # Define the input streams path (assuming it doesn't require the prefix)
+> input_streams <- file.path(base_input_folder, "Streams", "streams_100k.gp ..." ... [TRUNCATED] 
+
+> # Create the output folder if it doesn't exist
+> if (!dir.exists(output_folder)) {
++   dir.create(output_folder, recursive = TRUE)
++ }
+
+> # Load Required Libraries
+> library(SSN2)
+
+> library(SSNbler)
+
+> library(sf)
+
+> library(dplyr)
+
+> library(purrr)
+
+> library(ggplot2)
+
+> library(lmtest)
+
+> library(spdep)
+
+> library(classInt) # For spatial weights if needed
+
+> library(knitr)    # For better output formatting (optional)
+
+> #----------------------------#
+> #        Data Loading        #
+> #----------------------------#
+> 
+> if (load_ssn == FALSE){
++   # Read spatial dat .... [TRUNCATED] 
+
+> # Create distance matrix
+> ssn_create_distmat(CP_ssn)
+
+> #----------------------------#
+> #      Model Fitting         #
+> #----------------------------#
+> 
+> # Redirect output to the specified file in the .... [TRUNCATED] 

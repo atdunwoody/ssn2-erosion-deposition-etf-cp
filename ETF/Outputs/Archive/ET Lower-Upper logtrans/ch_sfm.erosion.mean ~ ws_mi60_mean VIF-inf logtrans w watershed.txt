@@ -1,0 +1,83 @@
+
+Call:
+ssn_lm(formula = ch_sfm.erosion.mean ~ ws_mi60_mean + ws_sbs_mean + 
+    hs_flow.accumulation.max + ws_flow.accum_max + ch_valley_width + 
+    ws_bare_earth_mean + hs_dnbr.median + ws_RV.Sand + hs_bare.earth.mean + 
+    ch_stream.power.central.diff + ws_accum_precip_mean + ch_slope.median + 
+    hs_aspect.median + ws_Kw + ch_change.in.slope.over.width + 
+    ch_watershed, ssn.object = ET_ssn, tailup_type = "exponential", 
+    taildown_type = "none", euclid_type = "gaussian", additive = "afv_flow_accum")
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.16189 -0.04341 -0.01511  0.01986  0.42591 
+
+Coefficients (fixed):
+                                Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                    0.0896215  0.1679690   0.534   0.5936    
+ws_mi60_mean                  -0.6184924  0.1185778  -5.216 1.83e-07 ***
+ws_sbs_mean                   -0.0910355  0.0354646  -2.567   0.0103 *  
+hs_flow.accumulation.max       0.0003335  0.0033585   0.099   0.9209    
+ws_flow.accum_max             -0.0806040  0.0355675  -2.266   0.0234 *  
+ch_valley_width               -0.0095309  0.0070103  -1.360   0.1740    
+ws_bare_earth_mean             0.0228612  0.0112028   2.041   0.0413 *  
+hs_dnbr.median                -0.0179489  0.0082148  -2.185   0.0289 *  
+ws_RV.Sand                     0.2624345  0.0652101   4.024 5.71e-05 ***
+hs_bare.earth.mean             0.0070284  0.0092631   0.759   0.4480    
+ch_stream.power.central.diff   0.0089155  0.0019570   4.556 5.22e-06 ***
+ws_accum_precip_mean           0.5013643  0.0806762   6.215 5.15e-10 ***
+ch_slope.median                0.0045919  0.0047527   0.966   0.3340    
+hs_aspect.median               0.0094644  0.0059991   1.578   0.1147    
+ws_Kw                          0.1115718  0.0508294   2.195   0.0282 *  
+ch_change.in.slope.over.width -0.0035798  0.0014544  -2.461   0.0138 *  
+ch_watershed                   0.0132239  0.0342462   0.386   0.6994    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Pseudo R-squared: 0.1775
+
+Coefficients (covariance):
+              Effect     Parameter   Estimate
+  tailup exponential  de (parsill)  2.755e-03
+  tailup exponential         range  3.640e+01
+     euclid gaussian  de (parsill)  2.381e-03
+     euclid gaussian         range  1.219e+04
+              nugget        nugget  2.735e-03
+
+# A tibble: 5 × 2
+  varcomp            proportion
+  <chr>                   <dbl>
+1 Covariates (PR-sq)      0.178
+2 tailup_de               0.288
+3 taildown_de             0    
+4 euclid_de               0.249
+5 nugget                  0.286
+# A tibble: 17 × 7
+   term                           estimate std.error statistic  p.value  conf.low conf.high
+   <chr>                             <dbl>     <dbl>     <dbl>    <dbl>     <dbl>     <dbl>
+ 1 (Intercept)                    0.0896     0.168      0.534  5.94e- 1 -0.240     0.419   
+ 2 ch_change.in.slope.over.width -0.00358    0.00145   -2.46   1.38e- 2 -0.00643  -0.000729
+ 3 ch_slope.median                0.00459    0.00475    0.966  3.34e- 1 -0.00472   0.0139  
+ 4 ch_stream.power.central.diff   0.00892    0.00196    4.56   5.22e- 6  0.00508   0.0128  
+ 5 ch_valley_width               -0.00953    0.00701   -1.36   1.74e- 1 -0.0233    0.00421 
+ 6 ch_watershed                   0.0132     0.0342     0.386  6.99e- 1 -0.0539    0.0803  
+ 7 hs_aspect.median               0.00946    0.00600    1.58   1.15e- 1 -0.00229   0.0212  
+ 8 hs_bare.earth.mean             0.00703    0.00926    0.759  4.48e- 1 -0.0111    0.0252  
+ 9 hs_dnbr.median                -0.0179     0.00821   -2.18   2.89e- 2 -0.0340   -0.00185 
+10 hs_flow.accumulation.max       0.000334   0.00336    0.0993 9.21e- 1 -0.00625   0.00692 
+11 ws_accum_precip_mean           0.501      0.0807     6.21   5.15e-10  0.343     0.659   
+12 ws_bare_earth_mean             0.0229     0.0112     2.04   4.13e- 2  0.000904  0.0448  
+13 ws_flow.accum_max             -0.0806     0.0356    -2.27   2.34e- 2 -0.150    -0.0109  
+14 ws_Kw                          0.112      0.0508     2.20   2.82e- 2  0.0119    0.211   
+15 ws_mi60_mean                  -0.618      0.119     -5.22   1.83e- 7 -0.851    -0.386   
+16 ws_RV.Sand                     0.262      0.0652     4.02   5.71e- 5  0.135     0.390   
+17 ws_sbs_mean                   -0.0910     0.0355    -2.57   1.03e- 2 -0.161    -0.0215  
+# A tibble: 1 × 9
+      n     p  npar  value    AIC   AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int>  <dbl>  <dbl>  <dbl>  <dbl>    <dbl>            <dbl>
+1   547    17     5 -1273. -1263. -1263.   636.     526.            0.178
+[1] "Leave One Out Cross Validation"
+# A tibble: 1 × 10
+       bias  std.bias    MSPE  RMSPE std.MSPE    RAV  cor2 cover.80 cover.90 cover.95
+      <dbl>     <dbl>   <dbl>  <dbl>    <dbl>  <dbl> <dbl>    <dbl>    <dbl>    <dbl>
+1 -0.000155 -0.000453 0.00428 0.0654    0.994 0.0655 0.645    0.859    0.918    0.934

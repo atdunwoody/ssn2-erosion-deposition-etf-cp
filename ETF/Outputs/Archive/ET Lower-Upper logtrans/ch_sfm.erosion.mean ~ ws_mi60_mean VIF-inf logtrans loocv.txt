@@ -1,0 +1,80 @@
+
+Call:
+ssn_lm(formula = ch_sfm.erosion.mean ~ ws_sbs_mean + hs_flow.accumulation.max + 
+    ws_flow.accum_max + ch_valley_width + ws_bare_earth_mean + 
+    hs_dnbr.median + ws_RV.Sand + hs_bare.earth.mean + ch_stream.power.central.diff + 
+    ws_accum_precip_mean + ch_slope.median + hs_aspect.median + 
+    ws_Kw + ch_change.in.slope.over.width, ssn.object = ET_ssn, 
+    tailup_type = "exponential", taildown_type = "none", euclid_type = "gaussian", 
+    additive = "afv_flow_accum")
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.219013 -0.071306 -0.036306  0.009843  0.529164 
+
+Coefficients (fixed):
+                                Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                    1.157e-01  3.574e-02   3.239   0.0012 ** 
+ws_sbs_mean                   -4.212e-05  5.228e-02  -0.001   0.9994    
+hs_flow.accumulation.max       5.843e-04  3.355e-03   0.174   0.8618    
+ws_flow.accum_max             -9.091e-03  4.206e-02  -0.216   0.8289    
+ch_valley_width               -5.788e-03  6.507e-03  -0.889   0.3738    
+ws_bare_earth_mean             2.126e-02  1.024e-02   2.075   0.0380 *  
+hs_dnbr.median                -1.406e-02  8.056e-03  -1.745   0.0810 .  
+ws_RV.Sand                     3.122e-02  5.840e-02   0.535   0.5929    
+hs_bare.earth.mean             6.502e-03  8.964e-03   0.725   0.4682    
+ch_stream.power.central.diff   8.875e-03  1.987e-03   4.468 7.91e-06 ***
+ws_accum_precip_mean           1.497e-02  6.016e-02   0.249   0.8034    
+ch_slope.median                3.643e-03  4.523e-03   0.805   0.4206    
+hs_aspect.median               9.068e-03  6.008e-03   1.509   0.1312    
+ws_Kw                          3.405e-02  2.953e-02   1.153   0.2489    
+ch_change.in.slope.over.width -3.576e-03  1.490e-03  -2.400   0.0164 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Pseudo R-squared: 0.07328
+
+Coefficients (covariance):
+              Effect     Parameter   Estimate
+  tailup exponential  de (parsill)  6.507e-03
+  tailup exponential         range  1.324e+05
+     euclid gaussian  de (parsill)  1.947e-03
+     euclid gaussian         range  2.231e+01
+              nugget        nugget  3.110e-03
+
+# A tibble: 5 × 2
+  varcomp            proportion
+  <chr>                   <dbl>
+1 Covariates (PR-sq)     0.0733
+2 tailup_de              0.521 
+3 taildown_de            0     
+4 euclid_de              0.156 
+5 nugget                 0.249 
+# A tibble: 15 × 7
+   term            estimate std.error statistic p.value conf.low conf.high
+   <chr>              <dbl>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
+ 1 (Intercept)      1.16e-1   0.0357   3.24     1.20e-3  0.0457   0.186   
+ 2 ch_change.in.s… -3.58e-3   0.00149 -2.40     1.64e-2 -0.00650 -0.000655
+ 3 ch_slope.median  3.64e-3   0.00452  0.805    4.21e-1 -0.00522  0.0125  
+ 4 ch_stream.powe…  8.88e-3   0.00199  4.47     7.91e-6  0.00498  0.0128  
+ 5 ch_valley_width -5.79e-3   0.00651 -0.889    3.74e-1 -0.0185   0.00697 
+ 6 hs_aspect.medi…  9.07e-3   0.00601  1.51     1.31e-1 -0.00271  0.0208  
+ 7 hs_bare.earth.…  6.50e-3   0.00896  0.725    4.68e-1 -0.0111   0.0241  
+ 8 hs_dnbr.median  -1.41e-2   0.00806 -1.75     8.10e-2 -0.0298   0.00173 
+ 9 hs_flow.accumu…  5.84e-4   0.00336  0.174    8.62e-1 -0.00599  0.00716 
+10 ws_accum_preci…  1.50e-2   0.0602   0.249    8.03e-1 -0.103    0.133   
+11 ws_bare_earth_…  2.13e-2   0.0102   2.08     3.80e-2  0.00118  0.0413  
+12 ws_flow.accum_… -9.09e-3   0.0421  -0.216    8.29e-1 -0.0915   0.0734  
+13 ws_Kw            3.41e-2   0.0295   1.15     2.49e-1 -0.0238   0.0919  
+14 ws_RV.Sand       3.12e-2   0.0584   0.535    5.93e-1 -0.0832   0.146   
+15 ws_sbs_mean     -4.21e-5   0.0523  -0.000806 9.99e-1 -0.103    0.102   
+# A tibble: 1 × 9
+      n     p  npar  value    AIC   AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int>  <dbl>  <dbl>  <dbl>  <dbl>    <dbl>            <dbl>
+1   547    15     5 -1273. -1263. -1262.   636.     533.           0.0733
+[1] "Leave One Out Cross Validation"
+# A tibble: 1 × 10
+      bias std.bias    MSPE  RMSPE std.MSPE    RAV  cor2 cover.80 cover.90
+     <dbl>    <dbl>   <dbl>  <dbl>    <dbl>  <dbl> <dbl>    <dbl>    <dbl>
+1 -1.26e-4 -3.63e-4 0.00431 0.0657     1.00 0.0654 0.643    0.863    0.912
+# ℹ 1 more variable: cover.95 <dbl>

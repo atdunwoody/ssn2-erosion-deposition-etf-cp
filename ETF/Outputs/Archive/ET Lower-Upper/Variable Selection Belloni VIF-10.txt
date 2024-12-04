@@ -1,0 +1,76 @@
+--- Treatment Variable: ws_mi60_mean ---
+Selected Control Variables (12): ['hs_aspect median', 'hs_flow accumulation max', 'hs_dnbr median', 'hs_slope median', 'ch_slope over width', 'ws_bare_earth_mean', 'hs_bare earth mean', 'hs_area', 'ch_stream power central diff', 'ch_change in slope over width', 'ch_curvature median', 'ch_valley_width']
+Treatment Effect Estimate:
+Coefficient for 'ws_mi60_mean': -0.1478
+P-value: 0.0176
+No high correlations among selected control variables (> 0.7) found for treatment variable 'ws_mi60_mean'.
+
+ws_mi60_mean +
+hs_aspect.median +
+hs_flow.accumulation.max +
+hs_dnbr.median +
+hs_slope.median +
+ch_slope.over.width +
+ws_bare_earth_mean +
+hs_bare.earth.mean +
+hs_area +
+ch_stream.power.central.diff +
+ch_change.in.slope.over.width +
+ch_curvature.median +
+ch_valley_width +
+
+--- Treatment Variable: hs_dnbr median ---
+Selected Control Variables (11): ['hs_aspect median', 'hs_curvature median', 'hs_flow accumulation max', 'hs_slope median', 'ch_slope over width', 'ws_bare_earth_mean', 'hs_bare earth mean', 'hs_area', 'ch_stream power central diff', 'ch_change in slope over width', 'ch_valley_width']
+Treatment Effect Estimate:
+Coefficient for 'hs_dnbr median': 0.2257
+P-value: 0.0000
+No high correlations among selected control variables (> 0.7) found for treatment variable 'hs_dnbr median'.
+
+hs_dnbr.median +
+hs_aspect.median +
+hs_curvature.median +
+hs_flow.accumulation.max +
+hs_slope.median +
+ch_slope.over.width +
+ws_bare_earth_mean +
+hs_bare.earth.mean +
+hs_area +
+ch_stream.power.central.diff +
+ch_change.in.slope.over.width +
+ch_valley_width +
+
+--- Treatment Variable: ch_stream power central diff ---
+Selected Control Variables (6): ['hs_aspect median', 'hs_flow accumulation max', 'hs_dnbr median', 'hs_slope median', 'hs_area', 'ch_change in slope over width']
+Treatment Effect Estimate:
+Coefficient for 'ch_stream power central diff': -0.2049
+P-value: 0.0000
+No high correlations among selected control variables (> 0.7) found for treatment variable 'ch_stream power central diff'.
+
+ch_stream.power.central.diff +
+hs_aspect.median +
+hs_flow.accumulation.max +
+hs_dnbr.median +
+hs_slope.median +
+hs_area +
+ch_change.in.slope.over.width +
+
+--- Treatment Variable: ch_stream power ---
+Selected Control Variables (8): ['hs_aspect median', 'hs_flow accumulation max', 'hs_dnbr median', 'ch_slope over width', 'hs_bare earth mean', 'ch_stream power central diff', 'ch_change in slope over width', 'ch_slope median']
+Treatment Effect Estimate:
+Coefficient for 'ch_stream power': -0.5156
+P-value: 0.0000
+High Correlation Matrix:
+                     ch_slope over width  ch_slope median  ch_stream power
+ch_slope over width                  NaN              NaN         0.850586
+ch_slope median                      NaN              NaN         0.756023
+ch_stream power                 0.850586         0.756023              NaN
+
+ch_stream.power +
+hs_aspect.median +
+hs_flow.accumulation.max +
+hs_dnbr.median +
+ch_slope.over.width +
+hs_bare.earth.mean +
+ch_stream.power.central.diff +
+ch_change.in.slope.over.width +
+ch_slope.median

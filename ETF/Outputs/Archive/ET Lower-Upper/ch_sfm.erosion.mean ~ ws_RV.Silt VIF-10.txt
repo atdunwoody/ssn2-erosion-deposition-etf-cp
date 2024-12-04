@@ -1,0 +1,79 @@
+ssn_lm(formula = ch_sfm.erosion.mean ~ ws_RV.Silt + ch_channel.width.over.valley.width + 
+    hs_aspect.median + hs_curvature.median + hs_flow.accumulation.max + 
+    hs_dnbr.median + hs_slope.median + ch_slope.over.width + 
+    ws_bare_earth_mean + ch_stream.power.central.diff + hs_area + 
+    ch_slope.median, ssn.object = ET_ssn, tailup_type = "linear", 
+    taildown_type = "linear", euclid_type = "spherical", additive = "afv_flow_accum")
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-7.69156 -0.04635  0.36261  0.64698  2.19139 
+
+Coefficients (fixed):
+                                    Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                        -0.251200   0.436243  -0.576 0.564734    
+ws_RV.Silt                          0.483968   0.326525   1.482 0.138293    
+ch_channel.width.over.valley.width -0.056120   0.045626  -1.230 0.218699    
+hs_aspect.median                   -0.035194   0.044936  -0.783 0.433512    
+hs_curvature.median                 0.040151   0.030885   1.300 0.193599    
+hs_flow.accumulation.max            0.008192   0.033074   0.248 0.804380    
+hs_dnbr.median                      0.095394   0.052377   1.821 0.068560 .  
+hs_slope.median                     0.016691   0.071068   0.235 0.814316    
+ch_slope.over.width                -0.025789   0.054149  -0.476 0.633894    
+ws_bare_earth_mean                 -0.301650   0.190629  -1.582 0.113561    
+ch_stream.power.central.diff       -0.099643   0.027404  -3.636 0.000277 ***
+hs_area                            -0.031417   0.032330  -0.972 0.331168    
+ch_slope.median                     0.005203   0.077334   0.067 0.946357    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Pseudo R-squared: 0.05358
+
+Coefficients (covariance):
+            Effect     Parameter   Estimate
+     tailup linear  de (parsill)  4.864e-01
+     tailup linear         range  2.821e+04
+   taildown linear  de (parsill)  3.552e-03
+   taildown linear         range  4.007e+03
+  euclid spherical  de (parsill)  1.497e+00
+  euclid spherical         range  5.485e+02
+            nugget        nugget  2.773e-01
+
+> varcomp(ssn_mod)
+# A tibble: 5 × 2
+  varcomp            proportion
+  <chr>                   <dbl>
+1 Covariates (PR-sq)    0.0536 
+2 tailup_de             0.203  
+3 taildown_de           0.00148
+4 euclid_de             0.626  
+5 nugget                0.116  
+> tidy(ssn_mod, conf.int = TRUE)  
+# A tibble: 13 × 7
+   term                               estimate std.error statistic  p.value conf.low conf.high
+   <chr>                                 <dbl>     <dbl>     <dbl>    <dbl>    <dbl>     <dbl>
+ 1 (Intercept)                        -0.251      0.436    -0.576  0.565    -1.11       0.604 
+ 2 ch_channel.width.over.valley.width -0.0561     0.0456   -1.23   0.219    -0.146      0.0333
+ 3 ch_slope.median                     0.00520    0.0773    0.0673 0.946    -0.146      0.157 
+ 4 ch_slope.over.width                -0.0258     0.0541   -0.476  0.634    -0.132      0.0803
+ 5 ch_stream.power.central.diff       -0.0996     0.0274   -3.64   0.000277 -0.153     -0.0459
+ 6 hs_area                            -0.0314     0.0323   -0.972  0.331    -0.0948     0.0319
+ 7 hs_aspect.median                   -0.0352     0.0449   -0.783  0.434    -0.123      0.0529
+ 8 hs_curvature.median                 0.0402     0.0309    1.30   0.194    -0.0204     0.101 
+ 9 hs_dnbr.median                      0.0954     0.0524    1.82   0.0686   -0.00726    0.198 
+10 hs_flow.accumulation.max            0.00819    0.0331    0.248  0.804    -0.0566     0.0730
+11 hs_slope.median                     0.0167     0.0711    0.235  0.814    -0.123      0.156 
+12 ws_bare_earth_mean                 -0.302      0.191    -1.58   0.114    -0.675      0.0720
+13 ws_RV.Silt                          0.484      0.327     1.48   0.138    -0.156      1.12  
+> glance(ssn_mod)
+# A tibble: 1 × 9
+      n     p  npar value   AIC  AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
+1   547    13     7 1186. 1200. 1200.  -593.     535.           0.0536
+> print("Leave One Out Cross Validation")
+[1] "Leave One Out Cross Validation"
+> loocv(ssn_mod)
+# A tibble: 1 × 10
+      bias std.bias  MSPE RMSPE std.MSPE   RAV  cor2 cover.80 cover.90 cover.95
+     <dbl>    <dbl> <dbl> <dbl>    <dbl> <dbl> <dbl>    <dbl>    <dbl>    <dbl>
+1 0.000221 0.000318 0.409 0.639     1.02 0.625 0.591    0.896    0.923    0.945

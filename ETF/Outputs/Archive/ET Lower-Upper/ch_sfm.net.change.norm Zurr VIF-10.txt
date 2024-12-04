@@ -1,0 +1,86 @@
+
+Call:
+ssn_lm(formula = ch_sfm.net.change.norm ~ ws_mi60_mean + ws_sbs_mean + 
+    ws_bare_earth_mean + ws_RV.Sand + ws_Kw + ch_slope.median + 
+    ch_flow.accumulation.max + ch_curvature.median + ch_valley_width + 
+    ch_channel_width + ch_central.slope.difference + ch_slope.over.width + 
+    ch_channel.width.over.valley.width + ch_slope.over.width.central.diff + 
+    hs_hillslope.length + hs_flow.accumulation.max + hs_aspect.median + 
+    hs_curvature.median + hs_bare.earth.mean + hs_dnbr.median, 
+    ssn.object = ET_ssn, tailup_type = "linear", taildown_type = "linear", 
+    euclid_type = "spherical", additive = "afv_flow_accum")
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.8203 -0.7433 -0.3192  0.1786  7.4204 
+
+Coefficients (fixed):
+                                    Estimate Std. Error z value Pr(>|z|)   
+(Intercept)                         0.136788   0.395687   0.346  0.72957   
+ws_mi60_mean                        0.132386   0.660556   0.200  0.84116   
+ws_sbs_mean                         0.122666   0.481510   0.255  0.79891   
+ws_bare_earth_mean                  0.419778   0.158989   2.640  0.00828 **
+ws_RV.Sand                         -0.063862   0.503445  -0.127  0.89906   
+ws_Kw                              -0.045802   0.328429  -0.139  0.88909   
+ch_slope.median                     0.002400   0.086775   0.028  0.97794   
+ch_flow.accumulation.max           -0.005312   0.160699  -0.033  0.97363   
+ch_curvature.median                -0.031688   0.041969  -0.755  0.45023   
+ch_valley_width                    -0.026066   0.051593  -0.505  0.61340   
+ch_channel_width                   -0.133516   0.083069  -1.607  0.10799   
+ch_central.slope.difference         0.018443   0.037251   0.495  0.62052   
+ch_slope.over.width                -0.039517   0.061983  -0.638  0.52377   
+ch_channel.width.over.valley.width  0.052913   0.076151   0.695  0.48715   
+ch_slope.over.width.central.diff    0.026346   0.034211   0.770  0.44124   
+hs_hillslope.length                 0.012235   0.036262   0.337  0.73581   
+hs_flow.accumulation.max           -0.021058   0.031445  -0.670  0.50307   
+hs_aspect.median                   -0.012615   0.047596  -0.265  0.79097   
+hs_curvature.median                -0.015552   0.035306  -0.440  0.65959   
+hs_bare.earth.mean                 -0.033976   0.058241  -0.583  0.55964   
+hs_dnbr.median                     -0.028396   0.054469  -0.521  0.60214   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Pseudo R-squared: 0.0282
+
+Coefficients (covariance):
+            Effect     Parameter   Estimate
+     tailup linear  de (parsill)  1.337e+00
+     tailup linear         range  1.858e+03
+   taildown linear  de (parsill)  3.577e-03
+   taildown linear         range  6.194e+05
+  euclid spherical  de (parsill)  5.390e-01
+  euclid spherical         range  3.446e+01
+            nugget        nugget  1.130e-01
+
+# A tibble: 5 × 2
+  varcomp            proportion
+  <chr>                   <dbl>
+1 Covariates (PR-sq)    0.0282 
+2 tailup_de             0.652  
+3 taildown_de           0.00174
+4 euclid_de             0.263  
+5 nugget                0.0551 
+# A tibble: 21 × 7
+   term                               estimate std.error statistic p.value conf.low conf.high
+   <chr>                                 <dbl>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
+ 1 (Intercept)                         0.137      0.396     0.346    0.730  -0.639     0.912 
+ 2 ch_central.slope.difference         0.0184     0.0373    0.495    0.621  -0.0546    0.0915
+ 3 ch_channel.width.over.valley.width  0.0529     0.0762    0.695    0.487  -0.0963    0.202 
+ 4 ch_channel_width                   -0.134      0.0831   -1.61     0.108  -0.296     0.0293
+ 5 ch_curvature.median                -0.0317     0.0420   -0.755    0.450  -0.114     0.0506
+ 6 ch_flow.accumulation.max           -0.00531    0.161    -0.0331   0.974  -0.320     0.310 
+ 7 ch_slope.median                     0.00240    0.0868    0.0277   0.978  -0.168     0.172 
+ 8 ch_slope.over.width                -0.0395     0.0620   -0.638    0.524  -0.161     0.0820
+ 9 ch_slope.over.width.central.diff    0.0263     0.0342    0.770    0.441  -0.0407    0.0934
+10 ch_valley_width                    -0.0261     0.0516   -0.505    0.613  -0.127     0.0751
+# ℹ 11 more rows
+# ℹ Use `print(n = ...)` to see more rows
+# A tibble: 1 × 9
+      n     p  npar value   AIC  AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
+1   547    21     7 1299. 1313. 1314.  -650.     528.           0.0282
+[1] "Leave One Out Cross Validation"
+# A tibble: 1 × 10
+      bias std.bias  MSPE RMSPE std.MSPE   RAV  cor2 cover.80 cover.90 cover.95
+     <dbl>    <dbl> <dbl> <dbl>    <dbl> <dbl> <dbl>    <dbl>    <dbl>    <dbl>
+1 0.000941 0.000854 0.447 0.669     1.02 0.661 0.554    0.863    0.918    0.936

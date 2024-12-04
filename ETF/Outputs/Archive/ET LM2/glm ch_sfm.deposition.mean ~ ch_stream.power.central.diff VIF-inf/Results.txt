@@ -1,0 +1,353 @@
+
+
+Call:
+ssn_glm(formula = model_formula, ssn.object = ET_ssn, family = "Gamma", 
+    tailup_type = "exponential", taildown_type = "none", euclid_type = "gaussian", 
+    additive = "afv_flow_accum")
+
+Deviance Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.279952 -0.096175 -0.007063  0.083394  0.313839 
+
+Coefficients (fixed):
+                                     Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                        -2.3945291  0.1884535 -12.706   <2e-16 ***
+ch_stream.power.central.diff       -0.1063880  0.6850609  -0.155    0.877    
+ch_central.slope.difference         0.0008169  0.0728788   0.011    0.991    
+ch_channel.width.over.valley.width  0.2200055  0.1342536   1.639    0.101    
+ws_drainage_density                -0.1408283  0.1855050  -0.759    0.448    
+ch_slope.over.width.central.diff    0.1731240  0.6403592   0.270    0.787    
+hs_bare.earth.mean                 -0.0228644  0.0500868  -0.456    0.648    
+ch_curvature.median                -0.0293347  0.0967676  -0.303    0.762    
+ch_valley_width                    -0.0150412  0.0769371  -0.196    0.845    
+ws_Kw                               0.0635928  0.1173628   0.542    0.588    
+ws_bare_earth_mean                  0.1318128  0.2194308   0.601    0.548    
+hs_hillslope.length                 0.1225493  0.0934880   1.311    0.190    
+hs_curvature.median                 0.0928276  0.0625928   1.483    0.138    
+ch_slope.median                     0.2474000  0.1823672   1.357    0.175    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Pseudo R-squared: 0.1795
+
+Coefficients (covariance):
+              Effect     Parameter  Estimate
+  tailup exponential  de (parsill)   0.02537
+  tailup exponential         range  91.96160
+     euclid gaussian  de (parsill)   0.65426
+     euclid gaussian         range  18.64778
+              nugget        nugget   0.01161
+          dispersion    dispersion  16.11630
+
+
+> # Print variance components of the model
+> varcomp(ssn_mod)
+# A tibble: 5 × 2
+  varcomp            proportion
+  <chr>                   <dbl>
+1 Covariates (PR-sq)     0.180 
+2 tailup_de              0.0301
+3 taildown_de            0     
+4 euclid_de              0.777 
+5 nugget                 0.0138
+
+> # Tidy the model output with confidence intervals and print
+> print(tidy(ssn_mod, conf.int = TRUE))  
+# A tibble: 14 × 7
+   term                                estimate std.error statistic p.value conf.low conf.high
+   <chr>                                  <dbl>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
+ 1 (Intercept)                        -2.39        0.188   -12.7      0      -2.76     -2.03  
+ 2 ch_central.slope.difference         0.000817    0.0729    0.0112   0.991  -0.142     0.144 
+ 3 ch_channel.width.over.valley.width  0.220       0.134     1.64     0.101  -0.0431    0.483 
+ 4 ch_curvature.median                -0.0293      0.0968   -0.303    0.762  -0.219     0.160 
+ 5 ch_slope.median                     0.247       0.182     1.36     0.175  -0.110     0.605 
+ 6 ch_slope.over.width.central.diff    0.173       0.640     0.270    0.787  -1.08      1.43  
+ 7 ch_stream.power.central.diff       -0.106       0.685    -0.155    0.877  -1.45      1.24  
+ 8 ch_valley_width                    -0.0150      0.0769   -0.196    0.845  -0.166     0.136 
+ 9 hs_bare.earth.mean                 -0.0229      0.0501   -0.456    0.648  -0.121     0.0753
+10 hs_curvature.median                 0.0928      0.0626    1.48     0.138  -0.0299    0.216 
+11 hs_hillslope.length                 0.123       0.0935    1.31     0.190  -0.0607    0.306 
+12 ws_bare_earth_mean                  0.132       0.219     0.601    0.548  -0.298     0.562 
+13 ws_drainage_density                -0.141       0.186    -0.759    0.448  -0.504     0.223 
+14 ws_Kw                               0.0636      0.117     0.542    0.588  -0.166     0.294 
+
+> # Provide a glance summary of the model and print
+> print(glance(ssn_mod))
+# A tibble: 1 × 9
+      n     p  npar value   AIC  AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
+1    98    14     6 -98.1 -86.1 -85.1   49.0     1.63            0.180
+
+> # Perform Leave-One-Out Cross Validation and print
+> print("Leave One Out Cross Validation")
+[1] "Leave One Out Cross Validation"
+
+> loocv_results <- loocv(ssn_mod)
+
+> print(loocv_results)
+# A tibble: 1 × 4
+     bias    MSPE  RMSPE   RAV
+    <dbl>   <dbl>  <dbl> <dbl>
+1 -0.0112 0.00401 0.0633 0.381
+
+> # Stop redirecting output
+> sink()
+
+> # --------- Shapiro-Wilk Test for Normality ---------
+> print("\n-------- Shapiro-Wilk Test for Normality ---------")
+[1] "\n-------- Shapiro-Wilk Test for Normality ---------"
+
+> print("Purpose:")
+[1] "Purpose:"
+
+> print("  - Normality: To check if the residuals are normally distributed.")
+[1] "  - Normality: To check if the residuals are normally distributed."
+
+> print("What to Look For:")
+[1] "What to Look For:"
+
+> print("  - p-value > 0.05: Fail to reject null hypothesis (residuals are normally distributed).")
+[1] "  - p-value > 0.05: Fail to reject null hypothesis (residuals are normally distributed)."
+
+> print("  - p-value <= 0.05: Reject null hypothesis (residuals are not normally distributed).\n")
+[1] "  - p-value <= 0.05: Reject null hypothesis (residuals are not normally distributed).\n"
+
+> shapiro_test <- shapiro.test(residuals)
+
+> print("Shapiro-Wilk Test Results:")
+[1] "Shapiro-Wilk Test Results:"
+
+> print(shapiro_test)
+
+	Shapiro-Wilk normality test
+
+data:  residuals
+W = 0.98864, p-value = 0.5708
+
+
+> # --------- Breusch-Pagan Test for Homoscedasticity ---------
+> print("\n-------- Breusch-Pagan Test for Homoscedasticity ---------")
+[1] "\n-------- Breusch-Pagan Test for Homoscedasticity ---------"
+
+> print("Purpose:")
+[1] "Purpose:"
+
+> print("  - Homoscedasticity: To check if residuals have constant variance across all levels of fitted values.")
+[1] "  - Homoscedasticity: To check if residuals have constant variance across all levels of fitted values."
+
+> print("What to Look For:")
+[1] "What to Look For:"
+
+> print("  - p-value > 0.05: Fail to reject null hypothesis (homoscedasticity holds).")
+[1] "  - p-value > 0.05: Fail to reject null hypothesis (homoscedasticity holds)."
+
+> print("  - p-value <= 0.05: Reject null hypothesis (heteroscedasticity present).\n")
+[1] "  - p-value <= 0.05: Reject null hypothesis (heteroscedasticity present).\n"
+
+> # Extract the model frame from the ssn_lm model
+> data_ssn <- model.frame(ssn_mod)
+
+> # Perform Breusch-Pagan Test
+> bp_test <- bptest(ssn_mod)
+
+> print("Breusch-Pagan Test Results:")
+[1] "Breusch-Pagan Test Results:"
+
+> print(bp_test)
+
+	studentized Breusch-Pagan test
+
+data:  ssn_mod
+BP = 10.242, df = 13, p-value = 0.674
+
+
+> # --------- Moran's I Test for Spatial Autocorrelation ---------
+> print("\n-------- Moran's I Test for Spatial Autocorrelation ---------")
+[1] "\n-------- Moran's I Test for Spatial Autocorrelation ---------"
+
+> print("Purpose:")
+[1] "Purpose:"
+
+> print("  - Spatial Autocorrelation: To determine if there is spatial autocorrelation in the residuals.")
+[1] "  - Spatial Autocorrelation: To determine if there is spatial autocorrelation in the residuals."
+
+> print("What to Look For:")
+[1] "What to Look For:"
+
+> print("  - A significant p-value (< 0.05) indicates spatial autocorrelation in residuals.")
+[1] "  - A significant p-value (< 0.05) indicates spatial autocorrelation in residuals."
+
+> print("    Suggests that spatial dependence is not fully captured by the model.\n")
+[1] "    Suggests that spatial dependence is not fully captured by the model.\n"
+
+> # Extract spatial coordinates from the SSN object
+> # Ensure that your SSN object has geometry information
+> coords <- st_coordinates(ssn_get_data(s .... [TRUNCATED] 
+
+> # Create a spatial weights matrix using k-nearest neighbors (k = 4 as an example)
+> knn <- knearneigh(coords, k = 4)
+
+> nb <- knn2nb(knn)
+
+> lw <- nb2listw(nb, style = "W", zero.policy = TRUE)
+
+> # Compute Moran's I
+> moran_test <- moran.test(residuals, lw, zero.policy = TRUE)
+
+> print("Moran's I Test Results:")
+[1] "Moran's I Test Results:"
+
+> print(moran_test)
+
+	Moran I test under randomisation
+
+data:  residuals  
+weights: lw    
+
+Moran I statistic standard deviate = -3.1445, p-value = 0.9992
+alternative hypothesis: greater
+sample estimates:
+Moran I statistic       Expectation          Variance 
+     -0.229298888      -0.010309278       0.004849952 
+
+
+> # Stop redirecting output
+> sink()
+[1] "\n-------- Shapiro-Wilk Test for Normality ---------"
+[1] "Purpose:"
+[1] "  - Normality: To check if the residuals are normally distributed."
+[1] "What to Look For:"
+[1] "  - p-value > 0.05: Fail to reject null hypothesis (residuals are normally distributed)."
+[1] "  - p-value <= 0.05: Reject null hypothesis (residuals are not normally distributed).\n"
+[1] "Shapiro-Wilk Test Results:"
+
+	Shapiro-Wilk normality test
+
+data:  residuals
+W = 0.82207, p-value = 1.636e-09
+
+[1] "\n-------- Breusch-Pagan Test for Homoscedasticity ---------"
+[1] "Purpose:"
+[1] "  - Homoscedasticity: To check if residuals have constant variance across all levels of fitted values."
+[1] "What to Look For:"
+[1] "  - p-value > 0.05: Fail to reject null hypothesis (homoscedasticity holds)."
+[1] "  - p-value <= 0.05: Reject null hypothesis (heteroscedasticity present).\n"
+
+Call:
+ssn_glm(formula = model_formula, ssn.object = ET_ssn, family = "Gamma", 
+    tailup_type = "exponential", taildown_type = "none", euclid_type = "gaussian", 
+    additive = "afv_flow_accum")
+
+Deviance Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.279952 -0.096175 -0.007063  0.083394  0.313839 
+
+Coefficients (fixed):
+                                     Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                        -2.3945291  0.1884535 -12.706   <2e-16 ***
+ch_stream.power.central.diff       -0.1063880  0.6850609  -0.155    0.877    
+ch_central.slope.difference         0.0008169  0.0728788   0.011    0.991    
+ch_channel.width.over.valley.width  0.2200055  0.1342536   1.639    0.101    
+ws_drainage_density                -0.1408283  0.1855050  -0.759    0.448    
+ch_slope.over.width.central.diff    0.1731240  0.6403592   0.270    0.787    
+hs_bare.earth.mean                 -0.0228644  0.0500868  -0.456    0.648    
+ch_curvature.median                -0.0293347  0.0967676  -0.303    0.762    
+ch_valley_width                    -0.0150412  0.0769371  -0.196    0.845    
+ws_Kw                               0.0635928  0.1173628   0.542    0.588    
+ws_bare_earth_mean                  0.1318128  0.2194308   0.601    0.548    
+hs_hillslope.length                 0.1225493  0.0934880   1.311    0.190    
+hs_curvature.median                 0.0928276  0.0625928   1.483    0.138    
+ch_slope.median                     0.2474000  0.1823672   1.357    0.175    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Pseudo R-squared: 0.1795
+
+Coefficients (covariance):
+              Effect     Parameter  Estimate
+  tailup exponential  de (parsill)   0.02537
+  tailup exponential         range  91.96160
+     euclid gaussian  de (parsill)   0.65426
+     euclid gaussian         range  18.64778
+              nugget        nugget   0.01161
+          dispersion    dispersion  16.11630
+
+# A tibble: 5 × 2
+  varcomp            proportion
+  <chr>                   <dbl>
+1 Covariates (PR-sq)     0.180 
+2 tailup_de              0.0301
+3 taildown_de            0     
+4 euclid_de              0.777 
+5 nugget                 0.0138
+# A tibble: 14 × 7
+   term                                estimate std.error statistic p.value conf.low conf.high
+   <chr>                                  <dbl>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
+ 1 (Intercept)                        -2.39        0.188   -12.7      0      -2.76     -2.03  
+ 2 ch_central.slope.difference         0.000817    0.0729    0.0112   0.991  -0.142     0.144 
+ 3 ch_channel.width.over.valley.width  0.220       0.134     1.64     0.101  -0.0431    0.483 
+ 4 ch_curvature.median                -0.0293      0.0968   -0.303    0.762  -0.219     0.160 
+ 5 ch_slope.median                     0.247       0.182     1.36     0.175  -0.110     0.605 
+ 6 ch_slope.over.width.central.diff    0.173       0.640     0.270    0.787  -1.08      1.43  
+ 7 ch_stream.power.central.diff       -0.106       0.685    -0.155    0.877  -1.45      1.24  
+ 8 ch_valley_width                    -0.0150      0.0769   -0.196    0.845  -0.166     0.136 
+ 9 hs_bare.earth.mean                 -0.0229      0.0501   -0.456    0.648  -0.121     0.0753
+10 hs_curvature.median                 0.0928      0.0626    1.48     0.138  -0.0299    0.216 
+11 hs_hillslope.length                 0.123       0.0935    1.31     0.190  -0.0607    0.306 
+12 ws_bare_earth_mean                  0.132       0.219     0.601    0.548  -0.298     0.562 
+13 ws_drainage_density                -0.141       0.186    -0.759    0.448  -0.504     0.223 
+14 ws_Kw                               0.0636      0.117     0.542    0.588  -0.166     0.294 
+# A tibble: 1 × 9
+      n     p  npar value   AIC  AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
+1    98    14     6 -98.1 -86.1 -85.1   49.0     1.63            0.180
+[1] "Leave One Out Cross Validation"
+# A tibble: 1 × 4
+     bias    MSPE  RMSPE   RAV
+    <dbl>   <dbl>  <dbl> <dbl>
+1 -0.0112 0.00401 0.0633 0.381
+[1] "\n-------- Shapiro-Wilk Test for Normality ---------"
+[1] "Purpose:"
+[1] "  - Normality: To check if the residuals are normally distributed."
+[1] "What to Look For:"
+[1] "  - p-value > 0.05: Fail to reject null hypothesis (residuals are normally distributed)."
+[1] "  - p-value <= 0.05: Reject null hypothesis (residuals are not normally distributed).\n"
+[1] "Shapiro-Wilk Test Results:"
+
+	Shapiro-Wilk normality test
+
+data:  residuals
+W = 0.98864, p-value = 0.5708
+
+[1] "\n-------- Breusch-Pagan Test for Homoscedasticity ---------"
+[1] "Purpose:"
+[1] "  - Homoscedasticity: To check if residuals have constant variance across all levels of fitted values."
+[1] "What to Look For:"
+[1] "  - p-value > 0.05: Fail to reject null hypothesis (homoscedasticity holds)."
+[1] "  - p-value <= 0.05: Reject null hypothesis (heteroscedasticity present).\n"
+[1] "Breusch-Pagan Test Results:"
+
+	studentized Breusch-Pagan test
+
+data:  ssn_mod
+BP = 10.242, df = 13, p-value = 0.674
+
+[1] "\n-------- Moran's I Test for Spatial Autocorrelation ---------"
+[1] "Purpose:"
+[1] "  - Spatial Autocorrelation: To determine if there is spatial autocorrelation in the residuals."
+[1] "What to Look For:"
+[1] "  - A significant p-value (< 0.05) indicates spatial autocorrelation in residuals."
+[1] "    Suggests that spatial dependence is not fully captured by the model.\n"
+[1] "Moran's I Test Results:"
+
+	Moran I test under randomisation
+
+data:  residuals  
+weights: lw    
+
+Moran I statistic standard deviate = -3.1445, p-value = 0.9992
+alternative hypothesis: greater
+sample estimates:
+Moran I statistic       Expectation          Variance 
+     -0.229298888      -0.010309278       0.004849952 
+

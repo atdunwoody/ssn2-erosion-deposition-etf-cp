@@ -1,0 +1,56 @@
+
+Call:
+ssn_lm(formula = ch_sfm.erosion.mean ~ hs_dnbr.median + hs_aspect.median + 
+    hs_curvature.median + ch_curvature.median, ssn.object = ET_ssn, 
+    tailup_type = "exponential", taildown_type = "none", euclid_type = "gaussian", 
+    additive = "afv_flow_accum")
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.12660 -0.06586 -0.03982  0.01488  0.59917 
+
+Coefficients (fixed):
+                     Estimate Std. Error z value Pr(>|z|)    
+(Intercept)          0.108762   0.022393   4.857 1.19e-06 ***
+hs_dnbr.median      -0.022123   0.007866  -2.813  0.00492 ** 
+hs_aspect.median     0.011148   0.005737   1.943  0.05198 .  
+hs_curvature.median -0.003741   0.003534  -1.059  0.28980    
+ch_curvature.median  0.002417   0.004239   0.570  0.56866    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Pseudo R-squared: 0.02102
+
+Coefficients (covariance):
+              Effect     Parameter   Estimate
+  tailup exponential  de (parsill)  5.271e-03
+  tailup exponential         range  7.241e+02
+     euclid gaussian  de (parsill)  1.626e-03
+     euclid gaussian         range  1.210e+01
+              nugget        nugget  2.457e-03
+
+# A tibble: 5 × 2
+  varcomp            proportion
+  <chr>                   <dbl>
+1 Covariates (PR-sq)     0.0210
+2 tailup_de              0.552 
+3 taildown_de            0     
+4 euclid_de              0.170 
+5 nugget                 0.257 
+# A tibble: 5 × 7
+  term                estimate std.error statistic    p.value   conf.low conf.high
+  <chr>                  <dbl>     <dbl>     <dbl>      <dbl>      <dbl>     <dbl>
+1 (Intercept)          0.109     0.0224      4.86  0.00000119  0.0649      0.153  
+2 ch_curvature.median  0.00242   0.00424     0.570 0.569      -0.00589     0.0107 
+3 hs_aspect.median     0.0111    0.00574     1.94  0.0520     -0.0000957   0.0224 
+4 hs_curvature.median -0.00374   0.00353    -1.06  0.290      -0.0107      0.00319
+5 hs_dnbr.median      -0.0221    0.00787    -2.81  0.00492    -0.0375     -0.00671
+# A tibble: 1 × 9
+      n     p  npar  value    AIC   AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int>  <dbl>  <dbl>  <dbl>  <dbl>    <dbl>            <dbl>
+1   547     5     5 -1311. -1301. -1301.   656.     575.           0.0210
+[1] "Leave One Out Cross Validation"
+# A tibble: 1 × 10
+       bias  std.bias    MSPE  RMSPE std.MSPE    RAV  cor2 cover.80 cover.90 cover.95
+      <dbl>     <dbl>   <dbl>  <dbl>    <dbl>  <dbl> <dbl>    <dbl>    <dbl>    <dbl>
+1 -0.000163 -0.000481 0.00429 0.0655     1.04 0.0640 0.645    0.863    0.920    0.945

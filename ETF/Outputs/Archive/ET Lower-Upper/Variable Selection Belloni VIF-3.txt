@@ -1,0 +1,56 @@
+Belloni 2014 Double Selection with VIF Threshold < 3 
+
+--- Treatment Variable: ws_mi60_mean ---
+Selected Control Variables (6): ['hs_aspect median', 'hs_curvature median', 'hs_flow accumulation max', 'hs_area', 'ch_stream power central diff', 'ch_curvature median']
+Treatment Effect Estimate:
+Coefficient for 'ws_mi60_mean': -0.3076
+P-value: 0.0000
+
+ws_mi60_mean +
+hs_aspect.median +
+hs_curvature.median +
+hs_flow.accumulation.max +
+hs_area +
+ch_stream.power.central.diff +
+ch_curvature.median +
+
+--- Treatment Variable: hs_dnbr median ---
+Selected Control Variables (6): ['hs_aspect median', 'hs_curvature median', 'hs_flow accumulation max', 'hs_area', 'ch_stream power central diff', 'ch_curvature median']
+Treatment Effect Estimate:
+Coefficient for 'hs_dnbr median': 0.3189
+P-value: 0.0000
+
+hs_dnbr.median +
+hs_aspect.median +
+hs_curvature.median +
+hs_flow.accumulation.max +
+hs_area +
+ch_stream.power.central.diff +
+ch_curvature.median +
+
+--- Treatment Variable: ch_stream power central diff ---
+Selected Control Variables (5): ['hs_aspect median', 'hs_curvature median', 'hs_flow accumulation max', 'hs_area', 'ch_curvature median']
+Treatment Effect Estimate:
+Coefficient for 'ch_stream power central diff': -0.1345
+P-value: 0.0009
+
+ch_stream.power.central.diff +
+hs_aspect.median +
+hs_curvature.median +
+hs_flow.accumulation.max +
+hs_area +
+ch_curvature.median +
+
+--- Treatment Variable: ch_stream power ---
+Selected Control Variables (6): ['hs_aspect median', 'hs_curvature median', 'hs_flow accumulation max', 'hs_area', 'ch_stream power central diff', 'ch_curvature median']
+Treatment Effect Estimate:
+Coefficient for 'ch_stream power': -0.2519
+P-value: 0.0000
+
+ch_stream.power +
+hs_aspect.median +
+hs_curvature.median +
+hs_flow.accumulation.max +
+hs_area +
+ch_stream.power.central.diff +
+ch_curvature.median
