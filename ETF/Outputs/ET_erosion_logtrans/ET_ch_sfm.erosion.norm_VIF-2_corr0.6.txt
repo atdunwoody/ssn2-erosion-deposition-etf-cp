@@ -7,11 +7,12 @@ ch_sfm.erosion.norm ~ ws_bare.earth.mean + ch_elevation.mean +
     hs_drainage_density
 
 SSN Path:
-Y:/ATD/GIS/ETF/Watershed Stats/SSN2/Outputs/ET_erosion_logtrans/ET_erosion_logtrans.ssn
+ETF/Outputs/ET_erosion_logtrans/ET_erosion_logtrans.ssn
 LSN Output Path:
-Y:/ATD/GIS/ETF/Watershed Stats/SSN2/Outputs/ET_erosion_logtrans/lsn_out
+ETF/Outputs/ET_erosion_logtrans/lsn_out
 
 summary(ssn_mod)
+
 Call:
 ssn_glm(formula = model_formula, ssn.object = CP_ssn, family = "Gamma", 
     tailup_type = "exponential", taildown_type = "none", euclid_type = "gaussian", 
@@ -97,3 +98,5 @@ glance(ssn_mod):
   <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
 1   275    15     7  915.  929.  930.  -458.    0.115           0.0117
 
+
+Starting Bootstrapping...
