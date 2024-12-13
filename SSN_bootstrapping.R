@@ -390,7 +390,8 @@ for (type in types) {
         estimate_mean = mean(estimate, na.rm = TRUE),
         estimate_sd = sd(estimate, na.rm = TRUE),
         conf_low = quantile(estimate, 0.025, na.rm = TRUE),
-        conf_high = quantile(estimate, 0.975, na.rm = TRUE)
+        conf_high = quantile(estimate, 0.975, na.rm = TRUE),
+        p_value = t.test(estimate, mu = 0)$p.value
       )
     
     # Write bootstrap summary to the output file

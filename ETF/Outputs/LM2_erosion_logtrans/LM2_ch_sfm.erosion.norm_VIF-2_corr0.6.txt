@@ -85,7 +85,7 @@ glance(ssn_mod):
 1    45    10     6  98.1  110.  112.  -49.0    0.179            0.169
 
 
-Starting Bootstrapping...
+Starting Bootstrapping for prefix: LM2 and type: erosion 
 
 Bootstrap Summary:
 # A tibble: 10 × 5
@@ -102,4 +102,4 @@ Bootstrap Summary:
  9 hs_eastness.median                       -0.457       0.240   -0.704    -0.258 
 10 hs_ndvi.max                              -0.191       0.295   -0.384     0.124 
 
-Bootstrapping Completed.
+Bootstrapping Completed for prefix: LM2 and type: erosion 

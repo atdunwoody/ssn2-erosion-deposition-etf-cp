@@ -99,4 +99,4 @@ glance(ssn_mod):
 1   275    15     7  915.  929.  930.  -458.    0.115           0.0117
 
 
-Starting Bootstrapping...
+Starting Bootstrapping for prefix: ET and type: erosion 

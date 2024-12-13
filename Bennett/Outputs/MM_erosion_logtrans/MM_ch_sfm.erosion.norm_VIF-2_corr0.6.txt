@@ -6,11 +6,12 @@ ch_sfm.erosion.norm ~ ch_channel.width.over.valley.width + ch_curvature.median +
     hs_ndvi.range + hs_dnbr.median + hs_drainage_density
 
 SSN Path:
-Y:/ATD/GIS/Bennett/Watershed Stats/SSN2/Outputs/MM_erosion_logtrans/MM_erosion_logtrans.ssn
+Bennett/Outputs/MM_erosion_logtrans/MM_erosion_logtrans.ssn
 LSN Output Path:
-Y:/ATD/GIS/Bennett/Watershed Stats/SSN2/Outputs/MM_erosion_logtrans/lsn_out
+Bennett/Outputs/MM_erosion_logtrans/lsn_out
 
 summary(ssn_mod)
+
 Call:
 ssn_glm(formula = model_formula, ssn.object = CP_ssn, family = "Gamma", 
     tailup_type = "exponential", taildown_type = "none", euclid_type = "gaussian", 
@@ -94,3 +95,27 @@ glance(ssn_mod):
   <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
 1   155    15     6 1950. 1962. 1963.  -975.   0.0233           0.0841
 
+
+Starting Bootstrapping for prefix: MM and type: erosion 
+
+Bootstrap Summary:
+# A tibble: 15 × 5
+   term                               estimate_mean estimate_sd conf_low conf_high
+   <chr>                                      <dbl>       <dbl>    <dbl>     <dbl>
+ 1 (Intercept)                              3.93        0.0524   3.87      3.97   
+ 2 ch_change.in.slope.over.width            0.0726      0.0166   0.0548    0.0836 
+ 3 ch_channel.width.over.valley.width      -0.138       0.157   -0.245     0.0294 
+ 4 ch_curvature.median                     -0.0459      0.155   -0.209     0.0714 
+ 5 ch_slope.over.width.central.diff        -0.00803     0.0134  -0.0216    0.00352
+ 6 ch_stream.power                          0.473       0.0585   0.418     0.529  
+ 7 hs_area                                  0.283       0.114    0.171     0.386  
+ 8 hs_bare.earth.mean                      -0.00147     0.00319 -0.00419   0.00178
+ 9 hs_curvature.median                      0.0716      0.0705   0.00450   0.138  
+10 hs_dnbr.median                          -0.0811      0.0804  -0.164    -0.0135 
+11 hs_drainage_density                     -0.0648      0.0579  -0.126    -0.0206 
+12 hs_flow.accumulation.max                 0.0800      0.211   -0.116     0.284  
+13 hs_ndvi.min                              0.327       0.0522   0.272     0.367  
+14 hs_ndvi.range                            0.661       0.143    0.565     0.814  
+15 hs_northness.median                      0.228       0.115    0.157     0.351  
+
+Bootstrapping Completed for prefix: MM and type: erosion 

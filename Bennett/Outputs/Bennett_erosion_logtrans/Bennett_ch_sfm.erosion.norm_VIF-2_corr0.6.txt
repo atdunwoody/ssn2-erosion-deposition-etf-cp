@@ -9,9 +9,9 @@ ch_sfm.erosion.norm ~ ws_mi60.max + ws_accum_precip.mean + ws_eastness.mean +
     hs_ndvi.range + hs_dnbr.median + hs_drainage_density
 
 SSN Path:
-Y:/ATD/GIS/Bennett/Watershed Stats/SSN2/Outputs/Bennett_erosion_logtrans/Bennett_erosion_logtrans.ssn
+Bennett/Outputs/Bennett_erosion_logtrans/Bennett_erosion_logtrans.ssn
 LSN Output Path:
-Y:/ATD/GIS/Bennett/Watershed Stats/SSN2/Outputs/Bennett_erosion_logtrans/lsn_out
+Bennett/Outputs/Bennett_erosion_logtrans/lsn_out
 
 summary(ssn_mod)
 
@@ -120,3 +120,24 @@ glance(ssn_mod):
   <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
 1  1131    25     7 9949. 9963. 9963. -4975.     198.           0.0479
 
+
+Starting Bootstrapping for prefix: Bennett and type: erosion 
+
+Bootstrap Summary:
+# A tibble: 25 × 5
+   term                               estimate_mean estimate_sd  conf_low conf_high
+   <chr>                                      <dbl>       <dbl>     <dbl>     <dbl>
+ 1 (Intercept)                            1.60         0.0217    1.58      1.62    
+ 2 ch_central.slope.difference            0.244        0.0294    0.212     0.263   
+ 3 ch_change.in.slope.over.width         -0.0485       0.0273   -0.0776   -0.0323  
+ 4 ch_channel.width.over.valley.width    -0.298        0.0836   -0.388    -0.244   
+ 5 ch_curvature.median                   -0.491        0.0881   -0.572    -0.405   
+ 6 ch_slope.over.width                    0.152        0.0280    0.130     0.181   
+ 7 ch_slope.over.width.central.diff       0.0000743    0.000682 -0.000641  0.000604
+ 8 ch_stream.power.central.diff          -0.000173     0.00434  -0.00320   0.00445 
+ 9 hs_bare.earth.mean                     0.00722      0.0145   -0.00759   0.0195  
+10 hs_curvature.median                   -0.0323       0.0175   -0.0458   -0.0140  
+# ℹ 15 more rows
+# ℹ Use `print(n = ...)` to see more rows
+
+Bootstrapping Completed for prefix: Bennett and type: erosion 
