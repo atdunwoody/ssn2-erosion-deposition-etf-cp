@@ -99,4 +99,26 @@ glance(ssn_mod):
 1   275    15     7  915.  929.  930.  -458.    0.115           0.0117
 
 
-Starting Bootstrapping for prefix: ET and type: erosion 
+Starting Bootstrapping...
+
+Bootstrap Summary:
+# A tibble: 15 × 6
+   term                               estimate_mean estimate_sd conf_low conf_high   p_value
+   <chr>                                      <dbl>       <dbl>    <dbl>     <dbl>     <dbl>
+ 1 (Intercept)                             -0.179       0.486    -0.628   0.681    0.273    
+ 2 ch_central.slope.difference             -0.144       0.263    -0.444   0.187    0.116    
+ 3 ch_channel.width.over.valley.width      -0.0880      0.367    -0.512   0.454    0.467    
+ 4 ch_curvature.median                      0.345       0.268    -0.187   0.556    0.00279  
+ 5 ch_elevation.mean                       -0.968       0.376    -1.60   -0.572    0.0000191
+ 6 ch_flow.accumulation.max                 0.518       0.270    -0.0483  0.741    0.000188 
+ 7 ch_slope.median                         -0.669       0.808    -1.99    0.00244  0.0280   
+ 8 hs_bare.earth.mean                       0.0123      0.0918   -0.0842  0.187    0.681    
+ 9 hs_curvature.median                     -0.0317      0.0566   -0.118   0.0441   0.110    
+10 hs_dnbr.median                          -0.118       0.0606   -0.223  -0.0427   0.000169 
+11 hs_drainage_density                      6.39       16.4     -13.9    28.1      0.249    
+12 hs_eastness.median                       0.0367      0.107    -0.0935  0.238    0.307    
+13 hs_hillslope.length                     -0.0379      0.0701   -0.155   0.0738   0.121    
+14 hs_slope.median                          0.0909      0.0926   -0.0287  0.225    0.0126   
+15 ws_bare.earth.mean                      -0.00262     0.00844  -0.0207  0.000842 0.352    
+
+Bootstrapping Completed.

@@ -9,9 +9,9 @@ ch_sfm.deposition.norm ~ ws_mi60.max + ws_eastness.mean + ws_bare.earth.mean +
     hs_drainage_density
 
 SSN Path:
-Y:/ATD/GIS/Bennett/Watershed Stats/SSN2/Outputs/Bennett_deposition_logtrans/Bennett_deposition_logtrans.ssn
+Bennett/Outputs/Bennett_deposition_logtrans/Bennett_deposition_logtrans.ssn
 LSN Output Path:
-Y:/ATD/GIS/Bennett/Watershed Stats/SSN2/Outputs/Bennett_deposition_logtrans/lsn_out
+Bennett/Outputs/Bennett_deposition_logtrans/lsn_out
 
 summary(ssn_mod)
 
@@ -118,3 +118,5 @@ glance(ssn_mod):
   <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
 1  1112    24     7 8437. 8451. 8451. -4218.     224.           0.0119
 
+
+Starting Bootstrapping...

@@ -4,23 +4,23 @@
 
 # ETF prefixes: "ET", "LM2", "LPM", "MM_ET"
 # Bennett prefixes: "Bennett", "ME", "MM", "MW", "UE", "UW", "UM"
-prefixes <- c("LM2")  # Can define single or multiple prefixes
+prefixes <- c("ME")  # Can define single or multiple prefixes
 
 # Types: "erosion", "deposition"
 types <- c("erosion")  # Can define single or both erosion, deposition
 
 # Model formula is stored in outputs folder:
-  #"ETF/Outputs/LM2_erosion_logtrans/ssn_formula.txt"
+#"ETF/Outputs/LM2_erosion_logtrans/ssn_formula.txt"
 formula_file_name <- "ssn_formula.txt"
 
 # SSN object already exists for each watershed/combined area, keep TRUE
 
 # If TRUE, the SSN object will be loaded from the existing path
-  # ETF/Outputs/LM2_erosion_logtrans/LM2_erosion_logtrans.ssn
+# ETF/Outputs/LM2_erosion_logtrans/LM2_erosion_logtrans.ssn
 
 # If FALSE, the SSN object will be created with data from:
-  # Inputs/Individual Watersheds/LM2_erosion_ssn points.gpkg
-  # Inputs/Streams/streams_100k.gpkg
+# Inputs/Individual Watersheds/LM2_erosion_ssn points.gpkg
+# Inputs/Streams/streams_100k.gpkg
 load_ssn <- TRUE
 
 # Bootstrapping parameters
@@ -30,7 +30,10 @@ set.seed(123)       # For reproducibility
 ################################################################################
 ######################### LOAD LIBRARIES #######################################
 ################################################################################
-
+# Install tictoc if not already installed
+if (!requireNamespace("tictoc", quietly = TRUE)) {
+  install.packages("tictoc")
+}
 
 # Load Required Libraries
 library(SSN2)
@@ -44,6 +47,7 @@ library(spdep)
 library(classInt) # For spatial weights if needed
 library(knitr)    # For better output formatting (optional)
 library(broom)    # For tidy model outputs
+library(tictoc)   # For timing the script
 
 #show warnings
 warnings()
@@ -52,6 +56,7 @@ warnings()
 ########################### DEFINE INPUT/OUTPUT PATHS ##########################
 ################################################################################
 
+tic("Total Script Execution Time")
 
 # Loop through each type and prefix
 for (type in types) {
@@ -98,13 +103,13 @@ for (type in types) {
     output_file <- file.path(
       output_folder, 
       paste0(prefix, "_ch_sfm.", type, ".norm_VIF-2_corr0.6.txt")
-      )
+    )
     
     # SSN2 formula can be changed in the formula file
     formula_file <- file.path(
       output_folder, 
       formula_file_name
-      )
+    )
     
     if (!file.exists(formula_file)) {
       stop(paste("Formula file does not exist:", formula_file))
@@ -133,9 +138,9 @@ for (type in types) {
       dir.create(output_folder, recursive = TRUE)
     }
     
-################################################################################
-########################### SSN2 PREPROCESSING ##################################
-################################################################################
+    ################################################################################
+    ########################### SSN2 PREPROCESSING ##################################
+    ################################################################################
     
     if (!load_ssn) {
       # Read spatial data
@@ -223,9 +228,9 @@ for (type in types) {
     # Create distance matrix
     ssn_create_distmat(CP_ssn)
     
-################################################################################
-########################### BOOTSTRAPPING FUNCTION ##############################
-################################################################################
+    ################################################################################
+    ########################### BOOTSTRAPPING FUNCTION ##############################
+    ################################################################################
     
     bootstrap_model <- function(ssn_obj, n_boot, model_formula, multiple_ws) {
       
@@ -236,6 +241,8 @@ for (type in types) {
       
       # Initialize a list to store results
       results_list <- vector("list", n_boot)
+      
+      varcomp_list <- vector("list", n_boot)
       
       for (i in 1:n_boot) {
         print(paste("Bootstrap iteration:", i))
@@ -301,17 +308,28 @@ for (type in types) {
         
         # Store the results
         results_list[[i]] <- tidy_mod
+        
+        varcomp_mod <- varcomp(ssn_mod_boot)
+        varcomp_mod$bootstrap_rep <- i
+        
+        varcomp_list[[i]] <- varcomp_mod
       }
       
       # Combine all bootstrap results into a single data frame
       bootstrap_results <- bind_rows(results_list)
       
-      return(bootstrap_results)
+      # Combine all bootstrap varcomp results into a single data frame
+      bootstrap_varcomp <- bind_rows(varcomp_list)
+      
+      
+      
+      return(list(bootstrap_results = bootstrap_results, bootstrap_varcomp = bootstrap_varcomp))
+      
     }
     
-################################################################################
-########################### SSN2 MODEL FITTING #################################
-################################################################################
+    ################################################################################
+    ########################### SSN2 MODEL FITTING #################################
+    ################################################################################
     
     
     # Save input parameters to the output file
@@ -325,8 +343,8 @@ for (type in types) {
     
     
     if (multiple_ws) {
-       # SSN2 model fitting with random effect of watershed     
-       ssn_mod <- ssn_glm(
+      # SSN2 model fitting with random effect of watershed     
+      ssn_mod <- ssn_glm(
         formula = model_formula,
         ssn.object = CP_ssn,
         family = "Gamma",
@@ -351,7 +369,7 @@ for (type in types) {
       )
     }
     
-
+    
     # Append the test results to the file
     cat("\nsummary(ssn_mod)\n", file = output_file, append = TRUE)
     capture.output(summary(ssn_mod), file = output_file, append = TRUE)
@@ -370,18 +388,22 @@ for (type in types) {
     
     cat("\n", file = output_file, append = TRUE)
     
-################################################################################
-########################### BOOTSTRAPPING PROCESS ################################
-################################################################################
+    ################################################################################
+    ########################### BOOTSTRAPPING PROCESS ################################
+    ################################################################################
     
     # Perform bootstrapping
     cat("\nStarting Bootstrapping...\n", file = output_file, append = TRUE)
-    bootstrap_results <- bootstrap_model(
+    bootstrap_output <- bootstrap_model(
       ssn_obj = CP_ssn,
       n_boot = n_bootstrap,
       model_formula = model_formula,
       multiple_ws = multiple_ws
     )
+    
+    # Extract the individual components from the returned list
+    bootstrap_results <- bootstrap_output$bootstrap_results
+    bootstrap_varcomp <- bootstrap_output$bootstrap_varcomp
     
     # Save bootstrap summary statistics
     bootstrap_summary <- bootstrap_results %>%
@@ -405,6 +427,13 @@ for (type in types) {
     )
     write.csv(bootstrap_results, bootstrap_output_file, row.names = FALSE)
     
+    
+    varcomp_output_file <- file.path(
+      output_folder, 
+      paste0(prefix, "_varcomp_results.", type, ".csv")
+    )
+    write.csv(bootstrap_varcomp, varcomp_output_file, row.names = FALSE)
+    
     cat("\nBootstrapping Completed.\n", file = output_file, append = TRUE)
     
   } # End of prefix loop
@@ -413,5 +442,6 @@ for (type in types) {
 ################################################################################
 ########################### END OF SCRIPT ######################################
 ################################################################################
-print(bootstrap_results)
-print(bootstrap_summary)
+# End the overall timer and print it
+total_time <- toc(log = TRUE, quiet = TRUE)
+cat("\nTotal Script Execution Time:", total_time$toc - total_time$tic, "seconds\n")

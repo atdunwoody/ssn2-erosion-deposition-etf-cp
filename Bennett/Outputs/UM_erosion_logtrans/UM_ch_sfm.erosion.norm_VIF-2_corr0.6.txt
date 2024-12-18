@@ -7,11 +7,12 @@ ch_sfm.erosion.norm ~ ch_channel.width.over.valley.width + ch_slope.median +
     hs_drainage_density
 
 SSN Path:
-Y:/ATD/GIS/Bennett/Watershed Stats/SSN2/Outputs/UM_erosion_logtrans/UM_erosion_logtrans.ssn
+Bennett/Outputs/UM_erosion_logtrans/UM_erosion_logtrans.ssn
 LSN Output Path:
-Y:/ATD/GIS/Bennett/Watershed Stats/SSN2/Outputs/UM_erosion_logtrans/lsn_out
+Bennett/Outputs/UM_erosion_logtrans/lsn_out
 
 summary(ssn_mod)
+
 Call:
 ssn_glm(formula = model_formula, ssn.object = CP_ssn, family = "Gamma", 
     tailup_type = "exponential", taildown_type = "none", euclid_type = "gaussian", 
@@ -97,3 +98,28 @@ glance(ssn_mod):
   <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
 1   142    16     6 1029. 1041. 1042.  -515.   0.0342            0.185
 
+
+Starting Bootstrapping...
+
+Bootstrap Summary:
+# A tibble: 16 × 6
+   term                               estimate_mean estimate_sd conf_low conf_high      p_value
+   <chr>                                      <dbl>       <dbl>    <dbl>     <dbl>        <dbl>
+ 1 (Intercept)                               1.53        0.296    0.926    1.80    0.0000000520
+ 2 ch_change.in.slope.over.width            -0.0392      0.0798  -0.122    0.118   0.155       
+ 3 ch_channel.width.over.valley.width        0.247       0.220   -0.0582   0.564   0.00613     
+ 4 ch_slope.median                          -0.231       0.655   -0.664    1.18    0.293       
+ 5 ch_slope.over.width.central.diff         -0.117       0.138   -0.380   -0.0192  0.0254      
+ 6 ch_stream.power                           0.362       0.394   -0.506    0.569   0.0175      
+ 7 ch_stream.power.central.diff              0.124       0.106   -0.0534   0.277   0.00495     
+ 8 hs_bare.earth.mean                        0.0205      0.0320  -0.0158   0.0738  0.0742      
+ 9 hs_curvature.median                      -0.0835      0.0446  -0.139   -0.0150  0.000224    
+10 hs_dnbr.median                           -0.137       0.0799  -0.218    0.0299  0.000419    
+11 hs_drainage_density                      -0.0230      0.0201  -0.0496   0.00270 0.00556     
+12 hs_eastness.median                       -0.242       0.0919  -0.389   -0.129   0.0000160   
+13 hs_flow.accumulation.max                 -0.0749      0.209   -0.408    0.222   0.286       
+14 hs_hillslope.length                       0.194       0.162    0.0163   0.479   0.00431     
+15 hs_northness.median                      -0.258       0.154   -0.508   -0.0529  0.000492    
+16 hs_slope.median                           0.287       0.178    0.0224   0.590   0.000641    
+
+Bootstrapping Completed.

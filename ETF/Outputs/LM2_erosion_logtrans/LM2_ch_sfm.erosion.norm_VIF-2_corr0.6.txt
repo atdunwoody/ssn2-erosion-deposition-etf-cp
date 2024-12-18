@@ -85,21 +85,4 @@ glance(ssn_mod):
 1    45    10     6  98.1  110.  112.  -49.0    0.179            0.169
 
 
-Starting Bootstrapping for prefix: LM2 and type: erosion 
-
-Bootstrap Summary:
-# A tibble: 10 × 5
-   term                               estimate_mean estimate_sd conf_low conf_high
-   <chr>                                      <dbl>       <dbl>    <dbl>     <dbl>
- 1 (Intercept)                              -0.726       0.120   -0.853    -0.640 
- 2 ch_change.in.slope.over.width            -0.0941      0.0274  -0.115    -0.0653
- 3 ch_channel.width.over.valley.width       -0.466       0.136   -0.554    -0.320 
- 4 ch_curvature.median                       0.366       0.262    0.0878    0.551 
- 5 ch_valley_width                          -0.570       0.375   -0.868    -0.179 
- 6 hs_curvature.median                       0.220       0.219   -0.0140    0.354 
- 7 hs_dnbr.median                           -0.441       0.232   -0.672    -0.233 
- 8 hs_drainage_density                      50.1       168.     -74.9     228.    
- 9 hs_eastness.median                       -0.457       0.240   -0.704    -0.258 
-10 hs_ndvi.max                              -0.191       0.295   -0.384     0.124 
-
-Bootstrapping Completed for prefix: LM2 and type: erosion 
+Starting Bootstrapping...
