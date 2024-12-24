@@ -83,22 +83,3 @@ glance(ssn_mod):
   <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
 1    62    10     6  258.  270.  272.  -129.    0.736            0.122
 
-
-Starting Bootstrapping...
-
-Bootstrap Summary:
-# A tibble: 10 × 6
-   term                               estimate_mean estimate_sd  conf_low conf_high     p_value
-   <chr>                                      <dbl>       <dbl>     <dbl>     <dbl>       <dbl>
- 1 (Intercept)                               0.293       0.106    0.131      0.461  0.0000109  
- 2 ch_central.slope.difference               0.139       0.0704   0.0128     0.229  0.000147   
- 3 ch_channel.width.over.valley.width       -0.0857      0.120   -0.266      0.0692 0.0500     
- 4 ch_curvature.median                       0.0842      0.0953  -0.00118    0.238  0.0210     
- 5 ch_flow.accumulation.max                  0.198       0.0497   0.132      0.272  0.000000518
- 6 ch_slope.median                           0.134       0.133   -0.0557     0.314  0.0111     
- 7 hs_curvature.median                       0.0105      0.0894  -0.119      0.127  0.720      
- 8 hs_drainage_density                      28.5        40.3    -32.9       85.1    0.0524     
- 9 hs_ndvi.range                             0.144       0.219   -0.240      0.442  0.0676     
-10 hs_slope.median                          -0.0127      0.139   -0.246      0.132  0.779      
-
-Bootstrapping Completed.

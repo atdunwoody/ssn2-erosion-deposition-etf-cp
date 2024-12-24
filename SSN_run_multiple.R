@@ -4,10 +4,10 @@
 
 # ETF prefixes: "ET", "LM2", "LPM", "MM_ET"
 # Bennett prefixes: "Bennett", "ME", "MM", "MW", "UE", "UW", "UM"
-prefixes <- c("LM2", "LPM")  # Can define single or multiple prefixes
+prefixes <- c("UM")  # Can define single or multiple prefixes
 
 # Types: "erosion", "deposition"
-types <- c("erosion", "deposition")  # Can define single or both erosion, deposition
+types <- c("net")  # Can define single or both erosion, deposition
 
 # Model formula is stored in outputs folder:
   #"ETF/Outputs/LM2_erosion_logtrans/ssn_formula.txt"
@@ -233,12 +233,11 @@ for (type in types) {
     cat("\n", file = output_file, append = TRUE)
     
     
-    if (multiple_ws) {
-       # SSN2 model fitting with random effect of watershed     
-       ssn_mod <- ssn_glm(
+    # Fit the model
+    if (multiple_ws && type == "net") {
+      ssn_mod <- ssn_lm(
         formula = model_formula,
         ssn.object = CP_ssn,
-        family = "Gamma",
         tailup_type = "exponential", 
         taildown_type = "none",
         euclid_type = "gaussian",
@@ -246,8 +245,32 @@ for (type in types) {
         additive = "afv_flow_accum",
         random = ~ as.factor(ch_watershed)
       )
+      model_type <- "ssn_lm"
+    } else if (multiple_ws) {
+      ssn_mod <- ssn_glm(
+        formula = model_formula,
+        ssn.object = CP_ssn,
+        family = "Gamma",
+        tailup_type = "exponential",
+        taildown_type = "none",
+        euclid_type = "gaussian",
+        nugget_type = "nugget",
+        additive = "afv_flow_accum",
+        random = ~ as.factor(ch_watershed)
+      )
+      model_type <- "ssn_glm"
+    } else if (type == "net") {
+      ssn_mod <- ssn_lm(
+        formula = model_formula,
+        ssn.object = CP_ssn,
+        tailup_type = "exponential",
+        taildown_type = "none",
+        euclid_type = "gaussian",
+        nugget_type = "nugget",
+        additive = "afv_flow_accum"
+      )
+      model_type <- "ssn_lm"
     } else {
-      # SSN2 model fitting for single watersheds
       ssn_mod <- ssn_glm(
         formula = model_formula,
         ssn.object = CP_ssn,
@@ -258,9 +281,13 @@ for (type in types) {
         nugget_type = "nugget",
         additive = "afv_flow_accum"
       )
+      model_type <- "ssn_glm"
     }
     
 
+    cat("\nModel Type:\n", file = output_file, append = TRUE)
+    cat(model_type, file = output_file, append = TRUE)
+    
     # Append the test results to the file
     cat("\nsummary(ssn_mod)\n", file = output_file, append = TRUE)
     capture.output(summary(ssn_mod), file = output_file, append = TRUE)
@@ -279,7 +306,26 @@ for (type in types) {
     
     cat("\n", file = output_file, append = TRUE)
     
+    # Perform Leave-One-Out Cross-Validation
+    loocv_results <- loocv(ssn_mod, cv_predict = TRUE, se.fit = TRUE)
+    # Extract the response variable from the formula
+    response_var <- all.vars(model_formula)[1]
     
+    # Get response variable values from the SSN object
+    response_values <- ssn_get_data(CP_ssn)[[response_var]]
+    
+    # Combine the LOOCV results and response values into a single data frame
+    loocv_results_df <- data.frame(
+      loocv_predictions = loocv_results$cv_predict,
+      obs_values = response_values,
+      se_fit = loocv_results$se.fit
+    )
+    
+    # Specify the output file path
+    loocv_results_file <- file.path(output_folder, "LOOCV_Results.csv")
+    
+    # Write the LOOCV results to a CSV file
+    write.csv(loocv_results_df, loocv_results_file, row.names = FALSE)
 
 ################################################################################
 ########################### SSN2 MODEL DIAGNOSTICS #############################

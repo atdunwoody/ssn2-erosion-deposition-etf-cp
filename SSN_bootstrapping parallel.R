@@ -6,8 +6,8 @@
 # Bennett prefixes: "Bennett", "ME", "MM", "MW", "UE", "UW", "UM"
 prefixes <- c("UM")  # Can define single or multiple prefixes
 
-# Types: "erosion", "deposition"
-types <- c("erosion")  # Can define single or both erosion, deposition
+# Types: "erosion", "deposition", "net"
+types <- c("net")  # Can define single or both erosion, deposition
 
 # Model formula is stored in outputs folder:
 #"ETF/Outputs/LM2_erosion_logtrans/ssn_formula.txt"
@@ -21,7 +21,7 @@ formula_file_name <- "ssn_formula.txt"
 # If FALSE, the SSN object will be created with data from:
 # Inputs/Individual Watersheds/LM2_erosion_ssn points.gpkg
 # Inputs/Streams/streams_100k.gpkg
-load_ssn <- TRUE
+load_ssn <- FALSE
 
 # Bootstrapping parameters
 n_bootstrap <- 10  # Number of bootstrap samples (adjust as needed)
@@ -281,15 +281,17 @@ for (type in types) {
         boot_data <- boot_data %>% 
           mutate(
             unique_id = i * 1e6 + row_number(),  # Unique ID generator
-            pid = unique_id,                     # Assign unique_id to pid
-            locID = unique_id                    # Assign unique_id to locID
+            pid = unique_id                     # Assign unique_id to pid
           ) %>%
           st_as_sf()
         
-        # Update 'netgeom' to reflect the new pid and locID
+        locID <- boot_data$locID
+        
+        # Update 'netgeom' to reflect the new uid while keeping the last number unchanged
         boot_data$netgeom <- mapply(function(geom, uid) {
-          sub("(.*\\s)(\\d+)\\s(\\d+)\\)$", paste0("\\1", uid, " ", uid, ")"), geom, uid)
+          sub("(.*\\s)\\d+\\s(\\d+)\\)$", paste0("\\1", uid, " \\2)"), geom)
         }, boot_data$netgeom, boot_data$unique_id)
+        
         
         # Remove the temporary unique_id column
         boot_data <- boot_data %>% select(-unique_id)
@@ -303,16 +305,22 @@ for (type in types) {
           mutate(bootstrap_rep = i)
         # -------------------- Added Code Ends Here --------------------
         
+        #save bootdata from iteration i to csv
+        write.csv(boot_data_df, paste0("boot_data_", i, ".csv"))
+        
+        
         # Continue with SSN update and model fitting
         ssn_updated <- ssn_put_data(boot_data, ssn_obj, name = "obs", resize_data = TRUE)
         ssn_create_distmat(ssn_updated)
         
+        response_var = all.vars(model_formula)[1]
+        
+
         # Fit the model
-        if (multiple_ws) {
-          ssn_mod_boot <- ssn_glm(
+        if (multiple_ws && type == "net") {
+          ssn_mod_boot <- ssn_lm(
             formula = model_formula,
             ssn.object = ssn_updated,
-            family = "Gamma",
             tailup_type = "exponential", 
             taildown_type = "none",
             euclid_type = "gaussian",
@@ -320,7 +328,35 @@ for (type in types) {
             additive = "afv_flow_accum",
             random = ~ as.factor(ch_watershed)
           )
-        } else {
+          model_type <- "ssn_lm"
+        }
+        else if (multiple_ws) {
+          ssn_mod_boot <- ssn_glm(
+            formula = model_formula,
+            ssn.object = ssn_updated,
+            family = "Gamma",
+            tailup_type = "exponential",
+            taildown_type = "none",
+            euclid_type = "gaussian",
+            nugget_type = "nugget",
+            additive = "afv_flow_accum",
+            random = ~ as.factor(ch_watershed)
+          )
+          model_type <- "ssn_glm"
+        }
+        else if (type == "net") {
+          ssn_mod_boot <- ssn_lm(
+            formula = model_formula,
+            ssn.object = ssn_updated,
+            tailup_type = "exponential",
+            taildown_type = "none",
+            euclid_type = "gaussian",
+            nugget_type = "nugget",
+            additive = "afv_flow_accum"
+          )
+          model_type <- "ssn_lm"
+        } 
+        else {
           ssn_mod_boot <- ssn_glm(
             formula = model_formula,
             ssn.object = ssn_updated,
@@ -331,6 +367,7 @@ for (type in types) {
             nugget_type = "nugget",
             additive = "afv_flow_accum"
           )
+          model_type <- "ssn_glm"
         }
         
         # Extract tidy coefficients with confidence intervals
@@ -343,7 +380,7 @@ for (type in types) {
         
         # -------------------- Added Code Starts Here --------------------
         # Return boot_data_df along with model results
-        return(list(tidy_mod = tidy_mod, varcomp_mod = varcomp_mod, boot_data = boot_data_df))
+        return(list(tidy_mod = tidy_mod, varcomp_mod = varcomp_mod, boot_data = boot_data_df, model_type = model_type))
         # -------------------- Added Code Ends Here --------------------
       }
       
@@ -352,16 +389,18 @@ for (type in types) {
         p <- progressor(along = 1:n_boot)
         
         bootstrap_results <- future_map(1:n_boot, function(i) {
-          p()
+          
           bootstrap_iteration(i)
         }, .options = furrr_options(seed = TRUE))
+        
+        p()
       })
       
       # Extract results
       results_list <- map(bootstrap_results, "tidy_mod")
       varcomp_list <- map(bootstrap_results, "varcomp_mod")
       boot_data_list <- map(bootstrap_results, "boot_data")  # Collect boot_data
-      
+      model_type <- bootstrap_results[[1]]$model_type
       # Combine all bootstrap results into a single data frame
       bootstrap_results_df <- bind_rows(results_list)
       
@@ -374,71 +413,12 @@ for (type in types) {
       return(list(
         bootstrap_results = bootstrap_results_df, 
         bootstrap_varcomp = bootstrap_varcomp_df,
-        bootstrap_data = bootstrap_data_df  # Include boot_data
+        bootstrap_data = bootstrap_data_df,
+        model_type = model_type# Include boot_data
       ))
       
     }
     
-    ################################################################################
-    ########################### SSN2 MODEL FITTING #################################
-    ################################################################################
-    
-    
-    # Save input parameters to the output file
-    cat("Model Formula:\n", file = output_file)
-    capture.output(model_formula, file = output_file, append = TRUE)
-    cat("\nSSN Path:\n", file = output_file, append = TRUE)
-    cat(ssn_path, file = output_file, append = TRUE)
-    cat("\nLSN Output Path:\n", file = output_file, append = TRUE)
-    cat(lsn_out, file = output_file, append = TRUE)
-    cat("\n", file = output_file, append = TRUE)
-    
-    
-    if (multiple_ws) {
-      # SSN2 model fitting with random effect of watershed     
-      ssn_mod <- ssn_glm(
-        formula = model_formula,
-        ssn.object = CP_ssn,
-        family = "Gamma",
-        tailup_type = "exponential", 
-        taildown_type = "none",
-        euclid_type = "gaussian",
-        nugget_type = "nugget",
-        additive = "afv_flow_accum",
-        random = ~ as.factor(ch_watershed)
-      )
-    } else {
-      # SSN2 model fitting for single watersheds
-      ssn_mod <- ssn_glm(
-        formula = model_formula,
-        ssn.object = CP_ssn,
-        family = "Gamma",
-        tailup_type = "exponential",
-        taildown_type = "none",
-        euclid_type = "gaussian",
-        nugget_type = "nugget",
-        additive = "afv_flow_accum"
-      )
-    }
-    
-    
-    # Append the test results to the file
-    cat("\nsummary(ssn_mod)\n", file = output_file, append = TRUE)
-    capture.output(summary(ssn_mod), file = output_file, append = TRUE)
-    
-    cat("\ntidy(ssn_mod, conf.int = TRUE):\n", file = output_file, append = TRUE)
-    capture.output(print(tidy(ssn_mod, conf.int = TRUE), n = Inf), file = output_file, append = TRUE)
-    
-    cat("\nvarcomp(ssn_mod):\n", file = output_file, append = TRUE)
-    capture.output(varcomp(ssn_mod), file = output_file, append = TRUE)
-    
-    cat("\nloocv(ssn_mod):\n", file = output_file, append = TRUE)
-    capture.output(loocv(ssn_mod), file = output_file, append = TRUE)
-    
-    cat("\nglance(ssn_mod):\n", file = output_file, append = TRUE)
-    capture.output(glance(ssn_mod), file = output_file, append = TRUE)
-    
-    cat("\n", file = output_file, append = TRUE)
     
     ################################################################################
     ########################### BOOTSTRAPPING PROCESS ################################
@@ -457,7 +437,7 @@ for (type in types) {
     bootstrap_results <- bootstrap_output$bootstrap_results
     bootstrap_varcomp <- bootstrap_output$bootstrap_varcomp
     bootstrap_data <- bootstrap_output$bootstrap_data  # Extract boot_data
-    
+    model_type <- bootstrap_output$model_type
     # Save bootstrap summary statistics
     bootstrap_summary <- bootstrap_results %>%
       group_by(term) %>%
@@ -471,6 +451,7 @@ for (type in types) {
     
     # Write bootstrap summary to the output file
     cat("\nBootstrap Summary:\n", file = output_file, append = TRUE)
+    capture.output(paste0("Model Type: ", model_type), file = output_file, append = TRUE)
     capture.output(print(bootstrap_summary), file = output_file, append = TRUE)
     
     # -------------------- Added Code Starts Here --------------------
@@ -514,3 +495,4 @@ for (type in types) {
 # End the overall timer and print it
 total_time <- toc(log = TRUE, quiet = TRUE)
 cat("\nTotal Script Execution Time:", total_time$toc - total_time$tic, "seconds\n")
+       

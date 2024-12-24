@@ -9,6 +9,8 @@ ETF/Outputs/LM2_erosion_logtrans/LM2_erosion_logtrans.ssn
 LSN Output Path:
 ETF/Outputs/LM2_erosion_logtrans/lsn_out
 
+Model Type:
+ssn_glm
 summary(ssn_mod)
 
 Call:
@@ -84,5 +86,3 @@ glance(ssn_mod):
   <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
 1    45    10     6  98.1  110.  112.  -49.0    0.179            0.169
 
-
-Starting Bootstrapping...

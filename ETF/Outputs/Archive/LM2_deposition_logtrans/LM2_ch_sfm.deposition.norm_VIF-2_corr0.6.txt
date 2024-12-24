@@ -1,0 +1,89 @@
+Model Formula:
+ch_sfm.deposition.norm ~ ch_curvature.median + ch_valley_width + 
+    ch_change.in.slope.over.width + ch_channel.width.over.valley.width + 
+    hs_eastness.median + hs_curvature.median + hs_ndvi.max + 
+    hs_dnbr.median + hs_drainage_density
+<environment: 0x000001d998a861f0>
+
+SSN Path:
+ETF/Outputs/LM2_deposition_logtrans/LM2_deposition_logtrans.ssn
+LSN Output Path:
+ETF/Outputs/LM2_deposition_logtrans/lsn_out
+
+summary(ssn_mod)
+
+Call:
+ssn_glm(formula = model_formula, ssn.object = CP_ssn, family = "Gamma", 
+    tailup_type = "exponential", taildown_type = "none", euclid_type = "gaussian", 
+    nugget_type = "nugget", additive = "afv_flow_accum")
+
+Deviance Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.0494 -0.6147 -0.1141  0.4449  1.0271 
+
+Coefficients (fixed):
+                                   Estimate Std. Error z value Pr(>|z|)  
+(Intercept)                        -0.91723    0.58610  -1.565   0.1176  
+ch_curvature.median                 0.09015    0.19607   0.460   0.6457  
+ch_valley_width                     0.05593    0.15355   0.364   0.7157  
+ch_change.in.slope.over.width       0.17988    0.11186   1.608   0.1078  
+ch_channel.width.over.valley.width  0.40655    0.23231   1.750   0.0801 .
+hs_eastness.median                 -0.12031    0.19157  -0.628   0.5300  
+hs_curvature.median                -0.21541    0.26125  -0.825   0.4096  
+hs_ndvi.max                        -0.58469    0.41372  -1.413   0.1576  
+hs_dnbr.median                     -0.72301    0.41299  -1.751   0.0800 .
+hs_drainage_density                59.32981   60.25325   0.985   0.3248  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Pseudo R-squared: 0.3137
+
+Coefficients (covariance):
+              Effect     Parameter   Estimate
+  tailup exponential  de (parsill)  1.358e-04
+  tailup exponential         range  1.882e+03
+     euclid gaussian  de (parsill)  1.064e+00
+     euclid gaussian         range  1.513e+02
+              nugget        nugget  2.427e-03
+          dispersion    dispersion  1.512e+00
+
+
+tidy(ssn_mod, conf.int = TRUE):
+# A tibble: 10 × 7
+   term                               estimate std.error statistic p.value conf.low conf.high
+   <chr>                                 <dbl>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
+ 1 (Intercept)                         -0.917      0.586    -1.56   0.118   -2.07      0.231 
+ 2 ch_change.in.slope.over.width        0.180      0.112     1.61   0.108   -0.0394    0.399 
+ 3 ch_channel.width.over.valley.width   0.407      0.232     1.75   0.0801  -0.0488    0.862 
+ 4 ch_curvature.median                  0.0901     0.196     0.460  0.646   -0.294     0.474 
+ 5 ch_valley_width                      0.0559     0.154     0.364  0.716   -0.245     0.357 
+ 6 hs_curvature.median                 -0.215      0.261    -0.825  0.410   -0.727     0.297 
+ 7 hs_dnbr.median                      -0.723      0.413    -1.75   0.0800  -1.53      0.0864
+ 8 hs_drainage_density                 59.3       60.3       0.985  0.325  -58.8     177.    
+ 9 hs_eastness.median                  -0.120      0.192    -0.628  0.530   -0.496     0.255 
+10 hs_ndvi.max                         -0.585      0.414    -1.41   0.158   -1.40      0.226 
+
+varcomp(ssn_mod):
+# A tibble: 5 × 2
+  varcomp            proportion
+  <chr>                   <dbl>
+1 Covariates (PR-sq)  0.314    
+2 tailup_de           0.0000873
+3 taildown_de         0        
+4 euclid_de           0.685    
+5 nugget              0.00156  
+
+loocv(ssn_mod):
+# A tibble: 1 × 4
+     bias  MSPE RMSPE   RAV
+    <dbl> <dbl> <dbl> <dbl>
+1 -0.0388 0.118 0.344 0.103
+
+glance(ssn_mod):
+# A tibble: 1 × 9
+      n     p  npar value   AIC  AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
+1    45    10     6  80.5  92.5  94.7  -40.2     23.9            0.314
+
+
+Timing for Processing  LM2  -  deposition :  14.48  seconds

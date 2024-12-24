@@ -2,13 +2,15 @@ Model Formula:
 ch_sfm.deposition.norm ~ ch_slope.median + ch_flow.accumulation.max + 
     ch_curvature.median + ch_central.slope.difference + ch_channel.width.over.valley.width + 
     hs_slope.median + hs_curvature.median + hs_ndvi.range + hs_drainage_density
+<environment: 0x000001f6192a40b8>
 
 SSN Path:
-Y:/ATD/GIS/ETF/Watershed Stats/SSN2/Outputs/LPM_deposition_logtrans/LPM_deposition_logtrans.ssn
+ETF/Outputs/LPM_deposition_logtrans/LPM_deposition_logtrans.ssn
 LSN Output Path:
-Y:/ATD/GIS/ETF/Watershed Stats/SSN2/Outputs/LPM_deposition_logtrans/lsn_out
+ETF/Outputs/LPM_deposition_logtrans/lsn_out
 
 summary(ssn_mod)
+
 Call:
 ssn_glm(formula = model_formula, ssn.object = CP_ssn, family = "Gamma", 
     tailup_type = "exponential", taildown_type = "none", euclid_type = "gaussian", 
@@ -31,7 +33,7 @@ hs_curvature.median                 -0.04107    0.08897  -0.462 0.644376
 hs_ndvi.range                        0.08298    0.13860   0.599 0.549380    
 hs_drainage_density                -41.69867   48.83623  -0.854 0.393190    
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Pseudo R-squared: 0.2326
 

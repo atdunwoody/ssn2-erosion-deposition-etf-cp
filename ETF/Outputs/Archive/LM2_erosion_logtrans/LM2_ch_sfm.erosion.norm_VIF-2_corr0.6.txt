@@ -1,0 +1,89 @@
+Model Formula:
+ch_sfm.erosion.norm ~ ch_curvature.median + ch_valley_width + 
+    ch_change.in.slope.over.width + ch_channel.width.over.valley.width + 
+    hs_eastness.median + hs_curvature.median + hs_ndvi.max + 
+    hs_dnbr.median + hs_drainage_density
+<environment: 0x000001cf93f70d78>
+
+SSN Path:
+ETF/Outputs/LM2_erosion_logtrans/LM2_erosion_logtrans.ssn
+LSN Output Path:
+ETF/Outputs/LM2_erosion_logtrans/lsn_out
+
+summary(ssn_mod)
+
+Call:
+ssn_glm(formula = model_formula, ssn.object = CP_ssn, family = "Gamma", 
+    tailup_type = "exponential", taildown_type = "none", euclid_type = "gaussian", 
+    nugget_type = "nugget", additive = "afv_flow_accum")
+
+Deviance Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.128429 -0.045689 -0.000826  0.035554  0.153533 
+
+Coefficients (fixed):
+                                     Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                        -9.103e-01  1.806e-01  -5.041 4.62e-07 ***
+ch_curvature.median                -3.491e-01  1.536e-01  -2.272   0.0231 *  
+ch_valley_width                    -2.579e-01  1.253e-01  -2.058   0.0396 *  
+ch_change.in.slope.over.width       6.134e-04  1.168e-01   0.005   0.9958    
+ch_channel.width.over.valley.width -2.715e-01  2.056e-01  -1.321   0.1866    
+hs_eastness.median                 -1.284e-01  1.897e-01  -0.677   0.4983    
+hs_curvature.median                 1.397e-01  2.377e-01   0.588   0.5568    
+hs_ndvi.max                         6.855e-02  2.652e-01   0.258   0.7960    
+hs_dnbr.median                     -2.820e-01  3.295e-01  -0.856   0.3921    
+hs_drainage_density                -5.165e+01  6.465e+01  -0.799   0.4243    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Pseudo R-squared: 0.1691
+
+Coefficients (covariance):
+              Effect     Parameter  Estimate
+  tailup exponential  de (parsill)   0.34840
+  tailup exponential         range  13.67704
+     euclid gaussian  de (parsill)   0.19422
+     euclid gaussian         range   0.07512
+              nugget        nugget   0.19811
+          dispersion    dispersion  16.22155
+
+
+tidy(ssn_mod, conf.int = TRUE):
+# A tibble: 10 × 7
+   term                                 estimate std.error statistic     p.value conf.low conf.high
+   <chr>                                   <dbl>     <dbl>     <dbl>       <dbl>    <dbl>     <dbl>
+ 1 (Intercept)                         -0.910        0.181  -5.04    0.000000462   -1.26    -0.556 
+ 2 ch_change.in.slope.over.width        0.000613     0.117   0.00525 0.996         -0.228    0.230 
+ 3 ch_channel.width.over.valley.width  -0.272        0.206  -1.32    0.187         -0.674    0.131 
+ 4 ch_curvature.median                 -0.349        0.154  -2.27    0.0231        -0.650   -0.0480
+ 5 ch_valley_width                     -0.258        0.125  -2.06    0.0396        -0.504   -0.0123
+ 6 hs_curvature.median                  0.140        0.238   0.588   0.557         -0.326    0.606 
+ 7 hs_dnbr.median                      -0.282        0.329  -0.856   0.392         -0.928    0.364 
+ 8 hs_drainage_density                -51.7         64.7    -0.799   0.424       -178.      75.1   
+ 9 hs_eastness.median                  -0.128        0.190  -0.677   0.498         -0.500    0.243 
+10 hs_ndvi.max                          0.0686       0.265   0.258   0.796         -0.451    0.588 
+
+varcomp(ssn_mod):
+# A tibble: 5 × 2
+  varcomp            proportion
+  <chr>                   <dbl>
+1 Covariates (PR-sq)      0.169
+2 tailup_de               0.391
+3 taildown_de             0    
+4 euclid_de               0.218
+5 nugget                  0.222
+
+loocv(ssn_mod):
+# A tibble: 1 × 4
+     bias  MSPE RMSPE   RAV
+    <dbl> <dbl> <dbl> <dbl>
+1 -0.0872 0.241 0.491 0.962
+
+glance(ssn_mod):
+# A tibble: 1 × 9
+      n     p  npar value   AIC  AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
+1    45    10     6  98.1  110.  112.  -49.0    0.179            0.169
+
+
+Timing for Processing  LM2  -  erosion :  13.91  seconds
