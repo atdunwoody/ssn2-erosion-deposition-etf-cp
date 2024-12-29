@@ -1,0 +1,1 @@
+ch_sfm.deposition.norm ~ ch_channel.width.over.valley.width + ch_curvature.median + ch_slope.over.width + ch_change.in.slope.over.width + ch_stream.power.central.diff + hs_area + hs_flow.accumulation.max + hs_storm.accum.60.min + hs_eastness.median + hs_curvature.median + hs_bare.earth.mean + hs_ndvi.min + hs_extended.dnbr.median

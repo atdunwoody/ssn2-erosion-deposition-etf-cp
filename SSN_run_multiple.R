@@ -2,33 +2,54 @@
 ########################### USER DEFINED VARIABLES #############################
 ################################################################################
 
-# ETF prefixes: "ET", "LM2", "LPM", "MM_ET"
-# Bennett prefixes: "Bennett", "ME", "MM", "MW", "UE", "UW", "UM"
-prefixes <- c("UM")  # Can define single or multiple prefixes
+# ETF prefixes: "ET sfm", "LM2 sfm", "LPM sfm", "MM_ET"
+#                "ET lidar", "LM2 lidar", "LPM lidar", "MM_ET lidar"
+# Bennett prefixes: "Bennett sfm", "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm"
+#                   "Bennett lidar", "ME lidar", "MM lidar", "MW lidar", "UE lidar", "UW lidar", "UM lidar"
+prefixes <- c(
+  "Bennett sfm"
+  # "ET sfm"
+  # "LM2 sfm"
+)  # Can define single or multiple prefixes
 
-# Types: "erosion", "deposition"
-types <- c("net")  # Can define single or both erosion, deposition
+# Types: "erosion", "deposition", "net"
+types <- c(
+  # "deposition",
+  "erosion"
+  #, "net"
+)  # Can define single or both erosion, deposition
+
+segment_list <- c(
+  # 5, 
+  # 10, 
+  20
+)
+
 
 # Model formula is stored in outputs folder:
-  #"ETF/Outputs/LM2_erosion_logtrans/ssn_formula.txt"
+#"ETF/Outputs/LM2_erosion_logtrans/ssn_formula.txt"
 formula_file_name <- "ssn_formula.txt"
 
 # SSN object already exists for each watershed/combined area, keep TRUE
 
 # If TRUE, the SSN object will be loaded from the existing path
-  # ETF/Outputs/LM2_erosion_logtrans/LM2_erosion_logtrans.ssn
+# ETF/Outputs/LM2_erosion_logtrans/LM2_erosion_logtrans.ssn
 
 # If FALSE, the SSN object will be created with data from:
-  # Inputs/Individual Watersheds/LM2_erosion_ssn points.gpkg
-  # Inputs/Streams/streams_100k.gpkg
+# Inputs/Individual Watersheds/LM2_erosion_ssn points.gpkg
+# Inputs/Streams/streams_100k.gpkg
 load_ssn <- TRUE
 
+# Bootstrapping parameters
+set.seed(123)         # For reproducibility
 
 ################################################################################
-######################### LOAD LIBRARIES #######################################
+######################### LOAD LIBRARIES ########################################
 ################################################################################
-
-
+# Install tictoc if not already installed
+if (!requireNamespace("tictoc", quietly = TRUE)) {
+  install.packages("tictoc")
+}
 # Load Required Libraries
 library(SSN2)
 library(SSNbler)
@@ -41,97 +62,120 @@ library(spdep)
 library(classInt) # For spatial weights if needed
 library(knitr)    # For better output formatting (optional)
 library(broom)    # For tidy model outputs
+library(tictoc)
+# Additional Libraries for Parallelization and Progress Updates
+library(future)
+library(furrr)
+library(progressr)
 
+# Show warnings
+warnings()
 
 ################################################################################
 ########################### DEFINE INPUT/OUTPUT PATHS ##########################
 ################################################################################
 
+# Set up parallel plan with 10 workers
+plan(multisession, workers = 10)
+
+# Initialize global progress handlers
+handlers(global = TRUE)
+
+tic("Total Script Execution Time")
 
 # Loop through each type and prefix
-for (type in types) {
-  for (prefix in prefixes) {
-    
-    bennett_prefixes <- c("Bennett", "ME", "MM", "MW", "UE", "UW", "UM")
-    if (prefix %in% bennett_prefixes) {
-      region <- "Bennett"
-    } else {
-      region <- "ETF"
-    }
-    
-    if (prefix =="MM_ET") {
-      prefix <- "MM"
-    }
-    
-    # Define the base input and output folders
-    print(paste0("Processing: ", prefix, " - ", type))
-    base_input_folder <- file.path(region,"Inputs")
-    base_output_folder <- file.path(region,"Outputs")
-    
-    # Determines whether random effect of watershed is included
-    if (prefix %in% c("Bennett", "ET")) {
-      input_obs <- file.path(
+for (segment in segment_list) {
+  for (type in types) {
+    for (prefix in prefixes) {
+      
+      bennett_prefixes <- c("Bennett sfm", "ME sfm", "MM sfm", "MW sfm", 
+                            "UE sfm", "UW sfm", "UM sfm", "Bennett lidar", 
+                            "ME lidar", "MM lidar", "MW lidar", "UE lidar", 
+                            "UW lidar", "UM lidar")
+      if (prefix %in% bennett_prefixes) {
+        region <- "Bennett"
+      } else {
+        region <- "ETF"
+      }
+      
+      if (prefix =="MM_ET sfm") {
+        prefix <- "MM sfm"
+      }
+      else if (prefix == "MM_ET lidar") {
+        prefix <- "MM lidar"
+      }
+      
+      # Define the base input and output folders
+      print(paste0("Processing: ", prefix, " - ", type, " with ", segment, "m spacing"))
+      base_input_folder <- file.path(region,"Inputs")
+      base_output_folder <- file.path(region,"Outputs")
+      
+      segment_input_folder <- file.path(base_input_folder, paste0("Segmented ", segment, "m"))
+      segment_output_folder <- file.path(base_output_folder, paste0("Segmented ", segment, "m"))
+      
+      # Determines whether random effect of watershed is included
+      if (prefix %in% c("Bennett", "ET", "Bennett sfm", "ET sfm", "Bennett lidar", "ET lidar")) {
+        input_obs <- file.path(
+          segment_input_folder, 
+          "Combined Watersheds", 
+          paste(prefix, type, "ssn points.gpkg", sep = " ")
+        )
+        multiple_ws <- TRUE
+      } else {
+        input_obs <- file.path(
+          segment_input_folder, 
+          "Individual Watersheds", 
+          paste(prefix, type, "ssn points.gpkg", sep = " ")
+        )
+        multiple_ws <- FALSE
+      }
+      
+      output_folder <- file.path(
+        segment_output_folder, 
+        paste0(prefix, "_", type, "_logtrans")
+      )
+      
+      output_file <- file.path(
+        output_folder, 
+        paste0(prefix, "_ch_sfm.", type, ".norm_VIF-2_corr0.6.txt")
+      )
+      
+      # SSN2 formula can be changed in the formula file
+      formula_file <- file.path(
+        output_folder, 
+        formula_file_name
+      )
+      
+      if (!file.exists(formula_file)) {
+        stop(paste("Formula file does not exist:", formula_file))
+      }
+      model_formula_str <- readLines(formula_file)
+      model_formula <- as.formula(model_formula_str)
+      
+      # Define the SSN path using the prefix and type
+      ssn_path <- file.path(
+        output_folder, 
+        paste0(prefix, "_", type, "_logtrans.ssn")
+      )
+      
+      # Define the LSN output folder
+      lsn_out <- file.path(output_folder, "lsn_out")
+      
+      # Define the input streams path
+      input_streams <- file.path(
         base_input_folder, 
-        "Combined Watersheds", 
-        paste(prefix, type, "ssn points.gpkg", sep = " ")
+        "Streams", 
+        "streams_100k.gpkg"
       )
-      multiple_ws <- TRUE
-    } else {
-      input_obs <- file.path(
-        base_input_folder, 
-        "Individual Watersheds", 
-        paste(prefix, type, "ssn points.gpkg", sep = " ")
-      )
-      multiple_ws <- FALSE
-    }
-    
-    output_folder <- file.path(
-      base_output_folder, 
-      paste0(prefix, "_", type, "_logtrans")
-    )
-    
-    output_file <- file.path(
-      output_folder, 
-      paste0(prefix, "_ch_sfm.", type, ".norm_VIF-2_corr0.6.txt")
-      )
-    
-    # SSN2 formula can be changed in the formula file
-    formula_file <- file.path(
-      output_folder, 
-      formula_file_name
-      )
-    
-    if (!file.exists(formula_file)) {
-      stop(paste("Formula file does not exist:", formula_file))
-    }
-    model_formula_str <- readLines(formula_file)
-    model_formula <- as.formula(model_formula_str)
-    
-    # Define the SSN path using the prefix and type
-    ssn_path <- file.path(
-      output_folder, 
-      paste0(prefix, "_", type, "_logtrans.ssn")
-    )
-    
-    # Define the LSN output folder
-    lsn_out <- file.path(output_folder, "lsn_out")
-    
-    # Define the input streams path
-    input_streams <- file.path(
-      base_input_folder, 
-      "Streams", 
-      "streams_100k.gpkg"
-    )
-    
-    # Create the output folder if it doesn't exist
-    if (!dir.exists(output_folder)) {
-      dir.create(output_folder, recursive = TRUE)
-    }
-    
+      
+      # Create the output folder if it doesn't exist
+      if (!dir.exists(output_folder)) {
+        dir.create(output_folder, recursive = TRUE)
+      }
 ################################################################################
 ########################### SSN2 PREPROESSING ##################################
 ################################################################################
-    
+
     if (!load_ssn) {
       # Read spatial data
       CP_streams <- st_read(input_streams)
@@ -493,5 +537,6 @@ for (type in types) {
                  type)
           )
 
+  }
   }
 }

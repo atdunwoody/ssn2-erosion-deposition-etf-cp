@@ -1,0 +1,1 @@
+ch_sfm.deposition.norm ~ ch_curvature.median + ch_stream.power.central.diff + hs_flow.accumulation.max + hs_accum.precip.mean + hs_storm.accum.10.min + hs_slope.median + hs_northness.median + hs_curvature.median + hs_bare.earth.mean + hs_ndvi.range + hs_dnbr.BAER.median
