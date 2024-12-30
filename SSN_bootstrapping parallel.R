@@ -4,10 +4,10 @@
 
 # ETF prefixes: "ET", "LM2", "LPM", "MM_ET"
 # Bennett prefixes: "Bennett", "ME", "MM", "MW", "UE", "UW", "UM"
-prefixes <- c("UM")  # Can define single or multiple prefixes
+prefixes <- c("UM_test")  # Can define single or multiple prefixes
 
 # Types: "erosion", "deposition", "net"
-types <- c("net")  # Can define single or both erosion, deposition
+types <- c("erosion")  # Can define single or both erosion, deposition
 
 # Model formula is stored in outputs folder:
 #"ETF/Outputs/LM2_erosion_logtrans/ssn_formula.txt"
@@ -21,7 +21,7 @@ formula_file_name <- "ssn_formula.txt"
 # If FALSE, the SSN object will be created with data from:
 # Inputs/Individual Watersheds/LM2_erosion_ssn points.gpkg
 # Inputs/Streams/streams_100k.gpkg
-load_ssn <- FALSE
+load_ssn <- TRUE
 
 # Bootstrapping parameters
 n_bootstrap <- 10  # Number of bootstrap samples (adjust as needed)
@@ -71,7 +71,7 @@ tic("Total Script Execution Time")
 for (type in types) {
   for (prefix in prefixes) {
     
-    bennett_prefixes <- c("Bennett", "ME", "MM", "MW", "UE", "UW", "UM")
+    bennett_prefixes <- c("Bennett", "ME", "MM", "MW", "UE", "UW", "UM", "UM_test")
     if (prefix %in% bennett_prefixes) {
       region <- "Bennett"
     } else {

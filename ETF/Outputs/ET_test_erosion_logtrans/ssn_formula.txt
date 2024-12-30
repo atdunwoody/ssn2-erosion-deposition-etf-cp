@@ -1,0 +1,1 @@
+ch_sfm.erosion.mean ~ ch_elevation.mean + ch_slope.median + ch_flow.accumulation.max + ch_curvature.median + ch_central.slope.difference + ch_channel.width.over.valley.width + hs_hillslope.length + hs_slope.median + hs_bare.earth.mean + hs_drainage_density

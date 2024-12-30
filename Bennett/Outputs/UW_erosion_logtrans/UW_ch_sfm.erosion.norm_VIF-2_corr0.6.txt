@@ -94,3 +94,28 @@ glance(ssn_mod):
   <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
 1   180    15     6 1400. 1412. 1413.  -700.  0.00904            0.259
 
+
+Starting Bootstrapping...
+
+Bootstrap Summary:
+[1] "Model Type: ssn_glm"
+# A tibble: 15 × 6
+   term                        estimate_mean estimate_sd conf_low conf_high  p_value
+   <chr>                               <dbl>       <dbl>    <dbl>     <dbl>    <dbl>
+ 1 (Intercept)                        1.09       0.0593   0.988      1.17   6.54e-13
+ 2 ch_central.slope.difference        0.109      0.100   -0.00186    0.271  7.46e- 3
+ 3 ch_curvature.median               -0.0959     0.155   -0.277      0.148  8.24e- 2
+ 4 ch_slope.median                    0.584      0.0887   0.440      0.708  6.35e- 9
+ 5 ch_stream.power                   -0.0176     0.0159  -0.0358     0.0144 6.89e- 3
+ 6 ch_valley_width                    0.332      0.0916   0.234      0.506  1.15e- 6
+ 7 hs_bare.earth.mean                 0.0708     0.0419   0.00856    0.139  4.66e- 4
+ 8 hs_curvature.median               -0.0766     0.0622  -0.185     -0.0219 3.67e- 3
+ 9 hs_dnbr.median                     0.0851     0.0500   0.00490    0.146  4.45e- 4
+10 hs_drainage_density               -0.0168     0.00402 -0.0222    -0.0108 3.33e- 7
+11 hs_eastness.median                 0.0486     0.0745  -0.0782     0.129  6.93e- 2
+12 hs_flow.accumulation.max          -0.299      0.220   -0.598      0.0731 2.04e- 3
+13 hs_ndvi.range                      0.364      0.108    0.237      0.526  2.10e- 6
+14 hs_northness.median               -0.831      0.125   -0.987     -0.638  5.84e- 9
+15 hs_slope.median                    0.279      0.106    0.0788     0.403  1.62e- 5
+
+Bootstrapping Completed.

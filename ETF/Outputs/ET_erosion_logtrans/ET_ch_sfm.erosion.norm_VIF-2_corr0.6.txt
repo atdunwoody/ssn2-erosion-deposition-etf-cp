@@ -122,3 +122,178 @@ Bootstrap Summary:
 15 ws_bare.earth.mean                      -0.00262     0.00844  -0.0207  0.000842 0.352    
 
 Bootstrapping Completed.
+
+Starting Bootstrapping...
+
+Bootstrap Summary:
+[1] "Model Type: ssn_glm"
+# A tibble: 15 × 6
+   term                               estimate_mean estimate_sd conf_low conf_high  p_value
+   <chr>                                      <dbl>       <dbl>    <dbl>     <dbl>    <dbl>
+ 1 (Intercept)                             -0.290       0.554    -1.27     0.375   0.132   
+ 2 ch_central.slope.difference             -0.222       0.158    -0.447   -0.0283  0.00164 
+ 3 ch_channel.width.over.valley.width       0.00361     0.196    -0.268    0.273   0.955   
+ 4 ch_curvature.median                      0.0839      0.241    -0.279    0.390   0.299   
+ 5 ch_elevation.mean                       -1.20        0.782    -2.70    -0.504   0.000891
+ 6 ch_flow.accumulation.max                 0.0738      0.716    -1.38     0.655   0.752   
+ 7 ch_slope.median                         -0.692       0.718    -1.61     0.126   0.0139  
+ 8 hs_bare.earth.mean                      -0.00218     0.0358   -0.0633   0.0407  0.851   
+ 9 hs_curvature.median                     -0.00423     0.0618   -0.0885   0.0966  0.833   
+10 hs_dnbr.median                          -0.127       0.0762   -0.266   -0.0238  0.000506
+11 hs_drainage_density                     -0.494      18.8     -28.1     23.2     0.936   
+12 hs_eastness.median                       0.0709      0.0715   -0.0269   0.194   0.0121  
+13 hs_hillslope.length                      0.00716     0.0443   -0.0619   0.0761  0.622   
+14 hs_slope.median                          0.0398      0.143    -0.222    0.213   0.402   
+15 ws_bare.earth.mean                      -0.00146     0.00664  -0.0154   0.00454 0.505   
+
+Bootstrapping Completed.
+
+Starting Bootstrapping...
+
+Bootstrap Summary:
+[1] "Model Type: ssn_glm"
+# A tibble: 15 × 6
+   term                               estimate_mean estimate_sd    conf_low conf_high  p_value
+   <chr>                                      <dbl>       <dbl>       <dbl>     <dbl>    <dbl>
+ 1 (Intercept)                             -1.39        0.103    -1.56       -1.27    1.00e-11
+ 2 ch_central.slope.difference             -0.136       0.121    -0.297      -0.00540 6.09e- 3
+ 3 ch_channel.width.over.valley.width       0.118       0.150    -0.0222      0.385   3.42e- 2
+ 4 ch_curvature.median                     -0.0219      0.227    -0.261       0.288   7.67e- 1
+ 5 ch_elevation.mean                       -0.249       0.178    -0.424       0.0964  1.66e- 3
+ 6 ch_flow.accumulation.max                 0.00404     0.160    -0.208       0.230   9.38e- 1
+ 7 ch_slope.median                          0.0363      0.164    -0.193       0.309   5.01e- 1
+ 8 hs_bare.earth.mean                       0.0741      0.0355    0.0282      0.123   9.86e- 5
+ 9 hs_curvature.median                     -0.0584      0.0736   -0.181       0.00900 3.34e- 2
+10 hs_dnbr.median                          -0.0992      0.0437   -0.185      -0.0441  5.20e- 5
+11 hs_drainage_density                      4.32       14.6     -13.0        26.6     3.72e- 1
+12 hs_eastness.median                       0.0604      0.0442    0.0238      0.155   1.93e- 3
+13 hs_hillslope.length                     -0.0216      0.0607   -0.129       0.0565  2.90e- 1
+14 hs_slope.median                         -0.131       0.0545   -0.198      -0.0261  3.30e- 5
+15 ws_bare.earth.mean                       0.00113     0.00179   0.0000569   0.00503 7.71e- 2
+
+Bootstrapping Completed.
+
+Starting Bootstrapping...
+
+Bootstrap Summary:
+[1] "Model Type: ssn_glm"
+# A tibble: 15 × 6
+   term                               estimate_mean estimate_sd    conf_low conf_high  p_value
+   <chr>                                      <dbl>       <dbl>       <dbl>     <dbl>    <dbl>
+ 1 (Intercept)                             -1.39        0.103    -1.56       -1.27    1.00e-11
+ 2 ch_central.slope.difference             -0.136       0.121    -0.297      -0.00540 6.09e- 3
+ 3 ch_channel.width.over.valley.width       0.118       0.150    -0.0222      0.385   3.42e- 2
+ 4 ch_curvature.median                     -0.0219      0.227    -0.261       0.288   7.67e- 1
+ 5 ch_elevation.mean                       -0.249       0.178    -0.424       0.0964  1.66e- 3
+ 6 ch_flow.accumulation.max                 0.00404     0.160    -0.208       0.230   9.38e- 1
+ 7 ch_slope.median                          0.0363      0.164    -0.193       0.309   5.01e- 1
+ 8 hs_bare.earth.mean                       0.0741      0.0355    0.0282      0.123   9.86e- 5
+ 9 hs_curvature.median                     -0.0584      0.0736   -0.181       0.00900 3.34e- 2
+10 hs_dnbr.median                          -0.0992      0.0437   -0.185      -0.0441  5.20e- 5
+11 hs_drainage_density                      4.32       14.6     -13.0        26.6     3.72e- 1
+12 hs_eastness.median                       0.0604      0.0442    0.0238      0.155   1.93e- 3
+13 hs_hillslope.length                     -0.0216      0.0607   -0.129       0.0565  2.90e- 1
+14 hs_slope.median                         -0.131       0.0545   -0.198      -0.0261  3.30e- 5
+15 ws_bare.earth.mean                       0.00113     0.00179   0.0000569   0.00503 7.71e- 2
+
+Bootstrapping Completed.
+
+Starting Bootstrapping...
+
+Bootstrap Summary:
+[1] "Model Type: ssn_glm"
+# A tibble: 15 × 6
+   term                               estimate_mean estimate_sd    conf_low conf_high  p_value
+   <chr>                                      <dbl>       <dbl>       <dbl>     <dbl>    <dbl>
+ 1 (Intercept)                             -1.39        0.103    -1.56       -1.27    1.00e-11
+ 2 ch_central.slope.difference             -0.136       0.121    -0.297      -0.00540 6.09e- 3
+ 3 ch_channel.width.over.valley.width       0.118       0.150    -0.0222      0.385   3.42e- 2
+ 4 ch_curvature.median                     -0.0219      0.227    -0.261       0.288   7.67e- 1
+ 5 ch_elevation.mean                       -0.249       0.178    -0.424       0.0964  1.66e- 3
+ 6 ch_flow.accumulation.max                 0.00404     0.160    -0.208       0.230   9.38e- 1
+ 7 ch_slope.median                          0.0363      0.164    -0.193       0.309   5.01e- 1
+ 8 hs_bare.earth.mean                       0.0741      0.0355    0.0282      0.123   9.86e- 5
+ 9 hs_curvature.median                     -0.0584      0.0736   -0.181       0.00900 3.34e- 2
+10 hs_dnbr.median                          -0.0992      0.0437   -0.185      -0.0441  5.20e- 5
+11 hs_drainage_density                      4.32       14.6     -13.0        26.6     3.72e- 1
+12 hs_eastness.median                       0.0604      0.0442    0.0238      0.155   1.93e- 3
+13 hs_hillslope.length                     -0.0216      0.0607   -0.129       0.0565  2.90e- 1
+14 hs_slope.median                         -0.131       0.0545   -0.198      -0.0261  3.30e- 5
+15 ws_bare.earth.mean                       0.00113     0.00179   0.0000569   0.00503 7.71e- 2
+
+Bootstrapping Completed.
+
+Starting Bootstrapping...
+
+Bootstrap Summary:
+[1] "Model Type: ssn_glm"
+# A tibble: 15 × 6
+   term                               estimate_mean estimate_sd    conf_low conf_high  p_value
+   <chr>                                      <dbl>       <dbl>       <dbl>     <dbl>    <dbl>
+ 1 (Intercept)                             -1.39        0.103    -1.56       -1.27    1.00e-11
+ 2 ch_central.slope.difference             -0.136       0.121    -0.297      -0.00540 6.09e- 3
+ 3 ch_channel.width.over.valley.width       0.118       0.150    -0.0222      0.385   3.42e- 2
+ 4 ch_curvature.median                     -0.0219      0.227    -0.261       0.288   7.67e- 1
+ 5 ch_elevation.mean                       -0.249       0.178    -0.424       0.0964  1.66e- 3
+ 6 ch_flow.accumulation.max                 0.00404     0.160    -0.208       0.230   9.38e- 1
+ 7 ch_slope.median                          0.0363      0.164    -0.193       0.309   5.01e- 1
+ 8 hs_bare.earth.mean                       0.0741      0.0355    0.0282      0.123   9.86e- 5
+ 9 hs_curvature.median                     -0.0584      0.0736   -0.181       0.00900 3.34e- 2
+10 hs_dnbr.median                          -0.0992      0.0437   -0.185      -0.0441  5.20e- 5
+11 hs_drainage_density                      4.32       14.6     -13.0        26.6     3.72e- 1
+12 hs_eastness.median                       0.0604      0.0442    0.0238      0.155   1.93e- 3
+13 hs_hillslope.length                     -0.0216      0.0607   -0.129       0.0565  2.90e- 1
+14 hs_slope.median                         -0.131       0.0545   -0.198      -0.0261  3.30e- 5
+15 ws_bare.earth.mean                       0.00113     0.00179   0.0000569   0.00503 7.71e- 2
+
+Bootstrapping Completed.
+
+Starting Bootstrapping...
+
+Bootstrap Summary:
+[1] "Model Type: ssn_glm"
+# A tibble: 15 × 6
+   term                               estimate_mean estimate_sd    conf_low conf_high  p_value
+   <chr>                                      <dbl>       <dbl>       <dbl>     <dbl>    <dbl>
+ 1 (Intercept)                             -1.39        0.103    -1.56       -1.27    1.00e-11
+ 2 ch_central.slope.difference             -0.136       0.121    -0.297      -0.00540 6.09e- 3
+ 3 ch_channel.width.over.valley.width       0.118       0.150    -0.0222      0.385   3.42e- 2
+ 4 ch_curvature.median                     -0.0219      0.227    -0.261       0.288   7.67e- 1
+ 5 ch_elevation.mean                       -0.249       0.178    -0.424       0.0964  1.66e- 3
+ 6 ch_flow.accumulation.max                 0.00404     0.160    -0.208       0.230   9.38e- 1
+ 7 ch_slope.median                          0.0363      0.164    -0.193       0.309   5.01e- 1
+ 8 hs_bare.earth.mean                       0.0741      0.0355    0.0282      0.123   9.86e- 5
+ 9 hs_curvature.median                     -0.0584      0.0736   -0.181       0.00900 3.34e- 2
+10 hs_dnbr.median                          -0.0992      0.0437   -0.185      -0.0441  5.20e- 5
+11 hs_drainage_density                      4.32       14.6     -13.0        26.6     3.72e- 1
+12 hs_eastness.median                       0.0604      0.0442    0.0238      0.155   1.93e- 3
+13 hs_hillslope.length                     -0.0216      0.0607   -0.129       0.0565  2.90e- 1
+14 hs_slope.median                         -0.131       0.0545   -0.198      -0.0261  3.30e- 5
+15 ws_bare.earth.mean                       0.00113     0.00179   0.0000569   0.00503 7.71e- 2
+
+Bootstrapping Completed.
+
+Starting Bootstrapping...
+
+Bootstrap Summary:
+[1] "Model Type: ssn_glm"
+# A tibble: 15 × 6
+   term                               estimate_mean estimate_sd    conf_low conf_high  p_value
+   <chr>                                      <dbl>       <dbl>       <dbl>     <dbl>    <dbl>
+ 1 (Intercept)                             -1.39        0.103    -1.56       -1.27    1.00e-11
+ 2 ch_central.slope.difference             -0.136       0.121    -0.297      -0.00540 6.09e- 3
+ 3 ch_channel.width.over.valley.width       0.118       0.150    -0.0222      0.385   3.42e- 2
+ 4 ch_curvature.median                     -0.0219      0.227    -0.261       0.288   7.67e- 1
+ 5 ch_elevation.mean                       -0.249       0.178    -0.424       0.0964  1.66e- 3
+ 6 ch_flow.accumulation.max                 0.00404     0.160    -0.208       0.230   9.38e- 1
+ 7 ch_slope.median                          0.0363      0.164    -0.193       0.309   5.01e- 1
+ 8 hs_bare.earth.mean                       0.0741      0.0355    0.0282      0.123   9.86e- 5
+ 9 hs_curvature.median                     -0.0584      0.0736   -0.181       0.00900 3.34e- 2
+10 hs_dnbr.median                          -0.0992      0.0437   -0.185      -0.0441  5.20e- 5
+11 hs_drainage_density                      4.32       14.6     -13.0        26.6     3.72e- 1
+12 hs_eastness.median                       0.0604      0.0442    0.0238      0.155   1.93e- 3
+13 hs_hillslope.length                     -0.0216      0.0607   -0.129       0.0565  2.90e- 1
+14 hs_slope.median                         -0.131       0.0545   -0.198      -0.0261  3.30e- 5
+15 ws_bare.earth.mean                       0.00113     0.00179   0.0000569   0.00503 7.71e- 2
+
+Bootstrapping Completed.
