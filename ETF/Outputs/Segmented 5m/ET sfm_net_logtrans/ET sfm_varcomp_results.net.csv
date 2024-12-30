@@ -1,0 +1,61 @@
+"varcomp","proportion","bootstrap_rep"
+"Covariates (PR-sq)",0.200297291080041,1
+"tailup_de",0.00103509111314584,1
+"taildown_de",0,1
+"euclid_de",0.0306559338431354,1
+"nugget",0,1
+"1 | as.factor(ch_watershed)",0.768011683963678,1
+"Covariates (PR-sq)",0.230773019262265,2
+"tailup_de",0.00136915669912429,2
+"taildown_de",0,2
+"euclid_de",0.0332890853087262,2
+"nugget",0,2
+"1 | as.factor(ch_watershed)",0.734568738729884,2
+"Covariates (PR-sq)",0.117763996855552,3
+"tailup_de",0.0360769567148127,3
+"taildown_de",0,3
+"euclid_de",0.313645866598394,3
+"nugget",0,3
+"1 | as.factor(ch_watershed)",0.532513179831242,3
+"Covariates (PR-sq)",0.454789141890973,4
+"tailup_de",1.19223397953106e-15,4
+"taildown_de",0,4
+"euclid_de",0.545198577772472,4
+"nugget",0,4
+"1 | as.factor(ch_watershed)",1.22803365541285e-05,4
+"Covariates (PR-sq)",0.278021543043932,5
+"tailup_de",0.00111135358025484,5
+"taildown_de",0,5
+"euclid_de",0.011515183814905,5
+"nugget",0,5
+"1 | as.factor(ch_watershed)",0.709351919560909,5
+"Covariates (PR-sq)",0.185531916559629,6
+"tailup_de",0.000183293895668429,6
+"taildown_de",0,6
+"euclid_de",0.00112412201959207,6
+"nugget",0,6
+"1 | as.factor(ch_watershed)",0.81316066752511,6
+"Covariates (PR-sq)",0.154309672125193,7
+"tailup_de",0.000888706498925728,7
+"taildown_de",0,7
+"euclid_de",0.0314631789844071,7
+"nugget",0,7
+"1 | as.factor(ch_watershed)",0.813338442391474,7
+"Covariates (PR-sq)",0.293607253221747,8
+"tailup_de",0.00216487583408391,8
+"taildown_de",0,8
+"euclid_de",0.045098775893148,8
+"nugget",0,8
+"1 | as.factor(ch_watershed)",0.659129095051021,8
+"Covariates (PR-sq)",0.195592628786248,9
+"tailup_de",0.000589355924918561,9
+"taildown_de",0,9
+"euclid_de",0.00931654244808805,9
+"nugget",0,9
+"1 | as.factor(ch_watershed)",0.794501472840746,9
+"Covariates (PR-sq)",0.234478011926857,10
+"tailup_de",0.00406718402151385,10
+"taildown_de",0,10
+"euclid_de",0.241075766301844,10
+"nugget",0,10
+"1 | as.factor(ch_watershed)",0.520379037749786,10

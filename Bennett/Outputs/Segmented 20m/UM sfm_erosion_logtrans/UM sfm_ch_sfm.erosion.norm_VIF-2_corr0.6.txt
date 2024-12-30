@@ -1,0 +1,72 @@
+
+Starting Bootstrapping...
+
+Starting Bootstrapping...
+
+Starting Bootstrapping...
+
+Starting Bootstrapping...
+
+Starting Bootstrapping...
+
+Bootstrap Summary:
+[1] "Model Type: ssn_glm"
+# A tibble: 12 × 6
+   term                               estimate_mean estimate_sd conf_low conf_high p_value
+   <chr>                                      <dbl>       <dbl>    <dbl>     <dbl>   <dbl>
+ 1 (Intercept)                              -0.806        0.897   -2.50     0.433  0.0193 
+ 2 ch_central.slope.difference              -0.0149       0.510   -0.773    0.675  0.928  
+ 3 ch_channel.width.over.valley.width       -0.835        0.940   -1.96     0.880  0.0203 
+ 4 ch_stream.power                           0.0888       0.851   -1.05     1.60   0.749  
+ 5 hs_bare.earth.mean                       -0.0345       0.428   -0.896    0.349  0.804  
+ 6 hs_curvature.median                      -0.295        0.222   -0.564    0.0724 0.00235
+ 7 hs_extended.dnbr.median                  -0.152        0.648   -0.914    0.883  0.478  
+ 8 hs_flow.accumulation.max                  0.300        0.738   -0.660    1.58   0.230  
+ 9 hs_ndvi.min                              -0.0743       1.34    -1.59     2.59   0.865  
+10 hs_northness.median                      -0.0323       0.214   -0.290    0.275  0.644  
+11 hs_slope.median                           0.806        0.634   -0.193    1.91   0.00302
+12 hs_storm.accum.30.min                     0.551        1.28    -1.99     1.93   0.205  
+
+Bootstrapping Completed.
+
+Starting Bootstrapping...
+
+Starting Bootstrapping...
+
+Starting Bootstrapping...
+
+Starting Bootstrapping...
+
+Starting Bootstrapping...
+
+Starting Bootstrapping...
+
+Starting Bootstrapping...
+
+Starting Bootstrapping...
+
+Starting Bootstrapping...
+
+Starting Bootstrapping...
+
+Starting Bootstrapping...
+
+Bootstrap Summary:
+[1] "Model Type: ssn_glm"
+# A tibble: 12 × 6
+   term                               estimate_mean estimate_sd conf_low conf_high p_value
+   <chr>                                      <dbl>       <dbl>    <dbl>     <dbl>   <dbl>
+ 1 (Intercept)                              -0.806        0.897   -2.50     0.433  0.0193 
+ 2 ch_central.slope.difference              -0.0149       0.510   -0.773    0.675  0.928  
+ 3 ch_channel.width.over.valley.width       -0.835        0.940   -1.96     0.880  0.0203 
+ 4 ch_stream.power                           0.0888       0.851   -1.05     1.60   0.749  
+ 5 hs_bare.earth.mean                       -0.0345       0.428   -0.896    0.349  0.804  
+ 6 hs_curvature.median                      -0.295        0.222   -0.564    0.0724 0.00235
+ 7 hs_extended.dnbr.median                  -0.152        0.648   -0.914    0.883  0.478  
+ 8 hs_flow.accumulation.max                  0.300        0.738   -0.660    1.58   0.230  
+ 9 hs_ndvi.min                              -0.0743       1.34    -1.59     2.59   0.865  
+10 hs_northness.median                      -0.0323       0.214   -0.290    0.275  0.644  
+11 hs_slope.median                           0.806        0.634   -0.193    1.91   0.00302
+12 hs_storm.accum.30.min                     0.551        1.28    -1.99     1.93   0.205  
+
+Bootstrapping Completed.

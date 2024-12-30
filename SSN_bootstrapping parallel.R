@@ -7,22 +7,21 @@
 # Bennett prefixes: "Bennett sfm", "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm"
 #                   "Bennett lidar", "ME lidar", "MM lidar", "MW lidar", "UE lidar", "UW lidar", "UM lidar"
 prefixes <- c(
-  # "Bennett sfm" 
-  # "ET sfm"
-  "LM2 sfm"
-  )  # Can define single or multiple prefixes
+  "ET sfm",
+  "Bennett sfm"
+  )  
 
 # Types: "erosion", "deposition", "net"
 types <- c(
-  # "deposition" 
-  "erosion"
-  #, "net"
-           )  # Can define single or both erosion, deposition
+  "deposition", 
+  "erosion",
+   "net"
+  )  
 
 segment_list <- c(
-  # 5
-  # 10
-  20
+  # 10,
+  20,
+  5
   )
 
 
@@ -64,7 +63,6 @@ library(classInt) # For spatial weights if needed
 library(knitr)    # For better output formatting (optional)
 library(broom)    # For tidy model outputs
 library(tictoc)
-# Additional Libraries for Parallelization and Progress Updates
 library(future)
 library(furrr)
 library(progressr)
@@ -179,12 +177,17 @@ for (segment in segment_list) {
       ################################################################################
       ########################### SSN2 PREPROCESSING ##################################
       ################################################################################
-      
+      print(input_obs)
       if (!load_ssn) {
         # Read spatial data
         CP_streams <- st_read(input_streams)
         CP_obs <- st_read(input_obs)
         
+        # Remove duplicate rows where the geom column has already appeared
+        # CP_obs <- obs[!duplicated(CP_obs$geom), ]
+        # 
+        # # Remove empty geometries using st_is_empty
+        # CP_obs <- CP_obs[!st_is_empty(CP_obs$geom), ]
         # Uncomment if you encounter an error about Multilinestrings
         # CP_streams <- st_cast(CP_streams, "LINESTRING")
         
@@ -206,10 +209,11 @@ for (segment in segment_list) {
           edges = edges,
           lsn_path = lsn_out,
           file_name = "obs",
-          snap_tolerance = 100,
+          snap_tolerance = 10,
           save_local = TRUE,
           overwrite = TRUE
         )
+
         
         # Calculate edge distances
         edges <- updist_edges(
@@ -249,6 +253,7 @@ for (segment in segment_list) {
           lsn_path = lsn_out
         )
         
+
         # Assemble SSN object
         CP_ssn <- ssn_assemble(
           edges = edges,
@@ -280,7 +285,7 @@ for (segment in segment_list) {
       obs_data_df <- st_drop_geometry(obs_data)
       
       # Write the obs_data to CSV
-      write.csv(obs_data_df, obs_output_file, row.names = FALSE)
+      write.csv(obs_data, obs_output_file, row.names = FALSE)
       
       # Optional: If you want to include coordinates, you can do the following:
       # coords <- st_coordinates(obs_data)
@@ -358,8 +363,9 @@ for (segment in segment_list) {
               ssn.object = ssn_updated,
               tailup_type = "exponential", 
               taildown_type = "none",
-              euclid_type = "gaussian",
-              nugget_type = "nugget",
+              estmethod = "ml",
+              euclid_type = "spherical",
+              nugget_type = "none",
               additive = "afv_flow_accum",
               random = ~ as.factor(ch_watershed)
             )
@@ -372,8 +378,9 @@ for (segment in segment_list) {
               family = "Gamma",
               tailup_type = "exponential",
               taildown_type = "none",
+              estmethod = "ml",
               euclid_type = "gaussian",
-              nugget_type = "nugget",
+              nugget_type = "none",
               additive = "afv_flow_accum",
               random = ~ as.factor(ch_watershed)
             )
@@ -385,8 +392,9 @@ for (segment in segment_list) {
               ssn.object = ssn_updated,
               tailup_type = "exponential",
               taildown_type = "none",
+              estmethod = "ml",
               euclid_type = "gaussian",
-              nugget_type = "nugget",
+              nugget_type = "none",
               additive = "afv_flow_accum"
             )
             model_type <- "ssn_lm"
@@ -398,9 +406,11 @@ for (segment in segment_list) {
               family = "Gamma",
               tailup_type = "exponential",
               taildown_type = "none",
+              estmethod = "ml",
               euclid_type = "gaussian",
-              nugget_type = "nugget",
+              nugget_type = "none",
               additive = "afv_flow_accum"
+              
             )
             model_type <- "ssn_glm"
           }
@@ -421,14 +431,12 @@ for (segment in segment_list) {
         
         # Use furrr's future_map with progressr for parallel processing and progress updates
         with_progress({
-          p <- progressor(along = 1:n_boot)
+          p <- progressor(steps = n_boot)
           
           bootstrap_results <- future_map(1:n_boot, function(i) {
-            
+            p()  # Increment progress
             bootstrap_iteration(i)
           }, .options = furrr_options(seed = TRUE))
-          
-          p()
         })
         
         # Extract results
@@ -531,4 +539,7 @@ for (segment in segment_list) {
 # End the overall timer and print it
 total_time <- toc(log = TRUE, quiet = TRUE)
 cat("\nTotal Script Execution Time:", total_time$toc - total_time$tic, "seconds\n")
-       
+
+
+
+

@@ -1,1 +1,1 @@
-ch_sfm.erosion.norm ~ ch_channel.width.over.valley.width + ch_slope.median + ch_curvature.median + ch_central.slope.difference + ch_stream.power.central.diff + hs_hillslope.length + hs_flow.accumulation.max + hs_accum.precip.mean + hs_slope.median + hs_bare.earth.mean
+ch_sfm.erosion.mean ~ ch_channel.width.over.valley.width + ch_slope.median + ch_flow.accumulation.max + ch_curvature.median + ch_change.in.slope.over.width + ch_slope.over.width.central.diff + hs_hillslope.length + hs_flow.accumulation.max + hs_slope.median + hs_bare.earth.mean

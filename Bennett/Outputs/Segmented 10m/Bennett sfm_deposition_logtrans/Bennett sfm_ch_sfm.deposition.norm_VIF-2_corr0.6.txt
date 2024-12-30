@@ -1,0 +1,48 @@
+
+Starting Bootstrapping...
+
+Starting Bootstrapping...
+
+Starting Bootstrapping...
+
+Bootstrap Summary:
+[1] "Model Type: ssn_glm"
+# A tibble: 22 × 6
+   term                               estimate_mean estimate_sd  conf_low conf_high  p_value
+   <chr>                                      <dbl>       <dbl>     <dbl>     <dbl>    <dbl>
+ 1 (Intercept)                             -2.11        0.0805  -2.19      -1.98    2.76e-14
+ 2 ch_change.in.slope.over.width           -0.0458      0.0491  -0.132      0.0231  1.61e- 2
+ 3 ch_channel.width.over.valley.width      -0.185       0.0386  -0.232     -0.121   1.05e- 7
+ 4 ch_curvature.median                      0.0198      0.0570  -0.0558     0.120   2.99e- 1
+ 5 ch_slope.over.width                      0.00476     0.0628  -0.103      0.0925  8.16e- 1
+ 6 ch_slope.over.width.central.diff        -0.00115     0.00558 -0.0116     0.00654 5.30e- 1
+ 7 ch_stream.power.central.diff             0.0199      0.0237  -0.000857   0.0672  2.65e- 2
+ 8 hs_area                                  0.0547      0.0304  -0.000377   0.0940  2.99e- 4
+ 9 hs_bare.earth.mean                      -0.0118      0.00786 -0.0211     0.00110 1.08e- 3
+10 hs_curvature.median                     -0.0293      0.0141  -0.0521    -0.00943 1.05e- 4
+# ℹ 12 more rows
+# ℹ Use `print(n = ...)` to see more rows
+
+Bootstrapping Completed.
+
+Starting Bootstrapping...
+
+Bootstrap Summary:
+[1] "Model Type: ssn_glm"
+# A tibble: 22 × 6
+   term                               estimate_mean estimate_sd   conf_low conf_high  p_value
+   <chr>                                      <dbl>       <dbl>      <dbl>     <dbl>    <dbl>
+ 1 (Intercept)                             -2.12        0.0913  -2.22       -1.98    8.06e-14
+ 2 ch_change.in.slope.over.width           -0.0579      0.0431  -0.136      -0.0224  2.15e- 3
+ 3 ch_channel.width.over.valley.width      -0.185       0.0508  -0.248      -0.0918  1.07e- 6
+ 4 ch_curvature.median                      0.0201      0.0599  -0.0895      0.0930  3.16e- 1
+ 5 ch_slope.over.width                     -0.00184     0.0470  -0.0837      0.0718  9.04e- 1
+ 6 ch_slope.over.width.central.diff         0.0150      0.0277   0.0000481   0.0743  1.22e- 1
+ 7 ch_stream.power.central.diff             0.0146      0.0265  -0.0218      0.0626  1.15e- 1
+ 8 hs_area                                  0.0562      0.0204   0.0262      0.0925  1.10e- 5
+ 9 hs_bare.earth.mean                      -0.0113      0.00458 -0.0192     -0.00471 2.71e- 5
+10 hs_curvature.median                     -0.0171      0.00798 -0.0275     -0.00199 8.00e- 5
+# ℹ 12 more rows
+# ℹ Use `print(n = ...)` to see more rows
+
+Bootstrapping Completed.
