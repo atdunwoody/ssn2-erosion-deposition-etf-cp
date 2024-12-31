@@ -7,10 +7,11 @@
 # Bennett prefixes: "Bennett sfm", "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm"
 #                  "Bennett lidar", "ME lidar", "MM lidar", "MW lidar", "UE lidar", "UW lidar", "UM lidar"
 prefixes <- c(
-  "ET sfm",
   "ET lidar",
-  "Bennett lidar",
-  "Bennett sfm"
+  "ET sfm",
+  "Bennett sfm",
+  "Bennett lidar"
+  
 )
 
 # Types: "erosion", "deposition", "net"
@@ -79,7 +80,9 @@ failures <- list()
 for (prefix in prefixes) {  
   for (segment in segment_list) {
     for (type in types) {
-    
+      if (grepl("lidar", prefix) && type != "erosion") {
+        next
+      }
       # Wrap the entire process in tryCatch
       tryCatch({
         
@@ -100,7 +103,7 @@ for (prefix in prefixes) {
           prefix <- "MM lidar"
         }
         
-        print(paste0("Processing: ", prefix, " - ", type, " with ", segment, "m spacing"))
+        message(paste0("\n\nProcessing: | ", prefix, " | ", type, " | ", segment, "m |\n"))
         
         base_input_folder <- file.path(region,"Inputs")
         base_output_folder <- file.path(region,"Outputs")
@@ -146,7 +149,7 @@ for (prefix in prefixes) {
         model_formula_str <- readLines(formula_file)
         model_formula <- as.formula(model_formula_str)
         
-        print(model_formula_str)
+        message("Model formula: \n", model_formula_str)
         
         ssn_path <- file.path(
           output_folder, 
@@ -267,7 +270,11 @@ for (prefix in prefixes) {
         response_var <- all.vars(model_formula)[1]
         if (response_var %in% colnames(obs_data_df)) {
           zero_neg_count <- sum(obs_data_df[[response_var]] <= 0, na.rm = TRUE)
-          message("Count of zero or negative ", response_var, ": ", zero_neg_count)
+          na_count <- sum(is.na(obs_data_df[[response_var]]))
+          inf_count <- sum(is.infinite(obs_data_df[[response_var]]))
+          variance <- var(obs_data_df[[response_var]], na.rm = TRUE)
+          message("Response Variable: ", response_var, "\n", "Count of zero or negative values: ", zero_neg_count)
+          message("NA count: ", na_count, " | Inf count: ", inf_count, "| Variance: ", variance, "\n")
         }
         
         pred_vars <- all.vars(model_formula)[-1]
@@ -301,12 +308,12 @@ for (prefix in prefixes) {
           ################################################################################
           bootstrap_model <- function(ssn_obj, n_boot, model_formula, multiple_ws) {
             
-            message("Fitting model with ", n_boot, " bootstrap samples...")
+            message(paste0("\nFitting model for | ", prefix, " | ", type, " | ", segment, "m | with ", n_boot, " bootstrap samples..."))
             
             obs_data <- ssn_get_data(ssn_obj, name = "obs")
             
-            # We'll allow up to 5 attempts for each bootstrap iteration
-            max_attempts <- 5
+            # We'll allow up to 10 attempts for each bootstrap iteration
+            max_attempts <- 10
             
             # A helper function that attempts to run one bootstrap iteration
             # and returns NULL if there is an error. 
@@ -420,12 +427,31 @@ for (prefix in prefixes) {
                 varcomp_mod <- varcomp(ssn_mod_boot)
                 varcomp_mod$bootstrap_rep <- i
                 
-                list(
+                loocv_mod <- loocv(ssn_mod_boot, cv_predict = TRUE, se.fit = TRUE)
+                loocv_mod$bootstrap_rep <- i
+                
+                glance_mod <- glance(ssn_mod_boot)
+                glance_mod$bootstrap_rep <- i
+                
+                residuals <- residuals(ssn_mod)
+                fitted_values <- fitted(ssn_mod)
+                
+                res_fit_df <- data.frame(
+                  residuals = residuals,
+                  fitted_values = fitted_values,
+                  bootstrap_rep = i
+                )
+                
+
+                return(list(
                   tidy_mod = tidy_mod,
                   varcomp_mod = varcomp_mod,
+                  loocv_mod = loocv_mod,
+                  glance_mod = glance_mod,
+                  res_fit_df = res_fit_df,
                   boot_data = boot_data_df,
                   model_type = model_type
-                )
+                ))
                 
               }, error = function(e) {
                 # Return NULL so we know the attempt failed
@@ -436,7 +462,7 @@ for (prefix in prefixes) {
             
             # Now we define the core iteration function that attempts up to max_attempts
             # times until it succeeds or we run out of attempts.
-            bootstrap_iteration <- function(i, p) {
+            bootstrap_iteration <- function(i) {
               for (attempt_num in seq_len(max_attempts)) {
                 message("\nBootstrap iteration ", i, ", attempt ", attempt_num)
                 result <- bootstrap_iteration_once(i)
@@ -445,7 +471,7 @@ for (prefix in prefixes) {
                 
                 if (!is.null(result)) {
                   # Identify bootstrap repetitions with proportion > 0.99
-                  selected_bootstrap_reps <- result$varcomp_mod$proportion > 0.99
+                  selected_bootstrap_reps <- result$varcomp_mod$proportion > 0.9999
                   varcomp_mod <- result$varcomp_mod
                   
                   # Filter out unwanted varcomp entries
@@ -470,7 +496,7 @@ for (prefix in prefixes) {
               # If we've reached here, all attempts have failed
               stop("Exceeded max attempts (", max_attempts, 
                    ") for bootstrap iteration ", i)
-              p(sprintf("Bootstrap iteration %d", i))
+
             }
             
             # Use future_map or a loop to run all bootstrap iterations
@@ -478,8 +504,9 @@ for (prefix in prefixes) {
               p <- progressor(along = 1:n_boot)
               bootstrap_results <- future_map(
                 1:n_boot,
-                function(i, p) {
-                  bootstrap_iteration(i, p())
+                function(i) {
+                  p(sprintf("Bootstrap iteration %d", i))
+                  bootstrap_iteration(i)
                 },
                 .options = furrr_options(seed = TRUE)
               )
@@ -488,20 +515,29 @@ for (prefix in prefixes) {
             # Extract model results
             results_list <- map(bootstrap_results, "tidy_mod")
             varcomp_list <- map(bootstrap_results, "varcomp_mod")
-            boot_data_list <- map(bootstrap_results, "boot_data")
+            loocv_list <- map(bootstrap_results, "loocv_mod")
+            glance_list <- map(bootstrap_results, "glance_mod")
+            res_fit_df <- map(bootstrap_results, "res_fit_df")
+            boot_data_df <- map(bootstrap_results, "boot_data")
             model_type <- bootstrap_results[[1]]$model_type
             
             # Combine into data frames
             bootstrap_results_df <- bind_rows(results_list)
             bootstrap_varcomp_df <- bind_rows(varcomp_list)
-            bootstrap_data_df <- bind_rows(boot_data_list)
+            bootstrap_loocv <- bind_rows(loocv_list)
+            bootstrap_glance <- bind_rows(glance_list)
+            bootstrap_res_fit_df <- bind_rows(res_fit_df)
+            bootstrap_data_df <- bind_rows(boot_data_df)
             
-            list(
+            return(list(
               bootstrap_results = bootstrap_results_df,
               bootstrap_varcomp = bootstrap_varcomp_df,
+              bootstrap_loocv = bootstrap_loocv,
+              bootstrap_glance = bootstrap_glance,
+              bootstrap_res_fit = bootstrap_res_fit_df,
               bootstrap_data = bootstrap_data_df,
               model_type = model_type
-            )
+            ))
           }
           
         
@@ -516,6 +552,9 @@ for (prefix in prefixes) {
         
         bootstrap_results <- bootstrap_output$bootstrap_results
         bootstrap_varcomp <- bootstrap_output$bootstrap_varcomp
+        bootstrap_loocv <- bootstrap_output$bootstrap_loocv
+        bootstrap_glance <- bootstrap_output$bootstrap_glance
+        bootstrap_res_fit <- bootstrap_output$bootstrap_res_fit
         bootstrap_data <- bootstrap_output$bootstrap_data
         model_type <- bootstrap_output$model_type
         
@@ -538,6 +577,15 @@ for (prefix in prefixes) {
         
         bootstrap_varcomp_file <- file.path(output_folder, paste0(prefix, "_varcomp_results.", type, ".csv"))
         write.csv(bootstrap_varcomp, bootstrap_varcomp_file, row.names = FALSE)
+        
+        bootstrap_loocv_file <- file.path(output_folder, paste0(prefix, "_loocv_results.", type, ".csv"))
+        write.csv(bootstrap_loocv, bootstrap_loocv_file, row.names = FALSE)
+        
+        bootstrap_glance_file <- file.path(output_folder, paste0(prefix, "_glance_results.", type, ".csv"))
+        write.csv(bootstrap_glance, bootstrap_glance_file, row.names = FALSE)
+        
+        bootstrap_res_fit_file <- file.path(output_folder, paste0(prefix, "_res_fit_results.", type, ".csv"))
+        write.csv(bootstrap_res_fit, bootstrap_res_fit_file, row.names = FALSE)
         
         bootstrap_data_file <- file.path(output_folder, paste0(prefix, "_bootstrap_data.", type, ".csv"))
         write.csv(bootstrap_data, bootstrap_data_file, row.names = FALSE)
@@ -578,38 +626,7 @@ if (length(failures) > 0) {
 }
 
 
+ 
 
-ssn_mod <- ssn_glm(
-  formula = model_formula,
-  ssn.object = CP_ssn,
-  family = "Gamma",
-  tailup_type = "exponential",
-  taildown_type = "none",
-  euclid_type = "gaussian",
-  nugget_type = "nugget",
-  additive = "afv_flow_accum"
-)
-
-# Load necessary library
-library(dplyr)
-
-# Calculate variance components
-varcomp_mod <- varcomp(ssn_mod)
-
-# Print the original variance components
-print(varcomp_mod$varcomp)
-
-# Remove rows where varcomp column equals "taildown_de" using base R
-varcomp_filtered <- varcomp_mod$varcomp[varcomp_mod$varcomp != "taildown_de"]
-
-# Print the filtered variance components
-print(varcomp_filtered)
-
-# Print the filtered variance components
-print(varcomp_filtered)
-
-
-# Print the filtered variance components
-print(varcomp_filtered)
 
 

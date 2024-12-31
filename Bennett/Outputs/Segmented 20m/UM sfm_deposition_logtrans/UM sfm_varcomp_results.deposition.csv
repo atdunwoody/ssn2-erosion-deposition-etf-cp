@@ -1,51 +1,51 @@
 "varcomp","proportion","bootstrap_rep"
-"Covariates (PR-sq)",0.661998105849074,1
-"tailup_de",0.000108113917397901,1
+"Covariates (PR-sq)",0.850745134106376,1
+"tailup_de",1.48140978291215e-25,1
 "taildown_de",0,1
-"euclid_de",0.337888036604301,1
-"nugget",5.74362922712038e-06,1
-"Covariates (PR-sq)",0.855920034916639,2
-"tailup_de",1.74811313196646e-10,2
+"euclid_de",0.149254865893624,1
+"nugget",0,1
+"Covariates (PR-sq)",0.745282922935283,2
+"tailup_de",2.10106306614017e-42,2
 "taildown_de",0,2
-"euclid_de",0.14407996490855,2
-"nugget",6.82111092589077e-42,2
-"Covariates (PR-sq)",0.836867217674907,3
-"tailup_de",0.000993432276323551,3
+"euclid_de",0.254717077064717,2
+"nugget",0,2
+"Covariates (PR-sq)",0.773802412642018,3
+"tailup_de",2.86846318194495e-18,3
 "taildown_de",0,3
-"euclid_de",0.153632698599072,3
-"nugget",0.00850665144969792,3
-"Covariates (PR-sq)",0.874271517840316,4
-"tailup_de",0.125727687333323,4
+"euclid_de",0.226197587357982,3
+"nugget",0,3
+"Covariates (PR-sq)",0.843738942569321,4
+"tailup_de",4.17350191166492e-29,4
 "taildown_de",0,4
-"euclid_de",7.94826360989614e-07,4
-"nugget",4.34562554342393e-86,4
-"Covariates (PR-sq)",0.868030682205021,5
-"tailup_de",0.000700121118203261,5
+"euclid_de",0.156261057430679,4
+"nugget",0,4
+"Covariates (PR-sq)",0.860529182453212,5
+"tailup_de",1.51564385336559e-05,5
 "taildown_de",0,5
-"euclid_de",0.00193655276460121,5
-"nugget",0.129332643912174,5
-"Covariates (PR-sq)",0.601096442337933,6
-"tailup_de",4.38178509335563e-05,6
+"euclid_de",0.139455661108254,5
+"nugget",0,5
+"Covariates (PR-sq)",0.780211585642653,6
+"tailup_de",1.38927231641934e-15,6
 "taildown_de",0,6
-"euclid_de",0.39885973968675,6
-"nugget",1.24383135308286e-10,6
-"Covariates (PR-sq)",0.939050225008415,7
-"tailup_de",0.000593643909898319,7
+"euclid_de",0.219788414357346,6
+"nugget",0,6
+"Covariates (PR-sq)",0.89309612474663,7
+"tailup_de",1.7404797124873e-19,7
 "taildown_de",0,7
-"euclid_de",0.0603561310816868,7
-"nugget",1.98514893318377e-44,7
-"Covariates (PR-sq)",0.856916999583734,8
-"tailup_de",0.127579678201148,8
+"euclid_de",0.10690387525337,7
+"nugget",0,7
+"Covariates (PR-sq)",0.683585366994825,8
+"tailup_de",2.54524759410355e-32,8
 "taildown_de",0,8
-"euclid_de",0.0155033222151184,8
-"nugget",3.8358972811235e-80,8
-"Covariates (PR-sq)",0.95556789525283,9
-"tailup_de",6.86880354256041e-43,9
+"euclid_de",0.316414633005175,8
+"nugget",0,8
+"Covariates (PR-sq)",0.72080849897428,9
+"tailup_de",5.16890449253339e-21,9
 "taildown_de",0,9
-"euclid_de",0.0444321047471699,9
-"nugget",1.49129827179457e-62,9
-"Covariates (PR-sq)",0.858802282687364,10
-"tailup_de",1.20111664634384e-08,10
+"euclid_de",0.27919150102572,9
+"nugget",0,9
+"Covariates (PR-sq)",0.81268897366379,10
+"tailup_de",1.812330826514e-18,10
 "taildown_de",0,10
-"euclid_de",0.141197705301469,10
-"nugget",1.08117830346173e-31,10
+"euclid_de",0.18731102633621,10
+"nugget",0,10

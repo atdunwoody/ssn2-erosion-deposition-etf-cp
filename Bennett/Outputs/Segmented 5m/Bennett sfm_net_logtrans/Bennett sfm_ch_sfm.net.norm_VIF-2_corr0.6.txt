@@ -1,0 +1,46 @@
+
+Starting Bootstrapping...
+
+Bootstrap Summary:
+[1] "Model Type: ssn_lm"
+# A tibble: 22 × 6
+   term                             estimate_mean estimate_sd conf_low conf_high  p_value
+   <chr>                                    <dbl>       <dbl>    <dbl>     <dbl>    <dbl>
+ 1 (Intercept)                             2.75         0.367  2.06     3.34     2.33e-18
+ 2 ch_change.in.slope.over.width           0.527        0.316  0.00701  1.12     4.79e- 7
+ 3 ch_curvature.median                     0.387        0.286 -0.117    0.948    7.91e- 6
+ 4 ch_flow.accumulation.max                0.517        0.499 -0.126    1.34     1.81e- 4
+ 5 ch_slope.over.width                    -0.0854       0.220 -0.408    0.300    9.88e- 2
+ 6 ch_slope.over.width.central.diff       -0.0817       0.325 -0.846   -0.000118 2.74e- 1
+ 7 ch_stream.power.central.diff           -0.0692       0.127 -0.241    0.196    2.44e- 2
+ 8 ch_valley_width                         0.376        0.354 -0.229    0.924    1.43e- 4
+ 9 hs_area                                 0.229        0.174 -0.112    0.499    1.11e- 5
+10 hs_aspect.eastness.median              -0.747        0.428 -1.34     0.0870   2.45e- 7
+# ℹ 12 more rows
+# ℹ Use `print(n = ...)` to see more rows
+
+Bootstrapping Completed.
+
+Starting Bootstrapping...
+
+Bootstrap Summary:
+[1] "Model Type: ssn_lm"
+# A tibble: 22 × 6
+   term                             estimate_mean estimate_sd conf_low conf_high  p_value
+   <chr>                                    <dbl>       <dbl>    <dbl>     <dbl>    <dbl>
+ 1 (Intercept)                             2.79         0.312   2.19    3.34     7.97e-20
+ 2 ch_change.in.slope.over.width           0.492        0.377  -0.249   1.12     1.26e- 5
+ 3 ch_curvature.median                     0.428        0.271  -0.0225  0.948    1.05e- 6
+ 4 ch_flow.accumulation.max                0.449        0.520  -0.170   1.34     1.05e- 3
+ 5 ch_slope.over.width                    -0.0799       0.217  -0.408   0.300    1.17e- 1
+ 6 ch_slope.over.width.central.diff       -0.0817       0.325  -0.846   0.000237 2.75e- 1
+ 7 ch_stream.power.central.diff           -0.0494       0.156  -0.241   0.343    1.72e- 1
+ 8 ch_valley_width                         0.466        0.367  -0.175   1.03     1.81e- 5
+ 9 hs_area                                 0.228        0.172  -0.112   0.499    1.06e- 5
+10 hs_aspect.eastness.median              -0.798        0.447  -1.40    0.0870   1.74e- 7
+# ℹ 12 more rows
+# ℹ Use `print(n = ...)` to see more rows
+
+Bootstrapping Completed.
+
+Starting Bootstrapping...

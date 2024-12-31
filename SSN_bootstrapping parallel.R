@@ -7,21 +7,22 @@
 # Bennett prefixes: "Bennett sfm", "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm"
 #                   "Bennett lidar", "ME lidar", "MM lidar", "MW lidar", "UE lidar", "UW lidar", "UM lidar"
 prefixes <- c(
-  "ET sfm",
-  "Bennett sfm"
+  # "UM sfm"
+  "ET lidar"
+  # "Bennett sfm"
   )  
 
 # Types: "erosion", "deposition", "net"
 types <- c(
-  "deposition", 
-  "erosion",
-   "net"
+  #"deposition"
+  "erosion"
+   # "net"
   )  
 
 segment_list <- c(
   # 10,
-  20,
-  5
+  20
+  # 5
   )
 
 
@@ -37,7 +38,7 @@ formula_file_name <- "ssn_formula.txt"
 # If FALSE, the SSN object will be created with data from:
 # Inputs/Individual Watersheds/LM2_erosion_ssn points.gpkg
 # Inputs/Streams/streams_100k.gpkg
-load_ssn <- FALSE
+load_ssn <- TRUE
 
 # Bootstrapping parameters
 n_bootstrap <- 10  # Number of bootstrap samples 
@@ -433,7 +434,9 @@ for (segment in segment_list) {
         with_progress({
           p <- progressor(steps = n_boot)
           
-          bootstrap_results <- future_map(1:n_boot, function(i) {
+          bootstrap_results <- future_map(
+            1:n_boot, 
+            function(i) {
             p()  # Increment progress
             bootstrap_iteration(i)
           }, .options = furrr_options(seed = TRUE))

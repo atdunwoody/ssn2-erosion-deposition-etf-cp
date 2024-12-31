@@ -7,12 +7,12 @@
 # Bennett prefixes: "Bennett sfm", "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm"
 #                   "Bennett lidar", "ME lidar", "MM lidar", "MW lidar", "UE lidar", "UW lidar", "UM lidar"
 prefixes <- c(
-  "Bennett sfm",
-  #"ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm",
-  "ET sfm" 
-  # "LM2 sfm", "LPM sfm", "MM_ET sfm", "Bennett lidar", 
-  #"MM lidar", "UE lidar", "UW lidar", "UM lidar",
-  # "ET lidar", "LM2 lidar", "LPM lidar", "MM_ET lidar"
+  "Bennett sfm", "Bennett lidar",
+  "ET sfm", "ET lidar",
+  "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm",
+  "LM2 sfm", "LPM sfm", "MM_ET sfm", 
+  "MM lidar", "UE lidar", "UW lidar", "UM lidar",
+  "LM2 lidar", "LPM lidar", "MM_ET lidar"
 )  # Can define single or multiple prefixes
 
 # Types: "erosion", "deposition", "net"
@@ -29,6 +29,7 @@ segment_list <- c(
 )
 
 load_ssn <- FALSE
+overwrite <- TRUE
 
 ################################################################################
 ######################### LOAD LIBRARIES #######################################
@@ -83,9 +84,9 @@ duplicates_df <- data.frame(
 )
 
 # Loop through each type and prefix
-for (segment in segment_list) {
-  for (type in types) {
-    for (prefix in prefixes) {
+for (prefix in prefixes) {
+  for (segment in segment_list) {
+    for (type in types){
       if (('lidar' %in% prefix) && !('erosion' %in% type)) {
         next
       }
@@ -169,7 +170,7 @@ for (segment in segment_list) {
       ########################### SSN2 PREPROCESSING ##################################
       ################################################################################
       
-      if ((!load_ssn) && (!file.exists(ssn_path))) {
+      if ((!load_ssn) && (!file.exists(ssn_path) || overwrite)) {
         # Read spatial data
         CP_streams <- st_read(input_streams)
         CP_obs <- st_read(input_obs)

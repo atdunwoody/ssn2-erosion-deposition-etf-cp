@@ -2,3 +2,63 @@
 Starting Bootstrapping...
 
 Starting Bootstrapping...
+
+Starting Bootstrapping...
+
+Bootstrap Summary:
+[1] "Model Type: ssn_glm"
+# A tibble: 19 × 6
+   term                               estimate_mean estimate_sd conf_low conf_high  p_value
+   <chr>                                      <dbl>       <dbl>    <dbl>     <dbl>    <dbl>
+ 1 (Intercept)                             -1.69        0.169   -1.93     -1.31    9.75e-21
+ 2 ch_channel.width.over.valley.width      -0.164       0.107   -0.349    -0.00473 1.55e- 6
+ 3 ch_curvature.median                      0.136       0.106   -0.0502    0.333   1.51e- 5
+ 4 ch_stream.power                          0.179       0.101   -0.0359    0.343   2.05e- 7
+ 5 ch_stream.power.central.diff            -0.0191      0.0712  -0.184     0.0612  2.44e- 1
+ 6 hs_area                                  0.300       0.0702   0.209     0.418   7.21e-14
+ 7 hs_aspect.eastness.median               -0.166       0.0885  -0.314    -0.0274  7.97e- 8
+ 8 hs_aspect.northness.median              -0.114       0.112   -0.348     0.0261  2.09e- 4
+ 9 hs_bare.earth.mean                      -0.0217      0.00805 -0.0393   -0.0126  2.43e-10
+10 hs_curvature.median                     -0.0575      0.0213  -0.0910   -0.0180  2.39e-10
+11 hs_extended.dnbr.median                 -0.00546     0.0826  -0.153     0.135   7.70e- 1
+12 hs_flow.accumulation.max                 0.104       0.131   -0.0941    0.335   2.06e- 3
+13 hs_ndvi.min.mean                         0.124       0.0659   0.0375    0.275   7.49e- 8
+14 hs_ndvi.range.mean                       0.294       0.110    0.0477    0.457   2.84e-10
+15 hs_slope.median                          0.124       0.0686  -0.00612   0.241   1.40e- 7
+16 ws_Kw                                    0.124       0.208   -0.265     0.491   1.56e- 2
+17 ws_bare.earth_mean                       1.00        0.417    0.414     1.74    1.62e- 9
+18 ws_dnbr.extended_mean                   -0.421       0.816   -1.30      0.981   3.26e- 2
+19 ws_ndvi.mean_mean                        0.178       0.184   -0.0918    0.458   3.75e- 4
+
+Bootstrapping Completed.
+
+Starting Bootstrapping...
+
+Bootstrap Summary:
+[1] "Model Type: ssn_glm"
+# A tibble: 19 × 6
+   term                               estimate_mean estimate_sd conf_low conf_high  p_value
+   <chr>                                      <dbl>       <dbl>    <dbl>     <dbl>    <dbl>
+ 1 (Intercept)                             -1.69        0.196    -1.99    -1.25    1.58e-19
+ 2 ch_channel.width.over.valley.width      -0.180       0.130    -0.424   -0.00473 5.98e- 6
+ 3 ch_curvature.median                      0.116       0.101    -0.0939   0.261   6.15e- 5
+ 4 ch_stream.power                          0.183       0.0830    0.0372   0.343   6.34e- 9
+ 5 ch_stream.power.central.diff            -0.00429     0.0546   -0.120    0.0625  7.29e- 1
+ 6 hs_area                                  0.303       0.0759    0.199    0.418   2.45e-13
+ 7 hs_aspect.eastness.median               -0.171       0.0839   -0.314   -0.0274  2.28e- 8
+ 8 hs_aspect.northness.median              -0.117       0.110    -0.348    0.0261  1.30e- 4
+ 9 hs_bare.earth.mean                      -0.0225      0.00887  -0.0393  -0.0114  6.56e-10
+10 hs_curvature.median                     -0.0577      0.0241   -0.0934  -0.0156  1.69e- 9
+11 hs_extended.dnbr.median                  0.00802     0.0749   -0.129    0.135   6.38e- 1
+12 hs_flow.accumulation.max                 0.105       0.125    -0.0941   0.335   1.35e- 3
+13 hs_ndvi.min.mean                         0.120       0.0551    0.0375   0.227   8.41e- 9
+14 hs_ndvi.range.mean                       0.293       0.0963    0.111    0.457   3.02e-11
+15 hs_slope.median                          0.131       0.0779   -0.0183   0.264   4.17e- 7
+16 ws_Kw                                    0.113       0.192    -0.265    0.436   1.62e- 2
+17 ws_bare.earth_mean                       1.03        0.457     0.402    1.99    4.95e- 9
+18 ws_dnbr.extended_mean                   -0.426       0.818    -1.30     1.00    3.08e- 2
+19 ws_ndvi.mean_mean                        0.184       0.179    -0.0918   0.458   1.91e- 4
+
+Bootstrapping Completed.
+
+Starting Bootstrapping...
