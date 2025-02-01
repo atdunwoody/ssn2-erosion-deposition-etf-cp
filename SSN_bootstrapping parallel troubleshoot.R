@@ -2,6 +2,9 @@
 ########################### USER DEFINED VARIABLES #############################
 ################################################################################
 
+#print working directory
+getwd()
+
 # ETF prefixes: "ET sfm", "LM2 sfm", "LPM sfm", "MM_ET"
 #               "ET lidar", "LM2 lidar", "LPM lidar", "MM_ET lidar"
 # Bennett prefixes: "Bennett sfm", "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm"
@@ -11,7 +14,7 @@ prefixes <- c(
   "ET sfm",
   "Bennett sfm",
   "Bennett lidar"
-  
+
 )
 
 # Types: "erosion", "deposition", "net"
@@ -23,8 +26,8 @@ types <- c(
 
 segment_list <- c(
   20,
-  10,
-  5
+  10
+  #5
 )
 
 # Model formula is stored in outputs folder:
@@ -35,7 +38,7 @@ formula_file_name <- "ssn_formula.txt"
 load_ssn <- TRUE
 
 # Bootstrapping parameters
-n_bootstrap <- 10  # Number of bootstrap samples 
+n_bootstrap <- 1000  # Number of bootstrap samples 
 set.seed(123)      # For reproducibility
 
 ################################################################################
@@ -77,7 +80,7 @@ tic("Total Script Execution Time")
 failures <- list()
 
 # Loop through each segment, type, and prefix
-for (prefix in prefixes) {  
+for (prefix in prefixes) {   
   for (segment in segment_list) {
     for (type in types) {
       if (grepl("lidar", prefix) && type != "erosion") {
@@ -133,10 +136,10 @@ for (prefix in prefixes) {
           paste0(prefix, "_", type, "_logtrans")
         )
         
-        output_file <- file.path(
-          output_folder, 
-          paste0(prefix, "_ch_sfm.", type, ".norm_VIF-2_corr0.6.txt")
-        )
+        bootstrap_folder <- file.path(output_folder, "bootstrap_results")
+        if (!dir.exists(bootstrap_folder)) {
+          dir.create(bootstrap_folder, recursive = TRUE)
+        }
         
         formula_file <- file.path(
           output_folder, 
@@ -148,8 +151,16 @@ for (prefix in prefixes) {
         }
         model_formula_str <- readLines(formula_file)
         model_formula <- as.formula(model_formula_str)
+        response_var <- all.vars(model_formula)[1]
         
         message("Model formula: \n", model_formula_str)
+        
+        
+        output_file <- file.path(
+          bootstrap_folder, 
+          paste0(response_var, " ", segment, "m_VIF-2_corr0.6_bootstrap.txt")
+        )
+        
         
         ssn_path <- file.path(
           output_folder, 
@@ -165,6 +176,13 @@ for (prefix in prefixes) {
         
         if (!dir.exists(output_folder)) {
           dir.create(output_folder, recursive = TRUE)
+        }
+        
+        bootstrap_results_file <- file.path(bootstrap_folder, paste0(prefix, "_bootstrap_results.", type, ".csv"))
+        
+        if (file.exists(bootstrap_results_file)) {
+          message(paste0("Bootstrap results file already exists: ", bootstrap_results_file))
+          next
         }
         
         ################################################################################
@@ -312,8 +330,8 @@ for (prefix in prefixes) {
             
             obs_data <- ssn_get_data(ssn_obj, name = "obs")
             
-            # We'll allow up to 10 attempts for each bootstrap iteration
-            max_attempts <- 10
+            # We'll allow up to 25 attempts for each bootstrap iteration
+            max_attempts <- 25
             
             # A helper function that attempts to run one bootstrap iteration
             # and returns NULL if there is an error. 
@@ -433,8 +451,8 @@ for (prefix in prefixes) {
                 glance_mod <- glance(ssn_mod_boot)
                 glance_mod$bootstrap_rep <- i
                 
-                residuals <- residuals(ssn_mod)
-                fitted_values <- fitted(ssn_mod)
+                residuals <- residuals(ssn_mod_boot)
+                fitted_values <- fitted(ssn_mod_boot)
                 
                 res_fit_df <- data.frame(
                   residuals = residuals,
@@ -464,7 +482,9 @@ for (prefix in prefixes) {
             # times until it succeeds or we run out of attempts.
             bootstrap_iteration <- function(i) {
               for (attempt_num in seq_len(max_attempts)) {
-                message("\nBootstrap iteration ", i, ", attempt ", attempt_num)
+                if (attempt_num > 1){
+                  message("\nBootstrap iteration ", i, ", attempt ", attempt_num)
+                }
                 result <- bootstrap_iteration_once(i)
                 high_covariance <- FALSE
                 
@@ -493,9 +513,10 @@ for (prefix in prefixes) {
                   message("Retrying iteration ", i, "...")
                 }
               }
-              # If we've reached here, all attempts have failed
-              stop("Exceeded max attempts (", max_attempts, 
-                   ") for bootstrap iteration ", i)
+              
+              # Make current result equal to previous result
+              message("All attempts failed for iteration ", i)
+              return(result)
 
             }
             
@@ -541,6 +562,11 @@ for (prefix in prefixes) {
           }
           
         
+        # If the output file exists, erase it
+        if (file.exists(output_file)) {
+          file.remove(output_file)
+        }
+        
         cat("\nStarting Bootstrapping...\n", file = output_file, append = TRUE)
         
         bootstrap_output <- bootstrap_model(
@@ -568,29 +594,96 @@ for (prefix in prefixes) {
             p_value       = t.test(estimate, mu = 0)$p.value
           )
         
+        
+        
         cat("\nBootstrap Summary:\n", file = output_file, append = TRUE)
         capture.output(paste0("Model Type: ", model_type), file = output_file, append = TRUE)
         capture.output(print(bootstrap_summary), file = output_file, append = TRUE)
         
-        bootstrap_results_file <- file.path(output_folder, paste0(prefix, "_bootstrap_results.", type, ".csv"))
+
+        
+        bootstrap_results_file <- file.path(bootstrap_folder, paste0(prefix, "_bootstrap_results.", type, ".csv"))
         write.csv(bootstrap_results, bootstrap_results_file, row.names = FALSE)
         
-        bootstrap_varcomp_file <- file.path(output_folder, paste0(prefix, "_varcomp_results.", type, ".csv"))
+        bootstrap_varcomp_file <- file.path(bootstrap_folder, paste0(prefix, "_varcomp_results.", type, ".csv"))
         write.csv(bootstrap_varcomp, bootstrap_varcomp_file, row.names = FALSE)
         
-        bootstrap_loocv_file <- file.path(output_folder, paste0(prefix, "_loocv_results.", type, ".csv"))
+        bootstrap_loocv_file <- file.path(bootstrap_folder, paste0(prefix, "_loocv_results.", type, ".csv"))
         write.csv(bootstrap_loocv, bootstrap_loocv_file, row.names = FALSE)
         
-        bootstrap_glance_file <- file.path(output_folder, paste0(prefix, "_glance_results.", type, ".csv"))
+        bootstrap_glance_file <- file.path(bootstrap_folder, paste0(prefix, "_glance_results.", type, ".csv"))
         write.csv(bootstrap_glance, bootstrap_glance_file, row.names = FALSE)
         
-        bootstrap_res_fit_file <- file.path(output_folder, paste0(prefix, "_res_fit_results.", type, ".csv"))
+        bootstrap_res_fit_file <- file.path(bootstrap_folder, paste0(prefix, "_residuals_fitted.", type, ".csv"))
         write.csv(bootstrap_res_fit, bootstrap_res_fit_file, row.names = FALSE)
         
-        bootstrap_data_file <- file.path(output_folder, paste0(prefix, "_bootstrap_data.", type, ".csv"))
+        bootstrap_data_file <- file.path(bootstrap_folder, paste0(prefix, "_bootstrap_data.", type, ".csv"))
         write.csv(bootstrap_data, bootstrap_data_file, row.names = FALSE)
         
+        
+        
+        #----------------------------#
+        #   Residuals vs Fitted Plot #
+        #----------------------------#
+        
+        fitted_values <- bootstrap_res_fit$fitted_values
+        residuals <- bootstrap_res_fit$residuals
+        
+        # Create Residuals vs Fitted plot
+        resid_fitted_plot <- ggplot(data.frame(Fitted = fitted_values, Residuals = residuals), 
+                                    aes(x = Fitted, y = Residuals)) +
+          geom_point(color = "blue") +
+          geom_hline(yintercept = 0, color = "red") +
+          geom_smooth(method = "loess", formula = y ~ x, se = FALSE, color = "green") +
+          labs(title = "Residuals vs Fitted Values",
+               x = "Fitted Values",
+               y = "Residuals") +
+          theme_minimal()
+        
+        # Save the plot to the output folder
+        ggsave(filename = file.path(bootstrap_folder, "Residuals_vs_Fitted.png"), 
+               plot = resid_fitted_plot, width = 8, height = 6)
+        
+        
+        #----------------------------#
+        #         Q-Q Plot           #
+        #----------------------------#
+        
+        # ggplot2 Q-Q Plot
+        qq_plot_gg <- ggplot(data.frame(Residuals = residuals), aes(sample = Residuals)) +
+          stat_qq(color = "blue") +
+          stat_qq_line(color = "red") +
+          labs(title = "Q-Q Plot of Residuals") +
+          theme_minimal()
+        
+        # Save the ggplot2 Q-Q plot
+        ggsave(filename = file.path(bootstrap_folder, "QQ_Plot_Residuals.png"), 
+               plot = qq_plot_gg, width = 8, height = 6)
+        
+        #----------------------------#
+        #       Histogram Plot       #
+        #----------------------------#
+        
+        hist_gg <- ggplot(data.frame(Residuals = residuals), aes(x = Residuals)) +
+          geom_histogram(aes(y = after_stat(density)), bins = 30, 
+                         fill = "lightblue", color = "black") +
+          stat_function(fun = dnorm, 
+                        args = list(mean = mean(residuals), sd = sd(residuals)),
+                        color = "red", linewidth = 1) +
+          labs(title = "Histogram of Residuals with Normal Curve",
+               x = "Residuals",
+               y = "Density") +
+          theme_minimal()
+        
+        # Save the ggplot2 Histogram
+        ggsave(filename = file.path(bootstrap_folder, "Histogram_Residuals.png"), 
+               plot = hist_gg, width = 8, height = 6)
+        
+        
         cat("\nBootstrapping Completed.\n", file = output_file, append = TRUE)
+        
+        
+        
         
       }, error = function(e) {
         message(
@@ -626,7 +719,6 @@ if (length(failures) > 0) {
 }
 
 
- 
 
 
 

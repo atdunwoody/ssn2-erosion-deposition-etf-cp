@@ -1,0 +1,95 @@
+Model Formula:
+ch_sfm.net.change ~ ch_channel.width.over.valley.width + ch_curvature.median + 
+    ch_central.slope.difference + ch_slope.over.width + ch_slope.over.width.central.diff + 
+    hs_area + hs_flow.accumulation.max + hs_storm.accum.60.min.mean + 
+    hs_aspect.northness.median + hs_curvature.median + hs_bare.earth.mean + 
+    hs_ndvi.min.mean + hs_extended.dnbr.median
+<environment: 0x000001db11eec470>
+
+SSN Path:
+Bennett/Outputs/Segmented 5m/MW sfm_net_logtrans/MW sfm_net_logtrans.ssn
+LSN Output Path:
+Bennett/Outputs/Segmented 5m/MW sfm_net_logtrans/lsn_out
+
+summary(ssn_mod)
+
+Call:
+ssn_lm(formula = model_formula, ssn.object = CP_ssn, tailup_type = "exponential", 
+    taildown_type = "none", euclid_type = "spherical", nugget_type = "nugget", 
+    additive = "afv_flow_accum", estmethod = "ml")
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-3.84715 -1.61052 -0.82724  0.09166 47.77115 
+
+Coefficients (fixed):
+                                     Estimate Std. Error z value Pr(>|z|)  
+(Intercept)                           1.80338    0.79706   2.263   0.0237 *
+ch_channel.width.over.valley.width    0.53788    0.65823   0.817   0.4138  
+ch_curvature.median                   0.57398    0.48860   1.175   0.2401  
+ch_central.slope.difference           0.43974    0.35032   1.255   0.2094  
+ch_slope.over.width                   0.46173    0.40895   1.129   0.2589  
+ch_slope.over.width.central.diff     -0.26515    0.27747  -0.956   0.3393  
+hs_area                              -0.01950    0.32562  -0.060   0.9522  
+hs_flow.accumulation.max             -0.26613    0.42919  -0.620   0.5352  
+hs_storm.accum.60.min.mean           -0.24663    1.15923  -0.213   0.8315  
+hs_aspect.northness.median           -0.24247    0.34791  -0.697   0.4858  
+hs_curvature.median                  -0.05747    0.08856  -0.649   0.5163  
+hs_bare.earth.mean                 -196.42916   88.03066  -2.231   0.0257 *
+hs_ndvi.min.mean                     -0.79860    0.41544  -1.922   0.0546 .
+hs_extended.dnbr.median              -0.07514    0.30021  -0.250   0.8024  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Pseudo R-squared: 0.04089
+
+Coefficients (covariance):
+              Effect     Parameter  Estimate
+  tailup exponential  de (parsill)     1.205
+  tailup exponential         range   234.143
+    euclid spherical  de (parsill)     1.674
+    euclid spherical         range   231.160
+              nugget        nugget    14.220
+
+
+tidy(ssn_mod, conf.int = TRUE):
+# A tibble: 14 × 7
+   term                                estimate std.error statistic p.value conf.low conf.high
+   <chr>                                  <dbl>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
+ 1 (Intercept)                           1.80      0.797     2.26    0.0237    0.241    3.37  
+ 2 ch_central.slope.difference           0.440     0.350     1.26    0.209    -0.247    1.13  
+ 3 ch_channel.width.over.valley.width    0.538     0.658     0.817   0.414    -0.752    1.83  
+ 4 ch_curvature.median                   0.574     0.489     1.17    0.240    -0.384    1.53  
+ 5 ch_slope.over.width                   0.462     0.409     1.13    0.259    -0.340    1.26  
+ 6 ch_slope.over.width.central.diff     -0.265     0.277    -0.956   0.339    -0.809    0.279 
+ 7 hs_area                              -0.0195    0.326    -0.0599  0.952    -0.658    0.619 
+ 8 hs_aspect.northness.median           -0.242     0.348    -0.697   0.486    -0.924    0.439 
+ 9 hs_bare.earth.mean                 -196.       88.0      -2.23    0.0257 -369.     -23.9   
+10 hs_curvature.median                  -0.0575    0.0886   -0.649   0.516    -0.231    0.116 
+11 hs_extended.dnbr.median              -0.0751    0.300    -0.250   0.802    -0.664    0.513 
+12 hs_flow.accumulation.max             -0.266     0.429    -0.620   0.535    -1.11     0.575 
+13 hs_ndvi.min.mean                     -0.799     0.415    -1.92    0.0546   -1.61     0.0157
+14 hs_storm.accum.60.min.mean           -0.247     1.16     -0.213   0.832    -2.52     2.03  
+
+varcomp(ssn_mod):
+# A tibble: 5 × 2
+  varcomp            proportion
+  <chr>                   <dbl>
+1 Covariates (PR-sq)     0.0409
+2 tailup_de              0.0676
+3 taildown_de            0     
+4 euclid_de              0.0939
+5 nugget                 0.798 
+
+loocv(ssn_mod):
+# A tibble: 1 × 10
+     bias std.bias  MSPE RMSPE std.MSPE   RAV   cor2 cover.80 cover.90 cover.95
+    <dbl>    <dbl> <dbl> <dbl>    <dbl> <dbl>  <dbl>    <dbl>    <dbl>    <dbl>
+1 -0.0292 -0.00949  16.7  4.09     1.04  3.96 0.0388    0.946    0.967    0.970
+
+glance(ssn_mod):
+# A tibble: 1 × 9
+      n     p  npar value   AIC  AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
+1   369    14     5 2052. 2090. 2092. -1026.     361.           0.0409
+

@@ -1,0 +1,88 @@
+Model Formula:
+ch_sfm.net.change ~ ch_channel.width.over.valley.width + ch_slope.median + 
+    ch_flow.accumulation.max + ch_central.slope.difference + 
+    hs_area + hs_flow.accumulation.max + hs_slope.median + hs_aspect.eastness.median + 
+    hs_curvature.median + hs_ndvi.range.mean
+<environment: 0x000001939a594438>
+
+SSN Path:
+ETF/Outputs/Segmented 20m/MM sfm_net_logtrans/MM sfm_net_logtrans.ssn
+LSN Output Path:
+ETF/Outputs/Segmented 20m/MM sfm_net_logtrans/lsn_out
+
+summary(ssn_mod)
+
+Call:
+ssn_lm(formula = model_formula, ssn.object = CP_ssn, tailup_type = "exponential", 
+    taildown_type = "none", euclid_type = "spherical", nugget_type = "nugget", 
+    additive = "afv_flow_accum", estmethod = "ml")
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-12.541  -4.605  -1.468   3.590  25.622 
+
+Coefficients (fixed):
+                                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                        13.13902    1.98093   6.633  3.3e-11 ***
+ch_channel.width.over.valley.width  1.77460    1.58280   1.121    0.262    
+ch_slope.median                    -1.43961    1.37119  -1.050    0.294    
+ch_flow.accumulation.max           -0.02628    0.28158  -0.093    0.926    
+ch_central.slope.difference         0.55743    0.69749   0.799    0.424    
+hs_area                            -0.19821    1.21147  -0.164    0.870    
+hs_flow.accumulation.max            0.33941    0.70179   0.484    0.629    
+hs_slope.median                     1.70944    1.62776   1.050    0.294    
+hs_aspect.eastness.median           0.87417    1.17491   0.744    0.457    
+hs_curvature.median                 1.71614    1.13650   1.510    0.131    
+hs_ndvi.range.mean                  1.09355    1.27041   0.861    0.389    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Pseudo R-squared: 0.1069
+
+Coefficients (covariance):
+              Effect     Parameter  Estimate
+  tailup exponential  de (parsill)     1.298
+  tailup exponential         range   516.833
+    euclid spherical  de (parsill)     3.845
+    euclid spherical         range   486.231
+              nugget        nugget    48.805
+
+
+tidy(ssn_mod, conf.int = TRUE):
+# A tibble: 11 × 7
+   term                               estimate std.error statistic  p.value conf.low conf.high
+   <chr>                                 <dbl>     <dbl>     <dbl>    <dbl>    <dbl>     <dbl>
+ 1 (Intercept)                         13.1        1.98     6.63   3.30e-11    9.26     17.0  
+ 2 ch_central.slope.difference          0.557      0.697    0.799  4.24e- 1   -0.810     1.92 
+ 3 ch_channel.width.over.valley.width   1.77       1.58     1.12   2.62e- 1   -1.33      4.88 
+ 4 ch_flow.accumulation.max            -0.0263     0.282   -0.0933 9.26e- 1   -0.578     0.526
+ 5 ch_slope.median                     -1.44       1.37    -1.05   2.94e- 1   -4.13      1.25 
+ 6 hs_area                             -0.198      1.21    -0.164  8.70e- 1   -2.57      2.18 
+ 7 hs_aspect.eastness.median            0.874      1.17     0.744  4.57e- 1   -1.43      3.18 
+ 8 hs_curvature.median                  1.72       1.14     1.51   1.31e- 1   -0.511     3.94 
+ 9 hs_flow.accumulation.max             0.339      0.702    0.484  6.29e- 1   -1.04      1.71 
+10 hs_ndvi.range.mean                   1.09       1.27     0.861  3.89e- 1   -1.40      3.58 
+11 hs_slope.median                      1.71       1.63     1.05   2.94e- 1   -1.48      4.90 
+
+varcomp(ssn_mod):
+# A tibble: 5 × 2
+  varcomp            proportion
+  <chr>                   <dbl>
+1 Covariates (PR-sq)     0.107 
+2 tailup_de              0.0215
+3 taildown_de            0     
+4 euclid_de              0.0637
+5 nugget                 0.808 
+
+loocv(ssn_mod):
+# A tibble: 1 × 10
+   bias std.bias  MSPE RMSPE std.MSPE   RAV   cor2 cover.80 cover.90 cover.95
+  <dbl>    <dbl> <dbl> <dbl>    <dbl> <dbl>  <dbl>    <dbl>    <dbl>    <dbl>
+1 0.100   0.0261  71.4  8.45     1.18  7.93 0.0211    0.833    0.883     0.95
+
+glance(ssn_mod):
+# A tibble: 1 × 9
+      n     p  npar value   AIC  AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
+1    60    11     5  408.  440.  453.  -204.     60.2            0.107
+

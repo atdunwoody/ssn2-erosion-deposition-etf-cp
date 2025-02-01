@@ -1,0 +1,24 @@
+
+Starting Bootstrapping...
+
+Bootstrap Summary:
+[1] "Model Type: ssn_glm"
+# A tibble: 14 × 6
+   term                               estimate_mean estimate_sd conf_low conf_high   p_value
+   <chr>                                      <dbl>       <dbl>    <dbl>     <dbl>     <dbl>
+ 1 (Intercept)                            -1.74          0.187  -1.97     -1.18    0        
+ 2 ch_change.in.slope.over.width           0.0174        0.0231 -0.0194    0.0773  3.55e- 99
+ 3 ch_channel.width.over.valley.width      0.158         0.0819  0.00571   0.322   0        
+ 4 ch_curvature.median                    -0.0384        0.0975 -0.237     0.144   3.87e- 33
+ 5 ch_slope.over.width.central.diff        0.0361        0.0403 -0.0411    0.113   3.37e-130
+ 6 hs_area                                 0.0285        0.0661 -0.104     0.162   7.83e- 39
+ 7 hs_aspect.eastness.median               0.000792      0.0921 -0.172     0.192   7.86e-  1
+ 8 hs_aspect.northness.median             -0.129         0.113  -0.350     0.0901  2.55e-182
+ 9 hs_curvature.median                     0.0429        0.0645 -0.0813    0.172   9.35e- 82
+10 hs_flow.accumulation.max               -0.0940        0.0458 -0.181    -0.00669 0        
+11 hs_ndvi.range.mean                     -0.198         0.0811 -0.347    -0.0344  0        
+12 ws_aspect.eastness_mean                -0.0383        0.163  -0.542     0.113   2.27e- 13
+13 ws_bare.earth_mean                      0.0822        0.0367  0.0141    0.160   0        
+14 ws_ndvi.min_mean                        0.0445        0.187  -0.228     0.479   1.27e- 13
+
+Bootstrapping Completed.

@@ -1,0 +1,22 @@
+
+Starting Bootstrapping...
+
+Bootstrap Summary:
+[1] "Model Type: ssn_lm"
+# A tibble: 22 × 6
+   term                             estimate_mean estimate_sd conf_low  conf_high   p_value
+   <chr>                                    <dbl>       <dbl>    <dbl>      <dbl>     <dbl>
+ 1 (Intercept)                             2.54        0.352    2.02    3.00      0        
+ 2 ch_change.in.slope.over.width           0.300       0.175   -0.0425  0.646     1.14e-300
+ 3 ch_curvature.median                     0.127       0.238   -0.367   0.538     1.30e- 56
+ 4 ch_flow.accumulation.max                0.0448      1.40    -2.56    2.09      3.12e-  1
+ 5 ch_slope.over.width                    -0.318       0.178   -0.661   0.0272    2.19e-312
+ 6 ch_slope.over.width.central.diff       -0.0463      0.132   -0.410   0.0000205 6.92e- 27
+ 7 ch_stream.power.central.diff           -0.0478      0.0758  -0.182   0.123     1.05e- 74
+ 8 ch_valley_width                         0.298       0.384   -0.357   1.06      3.47e-104
+ 9 hs_area                                 0.239       0.360   -0.313   0.937     3.12e- 81
+10 hs_aspect.eastness.median              -0.696       0.320   -1.26   -0.0517    0        
+# ℹ 12 more rows
+# ℹ Use `print(n = ...)` to see more rows
+
+Bootstrapping Completed.

@@ -3,7 +3,7 @@ Shapiro-Wilk Test for Normality:
 	Shapiro-Wilk normality test
 
 data:  residuals
-W = 0.98264, p-value = 5.033e-05
+W = 0.98183, p-value = 0.01907
 
 
 Moran's I Test for Spatial Autocorrelation:
@@ -13,14 +13,14 @@ Moran's I Test for Spatial Autocorrelation:
 data:  residuals  
 weights: lw    
 
-Moran I statistic standard deviate = -1.3037, p-value = 0.9038
+Moran I statistic standard deviate = 0.92317, p-value = 0.178
 alternative hypothesis: greater
 sample estimates:
 Moran I statistic       Expectation          Variance 
-    -0.0272738469     -0.0023310023      0.0003660651 
+     0.0206885213     -0.0055865922      0.0008100845 
 
 
 Summary of Statistical Tests:
-- Shapiro-Wilk Test for Normality: failed (p-value = 5.033e-05).
+- Shapiro-Wilk Test for Normality: failed (p-value = 0.01907).
 - Moran's I Test for Spatial Autocorrelation: passed (No significant spatial autocorrelation detected).
 

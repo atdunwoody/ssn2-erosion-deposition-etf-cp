@@ -1,0 +1,89 @@
+Model Formula:
+ch_sfm.erosion.mean ~ ch_valley_width + ch_change.in.slope.over.width + 
+    ch_stream.power + hs_hillslope.length + hs_flow.accumulation.max + 
+    hs_slope.median + hs_northness.median + hs_eastness.median + 
+    hs_bare.earth.mean + hs_extended.dnbr.median
+<environment: 0x0000014e9b1ff668>
+
+SSN Path:
+Bennett/Outputs/Segmented 20m/UM sfm_erosion_logtrans/UM sfm_erosion_logtrans.ssn
+LSN Output Path:
+Bennett/Outputs/Segmented 20m/UM sfm_erosion_logtrans/lsn_out
+
+summary(ssn_mod)
+
+Call:
+ssn_glm(formula = model_formula, ssn.object = CP_ssn, family = "Gamma", 
+    tailup_type = "exponential", taildown_type = "none", euclid_type = "spherical", 
+    nugget_type = "nugget", additive = "afv_flow_accum", estmethod = "ml")
+
+Deviance Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.7447 -0.8671 -0.2765  0.2404  1.8893 
+
+Coefficients (fixed):
+                              Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                   -1.47406    0.22039  -6.688 2.26e-11 ***
+ch_valley_width                0.81852    0.38448   2.129   0.0333 *  
+ch_change.in.slope.over.width -0.26045    0.25187  -1.034   0.3011    
+ch_stream.power               -0.79913    0.35429  -2.256   0.0241 *  
+hs_hillslope.length            0.10696    0.31280   0.342   0.7324    
+hs_flow.accumulation.max      -0.46420    0.32565  -1.425   0.1540    
+hs_slope.median                1.11472    0.25294   4.407 1.05e-05 ***
+hs_northness.median           -0.54308    0.34071  -1.594   0.1109    
+hs_eastness.median            -0.72476    0.29621  -2.447   0.0144 *  
+hs_bare.earth.mean            -0.06041    0.16847  -0.359   0.7199    
+hs_extended.dnbr.median       -0.04433    0.19989  -0.222   0.8245    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Pseudo R-squared: 0.6028
+
+Coefficients (covariance):
+              Effect     Parameter   Estimate
+  tailup exponential  de (parsill)  9.867e-16
+  tailup exponential         range  3.475e+31
+    euclid spherical  de (parsill)  1.874e-10
+    euclid spherical         range  3.001e+39
+              nugget        nugget  1.123e-67
+          dispersion    dispersion  1.115e+00
+
+
+tidy(ssn_mod, conf.int = TRUE):
+# A tibble: 11 × 7
+   term                          estimate std.error statistic  p.value conf.low conf.high
+   <chr>                            <dbl>     <dbl>     <dbl>    <dbl>    <dbl>     <dbl>
+ 1 (Intercept)                    -1.47       0.220    -6.69  2.26e-11  -1.91      -1.04 
+ 2 ch_change.in.slope.over.width  -0.260      0.252    -1.03  3.01e- 1  -0.754      0.233
+ 3 ch_stream.power                -0.799      0.354    -2.26  2.41e- 2  -1.49      -0.105
+ 4 ch_valley_width                 0.819      0.384     2.13  3.33e- 2   0.0649     1.57 
+ 5 hs_bare.earth.mean             -0.0604     0.168    -0.359 7.20e- 1  -0.391      0.270
+ 6 hs_eastness.median             -0.725      0.296    -2.45  1.44e- 2  -1.31      -0.144
+ 7 hs_extended.dnbr.median        -0.0443     0.200    -0.222 8.25e- 1  -0.436      0.347
+ 8 hs_flow.accumulation.max       -0.464      0.326    -1.43  1.54e- 1  -1.10       0.174
+ 9 hs_hillslope.length             0.107      0.313     0.342 7.32e- 1  -0.506      0.720
+10 hs_northness.median            -0.543      0.341    -1.59  1.11e- 1  -1.21       0.125
+11 hs_slope.median                 1.11       0.253     4.41  1.05e- 5   0.619      1.61 
+
+varcomp(ssn_mod):
+# A tibble: 5 × 2
+  varcomp            proportion
+  <chr>                   <dbl>
+1 Covariates (PR-sq)   6.03e- 1
+2 tailup_de            2.09e- 6
+3 taildown_de          0       
+4 euclid_de            3.97e- 1
+5 nugget               2.38e-58
+
+loocv(ssn_mod):
+# A tibble: 1 × 4
+     bias  MSPE RMSPE     RAV
+    <dbl> <dbl> <dbl>   <dbl>
+1 -0.0208 0.337 0.580 0.00536
+
+glance(ssn_mod):
+# A tibble: 1 × 9
+      n     p  npar value   AIC  AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
+1    35    11     6 -95.0 -61.0 -25.0   47.5     26.0            0.603
+

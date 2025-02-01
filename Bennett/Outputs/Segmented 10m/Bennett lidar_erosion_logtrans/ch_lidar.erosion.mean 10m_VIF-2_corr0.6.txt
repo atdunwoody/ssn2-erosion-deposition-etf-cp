@@ -1,0 +1,110 @@
+Model Formula:
+ch_lidar.erosion.mean ~ ws_dnbr.extended_mean + ws_bare.earth_mean + 
+    ws_ndvi.mean_mean + ws_Kw + ch_valley_width + ch_curvature.median + 
+    ch_central.slope.difference + ch_stream.power + hs_area + 
+    hs_flow.accumulation.max + hs_slope.median + hs_northness.median + 
+    hs_eastness.median + hs_curvature.median + hs_bare.earth.mean + 
+    hs_ndvi.min + hs_ndvi.range + hs_extended.dnbr.median
+<environment: 0x000002108b606210>
+
+SSN Path:
+Bennett/Outputs/Segmented 10m/Bennett lidar_erosion_logtrans/Bennett lidar_erosion_logtrans.ssn
+LSN Output Path:
+Bennett/Outputs/Segmented 10m/Bennett lidar_erosion_logtrans/lsn_out
+
+summary(ssn_mod)
+
+Call:
+ssn_glm(formula = model_formula, ssn.object = CP_ssn, family = "Gamma", 
+    tailup_type = "exponential", taildown_type = "none", euclid_type = "spherical", 
+    nugget_type = "nugget", additive = "afv_flow_accum", estmethod = "ml", 
+    random = ~as.factor(ch_watershed))
+
+Deviance Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.6748 -0.6682 -0.1216  0.2989  3.5029 
+
+Coefficients (fixed):
+                             Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                 -2.858238   0.483524  -5.911  3.4e-09 ***
+ws_dnbr.extended_mean        1.146479   0.723345   1.585    0.113    
+ws_bare.earth_mean           0.226822   0.604714   0.375    0.708    
+ws_ndvi.mean_mean            0.247531   0.236298   1.048    0.295    
+ws_Kw                        0.004079   0.308514   0.013    0.989    
+ch_valley_width              0.099915   0.128069   0.780    0.435    
+ch_curvature.median          0.170420   0.118501   1.438    0.150    
+ch_central.slope.difference -0.113530   0.071575  -1.586    0.113    
+ch_stream.power             -0.044047   0.118899  -0.370    0.711    
+hs_area                     -0.001593   0.086374  -0.018    0.985    
+hs_flow.accumulation.max    -0.025317   0.106648  -0.237    0.812    
+hs_slope.median              0.060913   0.094157   0.647    0.518    
+hs_northness.median          0.017638   0.101703   0.173    0.862    
+hs_eastness.median           0.010605   0.103987   0.102    0.919    
+hs_curvature.median          0.024488   0.042483   0.576    0.564    
+hs_bare.earth.mean          -0.010362   0.035952  -0.288    0.773    
+hs_ndvi.min                  0.094538   0.120642   0.784    0.433    
+hs_ndvi.range               -0.201018   0.144042  -1.396    0.163    
+hs_extended.dnbr.median     -0.013010   0.113363  -0.115    0.909    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Pseudo R-squared: 0.02023
+
+Coefficients (covariance):
+              Effect                    Parameter   Estimate
+  tailup exponential                 de (parsill)  5.429e-01
+  tailup exponential                        range  7.995e+02
+    euclid spherical                 de (parsill)  7.015e-01
+    euclid spherical                        range  7.928e+02
+              nugget                       nugget  1.616e-04
+          dispersion                   dispersion  1.303e+00
+              random  1 | as.factor(ch_watershed)  2.880e-03
+
+
+tidy(ssn_mod, conf.int = TRUE):
+# A tibble: 19 × 7
+   term                        estimate std.error statistic       p.value conf.low conf.high
+   <chr>                          <dbl>     <dbl>     <dbl>         <dbl>    <dbl>     <dbl>
+ 1 (Intercept)                 -2.86       0.484    -5.91   0.00000000340  -3.81     -1.91  
+ 2 ch_central.slope.difference -0.114      0.0716   -1.59   0.113          -0.254     0.0268
+ 3 ch_curvature.median          0.170      0.119     1.44   0.150          -0.0618    0.403 
+ 4 ch_stream.power             -0.0440     0.119    -0.370  0.711          -0.277     0.189 
+ 5 ch_valley_width              0.0999     0.128     0.780  0.435          -0.151     0.351 
+ 6 hs_area                     -0.00159    0.0864   -0.0184 0.985          -0.171     0.168 
+ 7 hs_bare.earth.mean          -0.0104     0.0360   -0.288  0.773          -0.0808    0.0601
+ 8 hs_curvature.median          0.0245     0.0425    0.576  0.564          -0.0588    0.108 
+ 9 hs_eastness.median           0.0106     0.104     0.102  0.919          -0.193     0.214 
+10 hs_extended.dnbr.median     -0.0130     0.113    -0.115  0.909          -0.235     0.209 
+11 hs_flow.accumulation.max    -0.0253     0.107    -0.237  0.812          -0.234     0.184 
+12 hs_ndvi.min                  0.0945     0.121     0.784  0.433          -0.142     0.331 
+13 hs_ndvi.range               -0.201      0.144    -1.40   0.163          -0.483     0.0813
+14 hs_northness.median          0.0176     0.102     0.173  0.862          -0.182     0.217 
+15 hs_slope.median              0.0609     0.0942    0.647  0.518          -0.124     0.245 
+16 ws_bare.earth_mean           0.227      0.605     0.375  0.708          -0.958     1.41  
+17 ws_dnbr.extended_mean        1.15       0.723     1.58   0.113          -0.271     2.56  
+18 ws_Kw                        0.00408    0.309     0.0132 0.989          -0.601     0.609 
+19 ws_ndvi.mean_mean            0.248      0.236     1.05   0.295          -0.216     0.711 
+
+varcomp(ssn_mod):
+# A tibble: 6 × 2
+  varcomp                     proportion
+  <chr>                            <dbl>
+1 Covariates (PR-sq)            0.0202  
+2 tailup_de                     0.426   
+3 taildown_de                   0       
+4 euclid_de                     0.551   
+5 nugget                        0.000127
+6 1 | as.factor(ch_watershed)   0.00226 
+
+loocv(ssn_mod):
+# A tibble: 1 × 4
+     bias  MSPE RMSPE   RAV
+    <dbl> <dbl> <dbl> <dbl>
+1 -0.0802  2.07  1.44 0.235
+
+glance(ssn_mod):
+# A tibble: 1 × 9
+      n     p  npar value   AIC  AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
+1   349    19     7 -395. -343. -339.   197.     254.           0.0202
+

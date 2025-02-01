@@ -1,0 +1,87 @@
+Model Formula:
+ch_lidar.erosion.mean ~ ch_channel.width.over.valley.width + 
+    ch_slope.median + ch_flow.accumulation.max + ch_curvature.median + 
+    ch_central.slope.difference + ch_slope.over.width.central.diff + 
+    hs_flow.accumulation.max + hs_slope.median + hs_bare.earth.mean
+<environment: 0x0000014e94adbb80>
+
+SSN Path:
+ETF/Outputs/Segmented 20m/LPM lidar_erosion_logtrans/LPM lidar_erosion_logtrans.ssn
+LSN Output Path:
+ETF/Outputs/Segmented 20m/LPM lidar_erosion_logtrans/lsn_out
+
+summary(ssn_mod)
+
+Call:
+ssn_glm(formula = model_formula, ssn.object = CP_ssn, family = "Gamma", 
+    tailup_type = "exponential", taildown_type = "none", euclid_type = "spherical", 
+    nugget_type = "nugget", additive = "afv_flow_accum", estmethod = "ml")
+
+Deviance Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.36909 -0.55453  0.06555  0.36319  0.63601 
+
+Coefficients (fixed):
+                                    Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                        -0.350187   0.117007  -2.993 0.002764 ** 
+ch_channel.width.over.valley.width -0.105939   0.090880  -1.166 0.243733    
+ch_slope.median                     0.474539   0.140012   3.389 0.000701 ***
+ch_flow.accumulation.max            0.567017   0.213009   2.662 0.007769 ** 
+ch_curvature.median                -0.427519   0.136252  -3.138 0.001703 ** 
+ch_central.slope.difference        -0.121753   0.082690  -1.472 0.140913    
+ch_slope.over.width.central.diff    0.152418   0.118928   1.282 0.199982    
+hs_flow.accumulation.max            0.237253   0.247672   0.958 0.338097    
+hs_slope.median                     0.007572   0.121812   0.062 0.950432    
+hs_bare.earth.mean                  0.041002   0.136865   0.300 0.764498    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Pseudo R-squared: 0.5429
+
+Coefficients (covariance):
+              Effect     Parameter    Estimate
+  tailup exponential  de (parsill)   5.052e-39
+  tailup exponential         range   1.427e+97
+    euclid spherical  de (parsill)   4.953e-11
+    euclid spherical         range   1.268e+60
+              nugget        nugget  1.439e-112
+          dispersion    dispersion   2.550e+00
+
+
+tidy(ssn_mod, conf.int = TRUE):
+# A tibble: 10 × 7
+   term                               estimate std.error statistic  p.value conf.low conf.high
+   <chr>                                 <dbl>     <dbl>     <dbl>    <dbl>    <dbl>     <dbl>
+ 1 (Intercept)                        -0.350      0.117    -2.99   0.00276   -0.580    -0.121 
+ 2 ch_central.slope.difference        -0.122      0.0827   -1.47   0.141     -0.284     0.0403
+ 3 ch_channel.width.over.valley.width -0.106      0.0909   -1.17   0.244     -0.284     0.0722
+ 4 ch_curvature.median                -0.428      0.136    -3.14   0.00170   -0.695    -0.160 
+ 5 ch_flow.accumulation.max            0.567      0.213     2.66   0.00777    0.150     0.985 
+ 6 ch_slope.median                     0.475      0.140     3.39   0.000701   0.200     0.749 
+ 7 ch_slope.over.width.central.diff    0.152      0.119     1.28   0.200     -0.0807    0.386 
+ 8 hs_bare.earth.mean                  0.0410     0.137     0.300  0.764     -0.227     0.309 
+ 9 hs_flow.accumulation.max            0.237      0.248     0.958  0.338     -0.248     0.723 
+10 hs_slope.median                     0.00757    0.122     0.0622 0.950     -0.231     0.246 
+
+varcomp(ssn_mod):
+# A tibble: 5 × 2
+  varcomp            proportion
+  <chr>                   <dbl>
+1 Covariates (PR-sq)  5.43e-  1
+2 tailup_de           4.66e- 29
+3 taildown_de         0        
+4 euclid_de           4.57e-  1
+5 nugget              1.33e-102
+
+loocv(ssn_mod):
+# A tibble: 1 × 4
+    bias  MSPE RMSPE     RAV
+   <dbl> <dbl> <dbl>   <dbl>
+1 0.0343 0.203 0.451 0.00379
+
+glance(ssn_mod):
+# A tibble: 1 × 9
+      n     p  npar value   AIC  AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
+1    39    10     6 -20.0  12.0  36.7   10.0     12.4            0.543
+

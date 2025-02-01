@@ -1,0 +1,29 @@
+
+Starting Bootstrapping...
+
+Bootstrap Summary:
+[1] "Model Type: ssn_glm"
+# A tibble: 19 × 6
+   term                               estimate_mean estimate_sd conf_low conf_high   p_value
+   <chr>                                      <dbl>       <dbl>    <dbl>     <dbl>     <dbl>
+ 1 (Intercept)                             -1.80         0.163  -2.14       -1.55  0        
+ 2 ch_change.in.slope.over.width            0.174        0.166  -0.0836      0.543 9.99e-163
+ 3 ch_channel.width.over.valley.width      -0.261        0.190  -0.607       0.137 3.12e-232
+ 4 ch_curvature.median                      0.0221       0.181  -0.318       0.383 1.17e-  4
+ 5 ch_slope.over.width                     -0.0970       0.166  -0.393       0.234 7.95e- 66
+ 6 ch_slope.over.width.central.diff        -0.0577       0.140  -0.376       0.156 5.15e- 36
+ 7 hs_area                                 -0.0333       0.101  -0.236       0.163 5.37e- 24
+ 8 hs_curvature.median                      0.00794      0.0805 -0.151       0.154 1.88e-  3
+ 9 hs_extended.dnbr.median                 -0.499        0.116  -0.716      -0.280 0        
+10 hs_flow.accumulation.max                 0.281        0.122   0.0476      0.518 0        
+11 hs_ndvi.min                              0.256        0.133   0.0161      0.514 0        
+12 hs_northness.median                      0.104        0.117  -0.112       0.333 3.64e-129
+13 hs_slope.median                          0.255        0.121  -0.00714     0.478 0        
+14 ws_RV.Silt                               0.193        0.209  -0.209       0.593 6.02e-136
+15 ws_aspect.eastness_mean                  0.900        0.702  -0.491       1.94  2.13e-213
+16 ws_bare.earth_mean                       0.928        1.12   -0.407       3.59  1.32e-115
+17 ws_flow.accum_max                        0.487        0.262  -0.116       0.882 0        
+18 ws_mi60_mean                             0.177        0.445  -0.645       1.11  1.01e- 33
+19 ws_ndvi.range_mean                       0.317        0.231   0.0527      0.816 3.71e-232
+
+Bootstrapping Completed.
