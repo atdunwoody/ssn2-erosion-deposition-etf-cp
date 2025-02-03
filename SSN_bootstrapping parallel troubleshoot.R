@@ -365,15 +365,6 @@ for (prefix in prefixes) {
                 boot_data_df <- st_drop_geometry(boot_data) %>%
                   mutate(bootstrap_rep = i)
                 
-                # Optionally write boot_data_df to CSV
-                if (!dir.exists(file.path(output_folder, "boot_data"))) {
-                  dir.create(file.path(output_folder, "boot_data"), recursive = TRUE)
-                }
-                write.csv(
-                  boot_data_df,
-                  file.path(output_folder, "boot_data", paste0("boot_data_", i, ".csv")),
-                  row.names = FALSE
-                )
                 
                 # Update SSN object with these bootstrapped data
                 ssn_updated <- ssn_put_data(boot_data, ssn_obj, name = "obs", resize_data = TRUE)

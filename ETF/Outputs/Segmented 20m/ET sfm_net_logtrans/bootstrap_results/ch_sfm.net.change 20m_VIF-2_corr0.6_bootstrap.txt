@@ -4,22 +4,22 @@ Starting Bootstrapping...
 Bootstrap Summary:
 [1] "Model Type: ssn_lm"
 # A tibble: 15 × 6
-   term                               estimate_mean estimate_sd  conf_low conf_high   p_value
-   <chr>                                      <dbl>       <dbl>     <dbl>     <dbl>     <dbl>
- 1 (Intercept)                             16.2           4.36    5.04       22.3   0        
- 2 ch_change.in.slope.over.width            0.127         0.269  -0.474       0.656 1.31e- 45
- 3 ch_channel.width.over.valley.width       2.66          1.34    0.00812     5.23  0        
- 4 ch_elevation.mean                       -4.33          3.56   -9.58        2.83  1.08e-199
- 5 ch_slope.over.width.central.diff        -0.00475       0.410  -0.931       0.709 7.14e-  1
- 6 ch_stream.power                         -0.727         1.26   -3.09        1.52  1.17e- 64
- 7 hs_area                                  0.566         1.23   -2.01        2.92  1.09e- 43
- 8 hs_aspect.eastness.median                1.09          1.12   -1.07        3.23  5.38e-148
- 9 hs_curvature.median                      1.16          1.16   -1.11        3.39  4.92e-152
-10 hs_flow.accumulation.max                 0.120         0.726  -1.35        1.49  2.24e-  7
-11 hs_ndvi.range.mean                       1.14          1.29   -1.38        3.64  9.87e-127
-12 hs_slope.median                          1.66          1.79   -2.35        4.60  1.98e-137
-13 hs_storm.accum.60.min.mean              -0.977        11.5   -12.0        30.8   7.21e-  3
-14 ws_bare.earth_mean                       1.34          0.884  -0.390       3.13  7.97e-261
-15 ws_ndvi.min_mean                         8.91          8.36  -10.7        19.5   8.04e-167
+   term                               estimate_mean estimate_sd conf_low conf_high   p_value
+   <chr>                                      <dbl>       <dbl>    <dbl>     <dbl>     <dbl>
+ 1 (Intercept)                            16.1            4.65    4.93      22.6   0        
+ 2 ch_change.in.slope.over.width           0.128          0.281  -0.429      0.712 8.94e- 43
+ 3 ch_channel.width.over.valley.width      2.62           1.36    0.0641     5.25  0        
+ 4 ch_elevation.mean                      -4.29           3.15   -9.52       2.06  6.74e-230
+ 5 ch_slope.over.width.central.diff        0.000773       0.444  -0.947      0.753 9.56e-  1
+ 6 ch_stream.power                        -0.737          1.28   -3.13       1.73  1.18e- 64
+ 7 hs_area                                 0.616          1.24   -1.97       2.84  6.34e- 50
+ 8 hs_aspect.eastness.median               1.05           1.13   -1.23       3.27  1.57e-137
+ 9 hs_curvature.median                     1.23           1.12   -1.11       3.44  5.82e-174
+10 hs_flow.accumulation.max                0.154          0.741  -1.35       1.55  8.25e- 11
+11 hs_ndvi.range.mean                      1.16           1.29   -1.38       3.75  3.17e-131
+12 hs_slope.median                         1.72           1.79   -2.31       4.51  9.43e-144
+13 hs_storm.accum.60.min.mean             -0.557         12.0   -12.6       32.1   1.41e-  1
+14 ws_bare.earth_mean                      1.37           0.845  -0.237      3.03  4.96e-281
+15 ws_ndvi.min_mean                        8.87           9.02  -10.3       20.3   3.94e-149
 
 Bootstrapping Completed.
