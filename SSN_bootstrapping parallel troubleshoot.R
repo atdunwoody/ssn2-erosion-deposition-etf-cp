@@ -10,8 +10,8 @@ getwd()
 # Bennett prefixes: "Bennett sfm", "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm"
 #                  "Bennett lidar", "ME lidar", "MM lidar", "MW lidar", "UE lidar", "UW lidar", "UM lidar"
 prefixes <- c(
-  "ET lidar",
-  "ET sfm",
+  # "ET lidar",
+  # "ET sfm",
   "Bennett sfm",
   "Bennett lidar"
 
@@ -25,9 +25,9 @@ types <- c(
 )
 
 segment_list <- c(
-  20,
-  10
-  #5
+  20
+  #,10
+  #,5
 )
 
 # Model formula is stored in outputs folder:
