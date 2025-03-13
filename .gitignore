@@ -48,6 +48,9 @@ po/*~
 # RStudio Connect folder
 rsconnect/
 
+#Ignore Archive File
+Archive/
+
 # Ignore all CSV files
 *.csv
 *.csv

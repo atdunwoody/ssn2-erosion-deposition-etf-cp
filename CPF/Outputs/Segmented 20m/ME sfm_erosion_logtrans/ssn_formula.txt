@@ -1,0 +1,1 @@
+sfm_erosion_mean ~ ch_valley_width + ch_curvature.median + ch_slope.over.width + ch_change.in.slope.over.width + hs_flow.accumulation.max + hs_slope.median + hs_curvature.median + hs_ndvi.min + hs_extended.dnbr.median + hs_drainage_density
