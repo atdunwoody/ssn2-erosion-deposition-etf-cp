@@ -6,14 +6,14 @@
 #               "ET lidar", "LM2 lidar", "LPM lidar", "MM_ET lidar"
 # Bennett prefixes: "Bennett sfm", "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm"
 #                  "Bennett lidar", "ME lidar", "MM lidar", "MW lidar", "UE lidar", "UW lidar", "UM lidar"
-prefix <- "MM_ET sfm" 
+prefix <- "ETF lidar" 
 
 # Types: "erosion", "deposition", "net"
 type <- "erosion"
 
 segment <- 20
 
-corr <- 0.4
+corr <- 0.7
 # Model formula is stored in outputs folder:
 # "ETF/Outputs/LM2_erosion_logtrans/ssn_formula.txt"
 formula_file_name <- "ssn_formula.txt"
@@ -24,7 +24,7 @@ formula_file_name <- "ssn_formula.txt"
 # If FALSE, the SSN object will be created with data from:
 # Inputs/Individual Watersheds/LM2_erosion_ssn points.gpkg
 # Inputs/Streams/streams_100k.gpkg
-load_ssn <- FALSE
+load_ssn <- TRUE
 
 ################################################################################
 ######################### LOAD LIBRARIES #######################################
@@ -95,7 +95,7 @@ tryCatch({
     segment_output_folder <- file.path(base_output_folder, paste0("Segmented ", segment, "m"))
     
     # Determines whether random effect of watershed is included
-    if (prefix_use %in% c("Bennett", "ET", "Bennett sfm", "ET sfm", "Bennett lidar", "ET lidar")) {
+    if (prefix_use %in% c("Bennett", "ETF", "Bennett sfm", "ETF sfm", "Bennett lidar", "ETF lidar")) {
       input_obs <- file.path(
         segment_input_folder, 
         "Combined Watersheds", 
@@ -153,7 +153,7 @@ tryCatch({
     input_streams <- file.path(
       base_input_folder, 
       "Streams", 
-      "streams_100k.gpkg"
+      "streams_10k.gpkg"
     )
     
     ################################################################################
@@ -473,6 +473,35 @@ tryCatch({
     cat(summary_statement, file = stats_test_file, append = TRUE)
     cat("\n", file = stats_test_file, append = TRUE)
     
+    
+    # Calculate mean and standard deviation of residuals and response variable
+    mean_residuals <- mean(residuals, na.rm = TRUE)
+    sd_residuals <- sd(residuals, na.rm = TRUE)
+    mean_response <- mean(ssn_data[[response_var]], na.rm = TRUE)
+    sd_response <- sd(ssn_data[[response_var]], na.rm = TRUE)
+    RMSPE <- loocv_results$stats$RMSPE
+    bias <- loocv_results$stats$bias
+    RAV <- loocv_results$stats$RAV
+    glance_results <- glance(ssn_mod)
+    AIC <- glance_results$AIC
+    
+    model_evaluation_file <- file.path(output_folder, "Model_Evaluation.csv")
+    
+    model_evaluation_data <- data.frame(
+      Mean_Residuals = mean_residuals,
+      SD_Residuals = sd_residuals,
+      Mean_Response = mean_response,
+      SD_Response = sd_response,
+      RMSPE = RMSPE,
+      Bias = bias,
+      RAV = RAV,
+      AIC = AIC
+    )
+    
+    write.csv(model_evaluation_data, model_evaluation_file, row.names = FALSE)
+    
+    
+    
     print(paste0("Finished SSN test and statistical evaluation for: ", 
                  prefix, " | ", type, " | ", segment))
   }  # end of main processing else
@@ -486,3 +515,5 @@ total_time <- toc(log = TRUE, quiet = TRUE)
 cat("\nTotal Script Execution Time:", 
     round(total_time$toc - total_time$tic, 2), 
     "seconds\n")
+
+
