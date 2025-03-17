@@ -1,0 +1,1 @@
+ch_sfm.net.change.norm ~ ch_valley_width + ch_slope.median + ch_flow.accumulation.max + ch_curvature.median + ch_central.slope.difference + hs_hillslope.length + hs_flow.accumulation.max + hs_slope.median + hs_curvature.median + hs_ndvi.mean.mean + hs_extended.dnbr.median + hs_drainage_density

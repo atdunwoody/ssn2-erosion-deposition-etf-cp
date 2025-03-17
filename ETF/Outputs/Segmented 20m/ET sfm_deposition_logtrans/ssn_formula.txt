@@ -1,1 +1,0 @@
-ch_sfm.deposition.sum ~ ws_slope.eastness_mean + ws_bare.earth_mean + ch_channel.width.over.valley.width + ch_curvature.median + ch_change.in.slope.over.width + hs_flow.accumulation.max + hs_curvature.median + hs_bare.earth.mean + hs_drainage_density

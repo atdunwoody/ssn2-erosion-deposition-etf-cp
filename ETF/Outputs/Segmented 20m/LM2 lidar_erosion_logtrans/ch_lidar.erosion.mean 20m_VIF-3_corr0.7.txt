@@ -1,0 +1,89 @@
+Model Formula:
+ch_lidar.erosion.mean ~ ch_curvature.median + ch_central.slope.difference + 
+    ch_stream.power + ch_stream.power.central.diff + hs_flow.accumulation.max + 
+    hs_slope.eastness.median + hs_curvature.median + hs_ndvi.mean.mean + 
+    hs_extended.dnbr.median + hs_drainage_density
+<environment: 0x0000022914ef6aa0>
+
+SSN Path:
+ETF/Outputs/Segmented 20m/LM2 lidar_erosion_logtrans/LM2 lidar_erosion_logtrans.ssn
+LSN Output Path:
+ETF/Outputs/Segmented 20m/LM2 lidar_erosion_logtrans/lsn_out
+
+summary(ssn_mod)
+
+Call:
+ssn_glm(formula = model_formula, ssn.object = CP_ssn, family = "Gamma", 
+    tailup_type = "exponential", taildown_type = "none", euclid_type = "spherical", 
+    nugget_type = "nugget", additive = "afv_flow_accum", estmethod = "ml")
+
+Deviance Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.09886 -0.02346  0.01022  0.03295  0.08003 
+
+Coefficients (fixed):
+                             Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                  -1.60255    0.07866 -20.374  < 2e-16 ***
+ch_curvature.median          -0.69545    0.08124  -8.561  < 2e-16 ***
+ch_central.slope.difference  -0.39953    0.05981  -6.680 2.39e-11 ***
+ch_stream.power               0.25806    0.12972   1.989  0.04666 *  
+ch_stream.power.central.diff  0.14286    0.04373   3.267  0.00109 ** 
+hs_flow.accumulation.max      0.35464    0.08507   4.169 3.06e-05 ***
+hs_slope.eastness.median      1.41328    0.19020   7.431 1.08e-13 ***
+hs_curvature.median           0.19531    0.08507   2.296  0.02168 *  
+hs_ndvi.mean.mean             1.64626    0.16383  10.049  < 2e-16 ***
+hs_extended.dnbr.median       1.19562    0.10822  11.048  < 2e-16 ***
+hs_drainage_density          -0.04570    0.10273  -0.445  0.65640    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Pseudo R-squared: 0.9857
+
+Coefficients (covariance):
+              Effect     Parameter   Estimate
+  tailup exponential  de (parsill)  4.400e-19
+  tailup exponential         range  4.480e+34
+    euclid spherical  de (parsill)  1.354e-11
+    euclid spherical         range  1.224e+41
+              nugget        nugget  7.597e-58
+          dispersion    dispersion  8.205e+01
+
+
+tidy(ssn_mod, conf.int = TRUE):
+# A tibble: 11 × 7
+   term                         estimate std.error statistic  p.value conf.low conf.high
+   <chr>                           <dbl>     <dbl>     <dbl>    <dbl>    <dbl>     <dbl>
+ 1 (Intercept)                   -1.60      0.0787   -20.4   0        -1.76       -1.45 
+ 2 ch_central.slope.difference   -0.400     0.0598    -6.68  2.39e-11 -0.517      -0.282
+ 3 ch_curvature.median           -0.695     0.0812    -8.56  0        -0.855      -0.536
+ 4 ch_stream.power                0.258     0.130      1.99  4.67e- 2  0.00382     0.512
+ 5 ch_stream.power.central.diff   0.143     0.0437     3.27  1.09e- 3  0.0572      0.229
+ 6 hs_curvature.median            0.195     0.0851     2.30  2.17e- 2  0.0286      0.362
+ 7 hs_drainage_density           -0.0457    0.103     -0.445 6.56e- 1 -0.247       0.156
+ 8 hs_extended.dnbr.median        1.20      0.108     11.0   0         0.984       1.41 
+ 9 hs_flow.accumulation.max       0.355     0.0851     4.17  3.06e- 5  0.188       0.521
+10 hs_ndvi.mean.mean              1.65      0.164     10.0   0         1.33        1.97 
+11 hs_slope.eastness.median       1.41      0.190      7.43  1.08e-13  1.04        1.79 
+
+varcomp(ssn_mod):
+# A tibble: 5 × 2
+  varcomp            proportion
+  <chr>                   <dbl>
+1 Covariates (PR-sq)   9.86e- 1
+2 tailup_de            4.63e-10
+3 taildown_de          0       
+4 euclid_de            1.43e- 2
+5 nugget               8.00e-49
+
+loocv(ssn_mod):
+# A tibble: 1 × 4
+       bias     MSPE  RMSPE     RAV
+      <dbl>    <dbl>  <dbl>   <dbl>
+1 0.0000305 0.000481 0.0219 0.00161
+
+glance(ssn_mod):
+# A tibble: 1 × 9
+      n     p  npar value   AIC  AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
+1    14    11     6 -161. -127. -280.   80.5   0.0365            0.986
+

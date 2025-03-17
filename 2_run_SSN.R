@@ -4,9 +4,9 @@
 
 # ETF prefixes: "ET sfm", "LM2 sfm", "LPM sfm", "MM_ET"
 #               "ET lidar", "LM2 lidar", "LPM lidar", "MM_ET lidar"
-# Bennett prefixes: "Bennett sfm", "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm"
-#                  "Bennett lidar", "ME lidar", "MM lidar", "MW lidar", "UE lidar", "UW lidar", "UM lidar"
-prefix <- "ETF lidar" 
+# CPF prefixes: "CPF sfm", "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm"
+#                  "CPF lidar", "ME lidar", "MM lidar", "MW lidar", "UE lidar", "UW lidar", "UM lidar"
+prefix <- "CPF sfm" 
 
 # Types: "erosion", "deposition", "net"
 type <- "erosion"
@@ -24,7 +24,7 @@ formula_file_name <- "ssn_formula.txt"
 # If FALSE, the SSN object will be created with data from:
 # Inputs/Individual Watersheds/LM2_erosion_ssn points.gpkg
 # Inputs/Streams/streams_100k.gpkg
-load_ssn <- TRUE
+load_ssn <- FALSE
 
 ################################################################################
 ######################### LOAD LIBRARIES #######################################
@@ -69,11 +69,11 @@ tryCatch({
     message("Skipping processing for prefix: ", prefix, " and type: ", type)
   } else {
     
-    if (prefix %in% c("Bennett sfm", "ME sfm", "MM sfm", "MW sfm", 
-                      "UE sfm", "UW sfm", "UM sfm", "Bennett lidar", 
+    if (prefix %in% c("CPF sfm", "ME sfm", "MM sfm", "MW sfm", 
+                      "UE sfm", "UW sfm", "UM sfm", "CPF lidar", 
                       "ME lidar", "MM lidar", "MW lidar", "UE lidar", 
                       "UW lidar", "UM lidar")) {
-      region <- "Bennett"
+      region <- "CPF"
     } else {
       region <- "ETF"
     }
@@ -95,7 +95,7 @@ tryCatch({
     segment_output_folder <- file.path(base_output_folder, paste0("Segmented ", segment, "m"))
     
     # Determines whether random effect of watershed is included
-    if (prefix_use %in% c("Bennett", "ETF", "Bennett sfm", "ETF sfm", "Bennett lidar", "ETF lidar")) {
+    if (prefix_use %in% c("CPF", "ETF", "CPF sfm", "ETF sfm", "CPF lidar", "ETF lidar")) {
       input_obs <- file.path(
         segment_input_folder, 
         "Combined Watersheds", 
@@ -116,6 +116,8 @@ tryCatch({
       paste0(prefix_use, "_", type, "_logtrans")
     )
     
+    print(paste0("Output folder: ", output_folder))
+    
     formula_file <- file.path(
       output_folder, 
       formula_file_name
@@ -133,7 +135,7 @@ tryCatch({
     
     output_file <- file.path(
       output_folder, 
-      paste0(response_var, " ", segment, "m_VIF-2_corr", corr, ".txt")
+      paste0(response_var, " ", segment, "m_VIF-3_corr", corr, ".txt")
     )
     
     if (file.exists(output_file)) {
@@ -485,7 +487,14 @@ tryCatch({
     glance_results <- glance(ssn_mod)
     AIC <- glance_results$AIC
     
-    model_evaluation_file <- file.path(output_folder, "Model_Evaluation.csv")
+    
+    
+    response_name <- paste0(response_var)
+    # Replace . with _ in the response variable name for file naming
+    response_name <- gsub("\\.", "_", response_name)
+    model_evaluation_file <- file.path(output_folder, 
+                                       paste0(response_name, 
+                                              "_corr_", corr, "_evaluation.csv"))
     
     model_evaluation_data <- data.frame(
       Mean_Residuals = mean_residuals,

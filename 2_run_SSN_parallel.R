@@ -4,31 +4,33 @@
 
 # ETF prefixes: "ET sfm", "LM2 sfm", "LPM sfm", "MM_ET"
 #               "ET lidar", "LM2 lidar", "LPM lidar", "MM_ET lidar"
-# Bennett prefixes: "Bennett sfm", "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm"
-#                  "Bennett lidar", "ME lidar", "MM lidar", "MW lidar", "UE lidar", "UW lidar", "UM lidar"
+# CPF prefixes: "CPF sfm", "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm"
+#                  "CPF lidar", "ME lidar", "MM lidar", "MW lidar", "UE lidar", "UW lidar", "UM lidar"
 prefixes <- c(
-  # "ET sfm", "LM2 sfm", "LPM sfm", "MM_ET sfm",
-  # "ET lidar", "LM2 lidar", "LPM lidar", "MM_ET lidar",
-  "Bennett sfm" 
-  # ,"ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm",
-  # ,"Bennett lidar" 
+  "ETF sfm", "ETF lidar"
+  # "LM2 sfm", "LPM sfm", "MM_ET sfm",
+  # "LM2 lidar", "LPM lidar", "MM_ET lidar",
+  # "CPF sfm",
+  # "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm",
+  # "CPF lidar",
   # "ME lidar", "MM lidar", "MW lidar", "UE lidar", "UW lidar", "UM lidar"
   
 )
 
 # Types: "erosion", "deposition", "net"
 types <- c(
-  # "deposition" 
-  "erosion"
-  # ,"net"
+  "deposition", 
+  "erosion",
+  "net change"
 )
 
 segments <- c(
-  20
-#   ,10
-#   ,5
+  20,
+  10,
+  5
  )
 
+corr <- 0.7
 # Model formula is stored in outputs folder:
 #"ETF/Outputs/LM2_erosion_logtrans/ssn_formula.txt"
 formula_file_name <- "ssn_formula.txt"
@@ -106,12 +108,12 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
       return(list(success = TRUE, prefix = prefix, type = type, segment = segment))
     }
     
-    bennett_prefixes <- c("Bennett sfm", "ME sfm", "MM sfm", "MW sfm", 
-                          "UE sfm", "UW sfm", "UM sfm", "Bennett lidar", 
+    CPF_prefixes <- c("CPF sfm", "ME sfm", "MM sfm", "MW sfm", 
+                          "UE sfm", "UW sfm", "UM sfm", "CPF lidar", 
                           "ME lidar", "MM lidar", "MW lidar", "UE lidar", 
                           "UW lidar", "UM lidar")
-    if (prefix %in% bennett_prefixes) {
-      region <- "Bennett"
+    if (prefix %in% CPF_prefixes) {
+      region <- "CPF"
     } else {
       region <- "ETF"
     }
@@ -133,7 +135,7 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
     segment_output_folder <- file.path(base_output_folder, paste0("Segmented ", segment, "m"))
     
     # Determines whether random effect of watershed is included
-    if (prefix_use %in% c("Bennett", "ET", "Bennett sfm", "ET sfm", "Bennett lidar", "ET lidar")) {
+    if (prefix_use %in% c("CPF", "ETF", "CPF sfm", "ETF sfm", "CPF lidar", "ETF lidar")) {
       input_obs <- file.path(
         segment_input_folder, 
         "Combined Watersheds", 
@@ -172,7 +174,7 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
     
     output_file <- file.path(
       output_folder, 
-      paste0(response_var, " ", segment, "m_VIF-2_corr0.6.txt")
+      paste0(response_var, " ", segment, "m_VIF-3_corr", corr, ".txt")
     )
     
     if (file.exists(output_file)) {
@@ -192,7 +194,7 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
     input_streams <- file.path(
       base_input_folder, 
       "Streams", 
-      "streams_100k.gpkg"
+      "streams_10k.gpkg"
     )
     
     
@@ -299,7 +301,7 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
     tic("SSN2 Model Fitting")
     
     # Fit the model
-    if (multiple_ws && type == "net") {
+    if (multiple_ws && type == "net change") {
       ssn_mod <- ssn_lm(
         formula = model_formula,
         ssn.object = CP_ssn,
@@ -328,7 +330,7 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
       )
       model_type <- "ssn_glm"
     }
-    else if (type == "net") {
+    else if (type == "net change") {
       ssn_mod <- ssn_lm(
         formula = model_formula,
         ssn.object = CP_ssn,
@@ -564,6 +566,37 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
     
     # Add a final newline for readability
     cat("\n", file = stats_test_file, append = TRUE)
+
+    # Calculate mean and standard deviation of residuals and response variable
+    mean_residuals <- mean(residuals, na.rm = TRUE)
+    sd_residuals <- sd(residuals, na.rm = TRUE)
+    mean_response <- mean(ssn_data[[response_var]], na.rm = TRUE)
+    sd_response <- sd(ssn_data[[response_var]], na.rm = TRUE)
+    RMSPE <- loocv_results$stats$RMSPE
+    bias <- loocv_results$stats$bias
+    RAV <- loocv_results$stats$RAV
+    glance_results <- glance(ssn_mod)
+    AIC <- glance_results$AIC
+    
+    response_name <- paste0(response_var)
+    # Replace . with _ in the response variable name for file naming
+    response_name <- gsub("\\.", "_", response_name)
+    model_evaluation_file <- file.path(output_folder, 
+                                       paste0(response_name, 
+                                              "_corr_", corr, "_evaluation.csv"))
+    
+    model_evaluation_data <- data.frame(
+      Mean_Residuals = mean_residuals,
+      SD_Residuals = sd_residuals,
+      Mean_Response = mean_response,
+      SD_Response = sd_response,
+      RMSPE = RMSPE,
+      Bias = bias,
+      RAV = RAV,
+      AIC = AIC
+    )
+    
+    write.csv(model_evaluation_data, model_evaluation_file, row.names = FALSE)
     
     print(paste0("Finished SSN test and statistical evaluation for: ", 
                  prefix, " | ", type, " | ", segment)
