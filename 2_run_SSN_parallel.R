@@ -7,23 +7,24 @@
 # CPF prefixes: "CPF sfm", "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm"
 #                  "CPF lidar", "ME lidar", "MM lidar", "MW lidar", "UE lidar", "UW lidar", "UM lidar"
 prefixes <- c(
-  "ETF sfm", "ETF lidar"
-  # "LM2 sfm", "LPM sfm", "MM_ET sfm",
-  # "LM2 lidar", "LPM lidar", "MM_ET lidar",
-  # "CPF sfm",
-  # "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm",
-  # "CPF lidar",
-  # "ME lidar", "MM lidar", "MW lidar", "UE lidar", "UW lidar", "UM lidar"
+  "ETF sfm",
+  "ETF lidar",
+  "LM2 sfm", "LPM sfm", "MM_ET sfm",
+  "LM2 lidar", "LPM lidar", "MM_ET lidar",
+  "CPF sfm",
+  "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm",
+  "CPF lidar",
+  "ME lidar", "MM lidar", "MW lidar", "UE lidar", "UW lidar", "UM lidar"
   
 )
 
 # Types: "erosion", "deposition", "net"
 types <- c(
-  "deposition", 
+  "deposition",
   "erosion",
   "net change"
 )
-
+ 
 segments <- c(
   20,
   10,
@@ -202,7 +203,7 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
     ########################### SSN2 PREPROCESSING ##################################
     ################################################################################
     
-    if ((!load_ssn) && (!file.exists(ssn_path) || overwrite)) {
+    if ((!load_ssn)) {
       # Read spatial data
       CP_streams <- st_read(input_streams)
       CP_obs <- st_read(input_obs)
@@ -394,6 +395,9 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
     # Perform Leave-One-Out Cross-Validation
     loocv_results <- loocv(ssn_mod, cv_predict = TRUE, se.fit = TRUE)
     
+    # Add response variable observations to the LOOCV results
+    loocv_results$obs <- ssn_get_data(ssn_mod)[[response_var]]
+    
     # Specify the output file path
     loocv_results_file <- file.path(output_folder, "loocv_results.csv")
     
@@ -584,6 +588,12 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
     model_evaluation_file <- file.path(output_folder, 
                                        paste0(response_name, 
                                               "_corr_", corr, "_evaluation.csv"))
+    num_parameters <- length(all.vars(model_formula)) - 1
+    
+    # num_observations is equal to the number of rows in the CP obs data frame
+    num_obs <- as.numeric(nrow(ssn_data))
+    # Switch num_observations to an integer
+    num_obs
     
     model_evaluation_data <- data.frame(
       Mean_Residuals = mean_residuals,
@@ -593,7 +603,10 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
       RMSPE = RMSPE,
       Bias = bias,
       RAV = RAV,
-      AIC = AIC
+      AIC = AIC,
+      num_parameters = num_parameters,
+      num_obs = num_obs
+      
     )
     
     write.csv(model_evaluation_data, model_evaluation_file, row.names = FALSE)

@@ -6,7 +6,7 @@
 #               "ET lidar", "LM2 lidar", "LPM lidar", "MM_ET lidar"
 # CPF prefixes: "CPF sfm", "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm"
 #                  "CPF lidar", "ME lidar", "MM lidar", "MW lidar", "UE lidar", "UW lidar", "UM lidar"
-prefix <- "CPF sfm" 
+prefix <- "ETF sfm" 
 
 # Types: "erosion", "deposition", "net"
 type <- "erosion"
@@ -353,6 +353,9 @@ tryCatch({
     # Perform Leave-One-Out Cross-Validation
     loocv_results <- loocv(ssn_mod, cv_predict = TRUE, se.fit = TRUE)
     
+    # Add response variable observations to the LOOCV results
+    loocv_results$obs <- ssn_get_data(ssn_mod)[[response_var]]
+    
     # Specify the output file path
     loocv_results_file <- file.path(output_folder, "loocv_results.csv")
     
@@ -487,14 +490,16 @@ tryCatch({
     glance_results <- glance(ssn_mod)
     AIC <- glance_results$AIC
     
-    
-    
     response_name <- paste0(response_var)
     # Replace . with _ in the response variable name for file naming
     response_name <- gsub("\\.", "_", response_name)
     model_evaluation_file <- file.path(output_folder, 
                                        paste0(response_name, 
                                               "_corr_", corr, "_evaluation.csv"))
+    num_parameters <- length(all.vars(model_formula)) - 1
+    
+    # num_observations is equal to the number of rows in the CP obs data frame
+    num_obs <- as.numeric(nrow(ssn_data))
     
     model_evaluation_data <- data.frame(
       Mean_Residuals = mean_residuals,
@@ -504,15 +509,17 @@ tryCatch({
       RMSPE = RMSPE,
       Bias = bias,
       RAV = RAV,
-      AIC = AIC
+      AIC = AIC,
+      num_parameters = num_parameters,
+      num_obs = num_obs
+      
     )
     
     write.csv(model_evaluation_data, model_evaluation_file, row.names = FALSE)
     
-    
-    
     print(paste0("Finished SSN test and statistical evaluation for: ", 
-                 prefix, " | ", type, " | ", segment))
+                 prefix, " | ", type, " | ", segment)
+    )
   }  # end of main processing else
   
 }, error = function(e) {
