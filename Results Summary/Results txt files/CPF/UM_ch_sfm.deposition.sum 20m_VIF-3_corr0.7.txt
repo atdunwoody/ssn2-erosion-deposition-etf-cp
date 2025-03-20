@@ -1,0 +1,75 @@
+Model Formula:
+ch_sfm.deposition.sum ~ hs_flow.accumulation.max + hs_eastness.median + 
+    hs_curvature.median + hs_extended.dnbr.median
+<environment: 0x000002a0263e2448>
+
+SSN Path:
+CPF/Outputs/Segmented 20m/UM sfm_deposition_logtrans/UM sfm_deposition_logtrans.ssn
+LSN Output Path:
+CPF/Outputs/Segmented 20m/UM sfm_deposition_logtrans/lsn_out
+
+summary(ssn_mod)
+
+Call:
+ssn_glm(formula = model_formula, ssn.object = CP_ssn, family = "Gamma", 
+    tailup_type = "exponential", taildown_type = "none", euclid_type = "spherical", 
+    nugget_type = "nugget", additive = "afv_flow_accum", estmethod = "ml")
+
+Deviance Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.76748 -0.39788 -0.07033  0.27394  1.11539 
+
+Coefficients (fixed):
+                         Estimate Std. Error z value Pr(>|z|)    
+(Intercept)              -2.77781    0.09489 -29.275   <2e-16 ***
+hs_flow.accumulation.max -0.11543    0.12679  -0.910    0.363    
+hs_eastness.median       -0.10212    0.12931  -0.790    0.430    
+hs_curvature.median      -0.04406    0.06297  -0.700    0.484    
+hs_extended.dnbr.median  -0.03368    0.08915  -0.378    0.706    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Pseudo R-squared: 0.05306
+
+Coefficients (covariance):
+              Effect     Parameter    Estimate
+  tailup exponential  de (parsill)   6.788e-44
+  tailup exponential         range   1.646e+97
+    euclid spherical  de (parsill)   2.256e-12
+    euclid spherical         range  1.569e+217
+              nugget        nugget   0.000e+00
+          dispersion    dispersion   3.308e+00
+
+
+tidy(ssn_mod, conf.int = TRUE):
+# A tibble: 5 × 7
+  term                     estimate std.error statistic p.value conf.low conf.high
+  <chr>                       <dbl>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
+1 (Intercept)               -2.78      0.0949   -29.3     0       -2.96    -2.59  
+2 hs_curvature.median       -0.0441    0.0630    -0.700   0.484   -0.167    0.0793
+3 hs_eastness.median        -0.102     0.129     -0.790   0.430   -0.356    0.151 
+4 hs_extended.dnbr.median   -0.0337    0.0891    -0.378   0.706   -0.208    0.141 
+5 hs_flow.accumulation.max  -0.115     0.127     -0.910   0.363   -0.364    0.133 
+
+varcomp(ssn_mod):
+# A tibble: 5 × 2
+  varcomp            proportion
+  <chr>                   <dbl>
+1 Covariates (PR-sq)   5.31e- 2
+2 tailup_de            2.85e-32
+3 taildown_de          0       
+4 euclid_de            9.47e- 1
+5 nugget               0       
+
+loocv(ssn_mod):
+# A tibble: 1 × 4
+      bias    MSPE  RMSPE      RAV
+     <dbl>   <dbl>  <dbl>    <dbl>
+1 0.000120 0.00109 0.0330 0.000484
+
+glance(ssn_mod):
+# A tibble: 1 × 9
+      n     p  npar value   AIC  AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
+1    45     5     6 -181. -159. -151.   90.7     12.7           0.0531
+

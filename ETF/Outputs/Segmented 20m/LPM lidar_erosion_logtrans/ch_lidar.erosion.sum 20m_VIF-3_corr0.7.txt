@@ -1,0 +1,75 @@
+Model Formula:
+ch_lidar.erosion.sum ~ ch_curvature.median + ch_stream.power.central.diff + 
+    hs_ndvi.mean.mean + hs_drainage_density
+<environment: 0x0000020e1931bad8>
+
+SSN Path:
+ETF/Outputs/Segmented 20m/LPM lidar_erosion_logtrans/LPM lidar_erosion_logtrans.ssn
+LSN Output Path:
+ETF/Outputs/Segmented 20m/LPM lidar_erosion_logtrans/lsn_out
+
+summary(ssn_mod)
+
+Call:
+ssn_glm(formula = model_formula, ssn.object = CP_ssn, family = "Gamma", 
+    tailup_type = "exponential", taildown_type = "none", euclid_type = "spherical", 
+    nugget_type = "nugget", additive = "afv_flow_accum", estmethod = "ml")
+
+Deviance Residuals:
+       Min         1Q     Median         3Q        Max 
+-3.802e-05 -2.759e-06  1.033e-06  8.608e-06  1.588e-05 
+
+Coefficients (fixed):
+                              Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                   1.351691   0.250370   5.399 6.71e-08 ***
+ch_curvature.median          -0.163377   0.148499  -1.100    0.271    
+ch_stream.power.central.diff -0.001066   0.092986  -0.011    0.991    
+hs_ndvi.mean.mean             0.105217   0.130150   0.808    0.419    
+hs_drainage_density          -0.090703   0.097194  -0.933    0.351    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Pseudo R-squared: 0.08461
+
+Coefficients (covariance):
+              Effect     Parameter   Estimate
+  tailup exponential  de (parsill)  1.150e-01
+  tailup exponential         range  9.003e-05
+    euclid spherical  de (parsill)  5.450e-01
+    euclid spherical         range  1.014e+02
+              nugget        nugget  3.366e-06
+          dispersion    dispersion  1.539e+05
+
+
+tidy(ssn_mod, conf.int = TRUE):
+# A tibble: 5 × 7
+  term                         estimate std.error statistic      p.value conf.low conf.high
+  <chr>                           <dbl>     <dbl>     <dbl>        <dbl>    <dbl>     <dbl>
+1 (Intercept)                   1.35       0.250     5.40   0.0000000671    0.861    1.84  
+2 ch_curvature.median          -0.163      0.148    -1.10   0.271          -0.454    0.128 
+3 ch_stream.power.central.diff -0.00107    0.0930   -0.0115 0.991          -0.183    0.181 
+4 hs_drainage_density          -0.0907     0.0972   -0.933  0.351          -0.281    0.0998
+5 hs_ndvi.mean.mean             0.105      0.130     0.808  0.419          -0.150    0.360 
+
+varcomp(ssn_mod):
+# A tibble: 5 × 2
+  varcomp            proportion
+  <chr>                   <dbl>
+1 Covariates (PR-sq) 0.0846    
+2 tailup_de          0.160     
+3 taildown_de        0         
+4 euclid_de          0.756     
+5 nugget             0.00000467
+
+loocv(ssn_mod):
+# A tibble: 1 × 4
+    bias  MSPE RMSPE   RAV
+   <dbl> <dbl> <dbl> <dbl>
+1 -0.451  5.37  2.32 0.573
+
+glance(ssn_mod):
+# A tibble: 1 × 9
+      n     p  npar value   AIC  AICc logLik      deviance pseudo.r.squared
+  <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>         <dbl>            <dbl>
+1    42     5     6  249.  271.  280.  -125. 0.00000000540           0.0846
+

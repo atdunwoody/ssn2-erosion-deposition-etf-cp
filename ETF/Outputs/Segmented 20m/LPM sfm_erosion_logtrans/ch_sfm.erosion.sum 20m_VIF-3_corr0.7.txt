@@ -1,0 +1,75 @@
+Model Formula:
+ch_sfm.erosion.sum ~ ch_slope.median + ch_curvature.median + 
+    ch_stream.power.central.diff + hs_drainage_density
+<environment: 0x0000020e1a34a1c8>
+
+SSN Path:
+ETF/Outputs/Segmented 20m/LPM sfm_erosion_logtrans/LPM sfm_erosion_logtrans.ssn
+LSN Output Path:
+ETF/Outputs/Segmented 20m/LPM sfm_erosion_logtrans/lsn_out
+
+summary(ssn_mod)
+
+Call:
+ssn_glm(formula = model_formula, ssn.object = CP_ssn, family = "Gamma", 
+    tailup_type = "exponential", taildown_type = "none", euclid_type = "spherical", 
+    nugget_type = "nugget", additive = "afv_flow_accum", estmethod = "ml")
+
+Deviance Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.2142 -0.4380 -0.2362  0.4128  1.0067 
+
+Coefficients (fixed):
+                             Estimate Std. Error z value Pr(>|z|)  
+(Intercept)                  -0.29889    0.12818  -2.332   0.0197 *
+ch_slope.median               0.22787    0.10225   2.229   0.0258 *
+ch_curvature.median           0.15528    0.14022   1.107   0.2681  
+ch_stream.power.central.diff  0.01664    0.09460   0.176   0.8604  
+hs_drainage_density          -0.09580    0.11031  -0.869   0.3851  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Pseudo R-squared: 0.1993
+
+Coefficients (covariance):
+              Effect     Parameter   Estimate
+  tailup exponential  de (parsill)  9.043e-12
+  tailup exponential         range  2.086e+09
+    euclid spherical  de (parsill)  4.022e-14
+    euclid spherical         range  1.123e+02
+              nugget        nugget  1.240e-08
+          dispersion    dispersion  2.590e+00
+
+
+tidy(ssn_mod, conf.int = TRUE):
+# A tibble: 5 × 7
+  term                         estimate std.error statistic p.value conf.low conf.high
+  <chr>                           <dbl>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
+1 (Intercept)                   -0.299     0.128     -2.33   0.0197  -0.550    -0.0477
+2 ch_curvature.median            0.155     0.140      1.11   0.268   -0.120     0.430 
+3 ch_slope.median                0.228     0.102      2.23   0.0258   0.0275    0.428 
+4 ch_stream.power.central.diff   0.0166    0.0946     0.176  0.860   -0.169     0.202 
+5 hs_drainage_density           -0.0958    0.110     -0.869  0.385   -0.312     0.120 
+
+varcomp(ssn_mod):
+# A tibble: 5 × 2
+  varcomp            proportion
+  <chr>                   <dbl>
+1 Covariates (PR-sq) 0.199     
+2 tailup_de          0.000583  
+3 taildown_de        0         
+4 euclid_de          0.00000259
+5 nugget             0.800     
+
+loocv(ssn_mod):
+# A tibble: 1 × 4
+     bias  MSPE RMSPE     RAV
+    <dbl> <dbl> <dbl>   <dbl>
+1 0.00731 0.165 0.406 0.00348
+
+glance(ssn_mod):
+# A tibble: 1 × 9
+      n     p  npar value   AIC  AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
+1    40     5     6  50.2  72.2  81.7  -25.1     14.5            0.199
+

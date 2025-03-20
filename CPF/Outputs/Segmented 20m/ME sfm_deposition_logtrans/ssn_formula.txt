@@ -1,0 +1,1 @@
+ch_sfm.deposition.sum ~ ch_flow.accumulation.max + ch_curvature.median + ch_central.slope.difference + hs_flow.accumulation.max + hs_eastness.median + hs_curvature.median + hs_extended.dnbr.median + hs_drainage_density

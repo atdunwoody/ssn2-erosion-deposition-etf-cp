@@ -1,0 +1,1 @@
+ch_sfm.net.change ~ ch_central.slope.difference + ch_stream.power + hs_curvature.median + hs_drainage_density

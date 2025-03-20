@@ -3,22 +3,22 @@
 ################################################################################
 
 prefixes <- c(
-  # "ETF sfm", "ETF lidar",
-  # "LM2 sfm", "LPM sfm", "MM_ET sfm",
-  # "LM2 lidar", "LPM lidar", "MM_ET lidar",
+  "ETF sfm", "ETF lidar",
+  "LM2 sfm", "LPM sfm", "MM_ET sfm",
+  "LM2 lidar", "LPM lidar", "MM_ET lidar",
   "CPF sfm",
-  # "ME sfm", 
+  "ME sfm",
   "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm",
   "CPF lidar",
   "MM lidar", "UE lidar", "UW lidar", "UM lidar"
 )
 types <- c(
-  "deposition", "net change",
-           "erosion"
+   "net change",
+   "deposition", "erosion"
            )
 segments <- c(
   20, 10, 5
-  )
+  )  
 
 param_grid <- expand.grid(prefix = prefixes, type = types, segment = segments, stringsAsFactors = FALSE)
 

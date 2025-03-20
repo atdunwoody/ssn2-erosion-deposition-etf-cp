@@ -6,12 +6,12 @@
 #               "ET lidar", "LM2 lidar", "LPM lidar", "MM_ET lidar"
 # CPF prefixes: "CPF sfm", "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm"
 #                  "CPF lidar", "ME lidar", "MM lidar", "MW lidar", "UE lidar", "UW lidar", "UM lidar"
-prefix <- "ETF sfm" 
+prefix <- "CPF lidar" 
 
 # Types: "erosion", "deposition", "net"
 type <- "erosion"
 
-segment <- 20
+segment <- 10
 
 corr <- 0.7
 # Model formula is stored in outputs folder:
