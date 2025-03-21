@@ -1,0 +1,7 @@
+"varcomp","proportion"
+"Covariates (PR-sq)",0.171303667103765
+"tailup_de",0.104924501346294
+"taildown_de",0
+"euclid_de",3.04989422317119e-08
+"nugget",5.14958764331579e-19
+"1 | as.factor(ch_watershed)",0.723771801051

@@ -1,0 +1,597 @@
+Region,Watershed,Segment Interval,Independent Variable,varcomp,proportion,source_file
+CPF,CPF,10m,sfm_deposition_logtrans,Covariates (PR-sq),0.0245255542394107,CPF\Outputs\Segmented 10m\CPF sfm_deposition_logtrans\varcomp_results.csv
+CPF,CPF,10m,sfm_deposition_logtrans,tailup_de,0.0242539575819208,CPF\Outputs\Segmented 10m\CPF sfm_deposition_logtrans\varcomp_results.csv
+CPF,CPF,10m,sfm_deposition_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 10m\CPF sfm_deposition_logtrans\varcomp_results.csv
+CPF,CPF,10m,sfm_deposition_logtrans,euclid_de,0.950010839616302,CPF\Outputs\Segmented 10m\CPF sfm_deposition_logtrans\varcomp_results.csv
+CPF,CPF,10m,sfm_deposition_logtrans,nugget,0.0001734360040789,CPF\Outputs\Segmented 10m\CPF sfm_deposition_logtrans\varcomp_results.csv
+CPF,CPF,10m,sfm_deposition_logtrans,1 | as.factor(ch_watershed),0.0010362125582873,CPF\Outputs\Segmented 10m\CPF sfm_deposition_logtrans\varcomp_results.csv
+CPF,CPF,10m,sfm_erosion_logtrans,Covariates (PR-sq),0.0503197628257029,CPF\Outputs\Segmented 10m\CPF sfm_erosion_logtrans\varcomp_results.csv
+CPF,CPF,10m,sfm_erosion_logtrans,tailup_de,0.360698908976462,CPF\Outputs\Segmented 10m\CPF sfm_erosion_logtrans\varcomp_results.csv
+CPF,CPF,10m,sfm_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 10m\CPF sfm_erosion_logtrans\varcomp_results.csv
+CPF,CPF,10m,sfm_erosion_logtrans,euclid_de,0.58717491681793,CPF\Outputs\Segmented 10m\CPF sfm_erosion_logtrans\varcomp_results.csv
+CPF,CPF,10m,sfm_erosion_logtrans,nugget,4.22740185270302e-05,CPF\Outputs\Segmented 10m\CPF sfm_erosion_logtrans\varcomp_results.csv
+CPF,CPF,10m,sfm_erosion_logtrans,1 | as.factor(ch_watershed),0.0017641373613785,CPF\Outputs\Segmented 10m\CPF sfm_erosion_logtrans\varcomp_results.csv
+CPF,CPF,10m,sfm_net change_logtrans,Covariates (PR-sq),0.0199249106433912,CPF\Outputs\Segmented 10m\CPF sfm_net change_logtrans\varcomp_results.csv
+CPF,CPF,10m,sfm_net change_logtrans,tailup_de,0.0905646884275119,CPF\Outputs\Segmented 10m\CPF sfm_net change_logtrans\varcomp_results.csv
+CPF,CPF,10m,sfm_net change_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 10m\CPF sfm_net change_logtrans\varcomp_results.csv
+CPF,CPF,10m,sfm_net change_logtrans,euclid_de,0.886312901738053,CPF\Outputs\Segmented 10m\CPF sfm_net change_logtrans\varcomp_results.csv
+CPF,CPF,10m,sfm_net change_logtrans,nugget,0.0031631456558977,CPF\Outputs\Segmented 10m\CPF sfm_net change_logtrans\varcomp_results.csv
+CPF,CPF,10m,sfm_net change_logtrans,1 | as.factor(ch_watershed),3.43535351458825e-05,CPF\Outputs\Segmented 10m\CPF sfm_net change_logtrans\varcomp_results.csv
+CPF,ME,10m,sfm_deposition_logtrans,Covariates (PR-sq),0.301500436753875,CPF\Outputs\Segmented 10m\ME sfm_deposition_logtrans\varcomp_results.csv
+CPF,ME,10m,sfm_deposition_logtrans,tailup_de,1.3422942814392e-05,CPF\Outputs\Segmented 10m\ME sfm_deposition_logtrans\varcomp_results.csv
+CPF,ME,10m,sfm_deposition_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 10m\ME sfm_deposition_logtrans\varcomp_results.csv
+CPF,ME,10m,sfm_deposition_logtrans,euclid_de,0.69526910253653,CPF\Outputs\Segmented 10m\ME sfm_deposition_logtrans\varcomp_results.csv
+CPF,ME,10m,sfm_deposition_logtrans,nugget,0.0032170377667802,CPF\Outputs\Segmented 10m\ME sfm_deposition_logtrans\varcomp_results.csv
+CPF,ME,10m,sfm_erosion_logtrans,Covariates (PR-sq),0.302993797309625,CPF\Outputs\Segmented 10m\ME sfm_erosion_logtrans\varcomp_results.csv
+CPF,ME,10m,sfm_erosion_logtrans,tailup_de,0.697006200762087,CPF\Outputs\Segmented 10m\ME sfm_erosion_logtrans\varcomp_results.csv
+CPF,ME,10m,sfm_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 10m\ME sfm_erosion_logtrans\varcomp_results.csv
+CPF,ME,10m,sfm_erosion_logtrans,euclid_de,1.92828817879652e-09,CPF\Outputs\Segmented 10m\ME sfm_erosion_logtrans\varcomp_results.csv
+CPF,ME,10m,sfm_erosion_logtrans,nugget,2.82453258045673e-268,CPF\Outputs\Segmented 10m\ME sfm_erosion_logtrans\varcomp_results.csv
+CPF,ME,10m,sfm_net change_logtrans,Covariates (PR-sq),0.175778988910838,CPF\Outputs\Segmented 10m\ME sfm_net change_logtrans\varcomp_results.csv
+CPF,ME,10m,sfm_net change_logtrans,tailup_de,4.39549576408258e-17,CPF\Outputs\Segmented 10m\ME sfm_net change_logtrans\varcomp_results.csv
+CPF,ME,10m,sfm_net change_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 10m\ME sfm_net change_logtrans\varcomp_results.csv
+CPF,ME,10m,sfm_net change_logtrans,euclid_de,0.824213661468452,CPF\Outputs\Segmented 10m\ME sfm_net change_logtrans\varcomp_results.csv
+CPF,ME,10m,sfm_net change_logtrans,nugget,7.34962071035865e-06,CPF\Outputs\Segmented 10m\ME sfm_net change_logtrans\varcomp_results.csv
+CPF,MM,10m,lidar_erosion_logtrans,Covariates (PR-sq),0.106637546574447,CPF\Outputs\Segmented 10m\MM lidar_erosion_logtrans\varcomp_results.csv
+CPF,MM,10m,lidar_erosion_logtrans,tailup_de,0.893323681859102,CPF\Outputs\Segmented 10m\MM lidar_erosion_logtrans\varcomp_results.csv
+CPF,MM,10m,lidar_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 10m\MM lidar_erosion_logtrans\varcomp_results.csv
+CPF,MM,10m,lidar_erosion_logtrans,euclid_de,3.87715664504435e-05,CPF\Outputs\Segmented 10m\MM lidar_erosion_logtrans\varcomp_results.csv
+CPF,MM,10m,lidar_erosion_logtrans,nugget,4.84713766444549e-27,CPF\Outputs\Segmented 10m\MM lidar_erosion_logtrans\varcomp_results.csv
+CPF,MM,10m,sfm_deposition_logtrans,Covariates (PR-sq),0.0728576699781033,CPF\Outputs\Segmented 10m\MM sfm_deposition_logtrans\varcomp_results.csv
+CPF,MM,10m,sfm_deposition_logtrans,tailup_de,2.92554835606096e-10,CPF\Outputs\Segmented 10m\MM sfm_deposition_logtrans\varcomp_results.csv
+CPF,MM,10m,sfm_deposition_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 10m\MM sfm_deposition_logtrans\varcomp_results.csv
+CPF,MM,10m,sfm_deposition_logtrans,euclid_de,0.927142329729342,CPF\Outputs\Segmented 10m\MM sfm_deposition_logtrans\varcomp_results.csv
+CPF,MM,10m,sfm_deposition_logtrans,nugget,0.0,CPF\Outputs\Segmented 10m\MM sfm_deposition_logtrans\varcomp_results.csv
+CPF,MM,10m,sfm_erosion_logtrans,Covariates (PR-sq),0.166286815834372,CPF\Outputs\Segmented 10m\MM sfm_erosion_logtrans\varcomp_results.csv
+CPF,MM,10m,sfm_erosion_logtrans,tailup_de,1.27742597266385e-08,CPF\Outputs\Segmented 10m\MM sfm_erosion_logtrans\varcomp_results.csv
+CPF,MM,10m,sfm_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 10m\MM sfm_erosion_logtrans\varcomp_results.csv
+CPF,MM,10m,sfm_erosion_logtrans,euclid_de,0.833713171391368,CPF\Outputs\Segmented 10m\MM sfm_erosion_logtrans\varcomp_results.csv
+CPF,MM,10m,sfm_erosion_logtrans,nugget,3.22832584709979e-144,CPF\Outputs\Segmented 10m\MM sfm_erosion_logtrans\varcomp_results.csv
+CPF,MM,10m,sfm_net change_logtrans,Covariates (PR-sq),0.114169337860571,CPF\Outputs\Segmented 10m\MM sfm_net change_logtrans\varcomp_results.csv
+CPF,MM,10m,sfm_net change_logtrans,tailup_de,0.0197928157911014,CPF\Outputs\Segmented 10m\MM sfm_net change_logtrans\varcomp_results.csv
+CPF,MM,10m,sfm_net change_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 10m\MM sfm_net change_logtrans\varcomp_results.csv
+CPF,MM,10m,sfm_net change_logtrans,euclid_de,0.866037846348327,CPF\Outputs\Segmented 10m\MM sfm_net change_logtrans\varcomp_results.csv
+CPF,MM,10m,sfm_net change_logtrans,nugget,7.35513626626629e-18,CPF\Outputs\Segmented 10m\MM sfm_net change_logtrans\varcomp_results.csv
+CPF,MW,10m,sfm_deposition_logtrans,Covariates (PR-sq),0.060891647836798,CPF\Outputs\Segmented 10m\MW sfm_deposition_logtrans\varcomp_results.csv
+CPF,MW,10m,sfm_deposition_logtrans,tailup_de,0.939108352163202,CPF\Outputs\Segmented 10m\MW sfm_deposition_logtrans\varcomp_results.csv
+CPF,MW,10m,sfm_deposition_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 10m\MW sfm_deposition_logtrans\varcomp_results.csv
+CPF,MW,10m,sfm_deposition_logtrans,euclid_de,9.48356251942972e-115,CPF\Outputs\Segmented 10m\MW sfm_deposition_logtrans\varcomp_results.csv
+CPF,MW,10m,sfm_deposition_logtrans,nugget,1.5122446184135202e-85,CPF\Outputs\Segmented 10m\MW sfm_deposition_logtrans\varcomp_results.csv
+CPF,MW,10m,sfm_erosion_logtrans,Covariates (PR-sq),0.0950077618615942,CPF\Outputs\Segmented 10m\MW sfm_erosion_logtrans\varcomp_results.csv
+CPF,MW,10m,sfm_erosion_logtrans,tailup_de,0.152049114825936,CPF\Outputs\Segmented 10m\MW sfm_erosion_logtrans\varcomp_results.csv
+CPF,MW,10m,sfm_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 10m\MW sfm_erosion_logtrans\varcomp_results.csv
+CPF,MW,10m,sfm_erosion_logtrans,euclid_de,0.736220282365284,CPF\Outputs\Segmented 10m\MW sfm_erosion_logtrans\varcomp_results.csv
+CPF,MW,10m,sfm_erosion_logtrans,nugget,0.0167228409471859,CPF\Outputs\Segmented 10m\MW sfm_erosion_logtrans\varcomp_results.csv
+CPF,MW,10m,sfm_net change_logtrans,Covariates (PR-sq),0.0838199810166944,CPF\Outputs\Segmented 10m\MW sfm_net change_logtrans\varcomp_results.csv
+CPF,MW,10m,sfm_net change_logtrans,tailup_de,0.490929117690483,CPF\Outputs\Segmented 10m\MW sfm_net change_logtrans\varcomp_results.csv
+CPF,MW,10m,sfm_net change_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 10m\MW sfm_net change_logtrans\varcomp_results.csv
+CPF,MW,10m,sfm_net change_logtrans,euclid_de,0.425250901292822,CPF\Outputs\Segmented 10m\MW sfm_net change_logtrans\varcomp_results.csv
+CPF,MW,10m,sfm_net change_logtrans,nugget,3.03818591493955e-115,CPF\Outputs\Segmented 10m\MW sfm_net change_logtrans\varcomp_results.csv
+CPF,UE,10m,lidar_erosion_logtrans,Covariates (PR-sq),0.158657286158388,CPF\Outputs\Segmented 10m\UE lidar_erosion_logtrans\varcomp_results.csv
+CPF,UE,10m,lidar_erosion_logtrans,tailup_de,2.5059812092188e-14,CPF\Outputs\Segmented 10m\UE lidar_erosion_logtrans\varcomp_results.csv
+CPF,UE,10m,lidar_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 10m\UE lidar_erosion_logtrans\varcomp_results.csv
+CPF,UE,10m,lidar_erosion_logtrans,euclid_de,0.841342713841587,CPF\Outputs\Segmented 10m\UE lidar_erosion_logtrans\varcomp_results.csv
+CPF,UE,10m,lidar_erosion_logtrans,nugget,3.04653953058854e-35,CPF\Outputs\Segmented 10m\UE lidar_erosion_logtrans\varcomp_results.csv
+CPF,UE,10m,sfm_deposition_logtrans,Covariates (PR-sq),0.396217185588729,CPF\Outputs\Segmented 10m\UE sfm_deposition_logtrans\varcomp_results.csv
+CPF,UE,10m,sfm_deposition_logtrans,tailup_de,0.603782814411271,CPF\Outputs\Segmented 10m\UE sfm_deposition_logtrans\varcomp_results.csv
+CPF,UE,10m,sfm_deposition_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 10m\UE sfm_deposition_logtrans\varcomp_results.csv
+CPF,UE,10m,sfm_deposition_logtrans,euclid_de,1.11297066913365e-21,CPF\Outputs\Segmented 10m\UE sfm_deposition_logtrans\varcomp_results.csv
+CPF,UE,10m,sfm_deposition_logtrans,nugget,9.91031708618462e-56,CPF\Outputs\Segmented 10m\UE sfm_deposition_logtrans\varcomp_results.csv
+CPF,UE,10m,sfm_erosion_logtrans,Covariates (PR-sq),0.328817392431973,CPF\Outputs\Segmented 10m\UE sfm_erosion_logtrans\varcomp_results.csv
+CPF,UE,10m,sfm_erosion_logtrans,tailup_de,0.671182607568027,CPF\Outputs\Segmented 10m\UE sfm_erosion_logtrans\varcomp_results.csv
+CPF,UE,10m,sfm_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 10m\UE sfm_erosion_logtrans\varcomp_results.csv
+CPF,UE,10m,sfm_erosion_logtrans,euclid_de,2.39694992830534e-24,CPF\Outputs\Segmented 10m\UE sfm_erosion_logtrans\varcomp_results.csv
+CPF,UE,10m,sfm_erosion_logtrans,nugget,3.16618263701839e-80,CPF\Outputs\Segmented 10m\UE sfm_erosion_logtrans\varcomp_results.csv
+CPF,UE,10m,sfm_net change_logtrans,Covariates (PR-sq),0.153523029950882,CPF\Outputs\Segmented 10m\UE sfm_net change_logtrans\varcomp_results.csv
+CPF,UE,10m,sfm_net change_logtrans,tailup_de,1.83327913572913e-07,CPF\Outputs\Segmented 10m\UE sfm_net change_logtrans\varcomp_results.csv
+CPF,UE,10m,sfm_net change_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 10m\UE sfm_net change_logtrans\varcomp_results.csv
+CPF,UE,10m,sfm_net change_logtrans,euclid_de,0.846476786721204,CPF\Outputs\Segmented 10m\UE sfm_net change_logtrans\varcomp_results.csv
+CPF,UE,10m,sfm_net change_logtrans,nugget,3.66411963903647e-57,CPF\Outputs\Segmented 10m\UE sfm_net change_logtrans\varcomp_results.csv
+CPF,UM,10m,sfm_deposition_logtrans,Covariates (PR-sq),0.179931597167138,CPF\Outputs\Segmented 10m\UM sfm_deposition_logtrans\varcomp_results.csv
+CPF,UM,10m,sfm_deposition_logtrans,tailup_de,0.000104449677042,CPF\Outputs\Segmented 10m\UM sfm_deposition_logtrans\varcomp_results.csv
+CPF,UM,10m,sfm_deposition_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 10m\UM sfm_deposition_logtrans\varcomp_results.csv
+CPF,UM,10m,sfm_deposition_logtrans,euclid_de,0.81996395315582,CPF\Outputs\Segmented 10m\UM sfm_deposition_logtrans\varcomp_results.csv
+CPF,UM,10m,sfm_deposition_logtrans,nugget,1.9593131264411e-20,CPF\Outputs\Segmented 10m\UM sfm_deposition_logtrans\varcomp_results.csv
+CPF,UM,10m,sfm_erosion_logtrans,Covariates (PR-sq),0.13450068236214,CPF\Outputs\Segmented 10m\UM sfm_erosion_logtrans\varcomp_results.csv
+CPF,UM,10m,sfm_erosion_logtrans,tailup_de,2.03630276484965e-26,CPF\Outputs\Segmented 10m\UM sfm_erosion_logtrans\varcomp_results.csv
+CPF,UM,10m,sfm_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 10m\UM sfm_erosion_logtrans\varcomp_results.csv
+CPF,UM,10m,sfm_erosion_logtrans,euclid_de,0.86549931763786,CPF\Outputs\Segmented 10m\UM sfm_erosion_logtrans\varcomp_results.csv
+CPF,UM,10m,sfm_erosion_logtrans,nugget,2.76811058474945e-169,CPF\Outputs\Segmented 10m\UM sfm_erosion_logtrans\varcomp_results.csv
+CPF,UW,10m,lidar_erosion_logtrans,Covariates (PR-sq),0.0585235969248303,CPF\Outputs\Segmented 10m\UW lidar_erosion_logtrans\varcomp_results.csv
+CPF,UW,10m,lidar_erosion_logtrans,tailup_de,0.941476403070192,CPF\Outputs\Segmented 10m\UW lidar_erosion_logtrans\varcomp_results.csv
+CPF,UW,10m,lidar_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 10m\UW lidar_erosion_logtrans\varcomp_results.csv
+CPF,UW,10m,lidar_erosion_logtrans,euclid_de,4.9772071972960794e-12,CPF\Outputs\Segmented 10m\UW lidar_erosion_logtrans\varcomp_results.csv
+CPF,UW,10m,lidar_erosion_logtrans,nugget,4.8265761402392605e-53,CPF\Outputs\Segmented 10m\UW lidar_erosion_logtrans\varcomp_results.csv
+CPF,UW,10m,sfm_deposition_logtrans,Covariates (PR-sq),0.0516254185518042,CPF\Outputs\Segmented 10m\UW sfm_deposition_logtrans\varcomp_results.csv
+CPF,UW,10m,sfm_deposition_logtrans,tailup_de,0.948372432891678,CPF\Outputs\Segmented 10m\UW sfm_deposition_logtrans\varcomp_results.csv
+CPF,UW,10m,sfm_deposition_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 10m\UW sfm_deposition_logtrans\varcomp_results.csv
+CPF,UW,10m,sfm_deposition_logtrans,euclid_de,2.14829743703936e-06,CPF\Outputs\Segmented 10m\UW sfm_deposition_logtrans\varcomp_results.csv
+CPF,UW,10m,sfm_deposition_logtrans,nugget,2.5908083928695803e-10,CPF\Outputs\Segmented 10m\UW sfm_deposition_logtrans\varcomp_results.csv
+CPF,UW,10m,sfm_erosion_logtrans,Covariates (PR-sq),0.257030365436218,CPF\Outputs\Segmented 10m\UW sfm_erosion_logtrans\varcomp_results.csv
+CPF,UW,10m,sfm_erosion_logtrans,tailup_de,0.742620147959637,CPF\Outputs\Segmented 10m\UW sfm_erosion_logtrans\varcomp_results.csv
+CPF,UW,10m,sfm_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 10m\UW sfm_erosion_logtrans\varcomp_results.csv
+CPF,UW,10m,sfm_erosion_logtrans,euclid_de,0.0003494866041451,CPF\Outputs\Segmented 10m\UW sfm_erosion_logtrans\varcomp_results.csv
+CPF,UW,10m,sfm_erosion_logtrans,nugget,1.79124877941058e-248,CPF\Outputs\Segmented 10m\UW sfm_erosion_logtrans\varcomp_results.csv
+CPF,CPF,20m,lidar_erosion_logtrans,Covariates (PR-sq),0.300649948560725,CPF\Outputs\Segmented 20m\CPF lidar_erosion_logtrans\varcomp_results.csv
+CPF,CPF,20m,lidar_erosion_logtrans,tailup_de,1.9991952332454502e-20,CPF\Outputs\Segmented 20m\CPF lidar_erosion_logtrans\varcomp_results.csv
+CPF,CPF,20m,lidar_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\CPF lidar_erosion_logtrans\varcomp_results.csv
+CPF,CPF,20m,lidar_erosion_logtrans,euclid_de,1.8818853698961598e-11,CPF\Outputs\Segmented 20m\CPF lidar_erosion_logtrans\varcomp_results.csv
+CPF,CPF,20m,lidar_erosion_logtrans,nugget,0.699338868320297,CPF\Outputs\Segmented 20m\CPF lidar_erosion_logtrans\varcomp_results.csv
+CPF,CPF,20m,lidar_erosion_logtrans,1 | as.factor(ch_watershed),1.11831001592998e-05,CPF\Outputs\Segmented 20m\CPF lidar_erosion_logtrans\varcomp_results.csv
+CPF,CPF,20m,sfm_deposition_logtrans,Covariates (PR-sq),0.0889980374948025,CPF\Outputs\Segmented 20m\CPF sfm_deposition_logtrans\varcomp_results.csv
+CPF,CPF,20m,sfm_deposition_logtrans,tailup_de,0.0478143667384129,CPF\Outputs\Segmented 20m\CPF sfm_deposition_logtrans\varcomp_results.csv
+CPF,CPF,20m,sfm_deposition_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\CPF sfm_deposition_logtrans\varcomp_results.csv
+CPF,CPF,20m,sfm_deposition_logtrans,euclid_de,0.0026475792975421,CPF\Outputs\Segmented 20m\CPF sfm_deposition_logtrans\varcomp_results.csv
+CPF,CPF,20m,sfm_deposition_logtrans,nugget,1.28152757377266e-19,CPF\Outputs\Segmented 20m\CPF sfm_deposition_logtrans\varcomp_results.csv
+CPF,CPF,20m,sfm_deposition_logtrans,1 | as.factor(ch_watershed),0.860540016469242,CPF\Outputs\Segmented 20m\CPF sfm_deposition_logtrans\varcomp_results.csv
+CPF,CPF,20m,sfm_erosion_logtrans,Covariates (PR-sq),0.0787437335368527,CPF\Outputs\Segmented 20m\CPF sfm_erosion_logtrans\varcomp_results.csv
+CPF,CPF,20m,sfm_erosion_logtrans,tailup_de,0.0038509292350197,CPF\Outputs\Segmented 20m\CPF sfm_erosion_logtrans\varcomp_results.csv
+CPF,CPF,20m,sfm_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\CPF sfm_erosion_logtrans\varcomp_results.csv
+CPF,CPF,20m,sfm_erosion_logtrans,euclid_de,0.910094534626549,CPF\Outputs\Segmented 20m\CPF sfm_erosion_logtrans\varcomp_results.csv
+CPF,CPF,20m,sfm_erosion_logtrans,nugget,0.0003285337420003,CPF\Outputs\Segmented 20m\CPF sfm_erosion_logtrans\varcomp_results.csv
+CPF,CPF,20m,sfm_erosion_logtrans,1 | as.factor(ch_watershed),0.0069822688595785,CPF\Outputs\Segmented 20m\CPF sfm_erosion_logtrans\varcomp_results.csv
+CPF,CPF,20m,sfm_net change_logtrans,Covariates (PR-sq),0.0995756660564191,CPF\Outputs\Segmented 20m\CPF sfm_net change_logtrans\varcomp_results.csv
+CPF,CPF,20m,sfm_net change_logtrans,tailup_de,4.33663704018968e-64,CPF\Outputs\Segmented 20m\CPF sfm_net change_logtrans\varcomp_results.csv
+CPF,CPF,20m,sfm_net change_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\CPF sfm_net change_logtrans\varcomp_results.csv
+CPF,CPF,20m,sfm_net change_logtrans,euclid_de,3.1956051240825503e-279,CPF\Outputs\Segmented 20m\CPF sfm_net change_logtrans\varcomp_results.csv
+CPF,CPF,20m,sfm_net change_logtrans,nugget,3.18786312929278e-214,CPF\Outputs\Segmented 20m\CPF sfm_net change_logtrans\varcomp_results.csv
+CPF,CPF,20m,sfm_net change_logtrans,1 | as.factor(ch_watershed),0.900424333943581,CPF\Outputs\Segmented 20m\CPF sfm_net change_logtrans\varcomp_results.csv
+CPF,ME,20m,sfm_deposition_logtrans,Covariates (PR-sq),0.421200213872131,CPF\Outputs\Segmented 20m\ME sfm_deposition_logtrans\varcomp_results.csv
+CPF,ME,20m,sfm_deposition_logtrans,tailup_de,0.578799786107602,CPF\Outputs\Segmented 20m\ME sfm_deposition_logtrans\varcomp_results.csv
+CPF,ME,20m,sfm_deposition_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\ME sfm_deposition_logtrans\varcomp_results.csv
+CPF,ME,20m,sfm_deposition_logtrans,euclid_de,2.02675386449504e-11,CPF\Outputs\Segmented 20m\ME sfm_deposition_logtrans\varcomp_results.csv
+CPF,ME,20m,sfm_deposition_logtrans,nugget,4.64194379232067e-45,CPF\Outputs\Segmented 20m\ME sfm_deposition_logtrans\varcomp_results.csv
+CPF,ME,20m,sfm_erosion_logtrans,Covariates (PR-sq),0.240801689221839,CPF\Outputs\Segmented 20m\ME sfm_erosion_logtrans\varcomp_results.csv
+CPF,ME,20m,sfm_erosion_logtrans,tailup_de,0.0005340196040232,CPF\Outputs\Segmented 20m\ME sfm_erosion_logtrans\varcomp_results.csv
+CPF,ME,20m,sfm_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\ME sfm_erosion_logtrans\varcomp_results.csv
+CPF,ME,20m,sfm_erosion_logtrans,euclid_de,2.90652337691027e-05,CPF\Outputs\Segmented 20m\ME sfm_erosion_logtrans\varcomp_results.csv
+CPF,ME,20m,sfm_erosion_logtrans,nugget,0.758635225940368,CPF\Outputs\Segmented 20m\ME sfm_erosion_logtrans\varcomp_results.csv
+CPF,ME,20m,sfm_net change_logtrans,Covariates (PR-sq),0.164574150669509,CPF\Outputs\Segmented 20m\ME sfm_net change_logtrans\varcomp_results.csv
+CPF,ME,20m,sfm_net change_logtrans,tailup_de,0.835425482837059,CPF\Outputs\Segmented 20m\ME sfm_net change_logtrans\varcomp_results.csv
+CPF,ME,20m,sfm_net change_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\ME sfm_net change_logtrans\varcomp_results.csv
+CPF,ME,20m,sfm_net change_logtrans,euclid_de,3.66493431882367e-07,CPF\Outputs\Segmented 20m\ME sfm_net change_logtrans\varcomp_results.csv
+CPF,ME,20m,sfm_net change_logtrans,nugget,1.9994664675354e-37,CPF\Outputs\Segmented 20m\ME sfm_net change_logtrans\varcomp_results.csv
+CPF,MM,20m,lidar_erosion_logtrans,Covariates (PR-sq),0.0142859157260102,CPF\Outputs\Segmented 20m\MM lidar_erosion_logtrans\varcomp_results.csv
+CPF,MM,20m,lidar_erosion_logtrans,tailup_de,0.98571408427399,CPF\Outputs\Segmented 20m\MM lidar_erosion_logtrans\varcomp_results.csv
+CPF,MM,20m,lidar_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\MM lidar_erosion_logtrans\varcomp_results.csv
+CPF,MM,20m,lidar_erosion_logtrans,euclid_de,6.62999133157365e-29,CPF\Outputs\Segmented 20m\MM lidar_erosion_logtrans\varcomp_results.csv
+CPF,MM,20m,lidar_erosion_logtrans,nugget,2.5693526917583e-85,CPF\Outputs\Segmented 20m\MM lidar_erosion_logtrans\varcomp_results.csv
+CPF,MM,20m,sfm_deposition_logtrans,Covariates (PR-sq),0.073146267543266,CPF\Outputs\Segmented 20m\MM sfm_deposition_logtrans\varcomp_results.csv
+CPF,MM,20m,sfm_deposition_logtrans,tailup_de,0.816372279853604,CPF\Outputs\Segmented 20m\MM sfm_deposition_logtrans\varcomp_results.csv
+CPF,MM,20m,sfm_deposition_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\MM sfm_deposition_logtrans\varcomp_results.csv
+CPF,MM,20m,sfm_deposition_logtrans,euclid_de,0.11048145260313,CPF\Outputs\Segmented 20m\MM sfm_deposition_logtrans\varcomp_results.csv
+CPF,MM,20m,sfm_deposition_logtrans,nugget,3.7792623117160098e-56,CPF\Outputs\Segmented 20m\MM sfm_deposition_logtrans\varcomp_results.csv
+CPF,MM,20m,sfm_erosion_logtrans,Covariates (PR-sq),0.113900672015394,CPF\Outputs\Segmented 20m\MM sfm_erosion_logtrans\varcomp_results.csv
+CPF,MM,20m,sfm_erosion_logtrans,tailup_de,0.886099327984606,CPF\Outputs\Segmented 20m\MM sfm_erosion_logtrans\varcomp_results.csv
+CPF,MM,20m,sfm_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\MM sfm_erosion_logtrans\varcomp_results.csv
+CPF,MM,20m,sfm_erosion_logtrans,euclid_de,2.13349973924029e-17,CPF\Outputs\Segmented 20m\MM sfm_erosion_logtrans\varcomp_results.csv
+CPF,MM,20m,sfm_erosion_logtrans,nugget,3.11883607266496e-139,CPF\Outputs\Segmented 20m\MM sfm_erosion_logtrans\varcomp_results.csv
+CPF,MM,20m,sfm_net change_logtrans,Covariates (PR-sq),0.135906291570916,CPF\Outputs\Segmented 20m\MM sfm_net change_logtrans\varcomp_results.csv
+CPF,MM,20m,sfm_net change_logtrans,tailup_de,0.0003369072057623,CPF\Outputs\Segmented 20m\MM sfm_net change_logtrans\varcomp_results.csv
+CPF,MM,20m,sfm_net change_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\MM sfm_net change_logtrans\varcomp_results.csv
+CPF,MM,20m,sfm_net change_logtrans,euclid_de,1.9082563850338897e-18,CPF\Outputs\Segmented 20m\MM sfm_net change_logtrans\varcomp_results.csv
+CPF,MM,20m,sfm_net change_logtrans,nugget,0.863756801223321,CPF\Outputs\Segmented 20m\MM sfm_net change_logtrans\varcomp_results.csv
+CPF,MW,20m,sfm_deposition_logtrans,Covariates (PR-sq),0.139642186635163,CPF\Outputs\Segmented 20m\MW sfm_deposition_logtrans\varcomp_results.csv
+CPF,MW,20m,sfm_deposition_logtrans,tailup_de,0.860357800643634,CPF\Outputs\Segmented 20m\MW sfm_deposition_logtrans\varcomp_results.csv
+CPF,MW,20m,sfm_deposition_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\MW sfm_deposition_logtrans\varcomp_results.csv
+CPF,MW,20m,sfm_deposition_logtrans,euclid_de,7.90627570218731e-13,CPF\Outputs\Segmented 20m\MW sfm_deposition_logtrans\varcomp_results.csv
+CPF,MW,20m,sfm_deposition_logtrans,nugget,1.27204123258157e-08,CPF\Outputs\Segmented 20m\MW sfm_deposition_logtrans\varcomp_results.csv
+CPF,MW,20m,sfm_erosion_logtrans,Covariates (PR-sq),0.211771496544497,CPF\Outputs\Segmented 20m\MW sfm_erosion_logtrans\varcomp_results.csv
+CPF,MW,20m,sfm_erosion_logtrans,tailup_de,0.78822850329766,CPF\Outputs\Segmented 20m\MW sfm_erosion_logtrans\varcomp_results.csv
+CPF,MW,20m,sfm_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\MW sfm_erosion_logtrans\varcomp_results.csv
+CPF,MW,20m,sfm_erosion_logtrans,euclid_de,5.15954642403448e-12,CPF\Outputs\Segmented 20m\MW sfm_erosion_logtrans\varcomp_results.csv
+CPF,MW,20m,sfm_erosion_logtrans,nugget,1.5268423360469701e-10,CPF\Outputs\Segmented 20m\MW sfm_erosion_logtrans\varcomp_results.csv
+CPF,MW,20m,sfm_net change_logtrans,Covariates (PR-sq),0.112986527638433,CPF\Outputs\Segmented 20m\MW sfm_net change_logtrans\varcomp_results.csv
+CPF,MW,20m,sfm_net change_logtrans,tailup_de,0.0935570440909729,CPF\Outputs\Segmented 20m\MW sfm_net change_logtrans\varcomp_results.csv
+CPF,MW,20m,sfm_net change_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\MW sfm_net change_logtrans\varcomp_results.csv
+CPF,MW,20m,sfm_net change_logtrans,euclid_de,0.793456428270594,CPF\Outputs\Segmented 20m\MW sfm_net change_logtrans\varcomp_results.csv
+CPF,MW,20m,sfm_net change_logtrans,nugget,3.58440077266904e-53,CPF\Outputs\Segmented 20m\MW sfm_net change_logtrans\varcomp_results.csv
+CPF,UE,20m,lidar_erosion_logtrans,Covariates (PR-sq),0.0849066557202205,CPF\Outputs\Segmented 20m\UE lidar_erosion_logtrans\varcomp_results.csv
+CPF,UE,20m,lidar_erosion_logtrans,tailup_de,0.330967673392624,CPF\Outputs\Segmented 20m\UE lidar_erosion_logtrans\varcomp_results.csv
+CPF,UE,20m,lidar_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\UE lidar_erosion_logtrans\varcomp_results.csv
+CPF,UE,20m,lidar_erosion_logtrans,euclid_de,0.0702486227054609,CPF\Outputs\Segmented 20m\UE lidar_erosion_logtrans\varcomp_results.csv
+CPF,UE,20m,lidar_erosion_logtrans,nugget,0.513877048181694,CPF\Outputs\Segmented 20m\UE lidar_erosion_logtrans\varcomp_results.csv
+CPF,UE,20m,sfm_deposition_logtrans,Covariates (PR-sq),0.434720549095542,CPF\Outputs\Segmented 20m\UE sfm_deposition_logtrans\varcomp_results.csv
+CPF,UE,20m,sfm_deposition_logtrans,tailup_de,0.070960941453842,CPF\Outputs\Segmented 20m\UE sfm_deposition_logtrans\varcomp_results.csv
+CPF,UE,20m,sfm_deposition_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\UE sfm_deposition_logtrans\varcomp_results.csv
+CPF,UE,20m,sfm_deposition_logtrans,euclid_de,0.4943178826056,CPF\Outputs\Segmented 20m\UE sfm_deposition_logtrans\varcomp_results.csv
+CPF,UE,20m,sfm_deposition_logtrans,nugget,6.26845016506669e-07,CPF\Outputs\Segmented 20m\UE sfm_deposition_logtrans\varcomp_results.csv
+CPF,UE,20m,sfm_erosion_logtrans,Covariates (PR-sq),0.194483355573919,CPF\Outputs\Segmented 20m\UE sfm_erosion_logtrans\varcomp_results.csv
+CPF,UE,20m,sfm_erosion_logtrans,tailup_de,0.805414695055247,CPF\Outputs\Segmented 20m\UE sfm_erosion_logtrans\varcomp_results.csv
+CPF,UE,20m,sfm_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\UE sfm_erosion_logtrans\varcomp_results.csv
+CPF,UE,20m,sfm_erosion_logtrans,euclid_de,7.118381292859961e-09,CPF\Outputs\Segmented 20m\UE sfm_erosion_logtrans\varcomp_results.csv
+CPF,UE,20m,sfm_erosion_logtrans,nugget,0.0001019422524529,CPF\Outputs\Segmented 20m\UE sfm_erosion_logtrans\varcomp_results.csv
+CPF,UE,20m,sfm_net change_logtrans,Covariates (PR-sq),0.0785527710194187,CPF\Outputs\Segmented 20m\UE sfm_net change_logtrans\varcomp_results.csv
+CPF,UE,20m,sfm_net change_logtrans,tailup_de,5.56517081500149e-06,CPF\Outputs\Segmented 20m\UE sfm_net change_logtrans\varcomp_results.csv
+CPF,UE,20m,sfm_net change_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\UE sfm_net change_logtrans\varcomp_results.csv
+CPF,UE,20m,sfm_net change_logtrans,euclid_de,0.921441663809766,CPF\Outputs\Segmented 20m\UE sfm_net change_logtrans\varcomp_results.csv
+CPF,UE,20m,sfm_net change_logtrans,nugget,9.65610464678518e-19,CPF\Outputs\Segmented 20m\UE sfm_net change_logtrans\varcomp_results.csv
+CPF,UM,20m,lidar_erosion_logtrans,Covariates (PR-sq),0.0608583743902823,CPF\Outputs\Segmented 20m\UM lidar_erosion_logtrans\varcomp_results.csv
+CPF,UM,20m,lidar_erosion_logtrans,tailup_de,0.815716189390684,CPF\Outputs\Segmented 20m\UM lidar_erosion_logtrans\varcomp_results.csv
+CPF,UM,20m,lidar_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\UM lidar_erosion_logtrans\varcomp_results.csv
+CPF,UM,20m,lidar_erosion_logtrans,euclid_de,3.61518764411361e-35,CPF\Outputs\Segmented 20m\UM lidar_erosion_logtrans\varcomp_results.csv
+CPF,UM,20m,lidar_erosion_logtrans,nugget,0.123425436219033,CPF\Outputs\Segmented 20m\UM lidar_erosion_logtrans\varcomp_results.csv
+CPF,UM,20m,sfm_deposition_logtrans,Covariates (PR-sq),0.0530568625840546,CPF\Outputs\Segmented 20m\UM sfm_deposition_logtrans\varcomp_results.csv
+CPF,UM,20m,sfm_deposition_logtrans,tailup_de,2.84951204542705e-32,CPF\Outputs\Segmented 20m\UM sfm_deposition_logtrans\varcomp_results.csv
+CPF,UM,20m,sfm_deposition_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\UM sfm_deposition_logtrans\varcomp_results.csv
+CPF,UM,20m,sfm_deposition_logtrans,euclid_de,0.946943137415945,CPF\Outputs\Segmented 20m\UM sfm_deposition_logtrans\varcomp_results.csv
+CPF,UM,20m,sfm_deposition_logtrans,nugget,0.0,CPF\Outputs\Segmented 20m\UM sfm_deposition_logtrans\varcomp_results.csv
+CPF,UM,20m,sfm_erosion_logtrans,Covariates (PR-sq),0.186235470858542,CPF\Outputs\Segmented 20m\UM sfm_erosion_logtrans\varcomp_results.csv
+CPF,UM,20m,sfm_erosion_logtrans,tailup_de,0.813757175761423,CPF\Outputs\Segmented 20m\UM sfm_erosion_logtrans\varcomp_results.csv
+CPF,UM,20m,sfm_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\UM sfm_erosion_logtrans\varcomp_results.csv
+CPF,UM,20m,sfm_erosion_logtrans,euclid_de,7.42867334309096e-10,CPF\Outputs\Segmented 20m\UM sfm_erosion_logtrans\varcomp_results.csv
+CPF,UM,20m,sfm_erosion_logtrans,nugget,7.35263716765756e-06,CPF\Outputs\Segmented 20m\UM sfm_erosion_logtrans\varcomp_results.csv
+CPF,UM,20m,sfm_net change_logtrans,Covariates (PR-sq),0.28434936703845,CPF\Outputs\Segmented 20m\UM sfm_net change_logtrans\varcomp_results.csv
+CPF,UM,20m,sfm_net change_logtrans,tailup_de,4.84913510263804e-21,CPF\Outputs\Segmented 20m\UM sfm_net change_logtrans\varcomp_results.csv
+CPF,UM,20m,sfm_net change_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\UM sfm_net change_logtrans\varcomp_results.csv
+CPF,UM,20m,sfm_net change_logtrans,euclid_de,0.71565063296155,CPF\Outputs\Segmented 20m\UM sfm_net change_logtrans\varcomp_results.csv
+CPF,UM,20m,sfm_net change_logtrans,nugget,4.35043449715257e-110,CPF\Outputs\Segmented 20m\UM sfm_net change_logtrans\varcomp_results.csv
+CPF,UW,20m,lidar_erosion_logtrans,Covariates (PR-sq),0.0739907646080669,CPF\Outputs\Segmented 20m\UW lidar_erosion_logtrans\varcomp_results.csv
+CPF,UW,20m,lidar_erosion_logtrans,tailup_de,0.926009233970468,CPF\Outputs\Segmented 20m\UW lidar_erosion_logtrans\varcomp_results.csv
+CPF,UW,20m,lidar_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\UW lidar_erosion_logtrans\varcomp_results.csv
+CPF,UW,20m,lidar_erosion_logtrans,euclid_de,1.4214649460836e-09,CPF\Outputs\Segmented 20m\UW lidar_erosion_logtrans\varcomp_results.csv
+CPF,UW,20m,lidar_erosion_logtrans,nugget,3.84178018639758e-84,CPF\Outputs\Segmented 20m\UW lidar_erosion_logtrans\varcomp_results.csv
+CPF,UW,20m,sfm_deposition_logtrans,Covariates (PR-sq),0.0469413966323455,CPF\Outputs\Segmented 20m\UW sfm_deposition_logtrans\varcomp_results.csv
+CPF,UW,20m,sfm_deposition_logtrans,tailup_de,0.0001990227882551,CPF\Outputs\Segmented 20m\UW sfm_deposition_logtrans\varcomp_results.csv
+CPF,UW,20m,sfm_deposition_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\UW sfm_deposition_logtrans\varcomp_results.csv
+CPF,UW,20m,sfm_deposition_logtrans,euclid_de,0.952824719822983,CPF\Outputs\Segmented 20m\UW sfm_deposition_logtrans\varcomp_results.csv
+CPF,UW,20m,sfm_deposition_logtrans,nugget,3.48607564168018e-05,CPF\Outputs\Segmented 20m\UW sfm_deposition_logtrans\varcomp_results.csv
+CPF,UW,20m,sfm_erosion_logtrans,Covariates (PR-sq),0.221619409406463,CPF\Outputs\Segmented 20m\UW sfm_erosion_logtrans\varcomp_results.csv
+CPF,UW,20m,sfm_erosion_logtrans,tailup_de,0.719142707417954,CPF\Outputs\Segmented 20m\UW sfm_erosion_logtrans\varcomp_results.csv
+CPF,UW,20m,sfm_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\UW sfm_erosion_logtrans\varcomp_results.csv
+CPF,UW,20m,sfm_erosion_logtrans,euclid_de,0.0592276668002549,CPF\Outputs\Segmented 20m\UW sfm_erosion_logtrans\varcomp_results.csv
+CPF,UW,20m,sfm_erosion_logtrans,nugget,1.02163753288244e-05,CPF\Outputs\Segmented 20m\UW sfm_erosion_logtrans\varcomp_results.csv
+CPF,UW,20m,sfm_net change_logtrans,Covariates (PR-sq),0.0838611610720409,CPF\Outputs\Segmented 20m\UW sfm_net change_logtrans\varcomp_results.csv
+CPF,UW,20m,sfm_net change_logtrans,tailup_de,0.81279944519037,CPF\Outputs\Segmented 20m\UW sfm_net change_logtrans\varcomp_results.csv
+CPF,UW,20m,sfm_net change_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 20m\UW sfm_net change_logtrans\varcomp_results.csv
+CPF,UW,20m,sfm_net change_logtrans,euclid_de,0.10321504669248,CPF\Outputs\Segmented 20m\UW sfm_net change_logtrans\varcomp_results.csv
+CPF,UW,20m,sfm_net change_logtrans,nugget,0.0001243470451094,CPF\Outputs\Segmented 20m\UW sfm_net change_logtrans\varcomp_results.csv
+CPF,CPF,5m,sfm_deposition_logtrans,Covariates (PR-sq),0.0243359708495667,CPF\Outputs\Segmented 5m\CPF sfm_deposition_logtrans\varcomp_results.csv
+CPF,CPF,5m,sfm_deposition_logtrans,tailup_de,0.839913004021474,CPF\Outputs\Segmented 5m\CPF sfm_deposition_logtrans\varcomp_results.csv
+CPF,CPF,5m,sfm_deposition_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 5m\CPF sfm_deposition_logtrans\varcomp_results.csv
+CPF,CPF,5m,sfm_deposition_logtrans,euclid_de,0.132205281107355,CPF\Outputs\Segmented 5m\CPF sfm_deposition_logtrans\varcomp_results.csv
+CPF,CPF,5m,sfm_deposition_logtrans,nugget,0.0034724195792263,CPF\Outputs\Segmented 5m\CPF sfm_deposition_logtrans\varcomp_results.csv
+CPF,CPF,5m,sfm_deposition_logtrans,1 | as.factor(ch_watershed),7.33244423787165e-05,CPF\Outputs\Segmented 5m\CPF sfm_deposition_logtrans\varcomp_results.csv
+CPF,CPF,5m,sfm_erosion_logtrans,Covariates (PR-sq),0.0163802839364792,CPF\Outputs\Segmented 5m\CPF sfm_erosion_logtrans\varcomp_results.csv
+CPF,CPF,5m,sfm_erosion_logtrans,tailup_de,0.41640443834712,CPF\Outputs\Segmented 5m\CPF sfm_erosion_logtrans\varcomp_results.csv
+CPF,CPF,5m,sfm_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 5m\CPF sfm_erosion_logtrans\varcomp_results.csv
+CPF,CPF,5m,sfm_erosion_logtrans,euclid_de,1.17799630353161e-07,CPF\Outputs\Segmented 5m\CPF sfm_erosion_logtrans\varcomp_results.csv
+CPF,CPF,5m,sfm_erosion_logtrans,nugget,0.537991778758045,CPF\Outputs\Segmented 5m\CPF sfm_erosion_logtrans\varcomp_results.csv
+CPF,CPF,5m,sfm_erosion_logtrans,1 | as.factor(ch_watershed),0.0292233811587257,CPF\Outputs\Segmented 5m\CPF sfm_erosion_logtrans\varcomp_results.csv
+CPF,ME,5m,sfm_deposition_logtrans,Covariates (PR-sq),0.19704571907875,CPF\Outputs\Segmented 5m\ME sfm_deposition_logtrans\varcomp_results.csv
+CPF,ME,5m,sfm_deposition_logtrans,tailup_de,0.709459977162154,CPF\Outputs\Segmented 5m\ME sfm_deposition_logtrans\varcomp_results.csv
+CPF,ME,5m,sfm_deposition_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 5m\ME sfm_deposition_logtrans\varcomp_results.csv
+CPF,ME,5m,sfm_deposition_logtrans,euclid_de,0.0934942630805193,CPF\Outputs\Segmented 5m\ME sfm_deposition_logtrans\varcomp_results.csv
+CPF,ME,5m,sfm_deposition_logtrans,nugget,4.06785765731293e-08,CPF\Outputs\Segmented 5m\ME sfm_deposition_logtrans\varcomp_results.csv
+CPF,ME,5m,sfm_erosion_logtrans,Covariates (PR-sq),0.168819919274746,CPF\Outputs\Segmented 5m\ME sfm_erosion_logtrans\varcomp_results.csv
+CPF,ME,5m,sfm_erosion_logtrans,tailup_de,0.0303828748855856,CPF\Outputs\Segmented 5m\ME sfm_erosion_logtrans\varcomp_results.csv
+CPF,ME,5m,sfm_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 5m\ME sfm_erosion_logtrans\varcomp_results.csv
+CPF,ME,5m,sfm_erosion_logtrans,euclid_de,0.800797205839668,CPF\Outputs\Segmented 5m\ME sfm_erosion_logtrans\varcomp_results.csv
+CPF,ME,5m,sfm_erosion_logtrans,nugget,3.71374564611097e-26,CPF\Outputs\Segmented 5m\ME sfm_erosion_logtrans\varcomp_results.csv
+CPF,MM,5m,lidar_erosion_logtrans,Covariates (PR-sq),0.0993646120875946,CPF\Outputs\Segmented 5m\MM lidar_erosion_logtrans\varcomp_results.csv
+CPF,MM,5m,lidar_erosion_logtrans,tailup_de,0.900635387912405,CPF\Outputs\Segmented 5m\MM lidar_erosion_logtrans\varcomp_results.csv
+CPF,MM,5m,lidar_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 5m\MM lidar_erosion_logtrans\varcomp_results.csv
+CPF,MM,5m,lidar_erosion_logtrans,euclid_de,4.43016725883476e-21,CPF\Outputs\Segmented 5m\MM lidar_erosion_logtrans\varcomp_results.csv
+CPF,MM,5m,lidar_erosion_logtrans,nugget,7.66726504939818e-33,CPF\Outputs\Segmented 5m\MM lidar_erosion_logtrans\varcomp_results.csv
+CPF,MM,5m,sfm_deposition_logtrans,Covariates (PR-sq),0.0509724905736767,CPF\Outputs\Segmented 5m\MM sfm_deposition_logtrans\varcomp_results.csv
+CPF,MM,5m,sfm_deposition_logtrans,tailup_de,0.94724346337042,CPF\Outputs\Segmented 5m\MM sfm_deposition_logtrans\varcomp_results.csv
+CPF,MM,5m,sfm_deposition_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 5m\MM sfm_deposition_logtrans\varcomp_results.csv
+CPF,MM,5m,sfm_deposition_logtrans,euclid_de,0.0017840460559037,CPF\Outputs\Segmented 5m\MM sfm_deposition_logtrans\varcomp_results.csv
+CPF,MM,5m,sfm_deposition_logtrans,nugget,9.631331895891589e-127,CPF\Outputs\Segmented 5m\MM sfm_deposition_logtrans\varcomp_results.csv
+CPF,MM,5m,sfm_erosion_logtrans,Covariates (PR-sq),0.172503218994765,CPF\Outputs\Segmented 5m\MM sfm_erosion_logtrans\varcomp_results.csv
+CPF,MM,5m,sfm_erosion_logtrans,tailup_de,0.0004435796256817,CPF\Outputs\Segmented 5m\MM sfm_erosion_logtrans\varcomp_results.csv
+CPF,MM,5m,sfm_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 5m\MM sfm_erosion_logtrans\varcomp_results.csv
+CPF,MM,5m,sfm_erosion_logtrans,euclid_de,3.9188747010168803e-10,CPF\Outputs\Segmented 5m\MM sfm_erosion_logtrans\varcomp_results.csv
+CPF,MM,5m,sfm_erosion_logtrans,nugget,0.827053200987666,CPF\Outputs\Segmented 5m\MM sfm_erosion_logtrans\varcomp_results.csv
+CPF,MM,5m,sfm_net change_logtrans,Covariates (PR-sq),0.0827949385269212,CPF\Outputs\Segmented 5m\MM sfm_net change_logtrans\varcomp_results.csv
+CPF,MM,5m,sfm_net change_logtrans,tailup_de,0.91719215276625,CPF\Outputs\Segmented 5m\MM sfm_net change_logtrans\varcomp_results.csv
+CPF,MM,5m,sfm_net change_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 5m\MM sfm_net change_logtrans\varcomp_results.csv
+CPF,MM,5m,sfm_net change_logtrans,euclid_de,1.37610976675836e-06,CPF\Outputs\Segmented 5m\MM sfm_net change_logtrans\varcomp_results.csv
+CPF,MM,5m,sfm_net change_logtrans,nugget,1.15325970617567e-05,CPF\Outputs\Segmented 5m\MM sfm_net change_logtrans\varcomp_results.csv
+CPF,MW,5m,sfm_deposition_logtrans,Covariates (PR-sq),0.0297347679527507,CPF\Outputs\Segmented 5m\MW sfm_deposition_logtrans\varcomp_results.csv
+CPF,MW,5m,sfm_deposition_logtrans,tailup_de,0.970264976950408,CPF\Outputs\Segmented 5m\MW sfm_deposition_logtrans\varcomp_results.csv
+CPF,MW,5m,sfm_deposition_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 5m\MW sfm_deposition_logtrans\varcomp_results.csv
+CPF,MW,5m,sfm_deposition_logtrans,euclid_de,5.64513078589704e-19,CPF\Outputs\Segmented 5m\MW sfm_deposition_logtrans\varcomp_results.csv
+CPF,MW,5m,sfm_deposition_logtrans,nugget,2.55096841647836e-07,CPF\Outputs\Segmented 5m\MW sfm_deposition_logtrans\varcomp_results.csv
+CPF,MW,5m,sfm_erosion_logtrans,Covariates (PR-sq),0.115175029074626,CPF\Outputs\Segmented 5m\MW sfm_erosion_logtrans\varcomp_results.csv
+CPF,MW,5m,sfm_erosion_logtrans,tailup_de,0.221617736289196,CPF\Outputs\Segmented 5m\MW sfm_erosion_logtrans\varcomp_results.csv
+CPF,MW,5m,sfm_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 5m\MW sfm_erosion_logtrans\varcomp_results.csv
+CPF,MW,5m,sfm_erosion_logtrans,euclid_de,0.661237904484366,CPF\Outputs\Segmented 5m\MW sfm_erosion_logtrans\varcomp_results.csv
+CPF,MW,5m,sfm_erosion_logtrans,nugget,0.0019693301518117,CPF\Outputs\Segmented 5m\MW sfm_erosion_logtrans\varcomp_results.csv
+CPF,MW,5m,sfm_net change_logtrans,Covariates (PR-sq),0.0483439477502475,CPF\Outputs\Segmented 5m\MW sfm_net change_logtrans\varcomp_results.csv
+CPF,MW,5m,sfm_net change_logtrans,tailup_de,0.951656049809266,CPF\Outputs\Segmented 5m\MW sfm_net change_logtrans\varcomp_results.csv
+CPF,MW,5m,sfm_net change_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 5m\MW sfm_net change_logtrans\varcomp_results.csv
+CPF,MW,5m,sfm_net change_logtrans,euclid_de,2.4404865887781103e-09,CPF\Outputs\Segmented 5m\MW sfm_net change_logtrans\varcomp_results.csv
+CPF,MW,5m,sfm_net change_logtrans,nugget,6.187306249054501e-118,CPF\Outputs\Segmented 5m\MW sfm_net change_logtrans\varcomp_results.csv
+CPF,UE,5m,lidar_erosion_logtrans,Covariates (PR-sq),0.0767185481203702,CPF\Outputs\Segmented 5m\UE lidar_erosion_logtrans\varcomp_results.csv
+CPF,UE,5m,lidar_erosion_logtrans,tailup_de,0.923281451877884,CPF\Outputs\Segmented 5m\UE lidar_erosion_logtrans\varcomp_results.csv
+CPF,UE,5m,lidar_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 5m\UE lidar_erosion_logtrans\varcomp_results.csv
+CPF,UE,5m,lidar_erosion_logtrans,euclid_de,1.7463383340091698e-12,CPF\Outputs\Segmented 5m\UE lidar_erosion_logtrans\varcomp_results.csv
+CPF,UE,5m,lidar_erosion_logtrans,nugget,1.6767304136933503e-117,CPF\Outputs\Segmented 5m\UE lidar_erosion_logtrans\varcomp_results.csv
+CPF,UE,5m,sfm_deposition_logtrans,Covariates (PR-sq),0.251328653116509,CPF\Outputs\Segmented 5m\UE sfm_deposition_logtrans\varcomp_results.csv
+CPF,UE,5m,sfm_deposition_logtrans,tailup_de,0.748670585463858,CPF\Outputs\Segmented 5m\UE sfm_deposition_logtrans\varcomp_results.csv
+CPF,UE,5m,sfm_deposition_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 5m\UE sfm_deposition_logtrans\varcomp_results.csv
+CPF,UE,5m,sfm_deposition_logtrans,euclid_de,7.61419633373872e-07,CPF\Outputs\Segmented 5m\UE sfm_deposition_logtrans\varcomp_results.csv
+CPF,UE,5m,sfm_deposition_logtrans,nugget,1.1241113661954899e-50,CPF\Outputs\Segmented 5m\UE sfm_deposition_logtrans\varcomp_results.csv
+CPF,UE,5m,sfm_erosion_logtrans,Covariates (PR-sq),0.243051947981915,CPF\Outputs\Segmented 5m\UE sfm_erosion_logtrans\varcomp_results.csv
+CPF,UE,5m,sfm_erosion_logtrans,tailup_de,0.756945179173727,CPF\Outputs\Segmented 5m\UE sfm_erosion_logtrans\varcomp_results.csv
+CPF,UE,5m,sfm_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 5m\UE sfm_erosion_logtrans\varcomp_results.csv
+CPF,UE,5m,sfm_erosion_logtrans,euclid_de,2.8728443577365e-06,CPF\Outputs\Segmented 5m\UE sfm_erosion_logtrans\varcomp_results.csv
+CPF,UE,5m,sfm_erosion_logtrans,nugget,8.75089469265471e-66,CPF\Outputs\Segmented 5m\UE sfm_erosion_logtrans\varcomp_results.csv
+CPF,UE,5m,sfm_net change_logtrans,Covariates (PR-sq),0.102784956117878,CPF\Outputs\Segmented 5m\UE sfm_net change_logtrans\varcomp_results.csv
+CPF,UE,5m,sfm_net change_logtrans,tailup_de,0.797243276667801,CPF\Outputs\Segmented 5m\UE sfm_net change_logtrans\varcomp_results.csv
+CPF,UE,5m,sfm_net change_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 5m\UE sfm_net change_logtrans\varcomp_results.csv
+CPF,UE,5m,sfm_net change_logtrans,euclid_de,0.0999717672143201,CPF\Outputs\Segmented 5m\UE sfm_net change_logtrans\varcomp_results.csv
+CPF,UE,5m,sfm_net change_logtrans,nugget,5.41519415494423e-68,CPF\Outputs\Segmented 5m\UE sfm_net change_logtrans\varcomp_results.csv
+CPF,UM,5m,sfm_deposition_logtrans,Covariates (PR-sq),0.140223532033086,CPF\Outputs\Segmented 5m\UM sfm_deposition_logtrans\varcomp_results.csv
+CPF,UM,5m,sfm_deposition_logtrans,tailup_de,4.72477164032449e-06,CPF\Outputs\Segmented 5m\UM sfm_deposition_logtrans\varcomp_results.csv
+CPF,UM,5m,sfm_deposition_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 5m\UM sfm_deposition_logtrans\varcomp_results.csv
+CPF,UM,5m,sfm_deposition_logtrans,euclid_de,0.859771739955454,CPF\Outputs\Segmented 5m\UM sfm_deposition_logtrans\varcomp_results.csv
+CPF,UM,5m,sfm_deposition_logtrans,nugget,3.2398198041882405e-09,CPF\Outputs\Segmented 5m\UM sfm_deposition_logtrans\varcomp_results.csv
+CPF,UM,5m,sfm_erosion_logtrans,Covariates (PR-sq),0.114921493593364,CPF\Outputs\Segmented 5m\UM sfm_erosion_logtrans\varcomp_results.csv
+CPF,UM,5m,sfm_erosion_logtrans,tailup_de,0.2225028979508,CPF\Outputs\Segmented 5m\UM sfm_erosion_logtrans\varcomp_results.csv
+CPF,UM,5m,sfm_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 5m\UM sfm_erosion_logtrans\varcomp_results.csv
+CPF,UM,5m,sfm_erosion_logtrans,euclid_de,0.65383428535241,CPF\Outputs\Segmented 5m\UM sfm_erosion_logtrans\varcomp_results.csv
+CPF,UM,5m,sfm_erosion_logtrans,nugget,0.0087413231034271,CPF\Outputs\Segmented 5m\UM sfm_erosion_logtrans\varcomp_results.csv
+CPF,UW,5m,sfm_deposition_logtrans,Covariates (PR-sq),0.0458452006604094,CPF\Outputs\Segmented 5m\UW sfm_deposition_logtrans\varcomp_results.csv
+CPF,UW,5m,sfm_deposition_logtrans,tailup_de,0.508840296760674,CPF\Outputs\Segmented 5m\UW sfm_deposition_logtrans\varcomp_results.csv
+CPF,UW,5m,sfm_deposition_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 5m\UW sfm_deposition_logtrans\varcomp_results.csv
+CPF,UW,5m,sfm_deposition_logtrans,euclid_de,0.254311976462377,CPF\Outputs\Segmented 5m\UW sfm_deposition_logtrans\varcomp_results.csv
+CPF,UW,5m,sfm_deposition_logtrans,nugget,0.191002526116539,CPF\Outputs\Segmented 5m\UW sfm_deposition_logtrans\varcomp_results.csv
+CPF,UW,5m,sfm_erosion_logtrans,Covariates (PR-sq),0.105059618326806,CPF\Outputs\Segmented 5m\UW sfm_erosion_logtrans\varcomp_results.csv
+CPF,UW,5m,sfm_erosion_logtrans,tailup_de,0.028649078680407,CPF\Outputs\Segmented 5m\UW sfm_erosion_logtrans\varcomp_results.csv
+CPF,UW,5m,sfm_erosion_logtrans,taildown_de,0.0,CPF\Outputs\Segmented 5m\UW sfm_erosion_logtrans\varcomp_results.csv
+CPF,UW,5m,sfm_erosion_logtrans,euclid_de,0.810681830475446,CPF\Outputs\Segmented 5m\UW sfm_erosion_logtrans\varcomp_results.csv
+CPF,UW,5m,sfm_erosion_logtrans,nugget,0.0556094725173407,CPF\Outputs\Segmented 5m\UW sfm_erosion_logtrans\varcomp_results.csv
+ETF,ETF,10m,lidar_erosion_logtrans,Covariates (PR-sq),0.119457713681143,ETF\Outputs\Segmented 10m\ETF lidar_erosion_logtrans\varcomp_results.csv
+ETF,ETF,10m,lidar_erosion_logtrans,tailup_de,0.880537213511726,ETF\Outputs\Segmented 10m\ETF lidar_erosion_logtrans\varcomp_results.csv
+ETF,ETF,10m,lidar_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 10m\ETF lidar_erosion_logtrans\varcomp_results.csv
+ETF,ETF,10m,lidar_erosion_logtrans,euclid_de,4.26049911703607e-06,ETF\Outputs\Segmented 10m\ETF lidar_erosion_logtrans\varcomp_results.csv
+ETF,ETF,10m,lidar_erosion_logtrans,nugget,2.43184055187512e-27,ETF\Outputs\Segmented 10m\ETF lidar_erosion_logtrans\varcomp_results.csv
+ETF,ETF,10m,lidar_erosion_logtrans,1 | as.factor(ch_watershed),8.12308013772972e-07,ETF\Outputs\Segmented 10m\ETF lidar_erosion_logtrans\varcomp_results.csv
+ETF,ETF,10m,sfm_deposition_logtrans,Covariates (PR-sq),0.253209449066052,ETF\Outputs\Segmented 10m\ETF sfm_deposition_logtrans\varcomp_results.csv
+ETF,ETF,10m,sfm_deposition_logtrans,tailup_de,3.38422506391135e-11,ETF\Outputs\Segmented 10m\ETF sfm_deposition_logtrans\varcomp_results.csv
+ETF,ETF,10m,sfm_deposition_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 10m\ETF sfm_deposition_logtrans\varcomp_results.csv
+ETF,ETF,10m,sfm_deposition_logtrans,euclid_de,2.57647316388275e-13,ETF\Outputs\Segmented 10m\ETF sfm_deposition_logtrans\varcomp_results.csv
+ETF,ETF,10m,sfm_deposition_logtrans,nugget,4.46340836534992e-13,ETF\Outputs\Segmented 10m\ETF sfm_deposition_logtrans\varcomp_results.csv
+ETF,ETF,10m,sfm_deposition_logtrans,1 | as.factor(ch_watershed),0.746790550899402,ETF\Outputs\Segmented 10m\ETF sfm_deposition_logtrans\varcomp_results.csv
+ETF,ETF,10m,sfm_erosion_logtrans,Covariates (PR-sq),0.349644118938074,ETF\Outputs\Segmented 10m\ETF sfm_erosion_logtrans\varcomp_results.csv
+ETF,ETF,10m,sfm_erosion_logtrans,tailup_de,0.65035584836439,ETF\Outputs\Segmented 10m\ETF sfm_erosion_logtrans\varcomp_results.csv
+ETF,ETF,10m,sfm_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 10m\ETF sfm_erosion_logtrans\varcomp_results.csv
+ETF,ETF,10m,sfm_erosion_logtrans,euclid_de,2.19805218498627e-08,ETF\Outputs\Segmented 10m\ETF sfm_erosion_logtrans\varcomp_results.csv
+ETF,ETF,10m,sfm_erosion_logtrans,nugget,3.26520227076842e-55,ETF\Outputs\Segmented 10m\ETF sfm_erosion_logtrans\varcomp_results.csv
+ETF,ETF,10m,sfm_erosion_logtrans,1 | as.factor(ch_watershed),1.0717014181868e-08,ETF\Outputs\Segmented 10m\ETF sfm_erosion_logtrans\varcomp_results.csv
+ETF,ETF,10m,sfm_net change_logtrans,Covariates (PR-sq),0.155034230554158,ETF\Outputs\Segmented 10m\ETF sfm_net change_logtrans\varcomp_results.csv
+ETF,ETF,10m,sfm_net change_logtrans,tailup_de,0.78162999617874,ETF\Outputs\Segmented 10m\ETF sfm_net change_logtrans\varcomp_results.csv
+ETF,ETF,10m,sfm_net change_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 10m\ETF sfm_net change_logtrans\varcomp_results.csv
+ETF,ETF,10m,sfm_net change_logtrans,euclid_de,5.96260189413224e-26,ETF\Outputs\Segmented 10m\ETF sfm_net change_logtrans\varcomp_results.csv
+ETF,ETF,10m,sfm_net change_logtrans,nugget,3.37681158583184e-26,ETF\Outputs\Segmented 10m\ETF sfm_net change_logtrans\varcomp_results.csv
+ETF,ETF,10m,sfm_net change_logtrans,1 | as.factor(ch_watershed),0.0633357732671024,ETF\Outputs\Segmented 10m\ETF sfm_net change_logtrans\varcomp_results.csv
+ETF,LM2,10m,lidar_erosion_logtrans,Covariates (PR-sq),0.0888175711196107,ETF\Outputs\Segmented 10m\LM2 lidar_erosion_logtrans\varcomp_results.csv
+ETF,LM2,10m,lidar_erosion_logtrans,tailup_de,0.0343166030400294,ETF\Outputs\Segmented 10m\LM2 lidar_erosion_logtrans\varcomp_results.csv
+ETF,LM2,10m,lidar_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 10m\LM2 lidar_erosion_logtrans\varcomp_results.csv
+ETF,LM2,10m,lidar_erosion_logtrans,euclid_de,0.87686582584036,ETF\Outputs\Segmented 10m\LM2 lidar_erosion_logtrans\varcomp_results.csv
+ETF,LM2,10m,lidar_erosion_logtrans,nugget,1.49276174993196e-41,ETF\Outputs\Segmented 10m\LM2 lidar_erosion_logtrans\varcomp_results.csv
+ETF,LM2,10m,sfm_deposition_logtrans,Covariates (PR-sq),0.179236249182407,ETF\Outputs\Segmented 10m\LM2 sfm_deposition_logtrans\varcomp_results.csv
+ETF,LM2,10m,sfm_deposition_logtrans,tailup_de,0.820763444546169,ETF\Outputs\Segmented 10m\LM2 sfm_deposition_logtrans\varcomp_results.csv
+ETF,LM2,10m,sfm_deposition_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 10m\LM2 sfm_deposition_logtrans\varcomp_results.csv
+ETF,LM2,10m,sfm_deposition_logtrans,euclid_de,3.06271424087755e-07,ETF\Outputs\Segmented 10m\LM2 sfm_deposition_logtrans\varcomp_results.csv
+ETF,LM2,10m,sfm_deposition_logtrans,nugget,1.86544838874155e-31,ETF\Outputs\Segmented 10m\LM2 sfm_deposition_logtrans\varcomp_results.csv
+ETF,LM2,10m,sfm_erosion_logtrans,Covariates (PR-sq),0.323923893241255,ETF\Outputs\Segmented 10m\LM2 sfm_erosion_logtrans\varcomp_results.csv
+ETF,LM2,10m,sfm_erosion_logtrans,tailup_de,0.676075282656247,ETF\Outputs\Segmented 10m\LM2 sfm_erosion_logtrans\varcomp_results.csv
+ETF,LM2,10m,sfm_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 10m\LM2 sfm_erosion_logtrans\varcomp_results.csv
+ETF,LM2,10m,sfm_erosion_logtrans,euclid_de,8.24102497546288e-07,ETF\Outputs\Segmented 10m\LM2 sfm_erosion_logtrans\varcomp_results.csv
+ETF,LM2,10m,sfm_erosion_logtrans,nugget,6.82196756539169e-21,ETF\Outputs\Segmented 10m\LM2 sfm_erosion_logtrans\varcomp_results.csv
+ETF,LM2,10m,sfm_net change_logtrans,Covariates (PR-sq),0.111947410537002,ETF\Outputs\Segmented 10m\LM2 sfm_net change_logtrans\varcomp_results.csv
+ETF,LM2,10m,sfm_net change_logtrans,tailup_de,0.888052589462892,ETF\Outputs\Segmented 10m\LM2 sfm_net change_logtrans\varcomp_results.csv
+ETF,LM2,10m,sfm_net change_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 10m\LM2 sfm_net change_logtrans\varcomp_results.csv
+ETF,LM2,10m,sfm_net change_logtrans,euclid_de,1.05551978885684e-13,ETF\Outputs\Segmented 10m\LM2 sfm_net change_logtrans\varcomp_results.csv
+ETF,LM2,10m,sfm_net change_logtrans,nugget,1.39591572940763e-60,ETF\Outputs\Segmented 10m\LM2 sfm_net change_logtrans\varcomp_results.csv
+ETF,LPM,10m,lidar_erosion_logtrans,Covariates (PR-sq),0.149660282074832,ETF\Outputs\Segmented 10m\LPM lidar_erosion_logtrans\varcomp_results.csv
+ETF,LPM,10m,lidar_erosion_logtrans,tailup_de,0.0578930879852075,ETF\Outputs\Segmented 10m\LPM lidar_erosion_logtrans\varcomp_results.csv
+ETF,LPM,10m,lidar_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 10m\LPM lidar_erosion_logtrans\varcomp_results.csv
+ETF,LPM,10m,lidar_erosion_logtrans,euclid_de,0.792428014547692,ETF\Outputs\Segmented 10m\LPM lidar_erosion_logtrans\varcomp_results.csv
+ETF,LPM,10m,lidar_erosion_logtrans,nugget,1.86153922682663e-05,ETF\Outputs\Segmented 10m\LPM lidar_erosion_logtrans\varcomp_results.csv
+ETF,LPM,10m,sfm_deposition_logtrans,Covariates (PR-sq),0.127965515555759,ETF\Outputs\Segmented 10m\LPM sfm_deposition_logtrans\varcomp_results.csv
+ETF,LPM,10m,sfm_deposition_logtrans,tailup_de,0.871986014913104,ETF\Outputs\Segmented 10m\LPM sfm_deposition_logtrans\varcomp_results.csv
+ETF,LPM,10m,sfm_deposition_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 10m\LPM sfm_deposition_logtrans\varcomp_results.csv
+ETF,LPM,10m,sfm_deposition_logtrans,euclid_de,5.8867774486618e-08,ETF\Outputs\Segmented 10m\LPM sfm_deposition_logtrans\varcomp_results.csv
+ETF,LPM,10m,sfm_deposition_logtrans,nugget,4.84106633627034e-05,ETF\Outputs\Segmented 10m\LPM sfm_deposition_logtrans\varcomp_results.csv
+ETF,LPM,10m,sfm_erosion_logtrans,Covariates (PR-sq),0.151129386499536,ETF\Outputs\Segmented 10m\LPM sfm_erosion_logtrans\varcomp_results.csv
+ETF,LPM,10m,sfm_erosion_logtrans,tailup_de,8.08733443981431e-13,ETF\Outputs\Segmented 10m\LPM sfm_erosion_logtrans\varcomp_results.csv
+ETF,LPM,10m,sfm_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 10m\LPM sfm_erosion_logtrans\varcomp_results.csv
+ETF,LPM,10m,sfm_erosion_logtrans,euclid_de,8.9915590483601e-06,ETF\Outputs\Segmented 10m\LPM sfm_erosion_logtrans\varcomp_results.csv
+ETF,LPM,10m,sfm_erosion_logtrans,nugget,0.848861621940607,ETF\Outputs\Segmented 10m\LPM sfm_erosion_logtrans\varcomp_results.csv
+ETF,LPM,10m,sfm_net change_logtrans,Covariates (PR-sq),0.0367513220665682,ETF\Outputs\Segmented 10m\LPM sfm_net change_logtrans\varcomp_results.csv
+ETF,LPM,10m,sfm_net change_logtrans,tailup_de,7.16301192155738e-16,ETF\Outputs\Segmented 10m\LPM sfm_net change_logtrans\varcomp_results.csv
+ETF,LPM,10m,sfm_net change_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 10m\LPM sfm_net change_logtrans\varcomp_results.csv
+ETF,LPM,10m,sfm_net change_logtrans,euclid_de,0.963248677933431,ETF\Outputs\Segmented 10m\LPM sfm_net change_logtrans\varcomp_results.csv
+ETF,LPM,10m,sfm_net change_logtrans,nugget,2.4667061322658597e-30,ETF\Outputs\Segmented 10m\LPM sfm_net change_logtrans\varcomp_results.csv
+ETF,MM,10m,lidar_erosion_logtrans,Covariates (PR-sq),0.0950350654373652,ETF\Outputs\Segmented 10m\MM lidar_erosion_logtrans\varcomp_results.csv
+ETF,MM,10m,lidar_erosion_logtrans,tailup_de,0.904962636993287,ETF\Outputs\Segmented 10m\MM lidar_erosion_logtrans\varcomp_results.csv
+ETF,MM,10m,lidar_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 10m\MM lidar_erosion_logtrans\varcomp_results.csv
+ETF,MM,10m,lidar_erosion_logtrans,euclid_de,2.2975693476147e-06,ETF\Outputs\Segmented 10m\MM lidar_erosion_logtrans\varcomp_results.csv
+ETF,MM,10m,lidar_erosion_logtrans,nugget,2.5722047909909e-22,ETF\Outputs\Segmented 10m\MM lidar_erosion_logtrans\varcomp_results.csv
+ETF,MM,10m,sfm_deposition_logtrans,Covariates (PR-sq),0.202652988308622,ETF\Outputs\Segmented 10m\MM sfm_deposition_logtrans\varcomp_results.csv
+ETF,MM,10m,sfm_deposition_logtrans,tailup_de,0.797347011684663,ETF\Outputs\Segmented 10m\MM sfm_deposition_logtrans\varcomp_results.csv
+ETF,MM,10m,sfm_deposition_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 10m\MM sfm_deposition_logtrans\varcomp_results.csv
+ETF,MM,10m,sfm_deposition_logtrans,euclid_de,6.71543038487537e-12,ETF\Outputs\Segmented 10m\MM sfm_deposition_logtrans\varcomp_results.csv
+ETF,MM,10m,sfm_deposition_logtrans,nugget,5.59875211786658e-89,ETF\Outputs\Segmented 10m\MM sfm_deposition_logtrans\varcomp_results.csv
+ETF,MM,10m,sfm_erosion_logtrans,Covariates (PR-sq),0.0855340585214875,ETF\Outputs\Segmented 10m\MM sfm_erosion_logtrans\varcomp_results.csv
+ETF,MM,10m,sfm_erosion_logtrans,tailup_de,5.034801909142871e-44,ETF\Outputs\Segmented 10m\MM sfm_erosion_logtrans\varcomp_results.csv
+ETF,MM,10m,sfm_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 10m\MM sfm_erosion_logtrans\varcomp_results.csv
+ETF,MM,10m,sfm_erosion_logtrans,euclid_de,0.914465941478512,ETF\Outputs\Segmented 10m\MM sfm_erosion_logtrans\varcomp_results.csv
+ETF,MM,10m,sfm_erosion_logtrans,nugget,7.15859384466092e-48,ETF\Outputs\Segmented 10m\MM sfm_erosion_logtrans\varcomp_results.csv
+ETF,MM,10m,sfm_net change_logtrans,Covariates (PR-sq),0.02073755043536,ETF\Outputs\Segmented 10m\MM sfm_net change_logtrans\varcomp_results.csv
+ETF,MM,10m,sfm_net change_logtrans,tailup_de,1.83879545394572e-20,ETF\Outputs\Segmented 10m\MM sfm_net change_logtrans\varcomp_results.csv
+ETF,MM,10m,sfm_net change_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 10m\MM sfm_net change_logtrans\varcomp_results.csv
+ETF,MM,10m,sfm_net change_logtrans,euclid_de,0.0024686865137135,ETF\Outputs\Segmented 10m\MM sfm_net change_logtrans\varcomp_results.csv
+ETF,MM,10m,sfm_net change_logtrans,nugget,0.976793763050926,ETF\Outputs\Segmented 10m\MM sfm_net change_logtrans\varcomp_results.csv
+ETF,ETF,20m,lidar_erosion_logtrans,Covariates (PR-sq),0.249346901381362,ETF\Outputs\Segmented 20m\ETF lidar_erosion_logtrans\varcomp_results.csv
+ETF,ETF,20m,lidar_erosion_logtrans,tailup_de,0.459037759740137,ETF\Outputs\Segmented 20m\ETF lidar_erosion_logtrans\varcomp_results.csv
+ETF,ETF,20m,lidar_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 20m\ETF lidar_erosion_logtrans\varcomp_results.csv
+ETF,ETF,20m,lidar_erosion_logtrans,euclid_de,0.291615338827356,ETF\Outputs\Segmented 20m\ETF lidar_erosion_logtrans\varcomp_results.csv
+ETF,ETF,20m,lidar_erosion_logtrans,nugget,6.222874930667599e-29,ETF\Outputs\Segmented 20m\ETF lidar_erosion_logtrans\varcomp_results.csv
+ETF,ETF,20m,lidar_erosion_logtrans,1 | as.factor(ch_watershed),5.1145462920850393e-11,ETF\Outputs\Segmented 20m\ETF lidar_erosion_logtrans\varcomp_results.csv
+ETF,ETF,20m,sfm_deposition_logtrans,Covariates (PR-sq),0.291525069142417,ETF\Outputs\Segmented 20m\ETF sfm_deposition_logtrans\varcomp_results.csv
+ETF,ETF,20m,sfm_deposition_logtrans,tailup_de,2.8323119215179297e-11,ETF\Outputs\Segmented 20m\ETF sfm_deposition_logtrans\varcomp_results.csv
+ETF,ETF,20m,sfm_deposition_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 20m\ETF sfm_deposition_logtrans\varcomp_results.csv
+ETF,ETF,20m,sfm_deposition_logtrans,euclid_de,0.0007134761578627,ETF\Outputs\Segmented 20m\ETF sfm_deposition_logtrans\varcomp_results.csv
+ETF,ETF,20m,sfm_deposition_logtrans,nugget,3.07404535772648e-45,ETF\Outputs\Segmented 20m\ETF sfm_deposition_logtrans\varcomp_results.csv
+ETF,ETF,20m,sfm_deposition_logtrans,1 | as.factor(ch_watershed),0.707761454671398,ETF\Outputs\Segmented 20m\ETF sfm_deposition_logtrans\varcomp_results.csv
+ETF,ETF,20m,sfm_erosion_logtrans,Covariates (PR-sq),0.381810056147185,ETF\Outputs\Segmented 20m\ETF sfm_erosion_logtrans\varcomp_results.csv
+ETF,ETF,20m,sfm_erosion_logtrans,tailup_de,0.618189114274354,ETF\Outputs\Segmented 20m\ETF sfm_erosion_logtrans\varcomp_results.csv
+ETF,ETF,20m,sfm_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 20m\ETF sfm_erosion_logtrans\varcomp_results.csv
+ETF,ETF,20m,sfm_erosion_logtrans,euclid_de,3.99040141444789e-13,ETF\Outputs\Segmented 20m\ETF sfm_erosion_logtrans\varcomp_results.csv
+ETF,ETF,20m,sfm_erosion_logtrans,nugget,6.17833970114672e-07,ETF\Outputs\Segmented 20m\ETF sfm_erosion_logtrans\varcomp_results.csv
+ETF,ETF,20m,sfm_erosion_logtrans,1 | as.factor(ch_watershed),2.11744092249139e-07,ETF\Outputs\Segmented 20m\ETF sfm_erosion_logtrans\varcomp_results.csv
+ETF,ETF,20m,sfm_net change_logtrans,Covariates (PR-sq),0.176437919561623,ETF\Outputs\Segmented 20m\ETF sfm_net change_logtrans\varcomp_results.csv
+ETF,ETF,20m,sfm_net change_logtrans,tailup_de,1.60851141654541e-30,ETF\Outputs\Segmented 20m\ETF sfm_net change_logtrans\varcomp_results.csv
+ETF,ETF,20m,sfm_net change_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 20m\ETF sfm_net change_logtrans\varcomp_results.csv
+ETF,ETF,20m,sfm_net change_logtrans,euclid_de,1.6170673827663799e-50,ETF\Outputs\Segmented 20m\ETF sfm_net change_logtrans\varcomp_results.csv
+ETF,ETF,20m,sfm_net change_logtrans,nugget,1.4388696143641399e-62,ETF\Outputs\Segmented 20m\ETF sfm_net change_logtrans\varcomp_results.csv
+ETF,ETF,20m,sfm_net change_logtrans,1 | as.factor(ch_watershed),0.823562080438377,ETF\Outputs\Segmented 20m\ETF sfm_net change_logtrans\varcomp_results.csv
+ETF,LM2,20m,lidar_erosion_logtrans,Covariates (PR-sq),0.114121284481479,ETF\Outputs\Segmented 20m\LM2 lidar_erosion_logtrans\varcomp_results.csv
+ETF,LM2,20m,lidar_erosion_logtrans,tailup_de,0.0042188308583917,ETF\Outputs\Segmented 20m\LM2 lidar_erosion_logtrans\varcomp_results.csv
+ETF,LM2,20m,lidar_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 20m\LM2 lidar_erosion_logtrans\varcomp_results.csv
+ETF,LM2,20m,lidar_erosion_logtrans,euclid_de,0.881659884387344,ETF\Outputs\Segmented 20m\LM2 lidar_erosion_logtrans\varcomp_results.csv
+ETF,LM2,20m,lidar_erosion_logtrans,nugget,2.72784749490051e-10,ETF\Outputs\Segmented 20m\LM2 lidar_erosion_logtrans\varcomp_results.csv
+ETF,LM2,20m,sfm_deposition_logtrans,Covariates (PR-sq),0.184087693587672,ETF\Outputs\Segmented 20m\LM2 sfm_deposition_logtrans\varcomp_results.csv
+ETF,LM2,20m,sfm_deposition_logtrans,tailup_de,0.815909825209172,ETF\Outputs\Segmented 20m\LM2 sfm_deposition_logtrans\varcomp_results.csv
+ETF,LM2,20m,sfm_deposition_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 20m\LM2 sfm_deposition_logtrans\varcomp_results.csv
+ETF,LM2,20m,sfm_deposition_logtrans,euclid_de,2.48120315631527e-06,ETF\Outputs\Segmented 20m\LM2 sfm_deposition_logtrans\varcomp_results.csv
+ETF,LM2,20m,sfm_deposition_logtrans,nugget,6.92322878277151e-39,ETF\Outputs\Segmented 20m\LM2 sfm_deposition_logtrans\varcomp_results.csv
+ETF,LM2,20m,sfm_erosion_logtrans,Covariates (PR-sq),0.0380052251680283,ETF\Outputs\Segmented 20m\LM2 sfm_erosion_logtrans\varcomp_results.csv
+ETF,LM2,20m,sfm_erosion_logtrans,tailup_de,0.0015523507503902,ETF\Outputs\Segmented 20m\LM2 sfm_erosion_logtrans\varcomp_results.csv
+ETF,LM2,20m,sfm_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 20m\LM2 sfm_erosion_logtrans\varcomp_results.csv
+ETF,LM2,20m,sfm_erosion_logtrans,euclid_de,0.960442331324554,ETF\Outputs\Segmented 20m\LM2 sfm_erosion_logtrans\varcomp_results.csv
+ETF,LM2,20m,sfm_erosion_logtrans,nugget,9.27570273565778e-08,ETF\Outputs\Segmented 20m\LM2 sfm_erosion_logtrans\varcomp_results.csv
+ETF,LM2,20m,sfm_net change_logtrans,Covariates (PR-sq),0.181340439845753,ETF\Outputs\Segmented 20m\LM2 sfm_net change_logtrans\varcomp_results.csv
+ETF,LM2,20m,sfm_net change_logtrans,tailup_de,8.98605648903456e-13,ETF\Outputs\Segmented 20m\LM2 sfm_net change_logtrans\varcomp_results.csv
+ETF,LM2,20m,sfm_net change_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 20m\LM2 sfm_net change_logtrans\varcomp_results.csv
+ETF,LM2,20m,sfm_net change_logtrans,euclid_de,0.818659560153349,ETF\Outputs\Segmented 20m\LM2 sfm_net change_logtrans\varcomp_results.csv
+ETF,LM2,20m,sfm_net change_logtrans,nugget,1.3408946638849e-62,ETF\Outputs\Segmented 20m\LM2 sfm_net change_logtrans\varcomp_results.csv
+ETF,LPM,20m,lidar_erosion_logtrans,Covariates (PR-sq),0.0846096226839129,ETF\Outputs\Segmented 20m\LPM lidar_erosion_logtrans\varcomp_results.csv
+ETF,LPM,20m,lidar_erosion_logtrans,tailup_de,0.159559260743027,ETF\Outputs\Segmented 20m\LPM lidar_erosion_logtrans\varcomp_results.csv
+ETF,LPM,20m,lidar_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 20m\LPM lidar_erosion_logtrans\varcomp_results.csv
+ETF,LPM,20m,lidar_erosion_logtrans,euclid_de,0.755826448716118,ETF\Outputs\Segmented 20m\LPM lidar_erosion_logtrans\varcomp_results.csv
+ETF,LPM,20m,lidar_erosion_logtrans,nugget,4.66785694205796e-06,ETF\Outputs\Segmented 20m\LPM lidar_erosion_logtrans\varcomp_results.csv
+ETF,LPM,20m,sfm_deposition_logtrans,Covariates (PR-sq),0.0186236195128644,ETF\Outputs\Segmented 20m\LPM sfm_deposition_logtrans\varcomp_results.csv
+ETF,LPM,20m,sfm_deposition_logtrans,tailup_de,0.981376380483763,ETF\Outputs\Segmented 20m\LPM sfm_deposition_logtrans\varcomp_results.csv
+ETF,LPM,20m,sfm_deposition_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 20m\LPM sfm_deposition_logtrans\varcomp_results.csv
+ETF,LPM,20m,sfm_deposition_logtrans,euclid_de,3.37291482624978e-12,ETF\Outputs\Segmented 20m\LPM sfm_deposition_logtrans\varcomp_results.csv
+ETF,LPM,20m,sfm_deposition_logtrans,nugget,3.45170779123099e-33,ETF\Outputs\Segmented 20m\LPM sfm_deposition_logtrans\varcomp_results.csv
+ETF,LPM,20m,sfm_erosion_logtrans,Covariates (PR-sq),0.199305778099137,ETF\Outputs\Segmented 20m\LPM sfm_erosion_logtrans\varcomp_results.csv
+ETF,LPM,20m,sfm_erosion_logtrans,tailup_de,0.0005834081883374,ETF\Outputs\Segmented 20m\LPM sfm_erosion_logtrans\varcomp_results.csv
+ETF,LPM,20m,sfm_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 20m\LPM sfm_erosion_logtrans\varcomp_results.csv
+ETF,LPM,20m,sfm_erosion_logtrans,euclid_de,2.59475069548583e-06,ETF\Outputs\Segmented 20m\LPM sfm_erosion_logtrans\varcomp_results.csv
+ETF,LPM,20m,sfm_erosion_logtrans,nugget,0.80010821896183,ETF\Outputs\Segmented 20m\LPM sfm_erosion_logtrans\varcomp_results.csv
+ETF,LPM,20m,sfm_net change_logtrans,Covariates (PR-sq),0.0627420097618826,ETF\Outputs\Segmented 20m\LPM sfm_net change_logtrans\varcomp_results.csv
+ETF,LPM,20m,sfm_net change_logtrans,tailup_de,0.845303233288824,ETF\Outputs\Segmented 20m\LPM sfm_net change_logtrans\varcomp_results.csv
+ETF,LPM,20m,sfm_net change_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 20m\LPM sfm_net change_logtrans\varcomp_results.csv
+ETF,LPM,20m,sfm_net change_logtrans,euclid_de,0.0919547569492932,ETF\Outputs\Segmented 20m\LPM sfm_net change_logtrans\varcomp_results.csv
+ETF,LPM,20m,sfm_net change_logtrans,nugget,7.97490608255042e-163,ETF\Outputs\Segmented 20m\LPM sfm_net change_logtrans\varcomp_results.csv
+ETF,MM,20m,lidar_erosion_logtrans,Covariates (PR-sq),0.0695973361807988,ETF\Outputs\Segmented 20m\MM lidar_erosion_logtrans\varcomp_results.csv
+ETF,MM,20m,lidar_erosion_logtrans,tailup_de,0.930402653030791,ETF\Outputs\Segmented 20m\MM lidar_erosion_logtrans\varcomp_results.csv
+ETF,MM,20m,lidar_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 20m\MM lidar_erosion_logtrans\varcomp_results.csv
+ETF,MM,20m,lidar_erosion_logtrans,euclid_de,1.07884106483244e-08,ETF\Outputs\Segmented 20m\MM lidar_erosion_logtrans\varcomp_results.csv
+ETF,MM,20m,lidar_erosion_logtrans,nugget,8.89317805242551e-76,ETF\Outputs\Segmented 20m\MM lidar_erosion_logtrans\varcomp_results.csv
+ETF,MM,20m,sfm_deposition_logtrans,Covariates (PR-sq),0.120843573723812,ETF\Outputs\Segmented 20m\MM sfm_deposition_logtrans\varcomp_results.csv
+ETF,MM,20m,sfm_deposition_logtrans,tailup_de,0.879156426266884,ETF\Outputs\Segmented 20m\MM sfm_deposition_logtrans\varcomp_results.csv
+ETF,MM,20m,sfm_deposition_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 20m\MM sfm_deposition_logtrans\varcomp_results.csv
+ETF,MM,20m,sfm_deposition_logtrans,euclid_de,2.4732351071323e-24,ETF\Outputs\Segmented 20m\MM sfm_deposition_logtrans\varcomp_results.csv
+ETF,MM,20m,sfm_deposition_logtrans,nugget,9.30400650241899e-12,ETF\Outputs\Segmented 20m\MM sfm_deposition_logtrans\varcomp_results.csv
+ETF,MM,20m,sfm_erosion_logtrans,Covariates (PR-sq),0.0848709057186398,ETF\Outputs\Segmented 20m\MM sfm_erosion_logtrans\varcomp_results.csv
+ETF,MM,20m,sfm_erosion_logtrans,tailup_de,2.2671638035958702e-15,ETF\Outputs\Segmented 20m\MM sfm_erosion_logtrans\varcomp_results.csv
+ETF,MM,20m,sfm_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 20m\MM sfm_erosion_logtrans\varcomp_results.csv
+ETF,MM,20m,sfm_erosion_logtrans,euclid_de,0.915129094281358,ETF\Outputs\Segmented 20m\MM sfm_erosion_logtrans\varcomp_results.csv
+ETF,MM,20m,sfm_erosion_logtrans,nugget,2.29003607445629e-56,ETF\Outputs\Segmented 20m\MM sfm_erosion_logtrans\varcomp_results.csv
+ETF,MM,20m,sfm_net change_logtrans,Covariates (PR-sq),0.0170595568944871,ETF\Outputs\Segmented 20m\MM sfm_net change_logtrans\varcomp_results.csv
+ETF,MM,20m,sfm_net change_logtrans,tailup_de,0.982940443105513,ETF\Outputs\Segmented 20m\MM sfm_net change_logtrans\varcomp_results.csv
+ETF,MM,20m,sfm_net change_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 20m\MM sfm_net change_logtrans\varcomp_results.csv
+ETF,MM,20m,sfm_net change_logtrans,euclid_de,1.94308803615683e-59,ETF\Outputs\Segmented 20m\MM sfm_net change_logtrans\varcomp_results.csv
+ETF,MM,20m,sfm_net change_logtrans,nugget,1.95904280122511e-25,ETF\Outputs\Segmented 20m\MM sfm_net change_logtrans\varcomp_results.csv
+ETF,ETF,5m,lidar_erosion_logtrans,Covariates (PR-sq),0.0740496996056572,ETF\Outputs\Segmented 5m\ETF lidar_erosion_logtrans\varcomp_results.csv
+ETF,ETF,5m,lidar_erosion_logtrans,tailup_de,0.925949009238467,ETF\Outputs\Segmented 5m\ETF lidar_erosion_logtrans\varcomp_results.csv
+ETF,ETF,5m,lidar_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 5m\ETF lidar_erosion_logtrans\varcomp_results.csv
+ETF,ETF,5m,lidar_erosion_logtrans,euclid_de,1.19860459175224e-06,ETF\Outputs\Segmented 5m\ETF lidar_erosion_logtrans\varcomp_results.csv
+ETF,ETF,5m,lidar_erosion_logtrans,nugget,5.47522100988759e-32,ETF\Outputs\Segmented 5m\ETF lidar_erosion_logtrans\varcomp_results.csv
+ETF,ETF,5m,lidar_erosion_logtrans,1 | as.factor(ch_watershed),9.25512839500568e-08,ETF\Outputs\Segmented 5m\ETF lidar_erosion_logtrans\varcomp_results.csv
+ETF,ETF,5m,sfm_deposition_logtrans,Covariates (PR-sq),0.313599658704192,ETF\Outputs\Segmented 5m\ETF sfm_deposition_logtrans\varcomp_results.csv
+ETF,ETF,5m,sfm_deposition_logtrans,tailup_de,0.674845735566253,ETF\Outputs\Segmented 5m\ETF sfm_deposition_logtrans\varcomp_results.csv
+ETF,ETF,5m,sfm_deposition_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 5m\ETF sfm_deposition_logtrans\varcomp_results.csv
+ETF,ETF,5m,sfm_deposition_logtrans,euclid_de,0.0114700310559569,ETF\Outputs\Segmented 5m\ETF sfm_deposition_logtrans\varcomp_results.csv
+ETF,ETF,5m,sfm_deposition_logtrans,nugget,1.2387013477941e-41,ETF\Outputs\Segmented 5m\ETF sfm_deposition_logtrans\varcomp_results.csv
+ETF,ETF,5m,sfm_deposition_logtrans,1 | as.factor(ch_watershed),8.45746735978713e-05,ETF\Outputs\Segmented 5m\ETF sfm_deposition_logtrans\varcomp_results.csv
+ETF,ETF,5m,sfm_erosion_logtrans,Covariates (PR-sq),0.0948996128819425,ETF\Outputs\Segmented 5m\ETF sfm_erosion_logtrans\varcomp_results.csv
+ETF,ETF,5m,sfm_erosion_logtrans,tailup_de,0.905099952079792,ETF\Outputs\Segmented 5m\ETF sfm_erosion_logtrans\varcomp_results.csv
+ETF,ETF,5m,sfm_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 5m\ETF sfm_erosion_logtrans\varcomp_results.csv
+ETF,ETF,5m,sfm_erosion_logtrans,euclid_de,7.37362381197963e-08,ETF\Outputs\Segmented 5m\ETF sfm_erosion_logtrans\varcomp_results.csv
+ETF,ETF,5m,sfm_erosion_logtrans,nugget,1.04832131278453e-17,ETF\Outputs\Segmented 5m\ETF sfm_erosion_logtrans\varcomp_results.csv
+ETF,ETF,5m,sfm_erosion_logtrans,1 | as.factor(ch_watershed),3.61302027350991e-07,ETF\Outputs\Segmented 5m\ETF sfm_erosion_logtrans\varcomp_results.csv
+ETF,ETF,5m,sfm_net change_logtrans,Covariates (PR-sq),0.130598044888065,ETF\Outputs\Segmented 5m\ETF sfm_net change_logtrans\varcomp_results.csv
+ETF,ETF,5m,sfm_net change_logtrans,tailup_de,2.4351479037036297e-11,ETF\Outputs\Segmented 5m\ETF sfm_net change_logtrans\varcomp_results.csv
+ETF,ETF,5m,sfm_net change_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 5m\ETF sfm_net change_logtrans\varcomp_results.csv
+ETF,ETF,5m,sfm_net change_logtrans,euclid_de,0.868207009211563,ETF\Outputs\Segmented 5m\ETF sfm_net change_logtrans\varcomp_results.csv
+ETF,ETF,5m,sfm_net change_logtrans,nugget,2.0413638885900402e-65,ETF\Outputs\Segmented 5m\ETF sfm_net change_logtrans\varcomp_results.csv
+ETF,ETF,5m,sfm_net change_logtrans,1 | as.factor(ch_watershed),0.0011949458760196,ETF\Outputs\Segmented 5m\ETF sfm_net change_logtrans\varcomp_results.csv
+ETF,LM2,5m,lidar_erosion_logtrans,Covariates (PR-sq),0.0892580777078155,ETF\Outputs\Segmented 5m\LM2 lidar_erosion_logtrans\varcomp_results.csv
+ETF,LM2,5m,lidar_erosion_logtrans,tailup_de,0.910741391204255,ETF\Outputs\Segmented 5m\LM2 lidar_erosion_logtrans\varcomp_results.csv
+ETF,LM2,5m,lidar_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 5m\LM2 lidar_erosion_logtrans\varcomp_results.csv
+ETF,LM2,5m,lidar_erosion_logtrans,euclid_de,5.3108792979221e-07,ETF\Outputs\Segmented 5m\LM2 lidar_erosion_logtrans\varcomp_results.csv
+ETF,LM2,5m,lidar_erosion_logtrans,nugget,5.31646143498577e-24,ETF\Outputs\Segmented 5m\LM2 lidar_erosion_logtrans\varcomp_results.csv
+ETF,LM2,5m,sfm_deposition_logtrans,Covariates (PR-sq),0.127055555706768,ETF\Outputs\Segmented 5m\LM2 sfm_deposition_logtrans\varcomp_results.csv
+ETF,LM2,5m,sfm_deposition_logtrans,tailup_de,0.187131831684041,ETF\Outputs\Segmented 5m\LM2 sfm_deposition_logtrans\varcomp_results.csv
+ETF,LM2,5m,sfm_deposition_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 5m\LM2 sfm_deposition_logtrans\varcomp_results.csv
+ETF,LM2,5m,sfm_deposition_logtrans,euclid_de,0.685719582514529,ETF\Outputs\Segmented 5m\LM2 sfm_deposition_logtrans\varcomp_results.csv
+ETF,LM2,5m,sfm_deposition_logtrans,nugget,9.30300946623892e-05,ETF\Outputs\Segmented 5m\LM2 sfm_deposition_logtrans\varcomp_results.csv
+ETF,LM2,5m,sfm_erosion_logtrans,Covariates (PR-sq),0.161738659769938,ETF\Outputs\Segmented 5m\LM2 sfm_erosion_logtrans\varcomp_results.csv
+ETF,LM2,5m,sfm_erosion_logtrans,tailup_de,0.838260245290242,ETF\Outputs\Segmented 5m\LM2 sfm_erosion_logtrans\varcomp_results.csv
+ETF,LM2,5m,sfm_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 5m\LM2 sfm_erosion_logtrans\varcomp_results.csv
+ETF,LM2,5m,sfm_erosion_logtrans,euclid_de,1.09493730968705e-06,ETF\Outputs\Segmented 5m\LM2 sfm_erosion_logtrans\varcomp_results.csv
+ETF,LM2,5m,sfm_erosion_logtrans,nugget,2.50946539735889e-12,ETF\Outputs\Segmented 5m\LM2 sfm_erosion_logtrans\varcomp_results.csv
+ETF,LM2,5m,sfm_net change_logtrans,Covariates (PR-sq),0.167652159346627,ETF\Outputs\Segmented 5m\LM2 sfm_net change_logtrans\varcomp_results.csv
+ETF,LM2,5m,sfm_net change_logtrans,tailup_de,0.832322717277247,ETF\Outputs\Segmented 5m\LM2 sfm_net change_logtrans\varcomp_results.csv
+ETF,LM2,5m,sfm_net change_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 5m\LM2 sfm_net change_logtrans\varcomp_results.csv
+ETF,LM2,5m,sfm_net change_logtrans,euclid_de,2.51233761258837e-05,ETF\Outputs\Segmented 5m\LM2 sfm_net change_logtrans\varcomp_results.csv
+ETF,LM2,5m,sfm_net change_logtrans,nugget,2.63101199563258e-299,ETF\Outputs\Segmented 5m\LM2 sfm_net change_logtrans\varcomp_results.csv
+ETF,LPM,5m,lidar_erosion_logtrans,Covariates (PR-sq),0.150981758575816,ETF\Outputs\Segmented 5m\LPM lidar_erosion_logtrans\varcomp_results.csv
+ETF,LPM,5m,lidar_erosion_logtrans,tailup_de,0.0676475414594564,ETF\Outputs\Segmented 5m\LPM lidar_erosion_logtrans\varcomp_results.csv
+ETF,LPM,5m,lidar_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 5m\LPM lidar_erosion_logtrans\varcomp_results.csv
+ETF,LPM,5m,lidar_erosion_logtrans,euclid_de,0.708588649693918,ETF\Outputs\Segmented 5m\LPM lidar_erosion_logtrans\varcomp_results.csv
+ETF,LPM,5m,lidar_erosion_logtrans,nugget,0.0727820502708098,ETF\Outputs\Segmented 5m\LPM lidar_erosion_logtrans\varcomp_results.csv
+ETF,LPM,5m,sfm_deposition_logtrans,Covariates (PR-sq),0.132116956202183,ETF\Outputs\Segmented 5m\LPM sfm_deposition_logtrans\varcomp_results.csv
+ETF,LPM,5m,sfm_deposition_logtrans,tailup_de,0.191175123870367,ETF\Outputs\Segmented 5m\LPM sfm_deposition_logtrans\varcomp_results.csv
+ETF,LPM,5m,sfm_deposition_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 5m\LPM sfm_deposition_logtrans\varcomp_results.csv
+ETF,LPM,5m,sfm_deposition_logtrans,euclid_de,0.676705960639122,ETF\Outputs\Segmented 5m\LPM sfm_deposition_logtrans\varcomp_results.csv
+ETF,LPM,5m,sfm_deposition_logtrans,nugget,1.95928832786902e-06,ETF\Outputs\Segmented 5m\LPM sfm_deposition_logtrans\varcomp_results.csv
+ETF,LPM,5m,sfm_erosion_logtrans,Covariates (PR-sq),0.18647469732893,ETF\Outputs\Segmented 5m\LPM sfm_erosion_logtrans\varcomp_results.csv
+ETF,LPM,5m,sfm_erosion_logtrans,tailup_de,0.813525296661764,ETF\Outputs\Segmented 5m\LPM sfm_erosion_logtrans\varcomp_results.csv
+ETF,LPM,5m,sfm_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 5m\LPM sfm_erosion_logtrans\varcomp_results.csv
+ETF,LPM,5m,sfm_erosion_logtrans,euclid_de,3.6931273885037703e-09,ETF\Outputs\Segmented 5m\LPM sfm_erosion_logtrans\varcomp_results.csv
+ETF,LPM,5m,sfm_erosion_logtrans,nugget,2.31617815673444e-09,ETF\Outputs\Segmented 5m\LPM sfm_erosion_logtrans\varcomp_results.csv
+ETF,LPM,5m,sfm_net change_logtrans,Covariates (PR-sq),0.0688851760435004,ETF\Outputs\Segmented 5m\LPM sfm_net change_logtrans\varcomp_results.csv
+ETF,LPM,5m,sfm_net change_logtrans,tailup_de,1.39017959155605e-05,ETF\Outputs\Segmented 5m\LPM sfm_net change_logtrans\varcomp_results.csv
+ETF,LPM,5m,sfm_net change_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 5m\LPM sfm_net change_logtrans\varcomp_results.csv
+ETF,LPM,5m,sfm_net change_logtrans,euclid_de,0.910438912883609,ETF\Outputs\Segmented 5m\LPM sfm_net change_logtrans\varcomp_results.csv
+ETF,LPM,5m,sfm_net change_logtrans,nugget,0.0206620092769753,ETF\Outputs\Segmented 5m\LPM sfm_net change_logtrans\varcomp_results.csv
+ETF,MM,5m,lidar_erosion_logtrans,Covariates (PR-sq),0.0762423676314812,ETF\Outputs\Segmented 5m\MM lidar_erosion_logtrans\varcomp_results.csv
+ETF,MM,5m,lidar_erosion_logtrans,tailup_de,0.923757561230153,ETF\Outputs\Segmented 5m\MM lidar_erosion_logtrans\varcomp_results.csv
+ETF,MM,5m,lidar_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 5m\MM lidar_erosion_logtrans\varcomp_results.csv
+ETF,MM,5m,lidar_erosion_logtrans,euclid_de,7.11132849737994e-08,ETF\Outputs\Segmented 5m\MM lidar_erosion_logtrans\varcomp_results.csv
+ETF,MM,5m,lidar_erosion_logtrans,nugget,2.5080984375974796e-11,ETF\Outputs\Segmented 5m\MM lidar_erosion_logtrans\varcomp_results.csv
+ETF,MM,5m,sfm_deposition_logtrans,Covariates (PR-sq),0.156952407173907,ETF\Outputs\Segmented 5m\MM sfm_deposition_logtrans\varcomp_results.csv
+ETF,MM,5m,sfm_deposition_logtrans,tailup_de,0.843046097777234,ETF\Outputs\Segmented 5m\MM sfm_deposition_logtrans\varcomp_results.csv
+ETF,MM,5m,sfm_deposition_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 5m\MM sfm_deposition_logtrans\varcomp_results.csv
+ETF,MM,5m,sfm_deposition_logtrans,euclid_de,1.49504885918072e-06,ETF\Outputs\Segmented 5m\MM sfm_deposition_logtrans\varcomp_results.csv
+ETF,MM,5m,sfm_deposition_logtrans,nugget,4.05527976315813e-53,ETF\Outputs\Segmented 5m\MM sfm_deposition_logtrans\varcomp_results.csv
+ETF,MM,5m,sfm_erosion_logtrans,Covariates (PR-sq),0.0511389527788417,ETF\Outputs\Segmented 5m\MM sfm_erosion_logtrans\varcomp_results.csv
+ETF,MM,5m,sfm_erosion_logtrans,tailup_de,0.114682750620422,ETF\Outputs\Segmented 5m\MM sfm_erosion_logtrans\varcomp_results.csv
+ETF,MM,5m,sfm_erosion_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 5m\MM sfm_erosion_logtrans\varcomp_results.csv
+ETF,MM,5m,sfm_erosion_logtrans,euclid_de,0.834141622850831,ETF\Outputs\Segmented 5m\MM sfm_erosion_logtrans\varcomp_results.csv
+ETF,MM,5m,sfm_erosion_logtrans,nugget,3.66737499052416e-05,ETF\Outputs\Segmented 5m\MM sfm_erosion_logtrans\varcomp_results.csv
+ETF,MM,5m,sfm_net change_logtrans,Covariates (PR-sq),0.0144501799331749,ETF\Outputs\Segmented 5m\MM sfm_net change_logtrans\varcomp_results.csv
+ETF,MM,5m,sfm_net change_logtrans,tailup_de,0.985547625371895,ETF\Outputs\Segmented 5m\MM sfm_net change_logtrans\varcomp_results.csv
+ETF,MM,5m,sfm_net change_logtrans,taildown_de,0.0,ETF\Outputs\Segmented 5m\MM sfm_net change_logtrans\varcomp_results.csv
+ETF,MM,5m,sfm_net change_logtrans,euclid_de,1.81701539314233e-06,ETF\Outputs\Segmented 5m\MM sfm_net change_logtrans\varcomp_results.csv
+ETF,MM,5m,sfm_net change_logtrans,nugget,3.7767953741682e-07,ETF\Outputs\Segmented 5m\MM sfm_net change_logtrans\varcomp_results.csv

@@ -1,0 +1,30 @@
+
+Starting Bootstrapping...
+
+Bootstrap Summary:
+[1] "Model Type: ssn_lm"
+# A tibble: 20 × 6
+   term                               estimate_mean estimate_sd conf_low conf_high   p_value
+   <chr>                                      <dbl>       <dbl>    <dbl>     <dbl>     <dbl>
+ 1 (Intercept)                              9.10          1.11     7.48     11.6   0        
+ 2 ch_change.in.slope.over.width            1.09          0.929   -0.413     3.30  2.34e-190
+ 3 ch_channel.width.over.valley.width      -0.681         1.23    -3.02      1.78  2.12e- 60
+ 4 ch_curvature.median                      1.28          1.17    -0.918     3.57  1.30e-171
+ 5 ch_slope.over.width                     -0.743         0.706   -1.94      1.22  3.85e-164
+ 6 ch_slope.over.width.central.diff        -0.372         0.768   -2.77      0.223 1.13e- 47
+ 7 hs_area                                 -0.421         0.631   -1.62      0.858 3.33e- 82
+ 8 hs_curvature.median                      0.00497       0.260   -0.500     0.556 5.46e-  1
+ 9 hs_eastness.median                      -3.47          1.30    -5.89     -1.04  0        
+10 hs_extended.dnbr.median                 -1.57          0.911   -3.26      0.291 7.68e-302
+11 hs_flow.accumulation.max                 1.08          0.685   -0.296     2.38  6.96e-273
+12 hs_ndvi.min                             -1.65          1.13    -3.79      0.558 1.79e-250
+13 hs_northness.median                     -0.825         0.823   -2.49      0.764 4.20e-153
+14 hs_slope.median                          0.975         0.842   -0.746     2.42  7.72e-187
+15 ws_RV.Silt                              -1.42          0.871   -2.96      0.240 5.05e-284
+16 ws_aspect.eastness_mean                  4.56          1.57     1.35      6.77  0        
+17 ws_bare.earth_mean                      -0.304         0.833   -2.14      0.915 4.74e- 29
+18 ws_flow.accum_max                        2.96          2.61    -0.152     8.27  5.52e-182
+19 ws_mi60_mean                            -0.614         1.21    -2.49      1.98  3.85e- 52
+20 ws_ndvi.range_mean                       2.47          2.88    -1.03      9.79  3.65e-122
+
+Bootstrapping Completed.
