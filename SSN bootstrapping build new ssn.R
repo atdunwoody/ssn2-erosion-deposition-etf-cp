@@ -2,19 +2,18 @@
 ########################### USER DEFINED VARIABLES #############################
 ################################################################################
 
-#print working directory
+# Print working directory
 getwd()
 
 # ETF prefixes: "ET sfm", "LM2 sfm", "LPM sfm", "MM_ET"
 #               "ET lidar", "LM2 lidar", "LPM lidar", "MM_ET lidar"
 # CPF prefixes: "CPF sfm", "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm"
-#                  "CPF lidar", "ME lidar", "MM lidar", "MW lidar", "UE lidar", "UW lidar", "UM lidar"
+#              "CPF lidar", "ME lidar", "MM lidar", "MW lidar", "UE lidar", "UW lidar", "UM lidar"
 prefixes <- c(
   # "ET lidar",
   # "ET sfm",
   # "CPF sfm",
   "CPF lidar"
-
 )
 
 # Types: "erosion", "deposition", "net"
@@ -25,8 +24,8 @@ types <- c(
 )
 
 segment_list <- c(
-  # 20
-  10
+  20
+  # 10
   #,5
 )
 
@@ -35,7 +34,7 @@ segment_list <- c(
 formula_file_name <- "ssn_formula.txt"
 
 # If TRUE, the SSN object will be loaded from the existing path
-load_ssn <- FALSE
+load_ssn <- TRUE
 
 # Bootstrapping parameters
 n_bootstrap <- 100  # Number of bootstrap samples 
@@ -44,11 +43,9 @@ set.seed(123)      # For reproducibility
 ################################################################################
 ######################### LOAD LIBRARIES ########################################
 ################################################################################
-# Install tictoc if not already installed
 if (!requireNamespace("tictoc", quietly = TRUE)) {
   install.packages("tictoc")
 }
-# Load Required Libraries
 library(SSN2)
 library(SSNbler)
 library(sf)
@@ -82,503 +79,305 @@ failures <- list()
 # Loop through each segment, type, and prefix
 for (prefix in prefixes) {   
   for (segment in segment_list) {
-    for (type in types) {
+    for (type in types) {  
       if (grepl("lidar", prefix) && type != "erosion") {
         next
       }
-      # Wrap the entire process in tryCatch
+      # Wrap the entire process in tryCatch to capture high-level errors
       tryCatch({
         
-        CPF_prefixes <- c("CPF sfm", "ME sfm", "MM sfm", "MW sfm", 
-                              "UE sfm", "UW sfm", "UM sfm", "CPF lidar", 
-                              "ME lidar", "MM lidar", "MW lidar", "UE lidar", 
-                              "UW lidar", "UM lidar")
-        
-        if (prefix %in% CPF_prefixes) {
-          region <- "CPF"
-        } else {
-          region <- "ETF"
-        }
-        
-        if (prefix =="MM_ET sfm") {
-          prefix <- "MM sfm"
-        } else if (prefix == "MM_ET lidar") {
-          prefix <- "MM lidar"
-        }
+        CPF_prefixes <- c("CPF sfm", "CPF lidar")
+        region <- if (prefix %in% CPF_prefixes) "CPF" else "ETF"
         
         message(paste0("\n\nProcessing: | ", prefix, " | ", type, " | ", segment, "m |\n"))
         
-        base_input_folder <- file.path(region,"Inputs")
-        base_output_folder <- file.path(region,"Outputs")
+        base_input_folder <- file.path(region, "Inputs")
+        base_output_folder <- file.path(region, "Outputs")
         segment_input_folder <- file.path(base_input_folder, paste0("Segmented ", segment, "m"))
         segment_output_folder <- file.path(base_output_folder, paste0("Segmented ", segment, "m"))
         
-        # Determines whether random effect of watershed is included
-        if (prefix %in% c("CPF", "ET", "CPF sfm", "ET sfm", 
-                          "CPF lidar", "ET lidar")) {
-          input_obs <- file.path(
-            segment_input_folder, 
-            "Combined Watersheds", 
-            paste(prefix, type, "ssn points.gpkg", sep = " ")
-          )
-          multiple_ws <- TRUE
-        } else {
-          input_obs <- file.path(
-            segment_input_folder, 
-            "Individual Watersheds", 
-            paste(prefix, type, "ssn points.gpkg", sep = " ")
-          )
-          multiple_ws <- FALSE
-        }
-        
-        output_folder <- file.path(
-          segment_output_folder, 
-          paste0(prefix, "_", type, "_logtrans")
-        )
-        
+        output_folder <- file.path(segment_output_folder, paste0(prefix, "_", type, "_logtrans"))
         bootstrap_folder <- file.path(output_folder, "bootstrap_results")
         if (!dir.exists(bootstrap_folder)) {
           dir.create(bootstrap_folder, recursive = TRUE)
         }
         
-        formula_file <- file.path(
-          output_folder, 
-          formula_file_name
-        )
-        
+        formula_file <- file.path(output_folder, formula_file_name)
         if (!file.exists(formula_file)) {
           stop(paste("Formula file does not exist:", formula_file))
         }
         model_formula_str <- readLines(formula_file)
         model_formula <- as.formula(model_formula_str)
         response_var <- all.vars(model_formula)[1]
-        
         message("Model formula: \n", model_formula_str)
-        
         
         output_file <- file.path(
           bootstrap_folder, 
           paste0(response_var, " ", segment, "m_VIF-2_corr0.6_bootstrap.txt")
         )
         
-        
-        ssn_path <- file.path(
-          output_folder, 
-          paste0(prefix, "_", type, "_logtrans.ssn")
-        )
-        
-        lsn_out <- file.path(output_folder, "lsn_out")
-        input_streams <- file.path(
-          base_input_folder, 
-          "Streams", 
-          "streams_100k.gpkg"
-        )
-        
+        input_streams <- file.path(base_input_folder, "Streams", "streams_100k.gpkg")
         if (!dir.exists(output_folder)) {
           dir.create(output_folder, recursive = TRUE)
         }
         
         bootstrap_results_file <- file.path(bootstrap_folder, paste0(prefix, "_bootstrap_results.", type, ".csv"))
-        
         if (file.exists(bootstrap_results_file)) {
           message(paste0("Bootstrap results file already exists: ", bootstrap_results_file))
           next
         }
         
         ################################################################################
-        ########################### SSN2 PREPROCESSING ##################################
+        ########################### BOOTSTRAPPING FUNCTION ##############################
         ################################################################################
-        if (!load_ssn) {
-          CP_streams <- st_read(input_streams)
-          CP_obs <- st_read(input_obs)
+        bootstrap_model <- function(input_obs, n_boot, model_formula, multiple_ws) {
           
-          # Convert lines to spatial network (LSN)
-          edges <- lines_to_lsn(
-            streams = CP_streams,
-            lsn_path = lsn_out,
-            snap_tolerance = 1,
-            check_topology = TRUE,
-            topo_tolerance = 2,
-            overwrite = TRUE,
-            verbose = TRUE,
-            remove_ZM = TRUE
-          )
+          message(paste0("\nFitting model for | ", prefix, " | ", type, " | ", segment, "m | with ", n_boot, " bootstrap samples..."))
           
-          obs <- sites_to_lsn(
-            sites = CP_obs,
-            edges = edges,
-            lsn_path = lsn_out,
-            file_name = "obs",
-            snap_tolerance = 10,
-            save_local = TRUE,
-            overwrite = TRUE
-          )
+          obs_data <- st_read(input_obs)
+          message("DEBUG: Read obs_data with ", nrow(obs_data), " rows.")
           
-          edges <- updist_edges(edges = edges, lsn_path = lsn_out, calc_length = TRUE)
-          site.list <- updist_sites(
-            sites = list(obs = obs), 
-            edges = edges,
-            length_col = "Length", 
-            lsn_path = lsn_out
-          )
+          # We'll allow up to 1 attempt per bootstrap iteration
+          max_attempts <- 10
           
-          infl_col <- "flow_accum_max"
-          segpi <- "flow_accum_PI"
-          afv_col <- "afv_flow_accum"
-          
-          edges <- afv_edges(
-            edges = edges, 
-            infl_col = infl_col, 
-            segpi = segpi,
-            afv_col = afv_col, 
-            lsn_path = lsn_out
-          )
-          site.list <- afv_sites(
-            sites = site.list, 
-            edges = edges, 
-            afv_col = afv_col,
-            save_local = TRUE, 
-            lsn_path = lsn_out
-          )
-          
-          CP_ssn <- ssn_assemble(
-            edges = edges,
-            lsn_path = lsn_out,
-            obs_sites = site.list$obs,
-            ssn_path = ssn_path,
-            import = TRUE,
-            overwrite = TRUE
-          )
-        } else {
-          CP_ssn <- ssn_import(ssn_path, overwrite = TRUE)
-        }
-        
-        ssn_create_distmat(CP_ssn)
-        
-        obs_data <- ssn_get_data(CP_ssn, name = "obs")
-        obs_output_file <- file.path(output_folder, paste0(prefix, "_obs_data.", type, ".csv"))
-        obs_data_df <- st_drop_geometry(obs_data)
-        write.csv(obs_data_df, obs_output_file, row.names = FALSE)
-        
-        ################################################################################
-        ########################### DEBUGGING HELPERS ###################################
-        ################################################################################
-        near_zero_var_cols <- function(df, freq_cut = 95/5, unique_cut = 10) {
-          n <- nrow(df)
-          nzv_vars <- c()
-          for (col in colnames(df)) {
-            vals <- df[[col]]
-            if (is.numeric(vals)) {
-              tbl <- table(vals)
-              if (length(tbl) == 1) {
-                nzv_vars <- c(nzv_vars, col)
-              } else {
-                freq_ratio <- max(tbl) / sort(tbl, decreasing = TRUE)[2]
-                pct_unique <- 100 * (length(unique(vals)) / n)
-                if (freq_ratio > freq_cut && pct_unique < unique_cut) {
-                  nzv_vars <- c(nzv_vars, col)
-                }
+          # A helper function that attempts one bootstrap iteration and returns NULL if there is an error. 
+          bootstrap_iteration_once <- function(i) {
+            tryCatch({
+              # New bootstrap sample for each iteration
+              boot_indices <- sample(1:nrow(obs_data), replace = TRUE)
+              boot_data <- obs_data[boot_indices, ]
+              message("DEBUG: Bootstrap iteration ", i, " - boot_data has ", nrow(boot_data), " rows.")
+              
+              CP_streams <- st_read(input_streams)
+              message("DEBUG: Read CP_streams with ", nrow(CP_streams), " features.")
+              
+              ssn_path <- file.path(output_folder, "ssn_boot", paste0(prefix, "_", type, "_logtrans_boot_", i, ".ssn"))
+              lsn_out <- file.path(output_folder, "lsn_out_boot", paste0("lsn_out_", i))
+              
+              # Create folders if they don't exist
+              if (!dir.exists(dirname(ssn_path))) {
+                dir.create(dirname(ssn_path), recursive = TRUE)
               }
-            }
+              if (!dir.exists(dirname(lsn_out))) {
+                dir.create(dirname(lsn_out), recursive = TRUE)
+              }
+              
+              # Convert lines to spatial network (LSN)
+              edges <- lines_to_lsn(
+                streams = CP_streams,
+                lsn_path = lsn_out,
+                snap_tolerance = 1,
+                check_topology = TRUE,
+                topo_tolerance = 2,
+                overwrite = TRUE,
+                verbose = TRUE,
+                remove_ZM = TRUE
+              )
+              
+              obs <- sites_to_lsn(
+                sites = boot_data,
+                edges = edges,
+                lsn_path = lsn_out,
+                file_name = "obs",
+                snap_tolerance = 10,
+                save_local = TRUE,
+                overwrite = TRUE
+              )
+              
+              edges <- updist_edges(edges = edges, lsn_path = lsn_out, calc_length = TRUE)
+              
+              site.list <- updist_sites(
+                sites = list(obs = obs), 
+                edges = edges,
+                length_col = "Length", 
+                lsn_path = lsn_out
+              )
+              
+              infl_col <- "flow_accum_max"
+              segpi <- "flow_accum_PI"
+              afv_col <- "afv_flow_accum"
+              
+              edges <- afv_edges(
+                edges = edges, 
+                infl_col = infl_col, 
+                segpi = segpi,
+                afv_col = afv_col, 
+                lsn_path = lsn_out
+              )
+              site.list <- afv_sites(
+                sites = site.list, 
+                edges = edges, 
+                afv_col = afv_col,
+                save_local = TRUE, 
+                lsn_path = lsn_out
+              )
+              
+              boot_ssn <- ssn_assemble(
+                edges = edges,
+                lsn_path = lsn_out,
+                obs_sites = site.list$obs,
+                ssn_path = ssn_path,
+                import = TRUE,
+                overwrite = TRUE
+              )
+              message("DEBUG: Assembled SSN object.")
+              
+              ssn_create_distmat(boot_ssn)
+              
+              # DEBUG: Check the SSN object structure (if possible)
+              message("DEBUG: SSN object class: ", class(boot_ssn))
+              
+              # Fit the model
+              if (type == "net") {
+                ssn_mod_boot <- ssn_lm(
+                  formula = model_formula,
+                  ssn.object = boot_ssn,
+                  tailup_type = "exponential",
+                  taildown_type = "none",
+                  estmethod = "ml",
+                  euclid_type = "spherical",
+                  nugget_type = "nugget",
+                  additive = "afv_flow_accum",
+                  random = ~ as.factor(ch_watershed)
+                )
+                model_type <- "ssn_lm"
+              } else {
+                ssn_mod_boot <- ssn_glm(
+                  formula = model_formula,
+                  ssn.object = boot_ssn,
+                  family = "Gamma",
+                  tailup_type = "exponential",
+                  taildown_type = "none",
+                  estmethod = "ml",
+                  euclid_type = "spherical",
+                  nugget_type = "nugget",
+                  additive = "afv_flow_accum",
+                  random = ~ as.factor(ch_watershed)
+                )
+                model_type <- "ssn_glm"
+              }
+              message("DEBUG: Model fitting complete. Class of model: ", class(ssn_mod_boot))
+              
+              # Extract outputs and add iteration ID
+              tidy_mod <- tidy(ssn_mod_boot, conf.int = TRUE)
+              tidy_mod$bootstrap_rep <- i
+              message("DEBUG: Tidy model output columns: ", paste(names(tidy_mod), collapse=", "))
+              
+              varcomp_mod <- varcomp(ssn_mod_boot)
+              varcomp_mod$bootstrap_rep <- i
+              
+              loocv_mod <- loocv(ssn_mod_boot, cv_predict = TRUE, se.fit = TRUE)
+              loocv_mod$bootstrap_rep <- i
+              
+              glance_mod <- glance(ssn_mod_boot)
+              glance_mod$bootstrap_rep <- i
+              
+              residuals <- residuals(ssn_mod_boot)
+              fitted_values <- fitted(ssn_mod_boot)
+              
+              res_fit_df <- data.frame(
+                residuals = residuals,
+                fitted_values = fitted_values,
+                bootstrap_rep = i
+              )
+              
+              # Return all outputs; note: boot_data_df is replaced by boot_data here
+              return(list(
+                tidy_mod = tidy_mod,
+                varcomp_mod = varcomp_mod,
+                loocv_mod = loocv_mod,
+                glance_mod = glance_mod,
+                res_fit_df = res_fit_df,
+                boot_data = boot_data,  # returning boot_data for troubleshooting
+                model_type = model_type
+              ))
+              
+            }, error = function(e) {
+              message("Error in iteration ", i, ": ", e$message)
+              return(NULL)
+            })
           }
-          nzv_vars
-        }
-        
-        message("\n--- TROUBLESHOOTING CHECKS ---")
-        response_var <- all.vars(model_formula)[1]
-        if (response_var %in% colnames(obs_data_df)) {
-          zero_neg_count <- sum(obs_data_df[[response_var]] <= 0, na.rm = TRUE)
-          na_count <- sum(is.na(obs_data_df[[response_var]]))
-          inf_count <- sum(is.infinite(obs_data_df[[response_var]]))
-          variance <- var(obs_data_df[[response_var]], na.rm = TRUE)
-          message("Response Variable: ", response_var, "\n", "Count of zero or negative values: ", zero_neg_count)
-          message("NA count: ", na_count, " | Inf count: ", inf_count, "| Variance: ", variance, "\n")
-        }
-        
-        pred_vars <- all.vars(model_formula)[-1]
-        for (v in pred_vars) {
-          if (v %in% colnames(obs_data_df)) {
-            na_count <- sum(is.na(obs_data_df[[v]]))
-            inf_count <- sum(is.infinite(obs_data_df[[v]]))
-            variance <- var(obs_data_df[[v]], na.rm = TRUE)
-            message(v, " | NA count: ", na_count, " | Inf count: ", inf_count, "| Variance: ", variance)
-          }
-        }
-        
-        nzv_cols <- near_zero_var_cols(obs_data_df)
-        if (length(nzv_cols) > 0) {
-          message("Near-zero variance columns identified: ", paste(nzv_cols, collapse = ", "))
-        }
-        
-        if ("locID" %in% names(obs_data_df)) {
-          dup_locID <- sum(duplicated(obs_data_df$locID))
-          message("Number of duplicate locID: ", dup_locID)
-        }
-        
-        # Uncomment to get quartile ranges of data
-        # numeric_cols <- obs_data_df %>% select(where(is.numeric))
-        # message("--- Data summary (numeric columns) ---")
-        # print(summary(numeric_cols))
-        
-
-          ################################################################################
-          ########################### BOOTSTRAPPING FUNCTION ##############################
-          ################################################################################
-          bootstrap_model <- function(input_obs, n_boot, model_formula, multiple_ws) {
-            
-            message(paste0("\nFitting model for | ", prefix, " | ", type, " | ", segment, "m | with ", n_boot, " bootstrap samples..."))
-            
-            obs_data <- st_read(input_obs)
-            
-            ssn_path <- file.path(
-              output_folder, 
-              paste0(prefix, "_", type, "_logtrans_boot.ssn")
-            )
-            
-            lsn_out <- file.path(output_folder, "lsn_out_boot")
-            
-            # We'll allow up to 25 attempts for each bootstrap iteration
-            max_attempts <- 25
-            
-            # A helper function that attempts to run one bootstrap iteration
-            # and returns NULL if there is an error. 
-            bootstrap_iteration_once <- function(i) {
-              tryCatch({
-                # New bootstrap sample each attempt
-                boot_indices <- sample(1:nrow(obs_data), replace = TRUE)
-                boot_data <- obs_data[boot_indices, ]
-                
-                boot_obs <- sites_to_lsn(
-                  sites = boot_data,
-                  edges = edges,
-                  lsn_path = lsn_out,
-                  file_name = "boot_obs",
-                  snap_tolerance = 10,
-                  save_local = TRUE,
-                  overwrite = TRUE
-                )
-                
-                edges <- updist_edges(edges = edges, lsn_path = lsn_out, calc_length = TRUE)
-                site.list <- updist_sites(
-                  sites = list(obs = boot_obs), 
-                  edges = edges,
-                  length_col = "Length", 
-                  lsn_path = lsn_out
-                )
-                
-                infl_col <- "flow_accum_max"
-                segpi <- "flow_accum_PI"
-                afv_col <- "afv_flow_accum"
-                
-                edges <- afv_edges(
-                  edges = edges, 
-                  infl_col = infl_col, 
-                  segpi = segpi,
-                  afv_col = afv_col, 
-                  lsn_path = lsn_out
-                )
-                site.list <- afv_sites(
-                  sites = site.list, 
-                  edges = edges, 
-                  afv_col = afv_col,
-                  save_local = TRUE, 
-                  lsn_path = lsn_out
-                )
-                
-                boot_ssn <- ssn_assemble(
-                  edges = edges,
-                  lsn_path = lsn_out,
-                  obs_sites = site.list$boot_obs,
-                  ssn_path = ssn_path,
-                  import = TRUE,
-                  overwrite = TRUE
-                )
-                ssn_create_distmat(boot_ssn)
-                
-                message("Bootstrap iteration ", i, " data size: ", nrow(boot_data_df))
-                
-                # Fit the model
-                if (multiple_ws && type == "net") {
-                  ssn_mod_boot <- ssn_lm(
-                    formula = model_formula,
-                    ssn.object = ssn_updated,
-                    tailup_type = "exponential",
-                    taildown_type = "none",
-                    estmethod = "ml",
-                    euclid_type = "spherical",
-                    nugget_type = "nugget",
-                    additive = "afv_flow_accum",
-                    random = ~ as.factor(ch_watershed)
-                  )
-                  model_type <- "ssn_lm"
-                }
-                else if (multiple_ws) {
-                  ssn_mod_boot <- ssn_glm(
-                    formula = model_formula,
-                    ssn.object = ssn_updated,
-                    family = "Gamma",
-                    tailup_type = "exponential",
-                    taildown_type = "none",
-                    estmethod = "ml",
-                    euclid_type = "spherical",
-                    nugget_type = "nugget",
-                    additive = "afv_flow_accum",
-                    random = ~ as.factor(ch_watershed)
-                  )
-                  model_type <- "ssn_glm"
-                }
-                else if (type == "net") {
-                  ssn_mod_boot <- ssn_lm(
-                    formula = model_formula,
-                    ssn.object = ssn_updated,
-                    tailup_type = "exponential",
-                    taildown_type = "none",
-                    estmethod = "ml",
-                    euclid_type = "spherical",
-                    nugget_type = "nugget",
-                    additive = "afv_flow_accum"
-                  )
-                  model_type <- "ssn_lm"
-                } else {
-                  ssn_mod_boot <- ssn_glm(
-                    formula = model_formula,
-                    ssn.object = ssn_updated,
-                    family = "Gamma",
-                    tailup_type = "exponential",
-                    taildown_type = "none",
-                    estmethod = "ml",
-                    euclid_type = "spherical",
-                    nugget_type = "nugget",
-                    additive = "afv_flow_accum"
-                  )
-                  model_type <- "ssn_glm"
-                }
-                
-                # On success, return the results
-                tidy_mod <- tidy(ssn_mod_boot, conf.int = TRUE)
-                tidy_mod$bootstrap_rep <- i
-                
-                varcomp_mod <- varcomp(ssn_mod_boot)
-                varcomp_mod$bootstrap_rep <- i
-                
-                loocv_mod <- loocv(ssn_mod_boot, cv_predict = TRUE, se.fit = TRUE)
-                loocv_mod$bootstrap_rep <- i
-                
-                glance_mod <- glance(ssn_mod_boot)
-                glance_mod$bootstrap_rep <- i
-                
-                residuals <- residuals(ssn_mod_boot)
-                fitted_values <- fitted(ssn_mod_boot)
-                
-                res_fit_df <- data.frame(
-                  residuals = residuals,
-                  fitted_values = fitted_values,
-                  bootstrap_rep = i
-                )
-                
-
-                return(list(
-                  tidy_mod = tidy_mod,
-                  varcomp_mod = varcomp_mod,
-                  loocv_mod = loocv_mod,
-                  glance_mod = glance_mod,
-                  res_fit_df = res_fit_df,
-                  boot_data = boot_data_df,
-                  model_type = model_type
-                ))
-                
-              }, error = function(e) {
-                # Return NULL so we know the attempt failed
-                message("Error in iteration ", i, ": ", e$message)
-                NULL
-              })
-            }
-            
-            # Now we define the core iteration function that attempts up to max_attempts
-            # times until it succeeds or we run out of attempts.
-            bootstrap_iteration <- function(i) {
-              for (attempt_num in seq_len(max_attempts)) {
-                if (attempt_num > 1){
-                  message("\nBootstrap iteration ", i, ", attempt ", attempt_num)
-                }
-                result <- bootstrap_iteration_once(i)
-                high_covariance <- FALSE
-                
-                
-                if (!is.null(result)) {
-                  # Identify bootstrap repetitions with proportion > 0.99
-                  selected_bootstrap_reps <- result$varcomp_mod$proportion > 0.9999
-                  varcomp_mod <- result$varcomp_mod
-                  
-                  # Filter out unwanted varcomp entries
-                  varcomp_filtered <- varcomp_mod %>%
-                    filter(!varcomp %in% c("taildown_de", "euclid_de", "nugget", "tailup_de"))
-                  
-                  selected_covariates <- varcomp_filtered$proportion == 0
-                  
-
-                  if (any(selected_bootstrap_reps) || any(selected_covariates)) {
-                    high_covariance <- TRUE
-                  }
-                }
-                
-                if (!is.null(result) && (high_covariance == FALSE)) {
-                  # If it succeeds, return the result immediately
-                  return(result)
-                } else {
-                  message("Retrying iteration ", i, "...")
+          
+          # Core iteration function: try up to max_attempts
+          bootstrap_iteration <- function(i) {
+            for (attempt_num in seq_len(max_attempts)) {
+              if (attempt_num > 1){
+                message("\nBootstrap iteration ", i, ", attempt ", attempt_num)
+              }
+              result <- bootstrap_iteration_once(i)
+              high_covariance <- FALSE
+              
+              if (!is.null(result)) {
+                # Identify bootstrap repetitions with extreme variance proportions
+                selected_bootstrap_reps <- result$varcomp_mod$proportion > 0.9999
+                varcomp_mod <- result$varcomp_mod
+                varcomp_filtered <- varcomp_mod %>%
+                  filter(!varcomp %in% c("taildown_de", "euclid_de", "nugget", "tailup_de"))
+                selected_covariates <- varcomp_filtered$proportion == 0
+                if (any(selected_bootstrap_reps) || any(selected_covariates)) {
+                  high_covariance <- TRUE
+                  message("DEBUG: High covariance detected in iteration ", i)
                 }
               }
               
-              # Make current result equal to previous result
-              message("All attempts failed for iteration ", i)
-              return(result)
-
+              if (!is.null(result) && (high_covariance == FALSE)) {
+                return(result)
+              } else {
+                message("Retrying iteration ", i, "...")
+              }
             }
-            
-            # Use future_map or a loop to run all bootstrap iterations
-            with_progress({
-              p <- progressor(along = 1:n_boot)
-              bootstrap_results <- future_map(
-                1:n_boot,
-                function(i) {
-                  p(sprintf("Bootstrap iteration %d", i))
-                  bootstrap_iteration(i)
-                },
-                .options = furrr_options(seed = TRUE)
-              )
-            })
-            
-            # Extract model results
-            results_list <- map(bootstrap_results, "tidy_mod")
-            varcomp_list <- map(bootstrap_results, "varcomp_mod")
-            loocv_list <- map(bootstrap_results, "loocv_mod")
-            glance_list <- map(bootstrap_results, "glance_mod")
-            res_fit_df <- map(bootstrap_results, "res_fit_df")
-            boot_data_df <- map(bootstrap_results, "boot_data")
-            model_type <- bootstrap_results[[1]]$model_type
-            
-            # Combine into data frames
-            bootstrap_results_df <- bind_rows(results_list)
-            bootstrap_varcomp_df <- bind_rows(varcomp_list)
-            bootstrap_loocv <- bind_rows(loocv_list)
-            bootstrap_glance <- bind_rows(glance_list)
-            bootstrap_res_fit_df <- bind_rows(res_fit_df)
-            bootstrap_data_df <- bind_rows(boot_data_df)
-            
-            return(list(
-              bootstrap_results = bootstrap_results_df,
-              bootstrap_varcomp = bootstrap_varcomp_df,
-              bootstrap_loocv = bootstrap_loocv,
-              bootstrap_glance = bootstrap_glance,
-              bootstrap_res_fit = bootstrap_res_fit_df,
-              bootstrap_data = bootstrap_data_df,
-              model_type = model_type
-            ))
+            message("All attempts failed for iteration ", i)
+            return(result)
           }
           
+          # Run all bootstrap iterations using future_map
+          with_progress({
+            p <- progressor(along = 1:n_boot)
+            bootstrap_results <- future_map(
+              1:n_boot,
+              function(i) {
+                p(sprintf("Bootstrap iteration %d", i))
+                bootstrap_iteration(i)
+              },
+              .options = furrr_options(seed = TRUE)
+            )
+          })
+          
+          # Extract outputs from each iteration
+          results_list <- map(bootstrap_results, "tidy_mod")
+          varcomp_list <- map(bootstrap_results, "varcomp_mod")
+          loocv_list <- map(bootstrap_results, "loocv_mod")
+          glance_list <- map(bootstrap_results, "glance_mod")
+          res_fit_df <- map(bootstrap_results, "res_fit_df")
+          boot_data_list <- map(bootstrap_results, "boot_data")
+          model_type <- bootstrap_results[[1]]$model_type
+          
+          # Combine into data frames
+          bootstrap_results_df <- bind_rows(results_list)
+          bootstrap_varcomp_df <- bind_rows(varcomp_list)
+          bootstrap_loocv <- bind_rows(loocv_list)
+          bootstrap_glance <- bind_rows(glance_list)
+          bootstrap_res_fit_df <- bind_rows(res_fit_df)
+          bootstrap_data_df <- bind_rows(boot_data_list)
+          
+          # DEBUG: Check that the tidy model output contains the "term" column
+          if (!"term" %in% names(bootstrap_results_df)) {
+            stop("DEBUG: 'term' column not found in bootstrap results. Available columns: ", 
+                 paste(names(bootstrap_results_df), collapse=", "))
+          }
+          
+          return(list(
+            bootstrap_results = bootstrap_results_df,
+            bootstrap_varcomp = bootstrap_varcomp_df,
+            bootstrap_loocv = bootstrap_loocv,
+            bootstrap_glance = bootstrap_glance,
+            bootstrap_res_fit = bootstrap_res_fit_df,
+            bootstrap_data = bootstrap_data_df,
+            model_type = model_type
+          ))
+        }
         
-        # If the output file exists, erase it
+        # Remove the output file if it exists
         if (file.exists(output_file)) {
           file.remove(output_file)
         }
@@ -600,6 +399,9 @@ for (prefix in prefixes) {
         bootstrap_data <- bootstrap_output$bootstrap_data
         model_type <- bootstrap_output$model_type
         
+        # DEBUG: Check structure of bootstrap_results before grouping
+        message("DEBUG: Names of bootstrap_results columns: ", paste(names(bootstrap_results), collapse=", "))
+        
         bootstrap_summary <- bootstrap_results %>%
           group_by(term) %>%
           summarise(
@@ -610,14 +412,11 @@ for (prefix in prefixes) {
             p_value       = t.test(estimate, mu = 0)$p.value
           )
         
-        
-        
         cat("\nBootstrap Summary:\n", file = output_file, append = TRUE)
         capture.output(paste0("Model Type: ", model_type), file = output_file, append = TRUE)
         capture.output(print(bootstrap_summary), file = output_file, append = TRUE)
         
-
-        
+        # Write outputs to CSV files
         bootstrap_results_file <- file.path(bootstrap_folder, paste0(prefix, "_bootstrap_results.", type, ".csv"))
         write.csv(bootstrap_results, bootstrap_results_file, row.names = FALSE)
         
@@ -636,16 +435,12 @@ for (prefix in prefixes) {
         bootstrap_data_file <- file.path(bootstrap_folder, paste0(prefix, "_bootstrap_data.", type, ".csv"))
         write.csv(bootstrap_data, bootstrap_data_file, row.names = FALSE)
         
-        
-        
         #----------------------------#
         #   Residuals vs Fitted Plot #
         #----------------------------#
-        
         fitted_values <- bootstrap_res_fit$fitted_values
         residuals <- bootstrap_res_fit$residuals
         
-        # Create Residuals vs Fitted plot
         resid_fitted_plot <- ggplot(data.frame(Fitted = fitted_values, Residuals = residuals), 
                                     aes(x = Fitted, y = Residuals)) +
           geom_point(color = "blue") +
@@ -656,30 +451,24 @@ for (prefix in prefixes) {
                y = "Residuals") +
           theme_minimal()
         
-        # Save the plot to the output folder
         ggsave(filename = file.path(bootstrap_folder, "Residuals_vs_Fitted.png"), 
                plot = resid_fitted_plot, width = 8, height = 6)
-        
         
         #----------------------------#
         #         Q-Q Plot           #
         #----------------------------#
-        
-        # ggplot2 Q-Q Plot
         qq_plot_gg <- ggplot(data.frame(Residuals = residuals), aes(sample = Residuals)) +
           stat_qq(color = "blue") +
           stat_qq_line(color = "red") +
           labs(title = "Q-Q Plot of Residuals") +
           theme_minimal()
         
-        # Save the ggplot2 Q-Q plot
         ggsave(filename = file.path(bootstrap_folder, "QQ_Plot_Residuals.png"), 
                plot = qq_plot_gg, width = 8, height = 6)
         
         #----------------------------#
         #       Histogram Plot       #
         #----------------------------#
-        
         hist_gg <- ggplot(data.frame(Residuals = residuals), aes(x = Residuals)) +
           geom_histogram(aes(y = after_stat(density)), bins = 30, 
                          fill = "lightblue", color = "black") +
@@ -691,26 +480,18 @@ for (prefix in prefixes) {
                y = "Density") +
           theme_minimal()
         
-        # Save the ggplot2 Histogram
         ggsave(filename = file.path(bootstrap_folder, "Histogram_Residuals.png"), 
                plot = hist_gg, width = 8, height = 6)
         
-        
         cat("\nBootstrapping Completed.\n", file = output_file, append = TRUE)
         
-        
-        
-        
       }, error = function(e) {
-        message(
-          paste0(
-            "Error for prefix: ", prefix, 
-            " | type: ", type, 
-            " | segment: ", segment, 
-            "\nMessage: ", e$message
-          )
-        )
-        # Record the failed combination
+        message(paste0(
+          "Error for prefix: ", prefix, 
+          " | type: ", type, 
+          " | segment: ", segment, 
+          "\nMessage: ", e$message
+        ))
         failures[[length(failures) + 1]] <<- list(
           prefix = prefix, 
           type = type, 
@@ -726,15 +507,9 @@ for (prefix in prefixes) {
 total_time <- toc(log = TRUE, quiet = TRUE)
 cat("\nTotal Script Execution Time:", total_time$toc - total_time$tic, "seconds\n")
 
-# Print failures at the end if any
 if (length(failures) > 0) {
   message("\nThe following parameter combinations failed:")
   print(failures)
 } else {
   message("\nNo parameter combinations failed.")
 }
-
-
-
-
-
