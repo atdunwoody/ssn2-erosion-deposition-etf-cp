@@ -1,1 +1,0 @@
-ch_lidar.erosion.sum ~ ch_valley_width + ch_flow.accumulation.max + ch_central.slope.difference + hs_flow.accumulation.max + hs_curvature.median + hs_ndvi.mean.mean + hs_drainage_density

@@ -1,1 +1,0 @@
-ch_lidar.erosion.sum ~ ch_curvature.median + ch_stream.power.central.diff + hs_ndvi.mean.mean + hs_drainage_density

@@ -1,1 +1,0 @@
-ch_sfm.erosion.sum ~ ch_central.slope.difference + ch_stream.power + hs_flow.accumulation.max + hs_eastness.median + hs_curvature.median + hs_drainage_density

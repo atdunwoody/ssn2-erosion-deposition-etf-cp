@@ -1,1 +1,0 @@
-ch_lidar.erosion.sum ~ ch_central.slope.difference + ch_stream.power + hs_flow.accumulation.max + hs_curvature.median

@@ -1,1 +1,0 @@
-ch_sfm.deposition.sum ~ ch_central.slope.difference + hs_hillslope.length + hs_flow.accumulation.max + hs_northness.median + hs_drainage_density

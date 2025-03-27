@@ -1,0 +1,98 @@
+Model Formula:
+ch_sfm.net.change ~ ws_10.min.sfm.storm.accum_mean + ws_eastness_mean + 
+    ws_bare.earth_mean + ch_channel.width.over.valley.width + 
+    ch_slope.median + ch_curvature.median + ch_stream.power.central.diff + 
+    ch_flow.accumulation.max.central.diff + hs_slope.median + 
+    hs_curvature.median + hs_bare.earth.mean + hs_ndvi.range.mean + 
+    hs_drainage_density
+<environment: 0x0000024592ad2588>
+
+SSN Path:
+ETF/Outputs/Segmented 20m/ETF sfm_net change_logtrans/ETF sfm_net change_logtrans.ssn
+LSN Output Path:
+ETF/Outputs/Segmented 20m/ETF sfm_net change_logtrans/lsn_out
+
+summary(ssn_mod)
+
+Call:
+ssn_lm(formula = model_formula, ssn.object = CP_ssn, tailup_type = "exponential", 
+    taildown_type = "none", euclid_type = "spherical", nugget_type = "nugget", 
+    additive = "afv_flow_accum", estmethod = "ml", random = ~as.factor(ch_watershed))
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.5354 -0.4491 -0.1425  0.2862  3.8069 
+
+Coefficients (fixed):
+                                      Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                            0.02003    0.09128   0.219  0.82629    
+ws_10.min.sfm.storm.accum_mean         0.25908    0.12691   2.041  0.04121 *  
+ws_eastness_mean                       0.44281    0.09670   4.579 4.66e-06 ***
+ws_bare.earth_mean                     0.25514    0.09413   2.711  0.00672 ** 
+ch_channel.width.over.valley.width    -0.04167    0.08693  -0.479  0.63169    
+ch_slope.median                        0.01736    0.11326   0.153  0.87819    
+ch_curvature.median                    0.09308    0.08994   1.035  0.30070    
+ch_stream.power.central.diff          -0.01710    0.07017  -0.244  0.80746    
+ch_flow.accumulation.max.central.diff  0.04537    0.07216   0.629  0.52948    
+hs_slope.median                       -0.02787    0.10026  -0.278  0.78106    
+hs_curvature.median                    0.06131    0.07791   0.787  0.43127    
+hs_bare.earth.mean                     0.04315    0.10100   0.427  0.66918    
+hs_ndvi.range.mean                     0.10607    0.09278   1.143  0.25295    
+hs_drainage_density                   -0.06010    0.08832  -0.681  0.49617    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Pseudo R-squared: 0.2201
+
+Coefficients (covariance):
+              Effect                    Parameter   Estimate
+  tailup exponential                 de (parsill)  1.874e-01
+  tailup exponential                        range  1.971e+01
+    euclid spherical                 de (parsill)  3.167e-02
+    euclid spherical                        range  3.776e+02
+              nugget                       nugget  4.865e-01
+              random  1 | as.factor(ch_watershed)  3.329e-05
+
+
+tidy(ssn_mod, conf.int = TRUE):
+# A tibble: 14 × 7
+   term                                  estimate std.error statistic    p.value conf.low conf.high
+   <chr>                                    <dbl>     <dbl>     <dbl>      <dbl>    <dbl>     <dbl>
+ 1 (Intercept)                             0.0200    0.0913     0.219 0.826       -0.159      0.199
+ 2 ch_channel.width.over.valley.width     -0.0417    0.0869    -0.479 0.632       -0.212      0.129
+ 3 ch_curvature.median                     0.0931    0.0899     1.03  0.301       -0.0832     0.269
+ 4 ch_flow.accumulation.max.central.diff   0.0454    0.0722     0.629 0.529       -0.0961     0.187
+ 5 ch_slope.median                         0.0174    0.113      0.153 0.878       -0.205      0.239
+ 6 ch_stream.power.central.diff           -0.0171    0.0702    -0.244 0.807       -0.155      0.120
+ 7 hs_bare.earth.mean                      0.0432    0.101      0.427 0.669       -0.155      0.241
+ 8 hs_curvature.median                     0.0613    0.0779     0.787 0.431       -0.0914     0.214
+ 9 hs_drainage_density                    -0.0601    0.0883    -0.681 0.496       -0.233      0.113
+10 hs_ndvi.range.mean                      0.106     0.0928     1.14  0.253       -0.0758     0.288
+11 hs_slope.median                        -0.0279    0.100     -0.278 0.781       -0.224      0.169
+12 ws_10.min.sfm.storm.accum_mean          0.259     0.127      2.04  0.0412       0.0103     0.508
+13 ws_bare.earth_mean                      0.255     0.0941     2.71  0.00672      0.0706     0.440
+14 ws_eastness_mean                        0.443     0.0967     4.58  0.00000466   0.253      0.632
+
+varcomp(ssn_mod):
+# A tibble: 6 × 2
+  varcomp                     proportion
+  <chr>                            <dbl>
+1 Covariates (PR-sq)           0.220    
+2 tailup_de                    0.207    
+3 taildown_de                  0        
+4 euclid_de                    0.0350   
+5 nugget                       0.538    
+6 1 | as.factor(ch_watershed)  0.0000368
+
+loocv(ssn_mod):
+# A tibble: 1 × 10
+     bias std.bias  MSPE RMSPE std.MSPE   RAV  cor2 cover.80 cover.90 cover.95
+    <dbl>    <dbl> <dbl> <dbl>    <dbl> <dbl> <dbl>    <dbl>    <dbl>    <dbl>
+1 0.00321  0.00225 0.794 0.891     1.07 0.865 0.238    0.824    0.899    0.932
+
+glance(ssn_mod):
+# A tibble: 1 × 9
+      n     p  npar value   AIC  AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
+1   148    14     6  365.  405.  412.  -183.     148.            0.220
+

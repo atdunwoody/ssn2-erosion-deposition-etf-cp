@@ -1,10 +1,9 @@
 Model Formula:
 ch_sfm.erosion.mean ~ ch_valley_width + ch_slope.median + ch_curvature.median + 
-    ch_stream.power + ch_stream.power.central.diff + hs_hillslope.length + 
-    hs_flow.accumulation.max + hs_slope.median + hs_northness.median + 
-    hs_eastness.median + hs_curvature.median + hs_ndvi.range + 
-    hs_extended.dnbr.median + hs_drainage_density
-<environment: 0x0000028b112cde40>
+    ch_stream.power + ch_stream.power.central.diff + ch_flow.accumulation.max.central.diff + 
+    hs_slope.median + hs_northness.median + hs_eastness.median + 
+    hs_curvature.median + hs_bare.earth.mean + hs_drainage_density
+<environment: 0x0000027410f5e8a8>
 
 SSN Path:
 CPF/Outputs/Segmented 10m/UW sfm_erosion_logtrans/UW sfm_erosion_logtrans.ssn
@@ -19,80 +18,76 @@ ssn_glm(formula = model_formula, ssn.object = CP_ssn, family = "Gamma",
     nugget_type = "nugget", additive = "afv_flow_accum", estmethod = "ml")
 
 Deviance Residuals:
-    Min      1Q  Median      3Q     Max 
--1.2838 -0.6984 -0.1759  0.2321  2.1686 
+     Min       1Q   Median       3Q      Max 
+-1.43244 -0.51153 -0.22719  0.08679  2.11014 
 
 Coefficients (fixed):
-                              Estimate Std. Error z value Pr(>|z|)    
-(Intercept)                  -2.341483   0.100905 -23.205  < 2e-16 ***
-ch_valley_width               0.027993   0.145089   0.193  0.84701    
-ch_slope.median               0.008499   0.134072   0.063  0.94945    
-ch_curvature.median          -0.008360   0.130770  -0.064  0.94903    
-ch_stream.power               0.008170   0.167293   0.049  0.96105    
-ch_stream.power.central.diff  0.043268   0.092759   0.466  0.64089    
-hs_hillslope.length           0.222959   0.147763   1.509  0.13132    
-hs_flow.accumulation.max     -0.349332   0.163661  -2.134  0.03280 *  
-hs_slope.median              -0.342320   0.120770  -2.834  0.00459 ** 
-hs_northness.median          -0.118254   0.123083  -0.961  0.33667    
-hs_eastness.median           -0.228631   0.142346  -1.606  0.10824    
-hs_curvature.median           0.081172   0.084833   0.957  0.33865    
-hs_ndvi.range                 0.082949   0.145593   0.570  0.56886    
-hs_extended.dnbr.median      -0.055122   0.148349  -0.372  0.71021    
-hs_drainage_density           0.085865   0.118391   0.725  0.46829    
+                                      Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                           -1.93324    0.06035 -32.036  < 2e-16 ***
+ch_valley_width                        0.20904    0.08250   2.534  0.01129 *  
+ch_slope.median                       -0.15374    0.08312  -1.850  0.06438 .  
+ch_curvature.median                   -0.06158    0.08748  -0.704  0.48149    
+ch_stream.power                        0.15924    0.09004   1.769  0.07696 .  
+ch_stream.power.central.diff           0.09429    0.07034   1.341  0.18008    
+ch_flow.accumulation.max.central.diff -0.02766    0.07052  -0.392  0.69491    
+hs_slope.median                       -0.02715    0.06964  -0.390  0.69669    
+hs_northness.median                   -0.13407    0.07204  -1.861  0.06274 .  
+hs_eastness.median                    -0.11241    0.07902  -1.423  0.15485    
+hs_curvature.median                    0.08741    0.07682   1.138  0.25520    
+hs_bare.earth.mean                    -0.16036    0.05968  -2.687  0.00721 ** 
+hs_drainage_density                    0.15688    0.07913   1.983  0.04742 *  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Pseudo R-squared: 0.257
+Pseudo R-squared: 0.2226
 
 Coefficients (covariance):
-              Effect     Parameter    Estimate
-  tailup exponential  de (parsill)   3.914e-13
-  tailup exponential         range  2.834e+119
-    euclid spherical  de (parsill)   1.842e-16
-    euclid spherical         range  2.508e+122
-              nugget        nugget  9.441e-261
-          dispersion    dispersion   2.110e+00
+              Effect     Parameter   Estimate
+  tailup exponential  de (parsill)  2.968e-11
+  tailup exponential         range  5.443e+06
+    euclid spherical  de (parsill)  2.249e-15
+    euclid spherical         range  8.010e-05
+              nugget        nugget  1.456e-17
+          dispersion    dispersion  2.288e+00
 
 
 tidy(ssn_mod, conf.int = TRUE):
-# A tibble: 15 × 7
-   term                         estimate std.error statistic p.value conf.low conf.high
-   <chr>                           <dbl>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
- 1 (Intercept)                  -2.34       0.101   -23.2    0        -2.54     -2.14  
- 2 ch_curvature.median          -0.00836    0.131    -0.0639 0.949    -0.265     0.248 
- 3 ch_slope.median               0.00850    0.134     0.0634 0.949    -0.254     0.271 
- 4 ch_stream.power               0.00817    0.167     0.0488 0.961    -0.320     0.336 
- 5 ch_stream.power.central.diff  0.0433     0.0928    0.466  0.641    -0.139     0.225 
- 6 ch_valley_width               0.0280     0.145     0.193  0.847    -0.256     0.312 
- 7 hs_curvature.median           0.0812     0.0848    0.957  0.339    -0.0851    0.247 
- 8 hs_drainage_density           0.0859     0.118     0.725  0.468    -0.146     0.318 
- 9 hs_eastness.median           -0.229      0.142    -1.61   0.108    -0.508     0.0504
-10 hs_extended.dnbr.median      -0.0551     0.148    -0.372  0.710    -0.346     0.236 
-11 hs_flow.accumulation.max     -0.349      0.164    -2.13   0.0328   -0.670    -0.0286
-12 hs_hillslope.length           0.223      0.148     1.51   0.131    -0.0667    0.513 
-13 hs_ndvi.range                 0.0829     0.146     0.570  0.569    -0.202     0.368 
-14 hs_northness.median          -0.118      0.123    -0.961  0.337    -0.359     0.123 
-15 hs_slope.median              -0.342      0.121    -2.83   0.00459  -0.579    -0.106 
+# A tibble: 13 × 7
+   term                                  estimate std.error statistic p.value conf.low conf.high
+   <chr>                                    <dbl>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
+ 1 (Intercept)                            -1.93      0.0603   -32.0   0       -2.05     -1.81   
+ 2 ch_curvature.median                    -0.0616    0.0875    -0.704 0.481   -0.233     0.110  
+ 3 ch_flow.accumulation.max.central.diff  -0.0277    0.0705    -0.392 0.695   -0.166     0.111  
+ 4 ch_slope.median                        -0.154     0.0831    -1.85  0.0644  -0.317     0.00918
+ 5 ch_stream.power                         0.159     0.0900     1.77  0.0770  -0.0172    0.336  
+ 6 ch_stream.power.central.diff            0.0943    0.0703     1.34  0.180   -0.0436    0.232  
+ 7 ch_valley_width                         0.209     0.0825     2.53  0.0113   0.0473    0.371  
+ 8 hs_bare.earth.mean                     -0.160     0.0597    -2.69  0.00721 -0.277    -0.0434 
+ 9 hs_curvature.median                     0.0874    0.0768     1.14  0.255   -0.0632    0.238  
+10 hs_drainage_density                     0.157     0.0791     1.98  0.0474   0.00178   0.312  
+11 hs_eastness.median                     -0.112     0.0790    -1.42  0.155   -0.267     0.0425 
+12 hs_northness.median                    -0.134     0.0720    -1.86  0.0627  -0.275     0.00713
+13 hs_slope.median                        -0.0271    0.0696    -0.390 0.697   -0.164     0.109  
 
 varcomp(ssn_mod):
 # A tibble: 5 × 2
-  varcomp            proportion
-  <chr>                   <dbl>
-1 Covariates (PR-sq)  2.57e-  1
-2 tailup_de           7.43e-  1
-3 taildown_de         0        
-4 euclid_de           3.49e-  4
-5 nugget              1.79e-248
+  varcomp             proportion
+  <chr>                    <dbl>
+1 Covariates (PR-sq) 0.223      
+2 tailup_de          0.777      
+3 taildown_de        0          
+4 euclid_de          0.0000589  
+5 nugget             0.000000381
 
 loocv(ssn_mod):
 # A tibble: 1 × 4
-      bias    MSPE  RMSPE     RAV
-     <dbl>   <dbl>  <dbl>   <dbl>
-1 0.000341 0.00937 0.0968 0.00128
+      bias   MSPE RMSPE     RAV
+     <dbl>  <dbl> <dbl>   <dbl>
+1 0.000352 0.0166 0.129 0.00154
 
 glance(ssn_mod):
 # A tibble: 1 × 9
       n     p  npar value   AIC  AICc logLik deviance pseudo.r.squared
   <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
-1   110    15     6 -303. -261. -250.   151.     48.8            0.257
+1   120    13     6 -217. -179. -171.   108.     50.6            0.223
 

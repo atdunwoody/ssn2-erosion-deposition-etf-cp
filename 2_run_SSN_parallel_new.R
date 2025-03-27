@@ -6,18 +6,19 @@ prefixes <- c(
   "ETF sfm", "ETF lidar",
   "LM2 sfm", "LPM sfm", "MM_ET sfm",
   "LM2 lidar", "LPM lidar", "MM_ET lidar",
-  "CPF sfm",
-  "ME sfm",
-  "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm",
-  "CPF lidar",
+  "CPF sfm" , "CPF lidar",
+  "ME sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm",
   "MM lidar", "UE lidar", "UW lidar", "UM lidar"
 )
 types <- c(
-   "net change",
-   "deposition", "erosion"
+   "net change", 
+  "deposition",
+  "erosion"
            )
 segments <- c(
-  20, 10, 5
+  #20, 
+  10 
+  # 5
   )  
 
 param_grid <- expand.grid(prefix = prefixes, type = types, segment = segments, stringsAsFactors = FALSE)
@@ -125,32 +126,14 @@ run_ssn_analysis <- function(prefix, type, segment) {
     response_var <- all.vars(model_formula)[1]
     
     # Define other parameters
-    corr <- 0.7
-    load_ssn <- FALSE
     ssn_path <- file.path(output_folder, paste0(prefix_use, "_", type, "_logtrans.ssn"))
     lsn_out <- file.path(output_folder, "lsn_out")
-    input_streams <- file.path(base_input_folder, "Streams", "streams_10k.gpkg")
+    input_streams <- file.path(base_input_folder, "Streams", "streams_100k.gpkg")
     output_file <- file.path(output_folder, paste0(response_var, " ", segment, "m_VIF-3_corr", corr, ".txt"))
     
     if (file.exists(output_file)) {
       file.remove(output_file)
     }
-
-    # Define the SSN path using the prefix and type
-    ssn_path <- file.path(
-      output_folder, 
-      paste0(prefix_use, "_", type, "_logtrans.ssn")
-    )
-    
-    # Define the LSN output folder
-    lsn_out <- file.path(output_folder, "lsn_out")
-    
-    # Define the input streams path
-    input_streams <- file.path(
-      base_input_folder, 
-      "Streams", 
-      "streams_10k.gpkg"
-    )
     
     ################################################################################
     ########################### SSN2 PREPROCESSING ##################################
@@ -254,7 +237,7 @@ run_ssn_analysis <- function(prefix, type, segment) {
     tic("SSN2 Model Fitting")
     
     # Fit the model
-    if (multiple_ws && type == "net") {
+    if (multiple_ws && type == "net change") {
       ssn_mod <- ssn_lm(
         formula = model_formula,
         ssn.object = CP_ssn,
@@ -283,7 +266,7 @@ run_ssn_analysis <- function(prefix, type, segment) {
       )
       model_type <- "ssn_glm"
     }
-    else if (type == "net") {
+    else if (type == "net change") {
       ssn_mod <- ssn_lm(
         formula = model_formula,
         ssn.object = CP_ssn,

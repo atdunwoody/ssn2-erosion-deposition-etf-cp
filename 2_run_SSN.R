@@ -6,12 +6,12 @@
 #               "ET lidar", "LM2 lidar", "LPM lidar", "MM_ET lidar"
 # CPF prefixes: "CPF sfm", "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm"
 #                  "CPF lidar", "ME lidar", "MM lidar", "MW lidar", "UE lidar", "UW lidar", "UM lidar"
-prefix <- "CPF lidar" 
+prefix <- "CPF sfm" 
 
 # Types: "erosion", "deposition", "net"
-type <- "erosion"
+type <- "deposition"
 
-segment <- 10
+segment <- 5
 
 corr <- 0.7
 # Model formula is stored in outputs folder:
@@ -155,7 +155,7 @@ tryCatch({
     input_streams <- file.path(
       base_input_folder, 
       "Streams", 
-      "streams_10k.gpkg"
+      "streams_100k.gpkg"
     )
     
     ################################################################################

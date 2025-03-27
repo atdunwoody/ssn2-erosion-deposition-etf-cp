@@ -1,1 +1,0 @@
-ch_sfm.deposition.sum ~ hs_flow.accumulation.max + hs_eastness.median + hs_curvature.median + hs_extended.dnbr.median

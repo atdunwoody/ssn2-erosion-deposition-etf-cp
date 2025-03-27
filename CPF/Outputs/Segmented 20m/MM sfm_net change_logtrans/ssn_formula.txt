@@ -1,1 +1,0 @@
-ch_sfm.net.change ~ ch_valley_width + ch_central.slope.difference + hs_northness.median + hs_curvature.median + hs_drainage_density

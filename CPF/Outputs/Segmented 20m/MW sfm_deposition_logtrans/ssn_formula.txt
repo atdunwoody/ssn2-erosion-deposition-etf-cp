@@ -1,1 +1,0 @@
-ch_sfm.deposition.sum ~ ch_valley_width + ch_slope.median + ch_stream.power.central.diff + hs_hillslope.length + hs_flow.accumulation.max + hs_northness.median + hs_eastness.median + hs_curvature.median + hs_extended.dnbr.median + hs_drainage_density

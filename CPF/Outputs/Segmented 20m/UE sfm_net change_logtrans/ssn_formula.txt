@@ -1,1 +1,0 @@
-ch_sfm.net.change ~ ch_flow.accumulation.max + ch_stream.power + ch_stream.power.central.diff + hs_eastness.median + hs_curvature.median + hs_drainage_density
