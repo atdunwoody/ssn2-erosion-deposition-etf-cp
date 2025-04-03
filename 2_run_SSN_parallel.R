@@ -2,53 +2,40 @@
 ########################### USER DEFINED VARIABLES #############################
 ################################################################################
 
-# ETF prefixes: "ET sfm", "LM2 sfm", "LPM sfm", "MM_ET"
-#               "ET lidar", "LM2 lidar", "LPM lidar", "MM_ET lidar"
-# CPF prefixes: "CPF sfm", "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm"
-#                  "CPF lidar", "ME lidar", "MM lidar", "MW lidar", "UE lidar", "UW lidar", "UM lidar"
 prefixes <- c(
-  "ETF sfm",
-  "ETF lidar",
-  "LM2 sfm", "LPM sfm", "MM_ET sfm",
-  "LM2 lidar", "LPM lidar", "MM_ET lidar",
-  "CPF sfm",
-  "ME sfm", "MM sfm", "MW sfm", "UE sfm", "UW sfm", "UM sfm",
-  "CPF lidar",
-  "ME lidar", "MM lidar", "MW lidar", "UE lidar", "UW lidar", "UM lidar"
-  
+  "ETF sfm", "ETF lidar",
+  # "LM2 sfm", "LPM sfm", "MM_ET sfm",
+  # "LM2 lidar", "LPM lidar", "MM_ET lidar",
+  "CPF sfm" , "CPF lidar"
+  # "ME sfm", "UE sfm", "UW sfm", "UM sfm",
+  # "MM lidar", "UE lidar", "UW lidar", "UM lidar"
 )
-
-# Types: "erosion", "deposition", "net"
 types <- c(
+  "net change",
   "deposition",
-  "erosion",
-  "net change"
-)
- 
+  "erosion"
+           )
 segments <- c(
-  20,
-  10,
-  5
- )
+  #20, 
+  10 
+  # 5
+  )  
+
+param_grid <- expand.grid(prefix = prefixes, type = types, segment = segments, stringsAsFactors = FALSE)
 
 corr <- 0.7
+
 # Model formula is stored in outputs folder:
-#"ETF/Outputs/LM2_erosion_logtrans/ssn_formula.txt"
+# "ETF/Outputs/LM2_erosion_logtrans/ssn_formula.txt"
 formula_file_name <- "ssn_formula.txt"
 
 # SSN object already exists for each watershed/combined area, keep TRUE
-
-# If TRUE, the SSN object will be loaded from the existing path
+# If TRUE, the SSN object will be loaded from the existing path:
 # ETF/Outputs/LM2_erosion_logtrans/LM2_erosion_logtrans.ssn
-
 # If FALSE, the SSN object will be created with data from:
 # Inputs/Individual Watersheds/LM2_erosion_ssn points.gpkg
 # Inputs/Streams/streams_100k.gpkg
 load_ssn <- FALSE
-
-# set seed for reproducibility
-options(future.seed = TRUE)
-# Add this near the beginning of your script, before any parallel processing
 
 ################################################################################
 ######################### LOAD LIBRARIES #######################################
@@ -66,15 +53,12 @@ library(spdep)
 library(classInt) # For spatial weights if needed
 library(knitr)    # For better output formatting (optional)
 library(broom)    # For tidy model outputs
-
-# Additional Libraries for Parallelization and Progress Updates
-library(future)
-library(furrr)
 library(progressr)
 library(tictoc)
 
 # Show warnings
 warnings()
+
 
 ################################################################################
 ########################### DEFINE INPUT/OUTPUT PATHS ##########################
@@ -83,121 +67,69 @@ warnings()
 # Start the overall timer
 tic("Total Script Execution Time")
 
-# Set up parallel plan with 10 workers
-plan(multisession, workers = 10)
-
-
-# Initialize global progress handlers
-handlers(global = TRUE)
-
-failures <- list()
-
-# Create a data frame of all combinations of prefixes and types
-combinations <- expand.grid(prefix = prefixes, type = types, segment = segments, stringsAsFactors = FALSE)
-message(paste("Processing", nrow(combinations), "parameter combinations"))
-
-# Function to process each combination
-process_combination <- function(prefix, type, segment, formula_file_name, p) {
+run_ssn_analysis <- function(prefix, type, segment) {
   tryCatch({
-    if (grepl("lidar", prefix) && type != "erosion") {
-      p()
-      return(list(success = TRUE, prefix = prefix, type = type, segment = segment))
+    # Early exit conditions based on prefix and type
+    if ((grepl("lidar", prefix) && type != "erosion") || prefix %in% c("ME lidar", "MW lidar")) {
+      message("Skipping processing for prefix: ", prefix, " and type: ", type)
+      return(NULL)
     }
     
-    if (prefix == "ME lidar" || prefix == "MW lidar") {
-      p()
-      return(list(success = TRUE, prefix = prefix, type = type, segment = segment))
-    }
-    
-    CPF_prefixes <- c("CPF sfm", "ME sfm", "MM sfm", "MW sfm", 
-                          "UE sfm", "UW sfm", "UM sfm", "CPF lidar", 
-                          "ME lidar", "MM lidar", "MW lidar", "UE lidar", 
-                          "UW lidar", "UM lidar")
-    if (prefix %in% CPF_prefixes) {
+    # Determine region and prefix_use
+    if (prefix %in% c("CPF sfm", "ME sfm", "MM sfm", "MW sfm", 
+                      "UE sfm", "UW sfm", "UM sfm", "CPF lidar", 
+                      "ME lidar", "MM lidar", "MW lidar", "UE lidar", 
+                      "UW lidar", "UM lidar")) {
       region <- "CPF"
     } else {
       region <- "ETF"
     }
+    prefix_use <- switch(prefix,
+                         "MM_ET sfm" = "MM sfm",
+                         "MM_ET lidar" = "MM lidar",
+                         prefix)
     
-    if (prefix == "MM_ET sfm") {
-      prefix_use <- "MM sfm"
-    } else if (prefix == "MM_ET lidar") {
-      prefix_use <- "MM lidar"
-    } else {
-      prefix_use <- prefix
-    }
+    message("Processing: ", prefix_use, " - ", type, " with ", segment, "m spacing")
     
-    # Define the base input and output folders
-    print(paste0("Processing: ", prefix_use, " - ", type, " with ", segment, "m spacing"))
-    base_input_folder <- file.path(region,"Inputs")
-    base_output_folder <- file.path(region,"Outputs")
-    
+    # Define input/output folders based on region, prefix, type, and segment.
+    base_input_folder <- file.path(region, "Inputs")
+    base_output_folder <- file.path(region, "Outputs")
     segment_input_folder <- file.path(base_input_folder, paste0("Segmented ", segment, "m"))
     segment_output_folder <- file.path(base_output_folder, paste0("Segmented ", segment, "m"))
     
-    # Determines whether random effect of watershed is included
     if (prefix_use %in% c("CPF", "ETF", "CPF sfm", "ETF sfm", "CPF lidar", "ETF lidar")) {
-      input_obs <- file.path(
-        segment_input_folder, 
-        "Combined Watersheds", 
-        paste(prefix_use, type, "ssn points.gpkg", sep = " ")
-      )
+      input_obs <- file.path(segment_input_folder, 
+                             "Combined Watersheds", 
+                             paste(prefix_use, type, "ssn points.gpkg", sep = " "))
       multiple_ws <- TRUE
     } else {
-      input_obs <- file.path(
-        segment_input_folder, 
-        "Individual Watersheds", 
-        paste(prefix_use, type, "ssn points.gpkg", sep = " ")
-      )
+      input_obs <- file.path(segment_input_folder, 
+                             "Individual Watersheds", 
+                             paste(prefix_use, type, "ssn points.gpkg", sep = " "))
       multiple_ws <- FALSE
     }
     
-    output_folder <- file.path(
-      segment_output_folder, 
-      paste0(prefix_use, "_", type, "_logtrans")
-    )
+    output_folder <- file.path(segment_output_folder, paste0(prefix_use, "_", type, "_logtrans"))
+    message("Output folder: ", output_folder)
     
-    formula_file <- file.path(
-      output_folder, 
-      formula_file_name
-    )
-    
+    formula_file <- file.path(output_folder, "ssn_formula.txt")
     if (!file.exists(formula_file)) {
-      stop(paste("Formula file does not exist:", formula_file))
+      stop("Formula file does not exist: ", formula_file)
     }
     
     model_formula_str <- readLines(formula_file)
     model_formula <- as.formula(model_formula_str)
     response_var <- all.vars(model_formula)[1]
     
-    message("Model formula: \n", model_formula_str)
-    
-    
-    output_file <- file.path(
-      output_folder, 
-      paste0(response_var, " ", segment, "m_VIF-3_corr", corr, ".txt")
-    )
+    # Define other parameters
+    ssn_path <- file.path(output_folder, paste0(prefix_use, "_", type, "_logtrans.ssn"))
+    lsn_out <- file.path(output_folder, "lsn_out")
+    input_streams <- file.path(base_input_folder, "Streams", "streams_100k.gpkg")
+    output_file <- file.path(output_folder, paste0(response_var, " ", segment, "m_VIF-3_corr", corr, ".txt"))
     
     if (file.exists(output_file)) {
       file.remove(output_file)
     }
-    
-    # Define the SSN path using the prefix and type
-    ssn_path <- file.path(
-      output_folder, 
-      paste0(prefix_use, "_", type, "_logtrans.ssn")
-    )
-    
-    # Define the LSN output folder
-    lsn_out <- file.path(output_folder, "lsn_out")
-    
-    # Define the input streams path
-    input_streams <- file.path(
-      base_input_folder, 
-      "Streams", 
-      "streams_10k.gpkg"
-    )
-    
     
     ################################################################################
     ########################### SSN2 PREPROCESSING ##################################
@@ -207,7 +139,7 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
       # Read spatial data
       CP_streams <- st_read(input_streams)
       CP_obs <- st_read(input_obs)
-      
+      print(paste0("CP_obs path: ", input_obs))
       # Convert lines to spatial network (LSN)
       edges <- lines_to_lsn(
         streams = CP_streams,
@@ -226,7 +158,7 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
         edges = edges,
         lsn_path = lsn_out,
         file_name = "obs",
-        snap_tolerance = 1,
+        snap_tolerance = 10,
         save_local = TRUE,
         overwrite = TRUE
       )
@@ -281,12 +213,11 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
     } else {
       # Load existing SSN object if load_ssn is TRUE
       CP_ssn <- ssn_import(ssn_path, overwrite = TRUE)
-      
     }
     
     # Create distance matrix
     ssn_create_distmat(CP_ssn)
-          
+    
     # End timer for SSN2 Preprocessing and log it to the output file
     preproc_time <- toc(log = TRUE, quiet = TRUE)
     cat("\nTiming for SSN2 Preprocessing:", 
@@ -308,7 +239,7 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
         ssn.object = CP_ssn,
         tailup_type = "exponential",
         taildown_type = "none",
-        estmethod = "ml",
+        estmethod = "reml",
         euclid_type = "spherical",
         nugget_type = "nugget",
         additive = "afv_flow_accum",
@@ -323,7 +254,7 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
         family = "Gamma",
         tailup_type = "exponential",
         taildown_type = "none",
-        estmethod = "ml",
+        estmethod = "reml",
         euclid_type = "spherical",
         nugget_type = "nugget",
         additive = "afv_flow_accum",
@@ -386,7 +317,7 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
     
     cat("\nloocv(ssn_mod):\n", file = output_file, append = TRUE)
     capture.output(loocv(ssn_mod), file = output_file, append = TRUE)
-  
+    
     cat("\nglance(ssn_mod):\n", file = output_file, append = TRUE)
     capture.output(glance(ssn_mod), file = output_file, append = TRUE)
     
@@ -424,7 +355,6 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
     #   Residuals vs Fitted Plot #
     #----------------------------#
     
-    # Create Residuals vs Fitted plot
     resid_fitted_plot <- ggplot(data.frame(Fitted = fitted_values, Residuals = residuals), 
                                 aes(x = Fitted, y = Residuals)) +
       geom_point(color = "blue") +
@@ -435,23 +365,19 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
            y = "Residuals") +
       theme_minimal()
     
-    # Save the plot to the output folder
     ggsave(filename = file.path(output_folder, "Residuals_vs_Fitted.png"), 
            plot = resid_fitted_plot, width = 8, height = 6)
-    
     
     #----------------------------#
     #         Q-Q Plot           #
     #----------------------------#
     
-    # ggplot2 Q-Q Plot
     qq_plot_gg <- ggplot(data.frame(Residuals = residuals), aes(sample = Residuals)) +
       stat_qq(color = "blue") +
       stat_qq_line(color = "red") +
       labs(title = "Q-Q Plot of Residuals") +
       theme_minimal()
     
-    # Save the ggplot2 Q-Q plot
     ggsave(filename = file.path(output_folder, "QQ_Plot_Residuals.png"), 
            plot = qq_plot_gg, width = 8, height = 6)
     
@@ -470,7 +396,6 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
            y = "Density") +
       theme_minimal()
     
-    # Save the ggplot2 Histogram
     ggsave(filename = file.path(output_folder, "Histogram_Residuals.png"), 
            plot = hist_gg, width = 8, height = 6)
     
@@ -478,103 +403,60 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
     #      Statistical Tests     #
     #----------------------------#
     
-    # Define the path to the output statistics file
     stats_test_file <- file.path(output_folder, "Statistical_Tests.txt")
-    
-    # Initialize the output file by overwriting any existing content
     if (file.exists(stats_test_file)) file.remove(stats_test_file)
     
-    #-------------------------------#
     # Shapiro-Wilk Test for Normality
-    #-------------------------------#
-    
-    # Perform Shapiro-Wilk Test on residuals
     shapiro_test <- shapiro.test(residuals)
-    
-    # Append the test name to the file
     cat("Shapiro-Wilk Test for Normality:\n", file = stats_test_file)
-    
-    # Append the test results to the file
     capture.output(shapiro_test, file = stats_test_file, append = TRUE)
-    
-    # Optionally, add a newline for readability
     cat("\n", file = stats_test_file, append = TRUE)
     
-    #------------------------------------------#
     # Moran's I Test for Spatial Autocorrelation
-    #------------------------------------------#
-    
-    # Extract spatial coordinates from the SSN object
     ssn_data <- ssn_get_data(ssn_mod)
-    
-    # Check if 'geometry' column exists
     if (!"geometry" %in% names(ssn_data)) {
       stop("The SSN object does not contain a 'geometry' column.")
     }
     
-    # Extract coordinates
     coords <- st_coordinates(ssn_data$geometry)
-    
-    # Create a spatial weights matrix using k-nearest neighbors (k = 12)
     knn <- knearneigh(coords, k = 12)
     nb <- knn2nb(knn)
     lw <- nb2listw(nb, style = "W", zero.policy = TRUE)
-    
-    # Compute Moran's I Test
     moran_test <- moran.test(residuals, lw, zero.policy = TRUE)
     
-    # Append the test name to the file
     cat("Moran's I Test for Spatial Autocorrelation:\n", file = stats_test_file, append = TRUE)
-    
-    # Append the test results to the file
     capture.output(moran_test, file = stats_test_file, append = TRUE)
-    
-    # Optionally, add a newline for readability
     cat("\n", file = stats_test_file, append = TRUE)
     
-    #-----------------------------------------#
-    # Summary Statement Based on Test Results
-    #-----------------------------------------#
-    
-    # Define the significance level
     significance_level <- 0.05
-    
-    # Extract p-values from the test results
     shapiro_p <- shapiro_test$p.value
     moran_p <- moran_test$p.value
     
-    # Initialize a variable to hold the summary statement
-    summary_statement <- ""
-    
-    # Determine pass/fail for Shapiro-Wilk Test
     if (shapiro_p > significance_level) {
       shapiro_result <- "passed (Residuals are normally distributed)."
     } else {
       shapiro_result <- paste0("failed (p-value = ", signif(shapiro_p, 4), ").")
     }
     
-    # Determine pass/fail for Moran's I Test
     if (moran_p > significance_level) {
       moran_result <- "passed (No significant spatial autocorrelation detected)."
     } else {
       moran_result <- paste0("failed (p-value = ", signif(moran_p, 4), ").")
     }
     
-    # Construct the summary statement
     summary_statement <- "Summary of Statistical Tests:\n"
     summary_statement <- paste0(summary_statement, "- Shapiro-Wilk Test for Normality: ", shapiro_result, "\n")
     summary_statement <- paste0(summary_statement, "- Moran's I Test for Spatial Autocorrelation: ", moran_result, "\n")
     
-    # Append the summary statements to the file
     cat(summary_statement, file = stats_test_file, append = TRUE)
-    
-    # Add a final newline for readability
     cat("\n", file = stats_test_file, append = TRUE)
-
+    
+    
     # Calculate mean and standard deviation of residuals and response variable
     mean_residuals <- mean(residuals, na.rm = TRUE)
     sd_residuals <- sd(residuals, na.rm = TRUE)
-    mean_response <- mean(ssn_data[[response_var]], na.rm = TRUE)
+    
+    mean_response <- mean(abs(ssn_data[[response_var]]), na.rm = TRUE)
     sd_response <- sd(ssn_data[[response_var]], na.rm = TRUE)
     RMSPE <- loocv_results$stats$RMSPE
     bias <- loocv_results$stats$bias
@@ -592,8 +474,6 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
     
     # num_observations is equal to the number of rows in the CP obs data frame
     num_obs <- as.numeric(nrow(ssn_data))
-    # Switch num_observations to an integer
-    num_obs
     
     model_evaluation_data <- data.frame(
       Mean_Residuals = mean_residuals,
@@ -611,90 +491,58 @@ process_combination <- function(prefix, type, segment, formula_file_name, p) {
     
     write.csv(model_evaluation_data, model_evaluation_file, row.names = FALSE)
     
-    print(paste0("Finished SSN test and statistical evaluation for: ", 
-                 prefix, " | ", type, " | ", segment)
-    )
-    p()
-    # Return success
-    return(list(success = TRUE, prefix = prefix, type = type, segment = segment))
-  }, error = function(e) {
-    message("Error in processing: ", prefix, " | ", type, " | ", segment, "m")
-    message(e)
-    p()
-    # Return error information
-    return(list(
-      success = FALSE,
-      prefix = prefix, 
-      type = type, 
-      segment = segment, 
-      error_message = e$message
-    ))
-  })
+    message("Finished processing for: ", prefix, " | ", type, " | ", segment)
     
+    # Optionally, return some summary information
+    return(list(prefix = prefix, type = type, segment = segment, error = NULL))
+    
+  }, error = function(e) {
+    error_msg <- paste("Error for", prefix, "-", type, "-", segment, ":", e$message)
+    message(error_msg)
+    
+    # Return error info instead of NULL so you can record it later
+    return(list(prefix = prefix, type = type, segment = segment, error = e$message))
+  })
 }
 
 ################################################################################
-########################### Parallel Processing #################################
+########################### PARALLEL PROCESSING ################################
 ################################################################################
-# Wrap the process_combination function with furrr's safely
-safe_process_combination <- safely(process_combination, otherwise = NULL, quiet = TRUE)
 
-# Apply the safe_process_combination function in parallel using furrr::future_pmap
+library(future)
+library(furrr)
+library(progressr)
+
+# Set up the parallel plan (adjust according to your system)
+options(future.seed = TRUE)
+plan(multisession, workers = 10)
+
+# Optionally, set up progress reporting
+handlers("txtprogressbar")
+
 with_progress({
-  p <- progressor(along = 1:nrow(combinations))
-  
-  results <- furrr::future_pmap(
-    combinations,
-    ~ safe_process_combination(
-      prefix = ..1,
-      type = ..2,
-      segment = ..3,
-      formula_file_name = formula_file_name,
-      p = p
-    ),
-    .options = furrr_options(seed = TRUE)
+  p <- progressor(along = 1:nrow(param_grid))
+  results <- future_pmap(
+    param_grid, 
+    function(prefix, type, segment) {
+    p()  # update progress
+    run_ssn_analysis(prefix, type, segment)
+  }, 
+  .options = furrr_options(seed = TRUE)
   )
 })
 
-################################################################################
-########################### POST-PROCESSING ####################################
-################################################################################
+# Filter out the runs that returned an error
+error_runs <- purrr::keep(results, ~ !is.null(.$error))
 
-# Initialize a list to store failures
-failures <- list()
-
-# Iterate through the results to collect failures
-for (i in seq_along(results)) {
-  res <- results[[i]]
-  if (!is.null(res$error)) {
-    # If using safely, res contains $result and $error
-    failures[[length(failures) + 1]] <- list(
-      prefix = combinations$prefix[i],
-      type = combinations$type[i],
-      segment = combinations$segment[i],
-      error_message = res$error$message
-    )
-  } else if (!is.null(res$result) && res$result$success == FALSE) {
-    # If the function returned a failure
-    failures[[length(failures) + 1]] <- list(
-      prefix = res$result$prefix,
-      type = res$result$type,
-      segment = res$result$segment,
-      error_message = "Unknown error"
-    )
+if (length(error_runs) > 0) {
+  cat("The following model runs encountered errors:\n")
+  for (err in error_runs) {
+    cat("Prefix:", err$prefix, "| Type:", err$type, "| Segment:", err$segment, "\n")
+    cat("Error Message:", err$error, "\n\n")
   }
-}
-
-# Print failures at the end if any
-if (length(failures) > 0) {
-  message("\nThe following parameter combinations failed:")
-  print(failures)
 } else {
-  message("\nNo parameter combinations failed.")
+  cat("No errors encountered.\n")
 }
 
-# End the overall timer and print it
-total_time <- toc(log = TRUE, quiet = TRUE)
-cat("\nTotal Script Execution Time:", 
-    round(total_time$toc - total_time$tic, 2), 
-    "seconds\n")
+

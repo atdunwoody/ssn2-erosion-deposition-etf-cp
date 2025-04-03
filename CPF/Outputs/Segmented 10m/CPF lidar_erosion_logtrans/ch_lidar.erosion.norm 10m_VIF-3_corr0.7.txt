@@ -1,0 +1,111 @@
+Model Formula:
+ch_lidar.erosion.norm ~ ws_dnbr.extended_mean + ws_slope_mean + 
+    ws_bare.earth_mean + ws_ndvi.mean_mean + ws_Kw + ch_valley_width + 
+    ch_slope.median + ch_curvature.median + ch_stream.power + 
+    ch_flow.accumulation.max.central.diff + hs_hillslope.length + 
+    hs_slope.median + hs_northness.median + hs_eastness.median + 
+    hs_curvature.median + hs_ndvi.mean + hs_extended.dnbr.median + 
+    hs_drainage_density
+<environment: 0x000001a7229ad5a8>
+
+SSN Path:
+CPF/Outputs/Segmented 10m/CPF lidar_erosion_logtrans/CPF lidar_erosion_logtrans.ssn
+LSN Output Path:
+CPF/Outputs/Segmented 10m/CPF lidar_erosion_logtrans/lsn_out
+
+summary(ssn_mod)
+
+Call:
+ssn_glm(formula = model_formula, ssn.object = CP_ssn, family = "Gamma", 
+    tailup_type = "exponential", taildown_type = "none", euclid_type = "spherical", 
+    nugget_type = "nugget", additive = "afv_flow_accum", estmethod = "reml", 
+    random = ~as.factor(ch_watershed))
+
+Deviance Residuals:
+     Min       1Q   Median       3Q      Max 
+-3.56964 -0.63387 -0.08299  0.35211  1.58213 
+
+Coefficients (fixed):
+                                       Estimate Std. Error z value Pr(>|z|)   
+(Intercept)                           -1.681959   0.518206  -3.246  0.00117 **
+ws_dnbr.extended_mean                  0.300239   0.340008   0.883  0.37722   
+ws_slope_mean                          0.305659   0.205777   1.485  0.13744   
+ws_bare.earth_mean                     0.044886   0.324670   0.138  0.89004   
+ws_ndvi.mean_mean                     -0.028792   0.340433  -0.085  0.93260   
+ws_Kw                                  0.005003   0.168503   0.030  0.97631   
+ch_valley_width                       -0.092967   0.094974  -0.979  0.32765   
+ch_slope.median                        0.103590   0.137652   0.753  0.45172   
+ch_curvature.median                   -0.061217   0.079163  -0.773  0.43935   
+ch_stream.power                        0.133786   0.138949   0.963  0.33563   
+ch_flow.accumulation.max.central.diff -0.047407   0.061123  -0.776  0.43798   
+hs_hillslope.length                   -0.047962   0.081748  -0.587  0.55740   
+hs_slope.median                        0.018369   0.081350   0.226  0.82135   
+hs_northness.median                    0.039681   0.071889   0.552  0.58096   
+hs_eastness.median                    -0.055696   0.073952  -0.753  0.45137   
+hs_curvature.median                    0.045516   0.060324   0.755  0.45053   
+hs_ndvi.mean                          -0.113985   0.094663  -1.204  0.22854   
+hs_extended.dnbr.median               -0.049785   0.080522  -0.618  0.53639   
+hs_drainage_density                   -0.071172   0.066595  -1.069  0.28519   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Pseudo R-squared: 0.04017
+
+Coefficients (covariance):
+              Effect                    Parameter   Estimate
+  tailup exponential                 de (parsill)  1.256e+00
+  tailup exponential                        range  4.321e+03
+    euclid spherical                 de (parsill)  4.091e-01
+    euclid spherical                        range  7.885e+01
+              nugget                       nugget  2.510e-03
+          dispersion                   dispersion  1.218e+00
+              random  1 | as.factor(ch_watershed)  1.068e-02
+
+
+tidy(ssn_mod, conf.int = TRUE):
+# A tibble: 19 × 7
+   term                                  estimate std.error statistic p.value conf.low conf.high
+   <chr>                                    <dbl>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
+ 1 (Intercept)                           -1.68       0.518    -3.25   0.00117  -2.70     -0.666 
+ 2 ch_curvature.median                   -0.0612     0.0792   -0.773  0.439    -0.216     0.0939
+ 3 ch_flow.accumulation.max.central.diff -0.0474     0.0611   -0.776  0.438    -0.167     0.0724
+ 4 ch_slope.median                        0.104      0.138     0.753  0.452    -0.166     0.373 
+ 5 ch_stream.power                        0.134      0.139     0.963  0.336    -0.139     0.406 
+ 6 ch_valley_width                       -0.0930     0.0950   -0.979  0.328    -0.279     0.0932
+ 7 hs_curvature.median                    0.0455     0.0603    0.755  0.451    -0.0727    0.164 
+ 8 hs_drainage_density                   -0.0712     0.0666   -1.07   0.285    -0.202     0.0594
+ 9 hs_eastness.median                    -0.0557     0.0740   -0.753  0.451    -0.201     0.0892
+10 hs_extended.dnbr.median               -0.0498     0.0805   -0.618  0.536    -0.208     0.108 
+11 hs_hillslope.length                   -0.0480     0.0817   -0.587  0.557    -0.208     0.112 
+12 hs_ndvi.mean                          -0.114      0.0947   -1.20   0.229    -0.300     0.0716
+13 hs_northness.median                    0.0397     0.0719    0.552  0.581    -0.101     0.181 
+14 hs_slope.median                        0.0184     0.0813    0.226  0.821    -0.141     0.178 
+15 ws_bare.earth_mean                     0.0449     0.325     0.138  0.890    -0.591     0.681 
+16 ws_dnbr.extended_mean                  0.300      0.340     0.883  0.377    -0.366     0.967 
+17 ws_Kw                                  0.00500    0.169     0.0297 0.976    -0.325     0.335 
+18 ws_ndvi.mean_mean                     -0.0288     0.340    -0.0846 0.933    -0.696     0.638 
+19 ws_slope_mean                          0.306      0.206     1.49   0.137    -0.0977    0.709 
+
+varcomp(ssn_mod):
+# A tibble: 6 × 2
+  varcomp                     proportion
+  <chr>                            <dbl>
+1 Covariates (PR-sq)             0.0402 
+2 tailup_de                      0.718  
+3 taildown_de                    0      
+4 euclid_de                      0.234  
+5 nugget                         0.00144
+6 1 | as.factor(ch_watershed)    0.00611
+
+loocv(ssn_mod):
+# A tibble: 1 × 4
+     bias   MSPE RMSPE   RAV
+    <dbl>  <dbl> <dbl> <dbl>
+1 -0.0291 0.0463 0.215 0.406
+
+glance(ssn_mod):
+# A tibble: 1 × 9
+      n     p  npar value   AIC  AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
+1   431    19     7  428.  442.  442.  -214.     310.           0.0402
+

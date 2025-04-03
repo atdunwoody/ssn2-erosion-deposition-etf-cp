@@ -1,0 +1,71 @@
+Model Formula:
+ch_lidar.erosion.norm ~ ch_stream.power.central.diff + ch_flow.accumulation.max.central.diff + 
+    hs_curvature.median
+<environment: 0x000002961a00e988>
+
+SSN Path:
+ETF/Outputs/Segmented 10m/LM2 lidar_erosion_logtrans/LM2 lidar_erosion_logtrans.ssn
+LSN Output Path:
+ETF/Outputs/Segmented 10m/LM2 lidar_erosion_logtrans/lsn_out
+
+summary(ssn_mod)
+
+Call:
+ssn_glm(formula = model_formula, ssn.object = CP_ssn, family = "Gamma", 
+    tailup_type = "exponential", taildown_type = "none", euclid_type = "spherical", 
+    nugget_type = "nugget", additive = "afv_flow_accum", estmethod = "ml")
+
+Deviance Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.0345 -0.8610 -0.2820  0.3948  1.3508 
+
+Coefficients (fixed):
+                                      Estimate Std. Error z value Pr(>|z|)
+(Intercept)                           -0.05677    0.14968  -0.379    0.704
+ch_stream.power.central.diff           0.17795    0.13918   1.279    0.201
+ch_flow.accumulation.max.central.diff -0.22092    0.15796  -1.399    0.162
+hs_curvature.median                   -0.02308    0.15453  -0.149    0.881
+
+Pseudo R-squared: 0.08105
+
+Coefficients (covariance):
+              Effect     Parameter   Estimate
+  tailup exponential  de (parsill)  1.094e-10
+  tailup exponential         range  2.571e+27
+    euclid spherical  de (parsill)  6.896e-23
+    euclid spherical         range  2.376e+24
+              nugget        nugget  9.161e-43
+          dispersion    dispersion  1.240e+00
+
+
+tidy(ssn_mod, conf.int = TRUE):
+# A tibble: 4 × 7
+  term                                  estimate std.error statistic p.value conf.low conf.high
+  <chr>                                    <dbl>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
+1 (Intercept)                            -0.0568     0.150    -0.379   0.704  -0.350     0.237 
+2 ch_flow.accumulation.max.central.diff  -0.221      0.158    -1.40    0.162  -0.531     0.0887
+3 ch_stream.power.central.diff            0.178      0.139     1.28    0.201  -0.0948    0.451 
+4 hs_curvature.median                    -0.0231     0.155    -0.149   0.881  -0.326     0.280 
+
+varcomp(ssn_mod):
+# A tibble: 5 × 2
+  varcomp            proportion
+  <chr>                   <dbl>
+1 Covariates (PR-sq)   8.10e- 2
+2 tailup_de            9.19e- 1
+3 taildown_de          0       
+4 euclid_de            5.79e-13
+5 nugget               7.69e-33
+
+loocv(ssn_mod):
+# A tibble: 1 × 4
+        bias  MSPE RMSPE     RAV
+       <dbl> <dbl> <dbl>   <dbl>
+1 -0.0000402 0.632 0.795 0.00630
+
+glance(ssn_mod):
+# A tibble: 1 × 9
+      n     p  npar value   AIC  AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
+1    36     4     6  89.0  109.  118.  -44.5     29.3           0.0810
+

@@ -1,1 +1,1 @@
-ch_sfm.deposition.mean ~ ch_channel.width.over.valley.width + ch_slope.median + ch_stream.power.central.diff + ch_flow.accumulation.max.central.diff + hs_slope.median + hs_curvature.median + hs_drainage_density
+ch_sfm.deposition.norm ~ ch_slope.median + ch_curvature.median + ch_stream.power.central.diff + ch_flow.accumulation.max.central.diff + hs_slope.median + hs_curvature.median + hs_drainage_density

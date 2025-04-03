@@ -1,2 +1,0 @@
-
-Timing for SSN2 Preprocessing: 22.68 seconds

@@ -1,0 +1,95 @@
+Model Formula:
+ch_sfm.net.change.norm ~ ch_curvature.median + ch_stream.power.central.diff + 
+    ch_flow.accumulation.max.central.diff + hs_curvature.median + 
+    hs_bare.earth.mean + hs_ndvi.max.mean + hs_dnbr.BAER.median + 
+    hs_drainage_density
+<environment: 0x0000024ba23f9378>
+
+SSN Path:
+ETF/Outputs/Segmented 10m/LM2 sfm_net change_logtrans/LM2 sfm_net change_logtrans.ssn
+LSN Output Path:
+ETF/Outputs/Segmented 10m/LM2 sfm_net change_logtrans/lsn_out
+
+summary(ssn_mod)
+
+Call:
+ssn_lm(formula = model_formula, ssn.object = CP_ssn, tailup_type = "exponential", 
+    taildown_type = "none", euclid_type = "spherical", nugget_type = "nugget", 
+    additive = "afv_flow_accum", estmethod = "ml")
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.5382 -0.6187 -0.2843  0.4228  2.9871 
+
+Coefficients (fixed):
+                                      Estimate Std. Error z value
+(Intercept)                            0.06060    0.22733   0.267
+ch_curvature.median                    0.08797    0.10871   0.809
+ch_stream.power.central.diff           0.17512    0.09416   1.860
+ch_flow.accumulation.max.central.diff  0.08029    0.09998   0.803
+hs_curvature.median                   -0.16144    0.10839  -1.489
+hs_bare.earth.mean                     0.14355    0.11306   1.270
+hs_ndvi.max.mean                      -0.12384    0.14988  -0.826
+hs_dnbr.BAER.median                   -0.10794    0.11331  -0.953
+hs_drainage_density                   -0.07963    0.10160  -0.784
+                                      Pr(>|z|)  
+(Intercept)                             0.7898  
+ch_curvature.median                     0.4184  
+ch_stream.power.central.diff            0.0629 .
+ch_flow.accumulation.max.central.diff   0.4220  
+hs_curvature.median                     0.1364  
+hs_bare.earth.mean                      0.2042  
+hs_ndvi.max.mean                        0.4087  
+hs_dnbr.BAER.median                     0.3408  
+hs_drainage_density                     0.4332  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Pseudo R-squared: 0.1151
+
+Coefficients (covariance):
+              Effect     Parameter   Estimate
+  tailup exponential  de (parsill)    0.03327
+  tailup exponential         range  169.54852
+    euclid spherical  de (parsill)    0.09428
+    euclid spherical         range  546.99535
+              nugget        nugget    0.72589
+
+
+tidy(ssn_mod, conf.int = TRUE):
+# A tibble: 9 × 7
+  term         estimate std.error statistic p.value conf.low conf.high
+  <chr>           <dbl>     <dbl>     <dbl>   <dbl>    <dbl>     <dbl>
+1 (Intercept)    0.0606    0.227      0.267  0.790  -0.385      0.506 
+2 ch_curvatur…   0.0880    0.109      0.809  0.418  -0.125      0.301 
+3 ch_flow.acc…   0.0803    0.100      0.803  0.422  -0.116      0.276 
+4 ch_stream.p…   0.175     0.0942     1.86   0.0629 -0.00943    0.360 
+5 hs_bare.ear…   0.144     0.113      1.27   0.204  -0.0780     0.365 
+6 hs_curvatur…  -0.161     0.108     -1.49   0.136  -0.374      0.0510
+7 hs_dnbr.BAE…  -0.108     0.113     -0.953  0.341  -0.330      0.114 
+8 hs_drainage…  -0.0796    0.102     -0.784  0.433  -0.279      0.119 
+9 hs_ndvi.max…  -0.124     0.150     -0.826  0.409  -0.418      0.170 
+
+varcomp(ssn_mod):
+# A tibble: 5 × 2
+  varcomp            proportion
+  <chr>                   <dbl>
+1 Covariates (PR-sq)     0.115 
+2 tailup_de              0.0345
+3 taildown_de            0     
+4 euclid_de              0.0978
+5 nugget                 0.753 
+
+loocv(ssn_mod):
+# A tibble: 1 × 10
+     bias std.bias  MSPE RMSPE std.MSPE   RAV   cor2 cover.80 cover.90
+    <dbl>    <dbl> <dbl> <dbl>    <dbl> <dbl>  <dbl>    <dbl>    <dbl>
+1 0.00475  0.00304 0.973 0.986     1.12 0.927 0.0742    0.809    0.899
+# ℹ 1 more variable: cover.95 <dbl>
+
+glance(ssn_mod):
+# A tibble: 1 × 9
+      n     p  npar value   AIC  AICc logLik deviance pseudo.r.squared
+  <int> <dbl> <int> <dbl> <dbl> <dbl>  <dbl>    <dbl>            <dbl>
+1    89     9     5  233.  261.  267.  -117.     90.5            0.115
+

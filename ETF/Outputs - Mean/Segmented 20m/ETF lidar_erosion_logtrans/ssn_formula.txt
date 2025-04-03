@@ -1,1 +1,0 @@
-ch_lidar.erosion.mean ~ ws_slope_mean + ws_bare.earth_mean + ch_channel.width.over.valley.width + ch_flow.accumulation.max + ch_curvature.median + ch_stream.power.central.diff + ch_flow.accumulation.max.central.diff + hs_slope.median + hs_curvature.median + hs_bare.earth.mean + hs_ndvi.range.mean + hs_drainage_density
